@@ -19,6 +19,8 @@
     <name>Powsybl tutorials</name>
 
     <properties>
+        <autoservice.version>1.0-rc2</autoservice.version>
+
         <java.version>1.8</java.version>
 
         <maven.checkstyle.version>3.0.0</maven.checkstyle.version>
@@ -42,6 +44,7 @@
     </properties>
 
     <modules>
+        <module>csv-exporter</module>
         <module>itools-packager</module>
         <module>javafx-packager</module>
     </modules>

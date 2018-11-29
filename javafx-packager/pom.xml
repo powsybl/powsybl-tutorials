@@ -80,12 +80,6 @@
     <dependencies>
         <!-- Required dependencies -->
         <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-simple</artifactId>
-            <version>${slf4j.version}</version>
-            <scope>runtime</scope>
-        </dependency>
-        <dependency>
             <groupId>com.powsybl</groupId>
             <artifactId>powsybl-gse-demo</artifactId>
             <version>${powsybl.gse.version}</version>

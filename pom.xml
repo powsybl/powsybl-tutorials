@@ -19,8 +19,6 @@
     <name>Powsybl tutorials</name>
 
     <properties>
-        <autoservice.version>1.0-rc2</autoservice.version>
-
         <java.version>1.8</java.version>
 
         <maven.checkstyle.version>3.0.0</maven.checkstyle.version>
@@ -36,6 +34,7 @@
         <maven.site.version>3.7.1</maven.site.version>
         <maven.surefire.version>2.22.0</maven.surefire.version>
 
+        <autoservice.version>1.0-rc2</autoservice.version>
         <logback.version>1.1.8</logback.version>
         <slf4j.version>1.7.22</slf4j.version>
 

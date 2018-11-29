@@ -8,10 +8,7 @@ package powsybl.tutorials.csv.export;
 
 import com.google.auto.service.AutoService;
 import com.powsybl.commons.datasource.DataSource;
-import com.powsybl.commons.io.table.Column;
-import com.powsybl.commons.io.table.CsvTableFormatterFactory;
-import com.powsybl.commons.io.table.TableFormatter;
-import com.powsybl.commons.io.table.TableFormatterConfig;
+import com.powsybl.commons.io.table.*;
 import com.powsybl.iidm.export.Exporter;
 import com.powsybl.iidm.network.Bus;
 import com.powsybl.iidm.network.Line;
@@ -34,7 +31,7 @@ public class CsvLinesExporter implements Exporter {
     private static final Logger LOGGER = LoggerFactory.getLogger(CsvLinesExporter.class);
 
     private static final String EXTENSION = "csv";
-    private static final char CSV_SEPARATOR = ',';
+    private static final char CSV_SEPARATOR = ';';
 
     @Override
     public String getFormat() {
@@ -52,12 +49,12 @@ public class CsvLinesExporter implements Exporter {
         Objects.requireNonNull(dataSource);
         try {
             long startTime = System.currentTimeMillis();
-            OutputStream outputStream = dataSource.newOutputStream(null, EXTENSION, false);
-            Writer writer = new OutputStreamWriter(outputStream);
-            CsvTableFormatterFactory csvTableFormatterFactory = new CsvTableFormatterFactory();
-            TableFormatterConfig tfc = new TableFormatterConfig(Locale.getDefault(), CSV_SEPARATOR, "", true, false);
 
-            try (TableFormatter formatter = csvTableFormatterFactory.create(writer, "", tfc,
+            TableFormatterFactory factory = new CsvTableFormatterFactory();
+            TableFormatterConfig tfc = new TableFormatterConfig(Locale.getDefault(), CSV_SEPARATOR, "N/A", true, false);
+
+            try (Writer writer = new OutputStreamWriter(dataSource.newOutputStream(null, EXTENSION, false));
+                 TableFormatter formatter = factory.create(writer, "", tfc,
                     new Column("LineId"),
                     new Column("SubstationId1"),
                     new Column("SubstationId2"),
@@ -73,37 +70,29 @@ public class CsvLinesExporter implements Exporter {
                     new Column("B2"))) {
 
                 for (Line line : network.getLines()) {
-                    String id = line.getId();
+                    VoltageLevel vl1 = line.getTerminal1().getVoltageLevel();
+                    VoltageLevel vl2 = line.getTerminal2().getVoltageLevel();
+
                     Bus bus1 = line.getTerminal1().getBusBreakerView().getBus();
                     String bus1Id = (bus1 != null) ? bus1.getId() : "";
-                    VoltageLevel vhl1 = (bus1 != null) ? bus1.getVoltageLevel() : null;
-                    String vhl1Id = (vhl1 != null) ? vhl1.getId() : "";
-                    String substationId1 = (vhl1 != null) ? vhl1.getSubstation().getId() : "";
+
                     Bus bus2 = line.getTerminal2().getBusBreakerView().getBus();
                     String bus2Id = (bus2 != null) ? bus2.getId() : "";
-                    VoltageLevel vhl2 = (bus2 != null) ? bus2.getVoltageLevel() : null;
-                    String vhl2Id = (vhl2 != null) ? vhl2.getId() : "";
-                    String substationId2 = (vhl2 != null) ? vhl2.getSubstation().getId() : "";
-                    double r = line.getR();
-                    double x = line.getX();
-                    double b1 = line.getB1();
-                    double b2 = line.getB2();
-                    double g1 = line.getG1();
-                    double g2 = line.getG2();
-                    LOGGER.debug("export lineID {} ", id);
-                    formatter.writeCell(id)
-                            .writeCell(substationId1)
-                            .writeCell(substationId2)
-                            .writeCell(vhl1Id)
-                            .writeCell(vhl2Id)
+
+                    LOGGER.debug("export lineID {} ", line.getId());
+                    formatter.writeCell(line.getId())
+                            .writeCell(vl1.getSubstation().getId())
+                            .writeCell(vl2.getSubstation().getId())
+                            .writeCell(vl1.getId())
+                            .writeCell(vl2.getId())
                             .writeCell(bus1Id)
                             .writeCell(bus2Id)
-                            .writeCell(r)
-                            .writeCell(x)
-                            .writeCell(g1)
-                            .writeCell(b1)
-                            .writeCell(g2)
-                            .writeCell(b2);
+                            .writeCell(line.getR())
+                            .writeCell(line.getX())
+                            .writeCell(line.getG1())
+                            .writeCell(line.getB1())
+                            .writeCell(line.getG2())
+                            .writeCell(line.getB2());
                 }
                 LOGGER.info("CSV export done in {} ms", System.currentTimeMillis() - startTime);
             }

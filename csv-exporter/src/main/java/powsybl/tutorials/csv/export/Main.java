@@ -19,7 +19,7 @@ public final class Main {
 
     public static void main(String[] args) {
         Network network = EurostagTutorialExample1Factory.create();
-        Exporters.export("CSV", network, null, Paths.get("/tmp/test.csv"));
+        Exporters.export("CSV", network, null, Paths.get(System.getProperty("java.io.tmpdir"), "test.csv"));
     }
 
     private Main() {

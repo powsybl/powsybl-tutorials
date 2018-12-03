@@ -31,7 +31,7 @@ public class CsvLinesExporter implements Exporter {
     private static final Logger LOGGER = LoggerFactory.getLogger(CsvLinesExporter.class);
 
     private static final String EXTENSION = "csv";
-    private static final char CSV_SEPARATOR = ';';
+    private static final char CSV_SEPARATOR = ',';
 
     @Override
     public String getFormat() {
@@ -87,12 +87,12 @@ public class CsvLinesExporter implements Exporter {
                             .writeCell(vl2.getId())
                             .writeCell(bus1Id)
                             .writeCell(bus2Id)
-                            .writeCell(line.getR())
-                            .writeCell(line.getX())
-                            .writeCell(line.getG1())
-                            .writeCell(line.getB1())
-                            .writeCell(line.getG2())
-                            .writeCell(line.getB2());
+                            .writeCell(writeDouble(line.getR()))
+                            .writeCell(writeDouble(line.getX()))
+                            .writeCell(writeDouble(line.getG1()))
+                            .writeCell(writeDouble(line.getB1()))
+                            .writeCell(writeDouble(line.getG2()))
+                            .writeCell(writeDouble((line.getB2())));
                 }
                 LOGGER.info("CSV export done in {} ms", System.currentTimeMillis() - startTime);
             }
@@ -100,7 +100,10 @@ public class CsvLinesExporter implements Exporter {
             LOGGER.error(e.toString(), e);
             throw new UncheckedIOException(e);
         }
+    }
 
+    private String writeDouble(double d) {
+        return String.valueOf(d).replace(",", ".");
     }
 
 }

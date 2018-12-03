@@ -92,7 +92,7 @@ public class CsvLinesExporter implements Exporter {
                             .writeCell(writeDouble(line.getG1()))
                             .writeCell(writeDouble(line.getB1()))
                             .writeCell(writeDouble(line.getG2()))
-                            .writeCell(writeDouble((line.getB2())));
+                            .writeCell(writeDouble(line.getB2()));
                 }
                 LOGGER.info("CSV export done in {} ms", System.currentTimeMillis() - startTime);
             }

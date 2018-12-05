@@ -54,21 +54,21 @@ public class CsvLinesImporter implements Importer {
         LOGGER.debug("Start import from file {}", data.getBaseName());
         long startTime = System.currentTimeMillis();
         try {
-            CsvReader reader = new CsvReader(data.newInputStream(null, EXTENSION), Charset.defaultCharset());
+            CsvReader reader = new CsvReader(data.newInputStream(null, EXTENSION), Charset.forName("UTF-8"));
             reader.readHeaders();
             while (reader.readRecord()) {
                 String id = reader.get("LineId");
                 LOGGER.info("import lineID {}", id);
                 Substation s1 = getSubstation(reader.get("SubstationId1"), network, Country.FR);
-                Substation s2 = getSubstation(reader.get("SubstationId2"), network, Country.FR);
-                VoltageLevel vlhv1 = getVoltageLevel(reader.get("VoltageLevelId1"), network, s1, 220, TopologyKind.BUS_BREAKER);
-                VoltageLevel vlhv2 = getVoltageLevel(reader.get("VoltageLevelId2"), network, s2, 220, TopologyKind.BUS_BREAKER);
-                Bus nhv1 = getBus(vlhv1, reader.get("BusId1"));
-                Bus nhv2 = getBus(vlhv2, reader.get("BusId2"));
+                Substation s2 = getSubstation(reader.get("SubstationId2"), network, Country.BE);
+                VoltageLevel vl1 = getVoltageLevel(reader.get("VoltageLevelId1"), network, s1, 220, TopologyKind.BUS_BREAKER);
+                VoltageLevel vl2 = getVoltageLevel(reader.get("VoltageLevelId2"), network, s2, 220, TopologyKind.BUS_BREAKER);
+                Bus nhv1 = getBus(vl1, reader.get("BusId1"));
+                Bus nhv2 = getBus(vl2, reader.get("BusId2"));
                 network.newLine()
                         .setId(id)
-                        .setVoltageLevel1(vlhv1.getId())
-                        .setVoltageLevel2(vlhv2.getId())
+                        .setVoltageLevel1(vl1.getId())
+                        .setVoltageLevel2(vl2.getId())
                         .setBus1(nhv1.getId())
                         .setConnectableBus1(nhv1.getId())
                         .setBus2(nhv2.getId())
@@ -90,15 +90,36 @@ public class CsvLinesImporter implements Importer {
         }
     }
 
-    private Substation getSubstation(String id, Network network, Country country) {
-        return (network.getSubstation(id) == null) ? network.newSubstation().setId(id).setCountry(country).add() : network.getSubstation(id);
+    private static Substation getSubstation(String id, Network network, Country country) {
+        Substation substation = network.getSubstation(id);
+        if (substation == null) {
+            substation = network.newSubstation()
+                    .setId(id)
+                    .setCountry(country)
+                    .add();
+        }
+        return substation;
     }
 
-    private Bus getBus(VoltageLevel vlhv, String id) {
-        return (vlhv.getBusBreakerView().getBus(id) == null) ? vlhv.getBusBreakerView().newBus().setId(id).add() : vlhv.getBusBreakerView().getBus(id);
+    private static VoltageLevel getVoltageLevel(String id, Network network, Substation s, double nominalVoltage, TopologyKind topologyKind) {
+        VoltageLevel voltageLevel = network.getVoltageLevel(id);
+        if (voltageLevel == null) {
+            voltageLevel = s.newVoltageLevel()
+                    .setId(id)
+                    .setNominalV(nominalVoltage)
+                    .setTopologyKind(topologyKind)
+                    .add();
+        }
+        return voltageLevel;
     }
 
-    private VoltageLevel getVoltageLevel(String id, Network network, Substation s, double nominalVoltage, TopologyKind topologyKind) {
-        return (network.getVoltageLevel(id) == null) ? s.newVoltageLevel().setId(id).setNominalV(nominalVoltage).setTopologyKind(topologyKind).add() : network.getVoltageLevel(id);
+    private static Bus getBus(VoltageLevel vl, String id) {
+        Bus bus = vl.getBusBreakerView().getBus(id);
+        if (bus == null) {
+            bus = vl.getBusBreakerView().newBus()
+                    .setId(id)
+                    .add();
+        }
+        return bus;
     }
 }

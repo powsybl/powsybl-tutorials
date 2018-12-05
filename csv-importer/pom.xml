@@ -13,7 +13,6 @@
     <artifactId>powsybl-csv-importer</artifactId>
     <name>Import CSV to Network</name>
 
-
     <dependencies>
         <!-- Compilation dependencies -->
         <dependency>
@@ -24,11 +23,6 @@
         <dependency>
             <groupId>com.powsybl</groupId>
             <artifactId>powsybl-iidm-converter-api</artifactId>
-            <version>${powsybl.core.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.powsybl</groupId>
-            <artifactId>powsybl-iidm-test</artifactId>
             <version>${powsybl.core.version}</version>
         </dependency>
         <dependency>
@@ -51,6 +45,5 @@
             <scope>runtime</scope>
         </dependency>
     </dependencies>
-
 
 </project>

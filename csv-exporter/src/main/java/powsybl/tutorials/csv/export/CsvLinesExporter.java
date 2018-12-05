@@ -31,6 +31,7 @@ public class CsvLinesExporter implements Exporter {
     private static final Logger LOGGER = LoggerFactory.getLogger(CsvLinesExporter.class);
 
     private static final String EXTENSION = "csv";
+
     private static final char CSV_SEPARATOR = ',';
 
     @Override
@@ -51,7 +52,7 @@ public class CsvLinesExporter implements Exporter {
             long startTime = System.currentTimeMillis();
 
             TableFormatterFactory factory = new CsvTableFormatterFactory();
-            TableFormatterConfig tfc = new TableFormatterConfig(Locale.getDefault(), CSV_SEPARATOR, "N/A", true, false);
+            TableFormatterConfig tfc = new TableFormatterConfig(Locale.US, CSV_SEPARATOR, "N/A", true, false);
 
             try (Writer writer = new OutputStreamWriter(dataSource.newOutputStream(null, EXTENSION, false));
                  TableFormatter formatter = factory.create(writer, "", tfc,
@@ -87,12 +88,12 @@ public class CsvLinesExporter implements Exporter {
                             .writeCell(vl2.getId())
                             .writeCell(bus1Id)
                             .writeCell(bus2Id)
-                            .writeCell(writeDouble(line.getR()))
-                            .writeCell(writeDouble(line.getX()))
-                            .writeCell(writeDouble(line.getG1()))
-                            .writeCell(writeDouble(line.getB1()))
-                            .writeCell(writeDouble(line.getG2()))
-                            .writeCell(writeDouble(line.getB2()));
+                            .writeCell(line.getR())
+                            .writeCell(line.getX())
+                            .writeCell(line.getG1())
+                            .writeCell(line.getB1())
+                            .writeCell(line.getG2())
+                            .writeCell(line.getB2());
                 }
                 LOGGER.info("CSV export done in {} ms", System.currentTimeMillis() - startTime);
             }
@@ -100,10 +101,6 @@ public class CsvLinesExporter implements Exporter {
             LOGGER.error(e.toString(), e);
             throw new UncheckedIOException(e);
         }
-    }
-
-    private String writeDouble(double d) {
-        return String.valueOf(d).replace(",", ".");
     }
 
 }

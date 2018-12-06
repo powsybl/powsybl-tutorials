@@ -31,7 +31,8 @@ public class CsvLinesExporter implements Exporter {
     private static final Logger LOGGER = LoggerFactory.getLogger(CsvLinesExporter.class);
 
     private static final String EXTENSION = "csv";
-    private static final char CSV_SEPARATOR = ';';
+
+    private static final char CSV_SEPARATOR = ',';
 
     @Override
     public String getFormat() {
@@ -51,7 +52,7 @@ public class CsvLinesExporter implements Exporter {
             long startTime = System.currentTimeMillis();
 
             TableFormatterFactory factory = new CsvTableFormatterFactory();
-            TableFormatterConfig tfc = new TableFormatterConfig(Locale.getDefault(), CSV_SEPARATOR, "N/A", true, false);
+            TableFormatterConfig tfc = new TableFormatterConfig(Locale.US, CSV_SEPARATOR, "N/A", true, false);
 
             try (Writer writer = new OutputStreamWriter(dataSource.newOutputStream(null, EXTENSION, false));
                  TableFormatter formatter = factory.create(writer, "", tfc,
@@ -100,7 +101,6 @@ public class CsvLinesExporter implements Exporter {
             LOGGER.error(e.toString(), e);
             throw new UncheckedIOException(e);
         }
-
     }
 
 }

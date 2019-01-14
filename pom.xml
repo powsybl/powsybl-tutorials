@@ -48,6 +48,7 @@
         <module>csv-importer</module>
         <module>itools-packager</module>
         <module>javafx-packager</module>
+        <module>count-lines-tool</module>
     </modules>
 
     <build>

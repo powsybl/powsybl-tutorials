@@ -21,6 +21,9 @@ import com.powsybl.tools.Command;
 import com.powsybl.tools.Tool;
 import com.powsybl.tools.ToolRunningContext;
 
+/**
+ * @author Abdelsalem Hedhili <abdelsalem.hedhili at rte-france.com>
+ */
 @AutoService(Tool.class)
 public class CountNetworkLinesTool implements Tool {
 

@@ -44,11 +44,11 @@
     </properties>
 
     <modules>
+        <module>count-network-lines-tool</module>
         <module>csv-exporter</module>
         <module>csv-importer</module>
         <module>itools-packager</module>
         <module>javafx-packager</module>
-        <module>count-lines-tool</module>
     </modules>
 
     <build>

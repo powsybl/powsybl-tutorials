@@ -44,6 +44,7 @@
     </properties>
 
     <modules>
+        <module>count-network-lines-tool</module>
         <module>csv-exporter</module>
         <module>csv-importer</module>
         <module>itools-packager</module>

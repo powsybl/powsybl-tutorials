@@ -4,7 +4,7 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
-package powsybl.tutorials.tool.countline;
+package powsybl.tutorials.tools;
 
 import java.nio.file.Path;
 
@@ -68,7 +68,7 @@ public class CountNetworkLinesTool implements Tool {
     }
 
     @Override
-    public void run(CommandLine line, ToolRunningContext context) throws Exception {
+    public void run(CommandLine line, ToolRunningContext context) {
         Path caseFile = context.getFileSystem().getPath(line.getOptionValue(CASE_FILE));
         context.getOutputStream().println("Loading network '" + caseFile + "'");
         Network network = Importers.loadNetwork(caseFile, context.getShortTimeExecutionComputationManager(), ImportConfig.load(), null);

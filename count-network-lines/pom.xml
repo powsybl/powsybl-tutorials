@@ -18,7 +18,7 @@
         <version>1.0.0</version>
     </parent>
 
-    <artifactId>count-network-lines-tool</artifactId>
+    <artifactId>powsybl-count-network-lines</artifactId>
 
     <dependencies>
         <dependency>

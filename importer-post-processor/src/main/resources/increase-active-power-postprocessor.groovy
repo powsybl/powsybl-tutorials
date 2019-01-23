@@ -31,6 +31,6 @@ def defaultConfig = ComponentDefaultConfig.load()
 loadFlowFactory = defaultConfig.newFactoryImpl(LoadFlowFactory.class)
 loadFlowParameters = new LoadFlowParameters(LoadFlowParameters.VoltageInitMode.UNIFORM_VALUES)
 loadFlow = loadFlowFactory.create(network, computationManager, 0)
-result = loadFlow.run(network.getStateManager().getWorkingStateId(),loadFlowParameters).join()
+result = loadFlow.run(network.getVariantManager().getWorkingVariantId(),loadFlowParameters).join()
 
 println " LF results - converge:" + result.ok + " ; metrics: " +result.getMetrics()

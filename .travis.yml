@@ -11,3 +11,6 @@ addons:
         organization: "powsybl-ci-github"
         token:
             secure: ${SONAR_TOKEN}
+
+script:
+- mvn clean verify sonar:sonar

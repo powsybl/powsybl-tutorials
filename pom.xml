@@ -49,6 +49,7 @@
         <module>csv-importer</module>
         <module>itools-packager</module>
         <module>javafx-packager</module>
+        <module>loadflow</module>
     </modules>
 
     <build>

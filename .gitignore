@@ -1,4 +1,9 @@
-target/
+/count-network-lines-tool/target/
+/csv-exporter/target/
+/csv-importer/target/
+/itools-packager/target/
+/javafx-packager/target/
+/target/
 
 # IntelliJ
 .idea

@@ -32,12 +32,13 @@ $ mvn compile exec:java
 Example:
 ```
 $ cd csv-exporter
-$ mvn compile exec:java -pl csv-exporter
+$ mvn compile exec:java
 [INFO] Scanning for projects...
-[INFO]
-[INFO] -------------< com.powsybl.tutorials:powsybl-csv-exporter >-------------
+[INFO] 
+[INFO] ------------------------------------------------------------------------
 [INFO] Building Export Network to CSV 1.0.0
-[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] ------------------------------------------------------------------------
+[INFO] 
 [...snip...]
 [INFO] --- exec-maven-plugin:1.6.0:java (default-cli) @ powsybl-csv-exporter ---
 [powsybl.tutorials.csv.export.Main.main()] INFO powsybl.tutorials.csv.export.CsvLinesExporter - CSV export done in 8 ms

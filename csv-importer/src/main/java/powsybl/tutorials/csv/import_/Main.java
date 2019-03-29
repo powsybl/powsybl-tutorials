@@ -10,6 +10,8 @@ import com.powsybl.iidm.import_.Importers;
 
 /**
  * @author Miora Ralambotiana <miora.ralambotiana at rte-france.com>
+ *
+ * This class is only needed to run the tutorial easily.
  */
 public final class Main {
 

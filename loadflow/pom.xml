@@ -67,8 +67,9 @@
         </dependency>
     </dependencies>
 
+    <!-- These properties are only needed to run the tutorial easily -->
     <properties>
         <exec.cleanupDaemonThreads>false</exec.cleanupDaemonThreads>
-        <exec.mainClass>LoadflowTutorial</exec.mainClass>
+        <exec.mainClass>powsybl.tutorials.loadflow.LoadflowTutorial</exec.mainClass>
     </properties>
 </project>

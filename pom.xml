@@ -44,6 +44,7 @@
     </properties>
 
     <modules>
+		<module>cgmes</module>
         <module>count-network-lines</module>
         <module>csv-exporter</module>
         <module>csv-importer</module>

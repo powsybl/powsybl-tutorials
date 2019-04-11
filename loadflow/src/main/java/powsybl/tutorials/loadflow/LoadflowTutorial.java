@@ -124,7 +124,10 @@ public final class LoadflowTutorial {
             System.out.println("Line: " + l.getTerminal1().getP());
             System.out.println("Line: " + l.getTerminal2().getP());
         }
-        // The power now flows only on line NHV1_NHV2.
+        // The power now flows only on line NHV1_NHV2_2.
+        for (VoltageLevel vl : network.getVoltageLevels()) {
+            vl.visitEquipments(visitor);
+        }
 
     }
 

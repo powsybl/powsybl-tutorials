@@ -3,7 +3,7 @@ This tutorial aims to compute loadflows on a small fictive network. We first loa
 
 
 # How to install the loadflow simulator  
-In the tutorial, we use Hades2, a RTE load-flow tool. Please visit the [Hades2 documentation](https://rte-france.github.io/hades2/index.html) to learn how to install Hades2 on your computer. Note that Hades2 only works on Linux for the moment.
+In the tutorial, we use Hades2, a RTE load-flow tool. Please visit the [Hades2 documentation](https://rte-france.github.io/hades2/index.html) to learn how to install Hades2 on your computer. Note that Hades2 only works on Linux and on Windows for the moment.
 
 # How to configure this tutorial
 The configuration file is :

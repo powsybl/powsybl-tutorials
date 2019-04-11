@@ -16,10 +16,9 @@ import com.powsybl.iidm.import_.Importers;
 public final class Main {
 
     public static void main(String[] args) {
-        Importers.loadNetwork(Main.class.getResource("/eurostag-tutorial-example1.csv").getPath());
+        Importers.loadNetwork("eurostag-tutorial-example1.csv", Main.class.getResourceAsStream("/eurostag-tutorial-example1.csv"));
     }
 
     private Main() {
     }
-
 }

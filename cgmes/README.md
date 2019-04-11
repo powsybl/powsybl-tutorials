@@ -1,7 +1,7 @@
 # CGMES, merge and security analysis tutorial
 In this tutorial, we learn how to import two CGMES files. The CGMES files are from 2 bordering countries: Belgium and Netherlands. These files are imported as 2 different networks and then merged in a single network. The second part of this tutorial aims to compute a security analysis on this network.
 
-Note that the boundary files in CGMES format are stored in each CGMES archive. Coming soon: the boundary files will be stored once and the path will be given by the ````config.yml```` file.
+Note that the boundary files in CGMES format are stored in each CGMES archive. Coming soon: the boundary files will be stored once and the path will be given by the `config.yml` file.
 
 In order to perform a security analysis, we need a load flow.
 
@@ -20,6 +20,6 @@ In the tutorial, you also have to configure the path to a local computation dire
 # Running the tutorial
 You just need to execute the following command lines:
 ```
-cd <path_to_powsybl_tutorials>/loadflow/
+cd <path_to_powsybl_tutorials>/cgmes/
 mvn package exec:java
 ```

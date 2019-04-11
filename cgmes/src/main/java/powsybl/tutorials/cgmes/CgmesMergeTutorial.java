@@ -45,7 +45,7 @@ public final class CgmesMergeTutorial {
 
         // These lines load two networks from files in CGMES format.
         // The two networks are stored in an array list.
-        List<Network> networks = new ArrayList<Network>();
+        List<Network> networks = new ArrayList<>();
         // A micro grid from Elia TSO (Belgium).
         File fileBe = new File(CgmesMergeTutorial.class.getResource("/MicroGridTestConfiguration_T4_BE_BB_Complete_v2.zip").getPath());
         Network networkBe = Importers.loadNetwork(fileBe.toString());
@@ -102,7 +102,7 @@ public final class CgmesMergeTutorial {
 
         // We are going to compute a load flow on this network with Hades2 simulator.
         // This line defined the way we want to compute : locally by default.
-        // See the loadflow tutorial for more information.
+        // See the load-flow tutorial for more information.
         ComputationManager computationManager = LocalComputationManager.getDefault();
         LoadFlow loadFlow = new Hades2Factory().create(networkBe, computationManager, 0);
         LoadFlowParameters loadFlowParameters = new LoadFlowParameters()
@@ -148,8 +148,8 @@ public final class CgmesMergeTutorial {
             }
         };
 
-        // And finally, these best way to implement a contingencies provider is this one :
-        // The list is composed of all lines which voltage is more than 300 kV.
+        // And finally, the best way to implement a contingencies provider is this one:
+        // The list is composed of all lines which voltage is less than 300 kV.
         ContingenciesProvider contingenciesProvider2 = n -> n.getLineStream()
                 .filter(l -> l.getTerminal1().getVoltageLevel().getNominalV() < 300)
                 .map(l -> new Contingency(getName(l), new BranchContingency(l.getId())))
@@ -162,7 +162,7 @@ public final class CgmesMergeTutorial {
                 securityAnalysisParameters, contingenciesProvider2).join();
 
         // Let's analyse the results.
-        // For each contingency, only the two winding transformer NL-TR2_1 is on constraints.
+        // For each contingency, only the two windings transformer NL-TR2_1 is overloaded.
         // Current permanent limit at each side of the transformer is reached.
         Security.print(securityAnalysisResult,
                 networkBe,
@@ -172,7 +172,7 @@ public final class CgmesMergeTutorial {
 
     }
 
-    // This function is need to give a name to merged line.
+    // This function is needed to give a name to merged line.
     private static String getName(Line line) {
         if (line.isTieLine()) {
             TieLine tieLine = (TieLine) line;

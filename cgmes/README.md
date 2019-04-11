@@ -21,5 +21,5 @@ In the tutorial, you also have to configure the path to a local computation dire
 You just need to execute the following command lines:
 ```
 cd <path_to_powsybl_tutorials>/cgmes/
-mvn package exec:java
+mvn compile exec:java
 ```

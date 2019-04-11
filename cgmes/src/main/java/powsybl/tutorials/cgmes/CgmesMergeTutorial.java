@@ -49,7 +49,7 @@ public final class CgmesMergeTutorial {
         // A micro grid from Elia TSO (Belgium).
         File fileBe = new File(CgmesMergeTutorial.class.getResource("/MicroGridTestConfiguration_T4_BE_BB_Complete_v2.zip").getPath());
         Network networkBe = Importers.loadNetwork(fileBe.toString());
-        System.out.println(networkBe);
+        System.out.println("ID of BE network: " + networkBe.getId());
         System.out.println("BE substation count :" + networkBe.getSubstationCount());
         networks.add(networkBe);
 
@@ -61,6 +61,7 @@ public final class CgmesMergeTutorial {
         // A micro grid from Tennet TSO (Netherlands).
         File fileNl = new File(CgmesMergeTutorial.class.getResource("/MicroGridTestConfiguration_T4_NL_BB_Complete_v2.zip").getPath());
         Network networkNl = Importers.loadNetwork(fileNl.toString());
+        System.out.println("ID of NL network: " + networkNl.getId());
         System.out.println("NL substation count: " + networkNl.getSubstationCount());
         networks.add(networkNl);
 

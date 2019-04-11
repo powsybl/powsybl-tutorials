@@ -38,23 +38,8 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.google.auto.service</groupId>
-            <artifactId>auto-service</artifactId>
-            <version>${autoservice.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.google.guava</groupId>
-            <artifactId>guava</artifactId>
-            <version>${guava.version}</version>
-        </dependency>
-        <dependency>
             <groupId>com.powsybl</groupId>
             <artifactId>powsybl-iidm-impl</artifactId>
-            <version>${powsybl.core.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.powsybl</groupId>
-            <artifactId>powsybl-iidm-test</artifactId>
             <version>${powsybl.core.version}</version>
         </dependency>
         <dependency>
@@ -62,20 +47,13 @@
             <artifactId>powsybl-hades2-integration</artifactId>
             <version>${powsybl.rte-core.version}</version>
         </dependency>
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>log4j-over-slf4j</artifactId>
-            <version>${slf4j.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-simple</artifactId>
-            <version>${slf4j.version}</version>
-        </dependency>
+
+        <!-- Runtime dependencies -->
         <dependency>
             <groupId>com.powsybl</groupId>
             <artifactId>powsybl-cgmes-conversion</artifactId>
             <version>${powsybl.core.version}</version>
+            <scope>runtime</scope>
         </dependency>
         <dependency>
             <groupId>com.powsybl</groupId>
@@ -88,6 +66,18 @@
                     <artifactId>logback-classic</artifactId>
                 </exclusion>
             </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>log4j-over-slf4j</artifactId>
+            <version>${slf4j.version}</version>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-simple</artifactId>
+            <version>${slf4j.version}</version>
+            <scope>runtime</scope>
         </dependency>
     </dependencies>
 </project>

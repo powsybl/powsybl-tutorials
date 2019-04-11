@@ -2,15 +2,21 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
     <parent>
         <artifactId>powsybl-tutorials</artifactId>
         <groupId>com.powsybl.tutorials</groupId>
         <version>1.0.0</version>
     </parent>
-    <modelVersion>4.0.0</modelVersion>
 
     <artifactId>loadflow</artifactId>
     <name>Loadflow tutorial</name>
+
+    <!-- These properties are only needed to run the tutorial easily -->
+    <properties>
+        <exec.cleanupDaemonThreads>false</exec.cleanupDaemonThreads>
+        <exec.mainClass>powsybl.tutorials.loadflow.LoadflowTutorial</exec.mainClass>
+    </properties>
 
     <build>
         <plugins>
@@ -38,7 +44,7 @@
         <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
-            <version>20.0</version>
+            <version>${guava.version}</version>
         </dependency>
         <dependency>
             <groupId>com.powsybl</groupId>
@@ -66,10 +72,4 @@
             <version>${slf4j.version}</version>
         </dependency>
     </dependencies>
-
-    <!-- These properties are only needed to run the tutorial easily -->
-    <properties>
-        <exec.cleanupDaemonThreads>false</exec.cleanupDaemonThreads>
-        <exec.mainClass>powsybl.tutorials.loadflow.LoadflowTutorial</exec.mainClass>
-    </properties>
 </project>

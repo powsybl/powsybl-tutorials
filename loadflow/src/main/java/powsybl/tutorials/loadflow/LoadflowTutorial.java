@@ -25,7 +25,7 @@ public final class LoadflowTutorial {
 
         // This line imports the network from a XML file. The network is described in the
         // iTesla Internal Data Model format.
-        File file = new File(LoadflowTutorial.class.getResource("eurostag-tutorial1-lf.xml").getPath());
+        File file = new File(LoadflowTutorial.class.getResource("/eurostag-tutorial1-lf.xml").getPath());
         Network network = Importers.loadNetwork(file.toString());
 
         // Let's scan the network.
@@ -124,7 +124,10 @@ public final class LoadflowTutorial {
             System.out.println("Line: " + l.getTerminal1().getP());
             System.out.println("Line: " + l.getTerminal2().getP());
         }
-        // The power now flows only on line NHV1_NHV2.
+        // The power now flows only on line NHV1_NHV2_2.
+        for (VoltageLevel vl : network.getVoltageLevels()) {
+            vl.visitEquipments(visitor);
+        }
 
     }
 

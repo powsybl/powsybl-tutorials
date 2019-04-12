@@ -3,19 +3,20 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+
     <parent>
         <artifactId>powsybl-tutorials</artifactId>
         <groupId>com.powsybl.tutorials</groupId>
         <version>1.0.0</version>
     </parent>
 
-    <artifactId>loadflow</artifactId>
-    <name>Loadflow tutorial</name>
+    <artifactId>cgmes</artifactId>
+    <name>CGMES tutorial</name>
 
     <!-- These properties are only needed to run the tutorial easily -->
     <properties>
         <exec.cleanupDaemonThreads>false</exec.cleanupDaemonThreads>
-        <exec.mainClass>powsybl.tutorials.loadflow.LoadflowTutorial</exec.mainClass>
+        <exec.mainClass>powsybl.tutorials.cgmes.CgmesMergeTutorial</exec.mainClass>
     </properties>
 
     <build>
@@ -37,39 +38,46 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.google.auto.service</groupId>
-            <artifactId>auto-service</artifactId>
-            <version>${autoservice.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.google.guava</groupId>
-            <artifactId>guava</artifactId>
-            <version>${guava.version}</version>
-        </dependency>
-        <dependency>
             <groupId>com.powsybl</groupId>
             <artifactId>powsybl-iidm-impl</artifactId>
             <version>${powsybl.core.version}</version>
         </dependency>
         <dependency>
-            <groupId>com.powsybl</groupId>
-            <artifactId>powsybl-iidm-converter-api</artifactId>
-            <version>${powsybl.core.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.powsybl</groupId>
-            <artifactId>powsybl-iidm-test</artifactId>
-            <version>${powsybl.core.version}</version>
-        </dependency>
-        <dependency>
             <groupId>com.rte-france.powsybl</groupId>
             <artifactId>powsybl-hades2-integration</artifactId>
+            <version>${powsybl.rte-core.version}</version>
+        </dependency>
+
+        <!-- Runtime dependencies -->
+        <dependency>
+            <groupId>com.powsybl</groupId>
+            <artifactId>powsybl-cgmes-conversion</artifactId>
             <version>${powsybl.core.version}</version>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.powsybl</groupId>
+            <artifactId>powsybl-triple-store-impl-rdf4j</artifactId>
+            <version>${powsybl.core.version}</version>
+            <scope>runtime</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>ch.qos.logback</groupId>
+                    <artifactId>logback-classic</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>log4j-over-slf4j</artifactId>
+            <version>${slf4j.version}</version>
+            <scope>runtime</scope>
         </dependency>
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-simple</artifactId>
             <version>${slf4j.version}</version>
+            <scope>runtime</scope>
         </dependency>
     </dependencies>
 </project>

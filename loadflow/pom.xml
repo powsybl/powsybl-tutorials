@@ -9,7 +9,7 @@
         <version>1.0.0</version>
     </parent>
 
-    <artifactId>loadflow</artifactId>
+    <artifactId>powsybl-loadflow</artifactId>
     <name>Loadflow tutorial</name>
 
     <!-- These properties are only needed to run the tutorial easily -->
@@ -64,12 +64,13 @@
         <dependency>
             <groupId>com.rte-france.powsybl</groupId>
             <artifactId>powsybl-hades2-integration</artifactId>
-            <version>${powsybl.core.version}</version>
+            <version>${powsybl.rte-core.version}</version>
         </dependency>
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-simple</artifactId>
             <version>${slf4j.version}</version>
+            <scope>runtime</scope>
         </dependency>
     </dependencies>
 </project>

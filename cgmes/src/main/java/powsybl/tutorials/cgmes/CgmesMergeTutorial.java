@@ -25,11 +25,11 @@ import com.powsybl.security.SecurityAnalysisParameters;
 import com.powsybl.security.SecurityAnalysisResult;
 import com.rte_france.powsybl.hades2.Hades2Factory;
 import com.rte_france.powsybl.hades2.Hades2SecurityAnalysisFactory;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.io.File;
+import java.io.IOException;
 import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -39,9 +39,7 @@ import java.util.stream.Collectors;
  */
 public final class CgmesMergeTutorial {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(CgmesMergeTutorial.class);
-
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
 
         // These lines load two networks from files in CGMES format.
         // The two networks are stored in an array list.
@@ -114,8 +112,7 @@ public final class CgmesMergeTutorial {
         System.out.println(result.getMetrics());
 
         // This following function prints the active balance summary.
-        // This function is available only on "debug" mode.
-        Networks.printBalanceSummary("Balance: ", networkBe, LOGGER);
+        Networks.printBalanceSummary("Balance: ", networkBe, new PrintWriter(System.out));
 
         // We are going to perform a security analysis on the merged network.
         SecurityAnalysis securityAnalysis = new Hades2SecurityAnalysisFactory().create(networkBe, computationManager, 0);

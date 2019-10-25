@@ -6,14 +6,11 @@
  */
 package powsybl.tutorials.loadflow;
 
-import com.powsybl.computation.ComputationManager;
-import com.powsybl.computation.local.LocalComputationManager;
 import com.powsybl.iidm.import_.Importers;
 import com.powsybl.iidm.network.*;
 import com.powsybl.loadflow.LoadFlow;
 import com.powsybl.loadflow.LoadFlowParameters;
-import com.powsybl.loadflow.LoadFlowResult;
-import com.rte_france.powsybl.hades2.Hades2Factory;
+
 import java.io.File;
 
 /**
@@ -65,28 +62,22 @@ public final class LoadflowTutorial {
             vl.visitEquipments(visitor);
         }
 
-        // We are going to compute a load flow on this network with Hades2 simulator.
-        // This line defined the way we want to compute : locally by default.
-        ComputationManager computationManager = LocalComputationManager.getDefault();
-        // This line configures the load flow computation : with the simulator Hades2 and with
-        // the computation manager defined before.
-        LoadFlow loadflow = new Hades2Factory().create(network, computationManager, 0);
+        // We are going to compute a load flow on this network.
+        // The load flow engine used should be defined in the config file.
 
         // These are the parameters of the load flow. Here angles are set to zero and
         // tensions are set to one per unit.
-        LoadFlowParameters loadflowParameters = new LoadFlowParameters()
-                .setVoltageInitMode(LoadFlowParameters.VoltageInitMode.UNIFORM_VALUES);
-        // The computation results will be stored in a variant of the network.
+        // Note that by default the load flow is computed from the initial variant of the network
+        // and the computation results will be stored in it. Here we prefer creating a new variant.
         // A variant of a network gathers all multi state variables (tensions, angles,
         // active and reactive powers, tap changer positions, hvdc converter modes,
         // switch positions, etc.)
         network.getVariantManager().cloneVariant(VariantManagerConstants.INITIAL_VARIANT_ID,
                 "loadflowVariant");
-        // The computation starts here. Do not miss the join at the end.
-        LoadFlowResult result = loadflow.run("loadflowVariant", loadflowParameters)
-                .join();
-        System.out.println(result.isOk());
-
+        network.getVariantManager().setWorkingVariant("loadflowVariant");
+        LoadFlowParameters loadflowParameters = new LoadFlowParameters()
+                .setVoltageInitMode(LoadFlowParameters.VoltageInitMode.UNIFORM_VALUES);
+        LoadFlow.run(network, loadflowParameters);
 
         // Note that tensions and angles have been computed previously and are stored
         // in the initial variant. The following lines just compared the results.
@@ -113,12 +104,11 @@ public final class LoadflowTutorial {
         // We create a new variant of the network in order to store the results.
         network.getVariantManager().cloneVariant("loadflowVariant",
                 "contingencyLoadflowVariant");
-        LoadFlowResult result2 = loadflow.run("contingencyLoadflowVariant",
-                loadflowParameters).join();
-        System.out.println(result2.isOk());
+        network.getVariantManager().setWorkingVariant("contingencyLoadflowVariant");
+        LoadFlow.run(network, loadflowParameters);
 
         // Let's analyse the results.
-        network.getVariantManager().setWorkingVariant("contingencyLoadflowVariant");
+        // network.getVariantManager().setWorkingVariant("contingencyLoadflowVariant");
         for (Line l : network.getLines()) {
             System.out.println("Line: " + l.getName());
             System.out.println("Line: " + l.getTerminal1().getP());

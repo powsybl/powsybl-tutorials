@@ -18,12 +18,10 @@ import com.powsybl.iidm.network.*;
 import com.powsybl.iidm.network.util.Networks;
 import com.powsybl.loadflow.LoadFlow;
 import com.powsybl.loadflow.LoadFlowParameters;
-import com.powsybl.loadflow.LoadFlowResult;
 import com.powsybl.security.Security;
 import com.powsybl.security.SecurityAnalysis;
 import com.powsybl.security.SecurityAnalysisParameters;
 import com.powsybl.security.SecurityAnalysisResult;
-import com.rte_france.powsybl.hades2.Hades2Factory;
 import com.rte_france.powsybl.hades2.Hades2SecurityAnalysisFactory;
 
 import java.io.File;
@@ -99,24 +97,24 @@ public final class CgmesMergeTutorial {
             System.out.println(networkBe.getName() + " :" + component.getNum() + " " + component.getSize() + " buses");
         }
 
-        // We are going to compute a load flow on this network with Hades2 simulator.
-        // This line defined the way we want to compute : locally by default.
+        networkBe.getGenerator("_3a3b27be-b18b-4385-b557-6735d733baf0").setVoltageRegulatorOn(false);
+
+        // We are going to compute a load flow on this network. The load-flow engine used
+        // is defined in the configuration file.
         // See the load-flow tutorial for more information.
-        ComputationManager computationManager = LocalComputationManager.getDefault();
-        LoadFlow loadFlow = new Hades2Factory().create(networkBe, computationManager, 0);
-        LoadFlowParameters loadFlowParameters = new LoadFlowParameters()
-                .setVoltageInitMode(LoadFlowParameters.VoltageInitMode.DC_VALUES);
-        LoadFlowResult result = loadFlow.run(VariantManagerConstants.INITIAL_VARIANT_ID, loadFlowParameters)
-                .join();
-        System.out.println(result.isOk());
-        System.out.println(result.getMetrics());
+        LoadFlowParameters loadFlowParameters = LoadFlowParameters.load();
+         //       .setVoltageInitMode(LoadFlowParameters.VoltageInitMode.DC_VALUES);
+        // loadFlowParameters.addExtension(ADNLoadFlowParameters.class, new ADNLoadFlowParameters().setRemoteVoltage(false));
+        LoadFlow.run(networkBe, loadFlowParameters);
 
         // This following function prints the active balance summary.
         Networks.printBalanceSummary("Balance: ", networkBe, new PrintWriter(System.out));
 
         // We are going to perform a security analysis on the merged network.
+        ComputationManager computationManager = LocalComputationManager.getDefault();
         SecurityAnalysis securityAnalysis = new Hades2SecurityAnalysisFactory().create(networkBe, computationManager, 0);
-        SecurityAnalysisParameters securityAnalysisParameters = new SecurityAnalysisParameters(); // Default parameters.
+        SecurityAnalysisParameters securityAnalysisParameters = new SecurityAnalysisParameters()
+                .setLoadFlowParameters(loadFlowParameters);
 
         // A security analysis needs a contingencies provider in order to create a list of contingencies.
         // We are going to learn how to implement a contingencies provider.

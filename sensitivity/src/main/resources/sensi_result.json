@@ -1,0 +1,89 @@
+{
+  "ok" : true,
+  "metrics" : {
+    "nbIter" : "1",
+    "dureeCalcul" : "0.0",
+    "cause" : "0",
+    "contraintes" : "4",
+    "statut" : "OK",
+    "csprMarcheForcee" : "0"
+  },
+  "logs" : "<?xml version=\"1.0\" encoding=\"ISO-8859-1\" standalone=\"no\"?>\n<logs xmlns=\"http://www.rte-france.com/gsr\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\">\n  <ctxt nom=\"Hades2\">\n    <ctxt nom=\"Data Initialization\">\n      <rec dt=\"29/01/2020 10:13:31\" level=\"INFO\">First node of the connected component : BBE1AA1_0 ; Number of nodes : 12, number of branches : 16</rec>\n      <rec dt=\"29/01/2020 10:13:31\" level=\"INFO\">Active Gen = 24000.000000, Active Load = 24000.000000, Reactive Gen = 0.000000, Reactive Load =0.000000</rec>\n      <rec dt=\"29/01/2020 10:13:31\" level=\"INFO\">Computation of the slack node - New slack node = BBE3AA1_0</rec>\n    </ctxt>\n    <ctxt nom=\"DCSensiAS\">\n      <rec dt=\"29/01/2020 10:13:31\" level=\"INFO\">DCSensiAS TestCase12Nodes/InitialState, cosphi = 1.00, Flat voltage values proportional to nominal voltage , Load with losses=NO</rec>\n      <ctxt nom=\"Base case\">\n        <ctxt nom=\"DC load flow\">\n          <rec dt=\"29/01/2020 10:13:31\" level=\"INFO\">Compensation achieved = -0.0000 MW</rec>\n        </ctxt>\n      </ctxt>\n      <ctxt nom=\"Contingencies\">\n        <rec dt=\"29/01/2020 10:13:31\" level=\"INFO\">No calculation of contingencies because no contingincy</rec>\n      </ctxt>\n    </ctxt>\n  </ctxt>\n</logs>\n",
+  "values" : [ {
+    "factor" : {
+      "@c" : ".factors.BranchFlowPerPSTAngle",
+      "function" : {
+        "@c" : ".BranchFlow",
+        "id" : "BBE2AA1  FFR3AA1  1",
+        "name" : "BBE2AA1  FFR3AA1  1",
+        "branchId" : "BBE2AA1  FFR3AA1  1"
+      },
+      "variable" : {
+        "@c" : ".PhaseTapChangerAngle",
+        "id" : "BBE2AA1  BBE3AA1  1",
+        "name" : "BBE2AA1  BBE3AA1  1",
+        "phaseTapChangerId" : "BBE2AA1  BBE3AA1  1"
+      }
+    },
+    "value" : 25.202552795410156,
+    "functionReference" : 500.0,
+    "variableReference" : NaN
+  }, {
+    "factor" : {
+      "@c" : ".factors.BranchFlowPerPSTAngle",
+      "function" : {
+        "@c" : ".BranchFlow",
+        "id" : "FFR2AA1  DDE3AA1  1",
+        "name" : "FFR2AA1  DDE3AA1  1",
+        "branchId" : "FFR2AA1  DDE3AA1  1"
+      },
+      "variable" : {
+        "@c" : ".PhaseTapChangerAngle",
+        "id" : "BBE2AA1  BBE3AA1  1",
+        "name" : "BBE2AA1  BBE3AA1  1",
+        "phaseTapChangerId" : "BBE2AA1  BBE3AA1  1"
+      }
+    },
+    "value" : 25.202552795410156,
+    "functionReference" : 1500.0,
+    "variableReference" : NaN
+  }, {
+    "factor" : {
+      "@c" : ".factors.BranchFlowPerPSTAngle",
+      "function" : {
+        "@c" : ".BranchFlow",
+        "id" : "DDE2AA1  NNL3AA1  1",
+        "name" : "DDE2AA1  NNL3AA1  1",
+        "branchId" : "DDE2AA1  NNL3AA1  1"
+      },
+      "variable" : {
+        "@c" : ".PhaseTapChangerAngle",
+        "id" : "BBE2AA1  BBE3AA1  1",
+        "name" : "BBE2AA1  BBE3AA1  1",
+        "phaseTapChangerId" : "BBE2AA1  BBE3AA1  1"
+      }
+    },
+    "value" : 25.202552795410156,
+    "functionReference" : -1000.0,
+    "variableReference" : NaN
+  }, {
+    "factor" : {
+      "@c" : ".factors.BranchFlowPerPSTAngle",
+      "function" : {
+        "@c" : ".BranchFlow",
+        "id" : "NNL2AA1  BBE3AA1  1",
+        "name" : "NNL2AA1  BBE3AA1  1",
+        "branchId" : "NNL2AA1  BBE3AA1  1"
+      },
+      "variable" : {
+        "@c" : ".PhaseTapChangerAngle",
+        "id" : "BBE2AA1  BBE3AA1  1",
+        "name" : "BBE2AA1  BBE3AA1  1",
+        "phaseTapChangerId" : "BBE2AA1  BBE3AA1  1"
+      }
+    },
+    "value" : 25.202552795410156,
+    "functionReference" : -1500.0,
+    "variableReference" : NaN
+  } ]
+}

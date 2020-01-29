@@ -35,6 +35,7 @@ import java.util.stream.Collectors;
  */
 public final class SensitivityTutorial {
     private static final Logger LOGGER = LoggerFactory.getLogger(SensitivityTutorial.class);
+    private static final String CONTINGENCY_VARIANT = "contingencyVariant";
 
     public static void main(String[] args) throws IOException {
 
@@ -173,14 +174,14 @@ public final class SensitivityTutorial {
         contingenciesProvider.getContingencies(network).forEach(cont -> {
             // Create a new variant and set it as the WorkingVariant.
             network.getVariantManager().cloneVariant(VariantManagerConstants.INITIAL_VARIANT_ID,
-                    "contingencyVariant");
-            network.getVariantManager().setWorkingVariant("contingencyVariant");
+                    CONTINGENCY_VARIANT);
+            network.getVariantManager().setWorkingVariant(CONTINGENCY_VARIANT);
             // Apply the contingency on the network in that variant.
             cont.toTask().modify(network, computationManager);
 
             // Run the sensitivity computation with respect to the PST tap position on that network.
             SensitivityComputationResults contingencyResults = sensitivityComputation.run(
-                    twtFactorsProvider, "contingencyVariant",
+                    twtFactorsProvider, CONTINGENCY_VARIANT,
                     SensitivityComputationParameters.load()).join();
 
             // Print the sensitivity values in the terminal.
@@ -189,7 +190,7 @@ public final class SensitivityTutorial {
                 LOGGER.info("Value: {}", value.getValue()));
 
             // Remove the variant corresponding to the current contingency.
-            network.getVariantManager().removeVariant("contingencyVariant");
+            network.getVariantManager().removeVariant(CONTINGENCY_VARIANT);
         });
     }
 

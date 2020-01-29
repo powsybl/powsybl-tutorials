@@ -73,13 +73,14 @@ public final class SensitivityTutorial {
         File iidmFile = new File(iidmPath.toString());
         // If the file doesn't exist, create it.
         if (!iidmFile.exists()) {
-            iidmFile.createNewFile();
+            boolean fileCreated = iidmFile.createNewFile();
+            if (!fileCreated) {
+                throw new IOException("Unable to create the iidm file");
+            }
         }
         // Write the data into the file.
         try (FileOutputStream os = new FileOutputStream(iidmFile.toString())) {
             NetworkXml.write(network, os);
-        } catch (IOException e) {
-            throw new UncheckedIOException(e);
         }
         // Print the buses' active power in the terminal
         for (Bus bus : network.getBusView().getBuses()) {
@@ -135,7 +136,10 @@ public final class SensitivityTutorial {
         File jsonTwtResultFile = new File(jsonTwtResultPath.toString());
         // If the file doesn't exist, create it
         if (!jsonTwtResultFile.exists()) {
-            jsonTwtResultFile.createNewFile();
+            boolean fileCreated = jsonTwtResultFile.createNewFile();
+            if (!fileCreated) {
+                throw new IOException("Unable to create the result file");
+            }
         }
         SensitivityComputationResultExporter exporter = new JsonSensitivityComputationResultExporter();
         try (FileOutputStream os = new FileOutputStream(jsonTwtResultFile.toString())) {

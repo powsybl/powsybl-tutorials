@@ -15,8 +15,8 @@ public final class VoltageLevelTopologyTutorial {
 
     public static void main(String[] args) throws IOException {
 
-        // First, we create the network described in the user story "topology" in bus/breaker topology model.
-        Network network1 = VoltageLevelTopologyTutorial.createBusBreakerNetwork();
+        // First, we create the network described in the user story "topology" in node/breaker topology model.
+        Network network1 = VoltageLevelTopologyTutorial.createNodeBreakerNetwork();
 
         // We visit the network through its bus/breaker view.
         System.out.println(network1.getId() + " in bus/breaker view: ");
@@ -56,8 +56,8 @@ public final class VoltageLevelTopologyTutorial {
             }
         }
 
-        // First, we create the network described in the user story "topology" in node/breaker topology model.
-        Network network2 = VoltageLevelTopologyTutorial.createNodeBreakerNetwork();
+        // First, we create the network described in the user story "topology" in bus/breaker topology model.
+        Network network2 = VoltageLevelTopologyTutorial.createBusBreakerNetwork();
 
         // We visit the network through its bus/breaker view.
         System.out.println(network2.getId() + " in bus/breaker view: ");

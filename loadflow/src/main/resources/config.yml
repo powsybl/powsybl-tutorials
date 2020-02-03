@@ -13,4 +13,8 @@ componentDefaultConfig:
 #  debug: true
 #  useSAX: false
   
-
+hades2:
+    homeDir: /home/tilloyann/simulators/hades2/hades2-V6.4.0.1.1/
+    timeout: 120
+    debug: true
+    useSAX: false

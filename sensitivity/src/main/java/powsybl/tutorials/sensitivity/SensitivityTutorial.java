@@ -83,11 +83,6 @@ public final class SensitivityTutorial {
         try (FileOutputStream os = new FileOutputStream(iidmFile.toString())) {
             NetworkXml.write(network, os);
         }
-        // Print the buses' active power in the terminal
-        for (Bus bus : network.getBusView().getBuses()) {
-            double activePower = bus.getP();
-            LOGGER.info("BUS {} - P: {}", bus.getId(), activePower);
-        }
 
         // 3. Create a list of factors to be studied in the sensitivity computation
         // A standard sensitivity computation input is composed of a list of sensitivity factors,
@@ -107,6 +102,14 @@ public final class SensitivityTutorial {
         monitoredLines.add(network.getLine("FFR2AA1  DDE3AA1  1"));
         monitoredLines.add(network.getLine("DDE2AA1  NNL3AA1  1"));
         monitoredLines.add(network.getLine("NNL2AA1  BBE3AA1  1"));
+
+        // Print the initial flow through each of the monitored lines.
+        // These are the values of the "function reference" in the
+        // JSON result file.
+        LOGGER.info("Initial active power through the four monitored lines");
+        for (Line line : monitoredLines) {
+            LOGGER.info("LINE {} - P: {} MW", line.getId(), line.getTerminal1().getP());
+        }
 
         // Then build the factors themselves.
         // TODO: refactor the API to simplify this part - use a builder pattern?
@@ -136,7 +139,22 @@ public final class SensitivityTutorial {
                 VariantManagerConstants.INITIAL_VARIANT_ID, SensitivityComputationParameters.load()).join();
 
         // 5. Output the results
+        // Print the sensitivity values in the terminal.
+        // The values of the four factors are expressed in MW/°, which
+        // means that for a 1° phase change introduced by the PST, the flow
+        // through a given monitored line is modified by the value of the
+        // factor (in MW).
+        // Here we see that each line will undergo a variation of 25MW for a phase change of 1°
+        // introduced by the PST (and -25MW for a -1° change).
+        // The four monitored lines are affected identically, because in this very simple
+        // network all lines have the same reactance.
+        LOGGER.info("Initial sensitivity results");
+        sensitivityTwtComputationResults.getSensitivityValues().forEach(value ->
+                LOGGER.info("Value: {} MW/°", value.getValue()));
+
         // Write the sensitivity results in a JSON file.
+        // You can check the results in the sensitivity/src/main/resources/sensi_result.json file.
+        // TODO: modify POWSYBL to fill the variable reference value in the results, at the moment it is NaN
         Path jsonTwtResultPath = Paths.get(resourcesPath, "./sensi_result.json").toAbsolutePath();
         File jsonTwtResultFile = new File(jsonTwtResultPath.toString());
         // If the file doesn't exist, create it
@@ -198,9 +216,13 @@ public final class SensitivityTutorial {
                     SensitivityComputationParameters.load()).join();
 
             // Print the sensitivity values in the terminal.
+            // The values of the four factors are expressed in MW/°, which
+            // means that for a 1° phase change introduced by the PST, the flow
+            // through a given monitored line is modified by the value of the
+            // factor (in MW).
             LOGGER.info("Contingency {}:", cont.getId());
             contingencyResults.getSensitivityValues().forEach(value ->
-                LOGGER.info("Value: {}", value.getValue()));
+                LOGGER.info("Value: {} MW/°", value.getValue()));
 
             // Remove the variant corresponding to the current contingency.
             network.getVariantManager().removeVariant(CONTINGENCY_VARIANT);

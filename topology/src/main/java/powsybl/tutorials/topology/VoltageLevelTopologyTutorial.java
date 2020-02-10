@@ -15,10 +15,14 @@ public final class VoltageLevelTopologyTutorial {
 
     public static void main(String[] args) throws IOException {
 
-        // First, we create the network described in the user story "topology" in node/breaker topology model.
+        // This tutorial comes as a comprehensive illustration of the different network representations in Powsybl:
+        // node/breaker, bus/breaker, bus view.
+
+        // First, we create the network described in the user story "topology", following the node/breaker
+        // topology representation.
         Network network1 = VoltageLevelTopologyTutorial.createNodeBreakerNetwork();
 
-        // We visit the network through its bus/breaker view.
+        // Now let us print the network data through its bus/breaker view.
         System.out.println(network1.getId() + " in bus/breaker view: ");
         for (VoltageLevel vl : network1.getVoltageLevels()) {
             for (Bus bus : vl.getBusBreakerView().getBuses()) {
@@ -39,7 +43,7 @@ public final class VoltageLevelTopologyTutorial {
             }
         }
 
-        // Now, we visit the network through its bus view.
+        // We can also print the network data through its bus view.
         System.out.println(network1.getId() + " in bus view: ");
         for (VoltageLevel vl : network1.getVoltageLevels()) {
             for (Bus bus : vl.getBusView().getBuses()) {
@@ -56,11 +60,12 @@ public final class VoltageLevelTopologyTutorial {
             }
         }
 
-        // First, we create the network described in the user story "topology" in bus/breaker topology model.
+        // The second part of this tutorial is based on the network described in the user story "topology" in
+        // bus/breaker topology description. Let us first create it.
         Network network2 = VoltageLevelTopologyTutorial.createBusBreakerNetwork();
 
-        // We visit the network through its bus/breaker view.
-        System.out.println(network2.getId() + " in bus/breaker view: ");
+        // Now we print the network data through its bus/breaker view.
+        System.out.println("\n" + network2.getId() + " in bus/breaker view: ");
         for (VoltageLevel vl : network2.getVoltageLevels()) {
             for (Bus bus : vl.getBusBreakerView().getBuses()) {
                 System.out.println("Bus: " + bus.getId());
@@ -80,7 +85,7 @@ public final class VoltageLevelTopologyTutorial {
             }
         }
 
-        // Now, we visit the network through its bus view.
+        // Finally, we visit the network through its bus view.
         System.out.println(network2.getId() + " in bus view: ");
         for (VoltageLevel vl : network2.getVoltageLevels()) {
             for (Bus bus : vl.getBusView().getBuses()) {
@@ -98,6 +103,9 @@ public final class VoltageLevelTopologyTutorial {
         }
     }
 
+    // Below are the two functions used to create the networks, following the bus/breaker representation and
+    // the node/breaker representation, respectively.
+    // Such network data could also be read from a CGMES file.
 
     private static Network createBusBreakerNetwork() {
 

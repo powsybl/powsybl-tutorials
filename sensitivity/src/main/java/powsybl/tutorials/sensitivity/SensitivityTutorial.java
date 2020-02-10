@@ -154,7 +154,16 @@ public final class SensitivityTutorial {
         }
 
         // 7. Perform a systematic sensitivity analysis
+        // A systematic sensitivity analysis consists of a series of sensitivity calculations
+        // performed on a network given a list of contingencies.
+        // At the moment the systematic study is performed by creating a network variant for each
+        // contingency, and running a sensitivity computation on each variant.
+        // Another possibility would be to use the systematic sensitivity feature of Hades2
+        // in the same way as the security analysis feature: creating one variant on which all
+        // the calculations are done successively, without re-loading the network each time, by
+        // modifying the Jacobian matrix directly in the solver.
         // TODO: implement the API for the Hades2 systematic sensitivity studies
+
         // First, implement a contingencies provider.
         // Here the list of contingencies is composed of the lines that are not monitored
         // in the sensitivity analysis.

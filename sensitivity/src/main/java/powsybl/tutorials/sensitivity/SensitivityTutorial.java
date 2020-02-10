@@ -54,8 +54,8 @@ public final class SensitivityTutorial {
         //         - the Netherlands - Belgium
         //     - we are monitoring the effect of the phase-shift transformer or of the generators' injections on
         //       each of these lines.
-        // In this tutorial the calculations are done in DC mode, but this can be changed in the config file
-        // by setting dcMode = false in the hades2-default-parameters.
+        // In this tutorial the power flow is done on active power only, but this can be changed in the config file
+        // by setting dcMode = false in the hades2-default-parameters. Then, the power flow will handle both P and Q.
 
         // In order to compute a sensitivity analysis on this network,
         // the sensitivity engine used should be defined in the local config file.

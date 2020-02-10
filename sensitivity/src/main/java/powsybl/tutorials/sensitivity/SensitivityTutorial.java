@@ -90,11 +90,15 @@ public final class SensitivityTutorial {
         }
 
         // 3. Create a list of factors to be studied in the sensitivity computation
+        // A standard sensitivity computation input is composed of a list of sensitivity factors,
+        // each one composed of a sensitivity variable (the variable of impact) and a sensitivity function
+        // (the observed function). They correspond to partial derivatives measuring the sensitivity
+        // of the observed function (for example the flow through a line) with respect to the
+        // variable of impact (for example a phase-shift transformer (PST) tap position or an injection).
         // There are four types of factors available, check the Powsybl website for more information.
-        // Here we study the effect of the Belgian phase shift transformer
-        // on the flow through each of the lines connecting the countries.
-        // We thus define these lines as monitoredBranch, and create one factor of type
-        // BranchFlowPerPSTAngle for each monitoredBranch.
+        // Here we study the effect of the Belgian phase shift transformer on the flow through each of
+        // the lines connecting the countries. We thus define these lines as monitoredBranch,
+        // and create one factor of type BranchFlowPerPSTAngle for each monitoredBranch.
         // TODO: read the CNEC and the RA data from a CRAC file instead of hard-coding their definition?
 
         // Start by defining the monitored lines.
@@ -104,7 +108,7 @@ public final class SensitivityTutorial {
         monitoredLines.add(network.getLine("DDE2AA1  NNL3AA1  1"));
         monitoredLines.add(network.getLine("NNL2AA1  BBE3AA1  1"));
 
-        // Then create the factors.
+        // Then build the factors themselves.
         // TODO: refactor the API to simplify this part - use a builder pattern?
         SensitivityFactorsProvider twtFactorsProvider = net -> {
             List<SensitivityFactor> factors = new ArrayList<>();

@@ -4,18 +4,16 @@ componentDefaultConfig:
     ContingenciesProviderFactory: com.powsybl.action.dsl.GroovyDslContingenciesProviderFactory
     
 #computation-local:
-#    tmp-dir: /tmp/sensitivity
+#    tmp-dir: <path_to_local_tmp>
 #    availableCore: 1
-
+#
 #hades2:
-#    homeDir: /home/leroyagn/projects/modeles/hades2_distributions/hades2-V6.4.0.1.1/
+#    homeDir: <path_to_hades_2>
 #    debug: true
 #    useSAX: false
 
 #hades2-default-parameters:
 #    dcMode: true
-#    balanceType: PROPORTIONAL_TO_GENERATION_P
-#    countriesToBalance: BE,DE,FR,NL
 #
 #hades2-default-sensitivity-parameters:
 #    computeInitialLoadflow: true

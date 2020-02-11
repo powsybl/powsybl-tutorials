@@ -23,7 +23,7 @@ public final class VoltageLevelTopologyTutorial {
         Network network1 = VoltageLevelTopologyTutorial.createNodeBreakerNetwork();
 
         // Now let us print the network data through its bus/breaker view.
-        System.out.println(network1.getId() + " in bus/breaker view: ");
+        System.out.println(network1.getId() + " in bus/breaker view:");
         for (VoltageLevel vl : network1.getVoltageLevels()) {
             for (Bus bus : vl.getBusBreakerView().getBuses()) {
                 System.out.println("Bus: " + bus.getId());
@@ -65,7 +65,7 @@ public final class VoltageLevelTopologyTutorial {
         Network network2 = VoltageLevelTopologyTutorial.createBusBreakerNetwork();
 
         // Now we print the network data through its bus/breaker view.
-        System.out.println("\n" + network2.getId() + " in bus/breaker view: ");
+        System.out.println("\n" + network2.getId() + " in bus/breaker view:");
         for (VoltageLevel vl : network2.getVoltageLevels()) {
             for (Bus bus : vl.getBusBreakerView().getBuses()) {
                 System.out.println("Bus: " + bus.getId());

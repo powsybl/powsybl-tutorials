@@ -7,13 +7,8 @@ componentDefaultConfig:
 #    localDir: <path_to_local_tmp>
 #    availableCore: 1
 #
-hades2:
-  homeDir: /home/tilloyann/simulators/hades2/hades2-V6.4.0.1.1/
-  timeout: 120
-  debug: true
-  useSAX: false
-
-hades2-default-parameters:
-  balanceType: PROPORTIONAL_TO_LOAD
-  computedConnectedComponentNumber: 1
-  remoteVoltage: true
+#hades2:
+#  homeDir: <path_to_hades_2>
+#  timeout: 120
+#  debug: true
+#  useSAX: false

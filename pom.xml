@@ -44,7 +44,6 @@
         <module>csv-importer</module>
         <module>itools-packager</module>
         <module>loadflow</module>
-        <module>sensitivity</module>
         <module>topology</module>
     </modules>
 

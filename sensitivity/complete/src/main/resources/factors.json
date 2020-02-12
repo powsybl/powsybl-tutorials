@@ -1,0 +1,57 @@
+[ {
+  "@c" : ".factors.BranchFlowPerPSTAngle",
+  "function" : {
+    "@c" : ".BranchFlow",
+    "id" : "BBE2AA1  FFR3AA1  1",
+    "name" : "BBE2AA1  FFR3AA1  1",
+    "branchId" : "BBE2AA1  FFR3AA1  1"
+  },
+  "variable" : {
+    "@c" : ".PhaseTapChangerAngle",
+    "id" : "BBE2AA1  BBE3AA1  1",
+    "name" : "BBE2AA1  BBE3AA1  1",
+    "phaseTapChangerId" : "BBE2AA1  BBE3AA1  1"
+  }
+}, {
+  "@c" : ".factors.BranchFlowPerPSTAngle",
+  "function" : {
+    "@c" : ".BranchFlow",
+    "id" : "FFR2AA1  DDE3AA1  1",
+    "name" : "FFR2AA1  DDE3AA1  1",
+    "branchId" : "FFR2AA1  DDE3AA1  1"
+  },
+  "variable" : {
+    "@c" : ".PhaseTapChangerAngle",
+    "id" : "BBE2AA1  BBE3AA1  1",
+    "name" : "BBE2AA1  BBE3AA1  1",
+    "phaseTapChangerId" : "BBE2AA1  BBE3AA1  1"
+  }
+}, {
+  "@c" : ".factors.BranchFlowPerPSTAngle",
+  "function" : {
+    "@c" : ".BranchFlow",
+    "id" : "DDE2AA1  NNL3AA1  1",
+    "name" : "DDE2AA1  NNL3AA1  1",
+    "branchId" : "DDE2AA1  NNL3AA1  1"
+  },
+  "variable" : {
+    "@c" : ".PhaseTapChangerAngle",
+    "id" : "BBE2AA1  BBE3AA1  1",
+    "name" : "BBE2AA1  BBE3AA1  1",
+    "phaseTapChangerId" : "BBE2AA1  BBE3AA1  1"
+  }
+}, {
+  "@c" : ".factors.BranchFlowPerPSTAngle",
+  "function" : {
+    "@c" : ".BranchFlow",
+    "id" : "NNL2AA1  BBE3AA1  1",
+    "name" : "NNL2AA1  BBE3AA1  1",
+    "branchId" : "NNL2AA1  BBE3AA1  1"
+  },
+  "variable" : {
+    "@c" : ".PhaseTapChangerAngle",
+    "id" : "BBE2AA1  BBE3AA1  1",
+    "name" : "BBE2AA1  BBE3AA1  1",
+    "phaseTapChangerId" : "BBE2AA1  BBE3AA1  1"
+  }
+} ]

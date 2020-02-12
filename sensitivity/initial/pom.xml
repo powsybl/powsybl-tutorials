@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.powsybl</groupId>
+        <artifactId>powsybl-parent</artifactId>
+        <version>3</version>
+        <relativePath/>
+    </parent>
+
+    <artifactId>powsybl-sensitivity</artifactId>
+
+    <properties>
+        <maven.exec.version>1.6.0</maven.exec.version>
+        <slf4j.version>1.7.22</slf4j.version>
+        <powsybl.core.version>3.4.0</powsybl.core.version>
+        <powsybl.rte-core.version>2.11.0</powsybl.rte-core.version>
+    </properties>
+
+</project>

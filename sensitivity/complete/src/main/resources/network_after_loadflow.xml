@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<iidm:network xmlns:iidm="http://www.itesla_project.eu/schema/iidm/1_0" id="TestCase12Nodes" caseDate="2020-01-22T15:20:53.725+01:00" forecastDistance="0" sourceFormat="code">
+<iidm:network xmlns:iidm="http://www.powsybl.org/schema/iidm/1_1" id="TestCase12Nodes" caseDate="2020-01-22T15:20:53.725+01:00" forecastDistance="0" sourceFormat="code">
     <iidm:substation id="BBE1AA" country="BE">
         <iidm:voltageLevel id="BBE1AA1" nominalV="380.0" topologyKind="BUS_BREAKER">
             <iidm:busBreakerTopology>

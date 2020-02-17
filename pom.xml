@@ -54,6 +54,7 @@
         <module>javafx-packager</module>
         <module>loadflow</module>
         <module>sensitivity</module>
+        <module>topology</module>
     </modules>
 
     <build>

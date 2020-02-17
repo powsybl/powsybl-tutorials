@@ -20,14 +20,14 @@ public final class LoadflowTutorial {
 
     public static void main(String[] args) {
 
-        // This line imports the network from a XML file. The network is described in the
+        // We first import the network from a XML file. The network is described in the
         // iTesla Internal Data Model format.
         File file = new File(LoadflowTutorial.class.getResource("/eurostag-tutorial1-lf.xml").getPath());
         Network network = Importers.loadNetwork(file.toString());
 
         // Let's scan the network.
-        // This network is composed of two substations. Each substations have two voltage
-        // levels and a two windings transformer.
+        // In this tutorial it is composed of two substations. Each substation has two voltage
+        // levels and one two-windings transformer.
         for (Substation substation : network.getSubstations()) {
             System.out.println("Substation " + substation.getName());
             System.out.println("Voltage levels: " + substation.getVoltageLevels());
@@ -43,8 +43,11 @@ public final class LoadflowTutorial {
             System.out.println("Line: " + l.getTerminal2().getP());
         }
 
-        // These lines print the energy sources and the loads of the network through
-        // a visitor.
+        // We now define a visitor and use it to print the energy sources
+        // and the loads of the network. Visitors are usually used to access
+        // the network equipments efficiently, and modify their properties
+        // for instance. Here we just print some data about the
+        // Generators and Loads.
         TopologyVisitor visitor = new DefaultTopologyVisitor() {
             @Override
             public void visitGenerator(Generator generator) {
@@ -65,23 +68,29 @@ public final class LoadflowTutorial {
 
         // We are going to compute a load flow on this network.
         // The load flow engine used should be defined in the config file.
+        // When executing this tutorial with Maven, a custom config.yml is used
+        // from the resources folder (check the pom.xml file).
+        // If you are using IntelliJ, configure the corresponding VM Option for the Run:
+        // -Dpowsybl.config.dirs="$PATH_TO_TUTORIALS/sensitivity/target/classes"
 
-        // These are the parameters of the load flow. Here angles are set to zero and
-        // tensions are set to one per unit.
         // Note that by default the load flow is computed from the initial variant of the network
-        // and the computation results will be stored in it. Here we prefer creating a new variant.
+        // and the computation results will be stored in it. Here we prefer to create a new variant.
         // A variant of a network gathers all multi state variables (tensions, angles,
         // active and reactive powers, tap changer positions, hvdc converter modes,
-        // switch positions, etc.)
+        // switch positions, etc.). For an example of a load-flow computation that does not
+        // rely on several variants, please check the cgmes tutorial.
         network.getVariantManager().cloneVariant(VariantManagerConstants.INITIAL_VARIANT_ID,
                 "loadflowVariant");
         network.getVariantManager().setWorkingVariant("loadflowVariant");
+
+        // Below are the parameters of the load flow. Here angles are set to zero and
+        // tensions are set to one per unit.
         LoadFlowParameters loadflowParameters = new LoadFlowParameters()
                 .setVoltageInitMode(LoadFlowParameters.VoltageInitMode.UNIFORM_VALUES);
         LoadFlow.run(network, loadflowParameters);
 
-        // Note that tensions and angles have been computed previously and are stored
-        // in the initial variant. The following lines just compared the results.
+        // Note that tensions and angles are present in the initial variant based on a reference
+        // calculation. The following lines just compare the results.
         double angle;
         double v;
         double angleInitial;
@@ -97,7 +106,7 @@ public final class LoadflowTutorial {
             System.out.println("Tension difference: " + (v - vInitial));
         }
 
-        // The line "NHV1_NHV2_1" is disconnected through the following lines.
+        // The line "NHV1_NHV2_1" is now disconnected.
         network.getLine("NHV1_NHV2_1").getTerminal1().disconnect();
         network.getLine("NHV1_NHV2_1").getTerminal2().disconnect();
 
@@ -109,13 +118,12 @@ public final class LoadflowTutorial {
         LoadFlow.run(network, loadflowParameters);
 
         // Let's analyse the results.
-        // network.getVariantManager().setWorkingVariant("contingencyLoadflowVariant");
         for (Line l : network.getLines()) {
             System.out.println("Line: " + l.getName());
             System.out.println("Line: " + l.getTerminal1().getP());
             System.out.println("Line: " + l.getTerminal2().getP());
         }
-        // The power now flows only on line NHV1_NHV2_2.
+        // The power now flows only through the line NHV1_NHV2_2, as expected.
         for (VoltageLevel vl : network.getVoltageLevels()) {
             vl.visitEquipments(visitor);
         }

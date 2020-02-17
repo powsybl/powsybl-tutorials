@@ -71,6 +71,7 @@ public final class CgmesMergeTutorial {
                 System.out.println("Generator: " + generator.getName() + ": "
                         + generator.getTerminal().getP() + " MW");
             }
+
             @Override
             public void visitLoad(Load load) {
                 System.out.println("Load: " + load.getName() + ": "

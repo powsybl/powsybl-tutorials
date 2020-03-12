@@ -34,7 +34,6 @@
         <slf4j.version>1.7.22</slf4j.version>
 
         <powsybl.core.version>3.2.0</powsybl.core.version>
-        <powsybl.gse.version>1.8.0</powsybl.gse.version>
         <powsybl.rte-core.version>2.9.0</powsybl.rte-core.version>
     </properties>
 

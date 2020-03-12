@@ -1,3 +1,0 @@
-mapdb-app-file-system:
-    drive-name: MyProjects
-    db-file: ${user.home}/powsybl-projects.db

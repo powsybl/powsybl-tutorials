@@ -14,12 +14,9 @@ import com.powsybl.iidm.export.Exporters;
 import com.powsybl.iidm.import_.Importers;
 import com.powsybl.iidm.network.*;
 import com.powsybl.loadflow.LoadFlow;
-import com.powsybl.loadflow.LoadFlowParameters;
-import sun.nio.ch.Net;
 
 import java.io.IOException;
 import java.io.OutputStreamWriter;
-import java.io.UncheckedIOException;
 import java.nio.file.Paths;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -39,13 +36,10 @@ public final class Merge {
         Network cgm2 = merge(true);
         Exporters.export("XIIDM", cgm2, new Properties(), Paths.get("/tmp/cgm-xnodes.xml"));
 
-        compareTieLines(cgm1, cgm2);
+        // compareTieLines(cgm1, cgm2);
 
-        printBuses(cgm1);
-        printBuses(cgm2);
-
-        printFlows(cgm1);
-        printFlows(cgm2);
+        printBuses(cgm1, cgm2);
+        printFlows(cgm1, cgm2);
     }
 
     private static Network merge(boolean withXnodes) {
@@ -70,34 +64,71 @@ public final class Merge {
         return cgm;
     }
 
-    private static void printBuses(Network network) throws IOException {
+    private static void printBuses(Network cgm1, Network cgm2) throws IOException {
         try (AsciiTableFormatter formatter = new AsciiTableFormatter(new OutputStreamWriter(System.out), "Buses", TableFormatterConfig.load(),
-                new Column("ID"), new Column("V"), new Column("Angle"))) {
-            network.getBusView().getBusStream()
-                    .sorted(Comparator.comparing(Bus::getId))
-                    .filter(b -> !b.getId().startsWith("TN_Border"))
-                    .forEach(b -> {
-                try {
-                    formatter.writeCell(b.getId()).writeCell(b.getV()).writeCell(b.getAngle());
-                } catch (IOException e) {
-                    throw new UncheckedIOException(e);
+                new Column("ID"), new Column("V1"), new Column("Angle1"), new Column("V2"), new Column("Angle2"), new Column("deltaV"), new Column("deltaAngle"))) {
+            for (Bus bus : cgm1.getBusView().getBuses()) {
+                if (!bus.getId().startsWith("TN_Border")) {
+                    Bus bus2 = cgm2.getBusView().getBus(bus.getId());
+
+                    double v1 = bus.getV();
+                    double angle1 = bus.getAngle();
+                    double v2 = bus2.getV();
+                    double angle2 = bus2.getAngle();
+
+                    formatter.writeCell(bus.getId())
+                            .writeCell(v1).writeCell(angle1)
+                            .writeCell(v2).writeCell(angle2)
+                            .writeCell(Math.abs(v1 - v2)).writeCell(Math.abs(angle1 - angle2));
                 }
-            });
+            }
         }
     }
 
-    private static void printFlows(Network network) throws IOException {
+    private static void printFlows(Network cgm1, Network cgm2) throws IOException {
         try (AsciiTableFormatter formatter = new AsciiTableFormatter(new OutputStreamWriter(System.out), "Flows", TableFormatterConfig.load(),
-                new Column("ID"), new Column("P1"), new Column("Q1"), new Column("P2"), new Column("Q2"))) {
-            network.getBranchStream().sorted(Comparator.comparing(Branch::getId)).forEach(b -> {
-                try {
-                    formatter.writeCell(b.getId())
-                            .writeCell(b.getTerminal1().getP()).writeCell(b.getTerminal1().getQ())
-                            .writeCell(b.getTerminal2().getP()).writeCell(b.getTerminal2().getQ());
-                } catch (IOException e) {
-                    throw new UncheckedIOException(e);
+                new Column("ID"), new Column("P1 (1)"), new Column("Q1 (1)"), new Column("P2 (1)"), new Column("Q2 (1)"),
+                new Column("P1 (2)"), new Column("Q1 (2)"), new Column("P2 (2)"), new Column("Q2 (2)"),
+                new Column("deltaP1"), new Column("deltaQ1"), new Column("deltaP2"), new Column("deltaQ2")
+                )) {
+            for (Branch branch : cgm1.getBranches()) {
+                double p1_1 = branch.getTerminal1().getP();
+                double q1_1 = branch.getTerminal1().getQ();
+                double p2_1 = branch.getTerminal2().getP();
+                double q2_1 = branch.getTerminal2().getQ();
+                double p1_2;
+                double q1_2;
+                double p2_2;
+                double q2_2;
+
+                if (branch instanceof TieLine) {
+                    String[] lineIds = branch.getId().split(" \\+ ");
+                    Line line1 = cgm2.getLine(lineIds[0]);
+                    Line line2 = cgm2.getLine(lineIds[1]);
+                    // Swap lines if the name of the tieLine has been reordered
+                    if (!line1.getTerminal1().getVoltageLevel().getId().equals(branch.getTerminal1().getVoltageLevel().getId())) {
+                        Line tmp = line1;
+                        line1 = line2;
+                        line2 = tmp;
+                    }
+
+                    p1_2 = line1.getTerminal1().getP();
+                    q1_2 = line1.getTerminal1().getQ();
+                    p2_2 = line2.getTerminal1().getP();
+                    q2_2 = line2.getTerminal1().getQ();
+                } else {
+                    Branch branch2 = cgm2.getBranch(branch.getId());
+                    p1_2 = branch2.getTerminal1().getP();
+                    q1_2 = branch2.getTerminal1().getQ();
+                    p2_2 = branch2.getTerminal2().getP();
+                    q2_2 = branch2.getTerminal2().getQ();
                 }
-            });
+
+                formatter.writeCell(branch.getId())
+                        .writeCell(p1_1).writeCell(q1_1).writeCell(p2_1).writeCell(q2_1)
+                        .writeCell(p1_2).writeCell(q1_2).writeCell(p2_2).writeCell(q2_2)
+                        .writeCell(Math.abs(p1_1 - p1_2)).writeCell(Math.abs(q1_1 - q1_2)).writeCell(Math.abs(p2_1 - p2_2)).writeCell(Math.abs(q2_1 - q2_2));
+            }
         }
     }
 

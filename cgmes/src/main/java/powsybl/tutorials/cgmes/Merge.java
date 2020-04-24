@@ -184,7 +184,6 @@ public final class Merge {
         endTasks.forEach(Runnable::run);
 
         // TODO(mathbagu): Triple stores, properties...
-
         return cgm;
     }
 
@@ -208,7 +207,6 @@ public final class Merge {
         Runnable runnable1 = createLineAdder(cgm, xnode, dl1);
         Runnable runnable2 = createLineAdder(cgm, xnode, dl2);
 
-        // Step 3: remove the dangling lines
         dl1.remove();
         dl2.remove();
 
@@ -247,5 +245,4 @@ public final class Merge {
         // TODO(mathbagu): what about P,Q ?
         return adder::add;
     }
-
 }

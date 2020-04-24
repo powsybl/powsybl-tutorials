@@ -108,7 +108,7 @@ public final class Merge {
             Line line1 = cgm2.getLine(lineIds[0]);
             Line line2 = cgm2.getLine(lineIds[1]);
 
-            try (AsciiTableFormatter formatter = new AsciiTableFormatter(new OutputStreamWriter(System.out), "Characteristics", TableFormatterConfig.load(),
+            try (AsciiTableFormatter formatter = new AsciiTableFormatter(new OutputStreamWriter(System.out), "Characteristics " + tieLine.getId(), TableFormatterConfig.load(),
                     new Column("Characteristic"), new Column("CGM1"), new Column("CGM2"))) {
                 formatter.writeCell("r").writeCell(tieLine.getR()).writeCell(line1.getR() + line2.getR());
                 formatter.writeCell("x").writeCell(tieLine.getX()).writeCell(line1.getX() + line2.getX());

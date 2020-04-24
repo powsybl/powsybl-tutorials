@@ -39,6 +39,11 @@
     <dependencies>
         <dependency>
             <groupId>com.powsybl</groupId>
+            <artifactId>powsybl-iidm-xml-converter</artifactId>
+            <version>${powsybl.core.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.powsybl</groupId>
             <artifactId>powsybl-iidm-impl</artifactId>
             <version>${powsybl.core.version}</version>
         </dependency>
@@ -51,6 +56,11 @@
             <groupId>com.powsybl</groupId>
             <artifactId>powsybl-config-classic</artifactId>
             <version>${powsybl.core.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.powsybl</groupId>
+            <artifactId>powsybl-open-loadflow</artifactId>
+            <version>${powsybl.openlf.version}</version>
         </dependency>
 
 

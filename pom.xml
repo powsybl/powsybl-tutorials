@@ -42,7 +42,6 @@
         <module>count-network-lines</module>
         <module>csv-exporter</module>
         <module>csv-importer</module>
-        <module>itools-packager</module>
         <module>loadflow</module>
         <module>sensitivity</module>
         <module>topology</module>

@@ -219,7 +219,6 @@ public final class VoltageLevelTopologyTutorial {
                 .setNominalV(132)
                 .setTopologyKind(TopologyKind.NODE_BREAKER)
                 .add();
-        vl1.getNodeBreakerView().setNodeCount(9);
 
         // We create 2 busbar sections BBS1 and BBS2.
         vl1.getNodeBreakerView().newBusbarSection()
@@ -322,7 +321,6 @@ public final class VoltageLevelTopologyTutorial {
                 .setNominalV(220)
                 .setTopologyKind(TopologyKind.NODE_BREAKER)
                 .add();
-        vl2.getNodeBreakerView().setNodeCount(4);
 
         // We create a busbar section BBS3.
         vl2.getNodeBreakerView().newBusbarSection()

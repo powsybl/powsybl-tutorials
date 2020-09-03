@@ -25,7 +25,7 @@ Note that Hades2 only works on Linux and Windows at the moment.
 # How to configure this tutorial
 The configuration file is :
 ```
-<path_to_powsybl_tutorials>/sensitivity/src/main/resources/config.yml
+<path_to_powsybl_tutorials>/sensitivity/complete/src/main/resources/config.yml
 ```
 In order to compute a sensitivity analysis on this network,
 the sensitivity engine used should be defined in the local config file.
@@ -44,6 +44,6 @@ configuration file by setting dcMode = false in the hades2-default-parameters.
 # Running the tutorial
 You just need to execute the following command lines:
 ```
-cd <path_to_powsybl_tutorials>/sensitivity/
+cd <path_to_powsybl_tutorials>/sensitivity/complete
 mvn package exec:java
 ```

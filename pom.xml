@@ -43,8 +43,6 @@
         <module>csv-exporter</module>
         <module>csv-importer</module>
         <module>itools-packager</module>
-        <module>sensitivity</module>
-        <module>loadflow</module>
         <module>topology</module>
     </modules>
 

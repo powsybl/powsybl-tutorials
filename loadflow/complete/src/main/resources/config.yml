@@ -1,0 +1,9 @@
+loadflow:
+  default-impl-name: "hades2"
+
+computation-local:
+    tmp-dir: /tmp
+    availableCore: 1
+
+hades2:
+    homeDir: <PATH_TO_HADES2>

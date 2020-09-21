@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (c) 2019, RTE (http://www.rte-france.com)
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -6,27 +6,22 @@
  */
 package powsybl.tutorials.sensitivity;
 
-import com.powsybl.computation.ComputationManager;
-import com.powsybl.computation.local.LocalComputationManager;
 import com.powsybl.contingency.BranchContingency;
 import com.powsybl.contingency.ContingenciesProvider;
 import com.powsybl.contingency.Contingency;
 import com.powsybl.iidm.import_.Importers;
 import com.powsybl.iidm.network.Line;
 import com.powsybl.iidm.network.Network;
-import com.powsybl.iidm.network.VariantManagerConstants;
 import com.powsybl.loadflow.LoadFlow;
 import com.powsybl.loadflow.LoadFlowParameters;
-import com.powsybl.sensitivity.*;
-import com.powsybl.sensitivity.converter.CsvSensitivityComputationResultExporter;
-import com.powsybl.sensitivity.converter.JsonSensitivityComputationResultExporter;
-import com.powsybl.sensitivity.converter.SensitivityComputationResultExporter;
+import com.powsybl.sensitivity.converter.CsvSensitivityAnalysisResultExporter;
+import com.powsybl.sensitivity.converter.JsonSensitivityAnalysisResultExporter;
+import com.powsybl.sensitivity.converter.SensitivityAnalysisResultExporter;
 import com.powsybl.sensitivity.factors.BranchFlowPerPSTAngle;
 import com.powsybl.sensitivity.factors.functions.BranchFlow;
 import com.powsybl.sensitivity.factors.variables.PhaseTapChangerAngle;
-import com.powsybl.sensitivity.json.JsonSensitivityComputationParameters;
+import com.powsybl.sensitivity.json.JsonSensitivityAnalysisParameters;
 import com.powsybl.sensitivity.json.SensitivityFactorsJsonSerializer;
-import com.rte_france.powsybl.hades2.sensitivity.Hades2SensitivityFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -39,7 +34,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * @author Agnes Leroy <agnes.leroy at rte-france.com>
+ * @author Agnes Leroy {@literal <agnes.leroy at rte-france.com>}
  */
 public final class SensitivityTutorialComplete {
     private static final Logger LOGGER = LoggerFactory.getLogger(SensitivityTutorialComplete.class);
@@ -87,16 +82,9 @@ public final class SensitivityTutorialComplete {
         };
 
         // 3. Run the sensitivity analysis
-        // Create a ComputationManager in order to perform the computations.
-        // TODO: make some refactoring like in the loadflow to avoid explicitly creating the computation manager
-        ComputationManager computationManager = LocalComputationManager.getDefault();
-        // Create a SensitivityComputation object.
-        // TODO: refactor also to do it like the loadflow
-        SensitivityComputation sensitivityComputation = new Hades2SensitivityFactory().create(network,
-                computationManager, 1);
-        // Run the computation.
-        SensitivityComputationResults sensiResults = sensitivityComputation.run(factorsProvider,
-                VariantManagerConstants.INITIAL_VARIANT_ID, SensitivityComputationParameters.load()).join();
+        // Run the analysis that will be performed on network working variant with default sensitivity analysis parameters
+        // Default implementation defined in the platform configuration will be used.
+        SensitivityAnalysisResults sensiResults = SensitivityAnalysis.find().run(network, factorsProvider);
 
         // 4. Output the results
         // Print the sensitivity values in the terminal.
@@ -124,7 +112,7 @@ public final class SensitivityTutorialComplete {
                 throw new IOException("Unable to create the result file");
             }
         }
-        SensitivityComputationResultExporter jsonExporter = new JsonSensitivityComputationResultExporter();
+        SensitivityAnalysisResultExporter jsonExporter = new JsonSensitivityAnalysisResultExporter();
         try (FileOutputStream os = new FileOutputStream(jsonSensiResultFile.toString())) {
             jsonExporter.export(sensiResults, new OutputStreamWriter(os));
         } catch (IOException e) {
@@ -171,12 +159,11 @@ public final class SensitivityTutorialComplete {
         // Run the sensitivity computation with respect to the PST tap position on that network.
 
         Path parametersFile = Paths.get(SensitivityTutorialComplete.class.getResource("/sensi_parameters.json").getPath());
-        SensitivityComputationParameters params = SensitivityComputationParameters.load();
-        JsonSensitivityComputationParameters.update(params, parametersFile);
+        SensitivityAnalysisParameters params = SensitivityAnalysisParameters.load();
+        JsonSensitivityAnalysisParameters.update(params, parametersFile);
 
-        SensitivityComputationResults systematicSensiResults = sensitivityComputation.run(
-                jsonFactorsProvider, contingenciesProvider, VariantManagerConstants.INITIAL_VARIANT_ID,
-                params).join();
+        SensitivityAnalysisResults systematicSensiResults = SensitivityAnalysis.find().run(network,
+                jsonFactorsProvider, contingenciesProvider, params);
 
         // Export the results to a CSV file
         Path csvResultPath = Paths.get(SensitivityTutorialComplete.class.getResource("/sensi_syst_result.json").getPath());
@@ -188,7 +175,7 @@ public final class SensitivityTutorialComplete {
                 throw new IOException("Unable to create the systematic sensi result file");
             }
         }
-        SensitivityComputationResultExporter csvExporter = new CsvSensitivityComputationResultExporter();
+        SensitivityAnalysisResultExporter csvExporter = new CsvSensitivityAnalysisResultExporter();
         try (FileOutputStream os = new FileOutputStream(csvResultFile.toString())) {
             csvExporter.export(systematicSensiResults, new OutputStreamWriter(os));
         } catch (IOException e) {

@@ -9,11 +9,17 @@ package powsybl.tutorials.sensitivity;
 import com.powsybl.contingency.BranchContingency;
 import com.powsybl.contingency.ContingenciesProvider;
 import com.powsybl.contingency.Contingency;
+import com.powsybl.contingency.EmptyContingencyListProvider;
 import com.powsybl.iidm.import_.Importers;
 import com.powsybl.iidm.network.Line;
 import com.powsybl.iidm.network.Network;
 import com.powsybl.loadflow.LoadFlow;
 import com.powsybl.loadflow.LoadFlowParameters;
+import com.powsybl.sensitivity.SensitivityAnalysis;
+import com.powsybl.sensitivity.SensitivityFactor;
+import com.powsybl.sensitivity.SensitivityFactorsProvider;
+import com.powsybl.sensitivity.SensitivityAnalysisParameters;
+import com.powsybl.sensitivity.SensitivityAnalysisResult;
 import com.powsybl.sensitivity.converter.CsvSensitivityAnalysisResultExporter;
 import com.powsybl.sensitivity.converter.JsonSensitivityAnalysisResultExporter;
 import com.powsybl.sensitivity.converter.SensitivityAnalysisResultExporter;
@@ -84,7 +90,7 @@ public final class SensitivityTutorialComplete {
         // 3. Run the sensitivity analysis
         // Run the analysis that will be performed on network working variant with default sensitivity analysis parameters
         // Default implementation defined in the platform configuration will be used.
-        SensitivityAnalysisResults sensiResults = SensitivityAnalysis.find().run(network, factorsProvider);
+        SensitivityAnalysisResult sensiResults = SensitivityAnalysis.run(network, factorsProvider, new EmptyContingencyListProvider());
 
         // 4. Output the results
         // Print the sensitivity values in the terminal.
@@ -162,8 +168,7 @@ public final class SensitivityTutorialComplete {
         SensitivityAnalysisParameters params = SensitivityAnalysisParameters.load();
         JsonSensitivityAnalysisParameters.update(params, parametersFile);
 
-        SensitivityAnalysisResults systematicSensiResults = SensitivityAnalysis.find().run(network,
-                jsonFactorsProvider, contingenciesProvider, params);
+        SensitivityAnalysisResult systematicSensiResults = SensitivityAnalysis.run(network, jsonFactorsProvider, contingenciesProvider, params);
 
         // Export the results to a CSV file
         Path csvResultPath = Paths.get(SensitivityTutorialComplete.class.getResource("/sensi_syst_result.json").getPath());

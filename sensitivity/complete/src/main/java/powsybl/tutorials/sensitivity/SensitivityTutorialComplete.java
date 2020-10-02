@@ -107,19 +107,13 @@ public final class SensitivityTutorialComplete {
                 LOGGER.info("Value: {} MW/°", value.getValue()));
 
         // Write the sensitivity results in a JSON file.
-        // You can check the results in the sensitivity/src/main/resources/sensi_result.json file.
+        // You can check the results in the sensitivity/complete/target/sensi_result.json file.
         // TODO: modify POWSYBL to fill the variable reference value in the results, at the moment it is NaN
-        Path jsonSensiResultPath = Paths.get(SensitivityTutorialComplete.class.getResource("/sensi_result.json").getPath());
-        File jsonSensiResultFile = new File(jsonSensiResultPath.toString());
-        // If the file doesn't exist, create it
-        if (!jsonSensiResultFile.exists()) {
-            boolean fileCreated = jsonSensiResultFile.createNewFile();
-            if (!fileCreated) {
-                throw new IOException("Unable to create the result file");
-            }
-        }
+        Path resultsPath = networkPath.getParent().getParent();
+        Path jsonSensiResultPath = resultsPath.resolve("sensi_result.json");
+
         SensitivityAnalysisResultExporter jsonExporter = new JsonSensitivityAnalysisResultExporter();
-        try (FileOutputStream os = new FileOutputStream(jsonSensiResultFile.toString())) {
+        try (OutputStream os = Files.newOutputStream(jsonSensiResultPath)) {
             jsonExporter.export(sensiResults, new OutputStreamWriter(os));
         } catch (IOException e) {
             throw new UncheckedIOException(e);
@@ -171,17 +165,9 @@ public final class SensitivityTutorialComplete {
         SensitivityAnalysisResult systematicSensiResults = SensitivityAnalysis.run(network, jsonFactorsProvider, contingenciesProvider, params);
 
         // Export the results to a CSV file
-        Path csvResultPath = Paths.get(SensitivityTutorialComplete.class.getResource("/sensi_syst_result.json").getPath());
-        File csvResultFile = new File(csvResultPath.toString());
-        // If the file doesn't exist, create it
-        if (!csvResultFile.exists()) {
-            boolean fileCreated = csvResultFile.createNewFile();
-            if (!fileCreated) {
-                throw new IOException("Unable to create the systematic sensi result file");
-            }
-        }
+        Path csvResultPath = resultsPath.resolve("sensi_syst_result.csv");
         SensitivityAnalysisResultExporter csvExporter = new CsvSensitivityAnalysisResultExporter();
-        try (FileOutputStream os = new FileOutputStream(csvResultFile.toString())) {
+        try (OutputStream os = Files.newOutputStream(csvResultPath)) {
             csvExporter.export(systematicSensiResults, new OutputStreamWriter(os));
         } catch (IOException e) {
             throw new UncheckedIOException(e);

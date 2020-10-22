@@ -1,5 +1,5 @@
-loadflow:
-  default-impl-name: "hades2"
+load-flow:
+  default-impl-name: Hades2
 
 computation-local:
     tmp-dir: /tmp

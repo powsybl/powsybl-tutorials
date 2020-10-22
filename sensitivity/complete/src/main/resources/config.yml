@@ -21,5 +21,7 @@ hades2-default-sensitivity-parameters:
     computeInitialLoadflow: true
     computeSensitivityToPsts: true
     computeSensitivityToInjections: false
-    resultsThreshold: 0.01
+    resultsThreshold: 0
 
+sensitivity-analysis:
+  default-impl-name: "Sensi2"

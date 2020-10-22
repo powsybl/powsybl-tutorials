@@ -33,8 +33,8 @@
         <logback.version>1.1.8</logback.version>
         <slf4j.version>1.7.22</slf4j.version>
 
-        <powsybl.core.version>3.3.0</powsybl.core.version>
-        <powsybl.rte-core.version>2.10.0</powsybl.rte-core.version>
+        <powsybl.core.version>3.7.1</powsybl.core.version>
+        <powsybl.rte-core.version>2.14.1</powsybl.rte-core.version>
     </properties>
 
     <modules>

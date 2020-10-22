@@ -16,8 +16,8 @@
     <properties>
         <maven.exec.version>1.6.0</maven.exec.version>
         <slf4j.version>1.7.22</slf4j.version>
-        <powsybl.core.version>3.4.0</powsybl.core.version>
-        <powsybl.rte-core.version>2.11.0</powsybl.rte-core.version>
+        <powsybl.core.version>3.7.1</powsybl.core.version>
+        <powsybl.rte-core.version>2.14.1</powsybl.rte-core.version>
 
         <!-- These properties are only needed to run the tutorial easily -->
         <exec.cleanupDaemonThreads>false</exec.cleanupDaemonThreads>
@@ -58,6 +58,7 @@
             <groupId>org.slf4j</groupId>
             <artifactId>log4j-over-slf4j</artifactId>
             <version>${slf4j.version}</version>
+            <scope>runtime</scope>
         </dependency>
 
         <!-- Runtime dependencies -->

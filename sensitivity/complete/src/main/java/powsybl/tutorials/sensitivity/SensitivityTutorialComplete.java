@@ -6,10 +6,7 @@
  */
 package powsybl.tutorials.sensitivity;
 
-import com.powsybl.contingency.BranchContingency;
-import com.powsybl.contingency.ContingenciesProvider;
 import com.powsybl.contingency.Contingency;
-import com.powsybl.contingency.EmptyContingencyListProvider;
 import com.powsybl.iidm.import_.Importers;
 import com.powsybl.iidm.network.Line;
 import com.powsybl.iidm.network.Network;
@@ -36,6 +33,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -90,7 +88,7 @@ public final class SensitivityTutorialComplete {
         // 3. Run the sensitivity analysis
         // Run the analysis that will be performed on network working variant with default sensitivity analysis parameters
         // Default implementation defined in the platform configuration will be used.
-        SensitivityAnalysisResult sensiResults = SensitivityAnalysis.run(network, factorsProvider, new EmptyContingencyListProvider());
+        SensitivityAnalysisResult sensiResults = SensitivityAnalysis.run(network, factorsProvider, Collections.emptyList());
 
         // 4. Output the results
         // Print the sensitivity values in the terminal.
@@ -126,10 +124,9 @@ public final class SensitivityTutorialComplete {
         // the calculations are done successively, without re-loading the network each time, by
         // modifying the Jacobian matrix directly in the solver.
 
-        // First, implement a contingencies provider.
         // Here the list of contingencies is composed of the lines that are not monitored
         // in the sensitivity analysis.
-        ContingenciesProvider contingenciesProvider = n -> n.getLineStream()
+        List<Contingency> contingencies = network.getLineStream()
                 .filter(l -> {
                     final boolean[] isContingency = {true};
                     monitoredLines.forEach(monitoredLine -> {
@@ -140,10 +137,12 @@ public final class SensitivityTutorialComplete {
                     });
                     return isContingency[0];
                 })
-                .map(l -> new Contingency(l.getId(), new BranchContingency(l.getId())))
+                .map(l -> Contingency.builder(l.getId())
+                                     .addBranch(l.getId())
+                                     .build())
                 .collect(Collectors.toList());
         // This makes a total of 11 contingencies
-        LOGGER.info("Number of contingencies: {}", contingenciesProvider.getContingencies(network).size());
+        LOGGER.info("Number of contingencies: {}", contingencies.size());
 
         // Now, read factors from a JSON file (this is the second example of how to create factors, actually
         // we created the same twice)
@@ -162,7 +161,7 @@ public final class SensitivityTutorialComplete {
         SensitivityAnalysisParameters params = SensitivityAnalysisParameters.load();
         JsonSensitivityAnalysisParameters.update(params, parametersFile);
 
-        SensitivityAnalysisResult systematicSensiResults = SensitivityAnalysis.run(network, jsonFactorsProvider, contingenciesProvider, params);
+        SensitivityAnalysisResult systematicSensiResults = SensitivityAnalysis.run(network, jsonFactorsProvider, contingencies, params);
 
         // Export the results to a CSV file
         Path csvResultPath = resultsPath.resolve("sensi_syst_result.csv");

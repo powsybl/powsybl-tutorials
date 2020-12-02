@@ -127,20 +127,18 @@ public final class SensitivityTutorialComplete {
         // Here the list of contingencies is composed of the lines that are not monitored
         // in the sensitivity analysis.
         List<Contingency> contingencies = network.getLineStream()
-                .filter(l -> {
-                    final boolean[] isContingency = {true};
-                    monitoredLines.forEach(monitoredLine -> {
-                        if (l.equals(monitoredLine)) {
-                            isContingency[0] = false;
-                            return;
-                        }
-                    });
-                    return isContingency[0];
-                })
-                .map(l -> Contingency.builder(l.getId())
-                                     .addBranch(l.getId())
-                                     .build())
-                .collect(Collectors.toList());
+            .filter(l -> {
+                final boolean[] isContingency = {true};
+                monitoredLines.forEach(monitoredLine -> {
+                    if (l.equals(monitoredLine)) {
+                        isContingency[0] = false;
+                        return;
+                    }
+                });
+                return isContingency[0];
+            })
+            .map(l -> Contingency.branch(l.getId()))
+            .collect(Collectors.toList());
         // This makes a total of 11 contingencies
         LOGGER.info("Number of contingencies: {}", contingencies.size());
 

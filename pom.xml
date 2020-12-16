@@ -30,7 +30,7 @@
         <autoservice.version>1.0-rc2</autoservice.version>
         <guava.version>20.0</guava.version>
         <javacsv.version>2.0</javacsv.version>
-        <logback.version>1.1.8</logback.version>
+        <logback.version>1.2.3</logback.version>
         <slf4j.version>1.7.22</slf4j.version>
 
         <powsybl.core.version>3.7.1</powsybl.core.version>

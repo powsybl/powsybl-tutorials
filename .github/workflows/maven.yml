@@ -22,6 +22,11 @@ jobs:
       - name: Build with Maven
         run: mvn --batch-mode package
 
+      - name: Set up JDK 11 for sonar analysis
+        uses: actions/setup-java@v1
+        with:
+          java-version: 11
+
       - name: Run SonarCloud analysis
         if: matrix.os == 'ubuntu-latest'
         run: >

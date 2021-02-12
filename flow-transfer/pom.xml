@@ -15,7 +15,7 @@
     <!-- These properties are only needed to run the tutorial easily -->
     <properties>
         <exec.cleanupDaemonThreads>false</exec.cleanupDaemonThreads>
-        <exec.mainClass>powsybl.tutorials.flow-transfer.FlowTransferAnalysis</exec.mainClass>
+        <exec.mainClass>powsybl.tutorials.flowtransfer.FlowTransferAnalysisTutorial</exec.mainClass>
     </properties>
 
     <build>

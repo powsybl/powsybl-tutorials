@@ -1,0 +1,39 @@
+componentDefaultConfig:
+  LoadFlowFactory: com.rte_france.powsybl.hades2.Hades2Factory
+  SecurityAnalysisFactory: com.powsybl.security.SecurityAnalysisFactoryImpl
+  ContingenciesProviderFactory: com.powsybl.action.dsl.GroovyDslContingenciesProviderFactory
+  SensitivityAnalysisFactory: com.powsybl.security.SecurityAnalysisFactoryImpl
+
+computation-local:
+  tmp-dir: /tmp/
+  available-core: 1
+
+hades2:
+  homeDir: <PATH_TO_HADES2>
+  timeout: 120
+  debug: true
+  useSAX: false
+
+hades2-default-parameters:
+  balanceType: PROPORTIONAL_TO_GENERATION_P_MAX
+  computedConnectedComponentNumber: 0
+  remoteVoltageGenerators: true
+
+load-flow:
+  default-impl-name: Hades2
+
+load-flow-default-parameters:
+  dc: false
+  phaseShifterRegulationOn: false
+  specificCompatibility: false
+  transformerVoltageControlOn: false
+  voltageInitMode: DC_VALUES
+
+hades2-default-sensitivity-parameters:
+  computeInitialLoadflow: true
+  computeSensitivityToPsts: true
+  computeSensitivityToInjections: false
+
+import-export-parameters-default-value:
+  iidm.export.adn.with-minimum-reactance: true
+  iidm.export.adn.minimum-reactance-per-unit: 0.000625

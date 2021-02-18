@@ -12,7 +12,7 @@ The configuration file is :
 ```
 In the tutorial, you have to configure the path to Hades2. Please visit the [loadflow feature](https://rte-france.github.io/hades2/features/loadflow.html) to configure it.
 
-In the tutorial, you also have to configure the path to a local computation directory (Hades2 temporary files will be stored here). Please visit [this page](https://www.powsybl.org/docs/configuration/modules/computation-local.html) to learn how to do it.
+In the tutorial, you also have to configure the path to a local computation directory (Hades2 temporary files will be stored here). Please visit [this page](https://www.powsybl.org/pages/documentation/user/configuration/computation-local.html) to learn how to do it.
 
 # Running the tutorial
 You just need to execute the following command lines :

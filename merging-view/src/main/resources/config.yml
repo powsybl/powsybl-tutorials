@@ -1,0 +1,11 @@
+#computation-local:
+#    localDir: <path_to_local_tmp>
+#    availableCore: 1
+#
+#hades2:
+#  homeDir: <path_to_hades>
+#  timeout: 120
+#  debug: true
+#  useSAX: false
+load-flow-default-parameters:
+  voltageInitMode: DC_VALUES

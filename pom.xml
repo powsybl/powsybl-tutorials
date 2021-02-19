@@ -44,6 +44,7 @@
         <module>csv-exporter</module>
         <module>csv-importer</module>
         <module>itools-packager</module>
+        <module>merging-view</module>
         <module>topology</module>
     </modules>
 

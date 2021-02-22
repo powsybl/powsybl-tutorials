@@ -8,6 +8,7 @@ package powsybl.tutorials.mergingview;
 
 import com.powsybl.cgmes.conversion.export.CgmesExportContext;
 import com.powsybl.cgmes.conversion.export.StateVariablesExport;
+import com.powsybl.cgmes.conversion.export.SteadyStateHypothesisExport;
 import com.powsybl.cgmes.conversion.extensions.CgmesSvMetadata;
 import com.powsybl.commons.xml.XmlUtil;
 import com.powsybl.iidm.import_.Importers;
@@ -32,6 +33,8 @@ import static com.powsybl.iidm.xml.IidmXmlConstants.INDENT;
  */
 public final class MergingViewTutorial {
 
+    private static final String TMP_DIR = System.getProperty("java.io.tmpdir"); // put your own directory output path
+
     public static void main(String[] args) throws IOException, XMLStreamException {
         File fileBe = new File(MergingViewTutorial.class.getResource("/MicroGridTestConfiguration_T4_BE_BB_Complete_v2.zip").getPath());
         Network n1 = Importers.loadNetwork(fileBe.toString());
@@ -45,7 +48,15 @@ public final class MergingViewTutorial {
         System.out.println(result.isOk());
         System.out.println(result.getMetrics());
 
-        try (OutputStream os = Files.newOutputStream(Paths.get(System.getProperty("java.io.tmpdir") + "/MicroGridTestConfiguration_T4_BE_NL_BB_SV_v2_TEST.xml"))) { // put your own output path
+        try (OutputStream os = Files.newOutputStream(Paths.get(TMP_DIR + "/MicroGridTestConfiguration_T4_BE_BB_SSH_v2_TEST.xml"))) {
+            XMLStreamWriter writer = XmlUtil.initializeWriter(true, INDENT, os);
+            SteadyStateHypothesisExport.write(n1, writer, new CgmesExportContext(n1));
+        }
+        try (OutputStream os = Files.newOutputStream(Paths.get(TMP_DIR + "/MicroGridTestConfiguraton_T4_NL_BB_SSH_v2_TEST.xml"))) {
+            XMLStreamWriter writer = XmlUtil.initializeWriter(true, INDENT, os);
+            SteadyStateHypothesisExport.write(n2, writer, new CgmesExportContext(n2));
+        }
+        try (OutputStream os = Files.newOutputStream(Paths.get(TMP_DIR + "/MicroGridTestConfiguration_T4_BE_NL_BB_SV_v2_TEST.xml"))) {
             XMLStreamWriter writer = XmlUtil.initializeWriter(true, INDENT, os);
             StateVariablesExport.write(mergingView, writer, createContext(mergingView, n1, n2));
         }

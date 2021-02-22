@@ -1,6 +1,6 @@
 # Merging View and SV export of CGM
 
-In this tutorial, we learn how to import IGM CGMES files, merge them, run a loadflow and export a SV file of the CGM composed of these IGM. The CGMES files are from two bordering countries: Belgium and Netherlands.
+In this tutorial, we learn how to import IGM CGMES files, merge them, run a loadflow and export updated SSH files and a merged SV file of the CGM composed of these IGM. The CGMES files are from two bordering countries: Belgium and Netherlands.
 
 Note that the boundary files in CGMES format are stored in each CGMES archive.
 
@@ -8,7 +8,7 @@ Note that the boundary files in CGMES format are stored in each CGMES archive.
 In the tutorial, we use Hades2, a RTE load-flow tool. Please visit the [Hades2 documentation](https://rte-france.github.io/hades2/index.html) to learn how to install Hades2 on your computer. Note that Hades2 only works on Linux and on Windows for the moment.
 
 # How to configure this tutorial
-The configuration file is :
+The configuration file is:
 ```
 <path_to_powsybl_tutorials>/merging-view/src/main/resources/config.yml
 ```

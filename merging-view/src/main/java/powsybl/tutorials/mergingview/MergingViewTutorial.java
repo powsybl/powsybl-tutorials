@@ -48,6 +48,25 @@ public final class MergingViewTutorial {
         System.out.println(result.isOk());
         System.out.println(result.getMetrics());
 
+        /*
+        TODO Launch a balance computation
+
+        // How to create the scalable?
+        Scalable scalableBe;
+        Scalable scalableNl;
+
+        NetworkAreaFactory beAreaFactory = new ControlAreaFactory("<BE_CONTROL_ID>");
+        NetworkAreaFactory nlAreaFactory = new ControlAreaFactory("<NL_CONTROL_ID>");
+
+        // What should be in targetNetPosition
+        List<BalanceComputationArea> areas = new ArrayList<>();
+        areas.add(new BalanceComputationArea("BE", beAreaFactory, scalableBe, <TARGET_NET_POSITION>));
+        areas.add(new BalanceComputationArea("NL", nlAreaFactory, scalableNl, <TARGET_NET_POSITION));
+
+        BalanceComputation balanceComputation = new BalanceComputationFactoryImpl().create(areas, new LoadFlow.Runner(new OpenLoadFlowProvider(new DenseMatrixFactory())), LocalComputationManager.getDefault());
+        balanceComputation.run(mergingView, network.getVariantManager().getWorkingVariantId(), new BalanceComputationParameters()).join();
+         */
+
         // Generate updated SSH files (one by IGM)
         try (OutputStream os = Files.newOutputStream(Paths.get(TMP_DIR + "/MicroGridTestConfiguration_T4_BE_BB_SSH_v2_TEST.xml"))) {
             XMLStreamWriter writer = XmlUtil.initializeWriter(true, INDENT, os);

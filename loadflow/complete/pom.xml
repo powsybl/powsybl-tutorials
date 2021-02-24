@@ -15,8 +15,6 @@
 
     <properties>
         <maven.exec.version>1.6.0</maven.exec.version>
-        <exec.cleanupDaemonThreads>false</exec.cleanupDaemonThreads>
-        <exec.mainClass>powsybl.tutorials.loadflow.LoadflowTutorialComplete</exec.mainClass>
         <powsybl.core.version>4.0.1</powsybl.core.version>
         <powsybl-open-loadflow.version>0.9.0</powsybl-open-loadflow.version>
         <slf4j.version>1.7.22</slf4j.version>
@@ -29,12 +27,13 @@
                 <artifactId>exec-maven-plugin</artifactId>
                 <version>1.6.0</version>
                 <configuration>
-                    <systemProperties>
-                        <systemProperty>
-                            <key>powsybl.config.dirs</key>
-                            <value>${project.build.directory}/classes</value>
-                        </systemProperty>
-                    </systemProperties>
+                    <executable>java</executable>
+                    <arguments>
+                        <argument>-Dpowsybl.config.dirs=${project.build.directory}/classes</argument>
+                        <argument>-classpath</argument>
+                        <classpath/>
+                        <argument>powsybl.tutorials.loadflow.LoadflowTutorialComplete</argument>
+                    </arguments>
                 </configuration>
             </plugin>
         </plugins>

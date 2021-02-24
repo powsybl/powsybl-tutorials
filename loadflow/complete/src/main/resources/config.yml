@@ -6,4 +6,4 @@ load-flow-default-parameters:
 
 open-loadflow-default-parameters:
   slackBusSelectorType: Name
-  nameSlackBusSelectorBusId: xxx
+  nameSlackBusSelectorBusId: VLHV2_0

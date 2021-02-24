@@ -1,0 +1,89 @@
+{
+  "ok" : true,
+  "metrics" : {
+    "nbIter" : "2",
+    "dureeCalcul" : "0.001",
+    "cause" : "0",
+    "contraintes" : "4",
+    "statut" : "OK",
+    "csprMarcheForcee" : "0"
+  },
+  "values" : [ {
+    "factor" : {
+      "@c" : ".factors.BranchFlowPerPSTAngle",
+      "function" : {
+        "@c" : ".BranchFlow",
+        "id" : "BBE2AA1  FFR3AA1  1",
+        "name" : "BBE2AA1  FFR3AA1  1",
+        "branchId" : "BBE2AA1  FFR3AA1  1"
+      },
+      "variable" : {
+        "@c" : ".PhaseTapChangerAngle",
+        "id" : "BBE2AA1  BBE3AA1  1",
+        "name" : "BBE2AA1  BBE3AA1  1",
+        "phaseTapChangerId" : "BBE2AA1  BBE3AA1  1"
+      }
+    },
+    "value" : 27.858552932739258,
+    "functionReference" : 499.77947998046875,
+    "variableReference" : NaN
+  }, {
+    "factor" : {
+      "@c" : ".factors.BranchFlowPerPSTAngle",
+      "function" : {
+        "@c" : ".BranchFlow",
+        "id" : "FFR2AA1  DDE3AA1  1",
+        "name" : "FFR2AA1  DDE3AA1  1",
+        "branchId" : "FFR2AA1  DDE3AA1  1"
+      },
+      "variable" : {
+        "@c" : ".PhaseTapChangerAngle",
+        "id" : "BBE2AA1  BBE3AA1  1",
+        "name" : "BBE2AA1  BBE3AA1  1",
+        "phaseTapChangerId" : "BBE2AA1  BBE3AA1  1"
+      }
+    },
+    "value" : 27.858552932739258,
+    "functionReference" : 1499.779541015625,
+    "variableReference" : NaN
+  }, {
+    "factor" : {
+      "@c" : ".factors.BranchFlowPerPSTAngle",
+      "function" : {
+        "@c" : ".BranchFlow",
+        "id" : "DDE2AA1  NNL3AA1  1",
+        "name" : "DDE2AA1  NNL3AA1  1",
+        "branchId" : "DDE2AA1  NNL3AA1  1"
+      },
+      "variable" : {
+        "@c" : ".PhaseTapChangerAngle",
+        "id" : "BBE2AA1  BBE3AA1  1",
+        "name" : "BBE2AA1  BBE3AA1  1",
+        "phaseTapChangerId" : "BBE2AA1  BBE3AA1  1"
+      }
+    },
+    "value" : 27.858552932739258,
+    "functionReference" : -1000.2205200195312,
+    "variableReference" : NaN
+  }, {
+    "factor" : {
+      "@c" : ".factors.BranchFlowPerPSTAngle",
+      "function" : {
+        "@c" : ".BranchFlow",
+        "id" : "NNL2AA1  BBE3AA1  1",
+        "name" : "NNL2AA1  BBE3AA1  1",
+        "branchId" : "NNL2AA1  BBE3AA1  1"
+      },
+      "variable" : {
+        "@c" : ".PhaseTapChangerAngle",
+        "id" : "BBE2AA1  BBE3AA1  1",
+        "name" : "BBE2AA1  BBE3AA1  1",
+        "phaseTapChangerId" : "BBE2AA1  BBE3AA1  1"
+      }
+    },
+    "value" : 27.858552932739258,
+    "functionReference" : -1500.220458984375,
+    "variableReference" : NaN
+  } ],
+  "contingenciesValues" : { }
+}

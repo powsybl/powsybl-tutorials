@@ -35,7 +35,7 @@ Please check the loadflow tutorial for more information on the configuration,
 as well as the [loadflow feature page](https://rte-france.github.io/hades2/features/loadflow.html) of the website.
 
 You also have to configure the path to a local computation directory (Hades2 temporary files will be stored here). 
-Please visit [this page](https://www.powsybl.org/docs/configuration/modules/computation-local.html) to learn how to do it.
+Please visit [this page](https://www.powsybl.org/pages/documentation/user/configuration/computation-local.html) to learn how to do it.
 
 The calculations are done in DC mode, but this can be changed in the 
 configuration file by setting dcMode = false in the hades2-default-parameters.

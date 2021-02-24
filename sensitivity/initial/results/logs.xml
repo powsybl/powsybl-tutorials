@@ -1,0 +1,1191 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
+<logs xmlns="http://www.rte-france.com/gsr" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <ctxt nom="Hades2">
+        <ctxt nom="Data Initialization">
+            <rec dt="26/01/2021 11:07:34" level="INFO">First node of the connected component : BBE1AA1_0 ; Number of nodes : 12, number of branches : 16</rec>
+            <rec dt="26/01/2021 11:07:34" level="INFO">Active Gen = 24000.000000, Active Load = 24000.000000, Reactive Gen = 0.000000, Reactive Load =0.000000</rec>
+            <rec dt="26/01/2021 11:07:34" level="INFO">Computation of the slack node - New slack node = BBE3AA1_0</rec>
+        </ctxt>
+        <ctxt nom="ACSensiAS">
+            <rec dt="26/01/2021 11:07:34" level="INFO">ACSensiAS TestCase12Nodes/InitialState, Reactive limites=YES, SVC simulation=NO, Tap changers simulation=NO, Starting from init values=NO, Maximum number of iterations=150, Remote regulations RemoteVoltageGenerators YES RemoteReactiveGenerators NO RemoteTapChangers NO Simule Shunt = NO</rec>
+            <ctxt nom="Base case">
+                <ctxt nom="AC load flow">
+                    <rec dt="26/01/2021 11:07:34" level="INFO">Main Network  : generation = 24000.00  load = 24000.00  New slack node = BBE3AA1_0</rec>
+                    <ctxt nom="Loop Init">
+                        <rec dt="26/01/2021 11:07:34" level="INFO"> Active mismatch on nodes , iteration 0</rec>
+                        <rec dt="26/01/2021 11:07:34" level="INFO">   node FFR3AA1_0 =&gt; 3.101307 MW</rec>
+                        <rec dt="26/01/2021 11:07:34" level="INFO">   node FFR2AA1_0 =&gt; 2.475462 MW</rec>
+                        <rec dt="26/01/2021 11:07:34" level="INFO">   node DDE3AA1_0 =&gt; 2.077181 MW</rec>
+                        <rec dt="26/01/2021 11:07:34" level="INFO">   node NNL2AA1_0 =&gt; 1.906405 MW</rec>
+                        <rec dt="26/01/2021 11:07:34" level="INFO">   node FFR1AA1_0 =&gt; 1.593666 MW</rec>
+                        <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE3AA1_1 =&gt; 0.683173 MW</rec>
+                        <rec dt="26/01/2021 11:07:34" level="INFO">   node DDE2AA1_0 =&gt; 0.683112 MW</rec>
+                        <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.398507 MW</rec>
+                        <rec dt="26/01/2021 11:07:34" level="INFO">   node DDE1AA1_0 =&gt; 0.227732 MW</rec>
+                        <rec dt="26/01/2021 11:07:34" level="INFO">   node NNL1AA1_0 =&gt; 0.199263 MW</rec>
+                        <rec dt="26/01/2021 11:07:34" level="INFO"> Reactive mismatch on nodes, iteration 0</rec>
+                        <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                        <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                        <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                        <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                        <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                        <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                        <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                        <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                        <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                        <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                        <ctxt nom="Macro Iter 1">
+                            <ctxt nom="Iteration NR 1">
+                                <rec dt="26/01/2021 11:07:34" level="INFO">Iteration 1 : Iter Compens 0, Macro-iter 1, NewtonRaphson It 1</rec>
+                                <rec dt="26/01/2021 11:07:34" level="INFO"> iter 1, updating variables, max value : phase=5.45e-03 (node DDE1AA1_0), u=1.26e+00 p.u. (node BBE1AA1_0)</rec>
+                                <rec dt="26/01/2021 11:07:34" level="INFO"> Active mismatch on nodes , iteration 1</rec>
+                                <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE3AA1_1 =&gt; 0.876472 MW</rec>
+                                <rec dt="26/01/2021 11:07:34" level="INFO">   node FFR2AA1_0 =&gt; 0.611507 MW</rec>
+                                <rec dt="26/01/2021 11:07:34" level="INFO">   node FFR3AA1_0 =&gt; 0.596952 MW</rec>
+                                <rec dt="26/01/2021 11:07:34" level="INFO">   node DDE1AA1_0 =&gt; 0.440880 MW</rec>
+                                <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.436915 MW</rec>
+                                <rec dt="26/01/2021 11:07:34" level="INFO">   node DDE2AA1_0 =&gt; 0.430288 MW</rec>
+                                <rec dt="26/01/2021 11:07:34" level="INFO">   node FFR1AA1_0 =&gt; 0.409013 MW</rec>
+                                <rec dt="26/01/2021 11:07:34" level="INFO">   node NNL3AA1_0 =&gt; 0.225082 MW</rec>
+                                <rec dt="26/01/2021 11:07:34" level="INFO">   node NNL1AA1_0 =&gt; 0.218457 MW</rec>
+                                <rec dt="26/01/2021 11:07:34" level="INFO">   node NNL2AA1_0 =&gt; 0.178557 MW</rec>
+                                <rec dt="26/01/2021 11:07:34" level="INFO"> Reactive mismatch on nodes, iteration 1</rec>
+                                <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                <rec dt="26/01/2021 11:07:34" level="INFO">Iteration 1, norm 2.40e+00</rec>
+                            </ctxt>
+                            <ctxt nom="Iteration NR 2">
+                                <rec dt="26/01/2021 11:07:34" level="INFO">Iteration 2 : Iter Compens 0, Macro-iter 1, NewtonRaphson It 2</rec>
+                                <rec dt="26/01/2021 11:07:34" level="INFO"> iter 2, updating variables, max value : phase=-9.66e-05 (node DDE1AA1_0), u=0.00e+00 p.u. (node )</rec>
+                                <rec dt="26/01/2021 11:07:34" level="INFO"> Active mismatch on nodes , iteration 2</rec>
+                                <rec dt="26/01/2021 11:07:34" level="INFO">   node FFR3AA1_0 =&gt; 0.000002 MW</rec>
+                                <rec dt="26/01/2021 11:07:34" level="INFO">   node FFR2AA1_0 =&gt; 0.000001 MW</rec>
+                                <rec dt="26/01/2021 11:07:34" level="INFO">   node DDE3AA1_0 =&gt; 0.000001 MW</rec>
+                                <rec dt="26/01/2021 11:07:34" level="INFO">   node NNL2AA1_0 =&gt; 0.000001 MW</rec>
+                                <rec dt="26/01/2021 11:07:34" level="INFO">   node FFR1AA1_0 =&gt; 0.000001 MW</rec>
+                                <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE3AA1_1 =&gt; 0.000000 MW</rec>
+                                <rec dt="26/01/2021 11:07:34" level="INFO">   node DDE2AA1_0 =&gt; 0.000000 MW</rec>
+                                <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MW</rec>
+                                <rec dt="26/01/2021 11:07:34" level="INFO">   node DDE1AA1_0 =&gt; 0.000000 MW</rec>
+                                <rec dt="26/01/2021 11:07:34" level="INFO">   node NNL1AA1_0 =&gt; 0.000000 MW</rec>
+                                <rec dt="26/01/2021 11:07:34" level="INFO"> Reactive mismatch on nodes, iteration 2</rec>
+                                <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                <rec dt="26/01/2021 11:07:34" level="INFO">Iteration 2, norm 6.42e-12</rec>
+                            </ctxt>
+                        </ctxt>
+                        <rec dt="26/01/2021 11:07:34" level="INFO">First LF before compensation, slack node mismatch = -0.000001</rec>
+                        <ctxt nom="End of Comp loop">
+                            <rec dt="26/01/2021 11:07:34" level="INFO">Load-generation balance 0, iter 2 : slack node mismatch = -0.000001</rec>
+                        </ctxt>
+                    </ctxt>
+                    <ctxt nom="End computation">
+                        <rec dt="26/01/2021 11:07:34" level="INFO">AC load flow; CONVERGENCE of load flow after 2 iterations with 0 compensations</rec>
+                    </ctxt>
+                    <rec dt="26/01/2021 11:07:34" level="INFO">HADConvergence (label inconnu)     </rec>
+                </ctxt>
+                <rec dt="26/01/2021 11:07:34" level="INFO">Reinitialization for the sensitivity analysis of the voltage regulation status of the nodes which have been modified during the load-flow computation   </rec>
+            </ctxt>
+            <ctxt nom="Contingencies">
+                <ctxt nom="Contingency BBE1AA1  BBE2AA1  1">
+                    <ctxt nom="Init">
+                        <rec dt="26/01/2021 11:07:34" level="INFO">Compensation achieved = 0.1000 MW</rec>
+                    </ctxt>
+                    <ctxt nom="Processing">
+                        <ctxt nom="Loop Init">
+                            <rec dt="26/01/2021 11:07:34" level="INFO"> Active mismatch on nodes , iteration 0</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node ndef2_BBE3AA1_1 =&gt; 833.354840 MW</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node ndef3_BBE1AA1_0 =&gt; 833.338173 MW</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node FFR3AA1_0 =&gt; 0.008335 MW</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node FFR1AA1_0 =&gt; 0.008334 MW</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node NNL1AA1_0 =&gt; 0.008333 MW</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node NNL3AA1_0 =&gt; 0.008333 MW</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node DDE1AA1_0 =&gt; 0.008333 MW</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node DDE2AA1_0 =&gt; 0.008333 MW</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node NNL2AA1_0 =&gt; 0.008332 MW</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node DDE3AA1_0 =&gt; 0.008332 MW</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO"> Reactive mismatch on nodes, iteration 0</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                            <ctxt nom="Macro Iter 1">
+                                <ctxt nom="Iteration NR 1">
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">Iteration 1 : Iter Compens 0, Macro-iter 1, NewtonRaphson It 1</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO"> iter 1, updating variables, max value : phase=-5.21e-02 (node ndef3_BBE1AA1_0), u=0.00e+00 p.u. (node )</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO"> Active mismatch on nodes , iteration 1</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node ndef2_BBE3AA1_1 =&gt; 0.918748 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node ndef3_BBE1AA1_0 =&gt; 0.602771 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node DDE3AA1_0 =&gt; 0.036362 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node NNL2AA1_0 =&gt; 0.030306 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node DDE2AA1_0 =&gt; 0.030061 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node FFR2AA1_0 =&gt; 0.017752 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node NNL3AA1_0 =&gt; 0.014690 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node FFR3AA1_0 =&gt; 0.007107 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node FFR1AA1_0 =&gt; 0.003111 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node DDE1AA1_0 =&gt; 0.003070 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO"> Reactive mismatch on nodes, iteration 1</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">Iteration 1, norm 1.21e+00</rec>
+                                </ctxt>
+                                <ctxt nom="Iteration NR 2">
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">Iteration 2 : Iter Compens 0, Macro-iter 1, NewtonRaphson It 2</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO"> iter 2, updating variables, max value : phase=4.86e-05 (node ndef2_BBE3AA1_1), u=0.00e+00 p.u. (node )</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO"> Active mismatch on nodes , iteration 2</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node ndef2_BBE3AA1_1 =&gt; 0.000002 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node ndef3_BBE1AA1_0 =&gt; 0.000001 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node DDE3AA1_0 =&gt; 0.000000 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node FFR2AA1_0 =&gt; 0.000000 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node DDE2AA1_0 =&gt; 0.000000 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node FFR3AA1_0 =&gt; 0.000000 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node NNL2AA1_0 =&gt; 0.000000 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node NNL3AA1_0 =&gt; 0.000000 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node FFR1AA1_0 =&gt; 0.000000 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node DDE1AA1_0 =&gt; 0.000000 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO"> Reactive mismatch on nodes, iteration 2</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">Iteration 2, norm 3.26e-12</rec>
+                                </ctxt>
+                            </ctxt>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">First LF before compensation, slack node mismatch = -0.099999</rec>
+                            <ctxt nom="End of Comp loop">
+                                <rec dt="26/01/2021 11:07:34" level="INFO">Load-generation balance 0, iter 2 : slack node mismatch = -0.099999</rec>
+                            </ctxt>
+                        </ctxt>
+                        <ctxt nom="End computation">
+                            <rec dt="26/01/2021 11:07:34" level="INFO">AC load flow; CONVERGENCE of load flow after 2 iterations with 0 compensations</rec>
+                        </ctxt>
+                    </ctxt>
+                    <ctxt nom="Processing">
+                        <rec dt="26/01/2021 11:07:34" level="INFO">Reinitialization for the sensitivity analysis of the voltage regulation status of the nodes which have been modified during the load-flow computation   </rec>
+                    </ctxt>
+                    <rec dt="26/01/2021 11:07:34" level="INFO">Contingency BBE1AA1  BBE2AA1  1 OK</rec>
+                </ctxt>
+                <ctxt nom="Contingency BBE1AA1  BBE3AA1  1">
+                    <ctxt nom="Init">
+                        <rec dt="26/01/2021 11:07:34" level="INFO">Contingency BBE1AA1  BBE3AA1  1 : Slack node modified</rec>
+                        <rec dt="26/01/2021 11:07:34" level="INFO">Compensation achieved = 0.1000 MW</rec>
+                    </ctxt>
+                    <ctxt nom="Processing">
+                        <ctxt nom="Loop Init">
+                            <rec dt="26/01/2021 11:07:34" level="INFO"> Active mismatch on nodes , iteration 0</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node ndef1_BBE3AA1_0 =&gt; 166.661828 MW</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node ndef3_BBE1AA1_0 =&gt; 166.645161 MW</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node FFR3AA1_0 =&gt; 0.008335 MW</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node FFR1AA1_0 =&gt; 0.008334 MW</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node ndef2_BBE3AA1_1 =&gt; 0.008334 MW</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node NNL1AA1_0 =&gt; 0.008333 MW</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node NNL3AA1_0 =&gt; 0.008333 MW</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node DDE1AA1_0 =&gt; 0.008333 MW</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node NNL2AA1_0 =&gt; 0.008332 MW</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node DDE3AA1_0 =&gt; 0.008332 MW</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO"> Reactive mismatch on nodes, iteration 0</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                            <ctxt nom="Macro Iter 1">
+                                <ctxt nom="Iteration NR 1">
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">Iteration 1 : Iter Compens 0, Macro-iter 1, NewtonRaphson It 1</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO"> iter 1, updating variables, max value : phase=-1.54e-02 (node ndef3_BBE1AA1_0), u=0.00e+00 p.u. (node )</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO"> Active mismatch on nodes , iteration 1</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node ndef2_BBE3AA1_1 =&gt; 0.073618 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node ndef3_BBE1AA1_0 =&gt; 0.048344 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node ndef1_BBE3AA1_0 =&gt; 0.023049 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node DDE3AA1_0 =&gt; 0.001415 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node NNL2AA1_0 =&gt; 0.001248 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node FFR2AA1_0 =&gt; 0.000672 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node NNL3AA1_0 =&gt; 0.000625 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node FFR3AA1_0 =&gt; 0.000318 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node FFR1AA1_0 =&gt; 0.000124 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node DDE1AA1_0 =&gt; 0.000122 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO"> Reactive mismatch on nodes, iteration 1</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">Iteration 1, norm 8.29e-03</rec>
+                                </ctxt>
+                                <ctxt nom="Iteration NR 2">
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">Iteration 2 : Iter Compens 0, Macro-iter 1, NewtonRaphson It 2</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO"> iter 2, updating variables, max value : phase=-2.10e-06 (node ndef3_BBE1AA1_0), u=0.00e+00 p.u. (node )</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO"> Active mismatch on nodes , iteration 2</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node ndef2_BBE3AA1_1 =&gt; 0.000000 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node ndef3_BBE1AA1_0 =&gt; 0.000000 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node ndef1_BBE3AA1_0 =&gt; 0.000000 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node DDE3AA1_0 =&gt; 0.000000 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node FFR2AA1_0 =&gt; 0.000000 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node FFR3AA1_0 =&gt; 0.000000 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node FFR1AA1_0 =&gt; 0.000000 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node NNL3AA1_0 =&gt; 0.000000 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node DDE1AA1_0 =&gt; 0.000000 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node NNL2AA1_0 =&gt; 0.000000 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO"> Reactive mismatch on nodes, iteration 2</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">Iteration 2, norm 4.68e-17</rec>
+                                </ctxt>
+                            </ctxt>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">First LF before compensation, slack node mismatch = -0.100000</rec>
+                            <ctxt nom="End of Comp loop">
+                                <rec dt="26/01/2021 11:07:34" level="INFO">Load-generation balance 0, iter 2 : slack node mismatch = -0.100000</rec>
+                            </ctxt>
+                        </ctxt>
+                        <ctxt nom="End computation">
+                            <rec dt="26/01/2021 11:07:34" level="INFO">AC load flow; CONVERGENCE of load flow after 2 iterations with 0 compensations</rec>
+                        </ctxt>
+                    </ctxt>
+                    <ctxt nom="Processing">
+                        <rec dt="26/01/2021 11:07:34" level="INFO">Reinitialization for the sensitivity analysis of the voltage regulation status of the nodes which have been modified during the load-flow computation   </rec>
+                    </ctxt>
+                    <rec dt="26/01/2021 11:07:34" level="INFO">Contingency BBE1AA1  BBE3AA1  1 OK</rec>
+                </ctxt>
+                <ctxt nom="Contingency FFR1AA1  FFR2AA1  1">
+                    <ctxt nom="Init">
+                        <rec dt="26/01/2021 11:07:34" level="INFO">Compensation achieved = 0.1000 MW</rec>
+                    </ctxt>
+                    <ctxt nom="Processing">
+                        <ctxt nom="Loop Init">
+                            <rec dt="26/01/2021 11:07:34" level="INFO"> Active mismatch on nodes , iteration 0</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node ndef2_FFR1AA1_0 =&gt; 1333.752080 MW</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node ndef1_FFR2AA1_0 =&gt; 1333.735414 MW</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node FFR3AA1_0 =&gt; 0.008335 MW</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE3AA1_1 =&gt; 0.008334 MW</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node NNL1AA1_0 =&gt; 0.008333 MW</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node NNL3AA1_0 =&gt; 0.008333 MW</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node DDE1AA1_0 =&gt; 0.008333 MW</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.008333 MW</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node DDE2AA1_0 =&gt; 0.008333 MW</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node NNL2AA1_0 =&gt; 0.008332 MW</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO"> Reactive mismatch on nodes, iteration 0</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                            <ctxt nom="Macro Iter 1">
+                                <ctxt nom="Iteration NR 1">
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">Iteration 1 : Iter Compens 0, Macro-iter 1, NewtonRaphson It 1</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO"> iter 1, updating variables, max value : phase=1.03e-01 (node ndef2_FFR1AA1_0), u=0.00e+00 p.u. (node )</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO"> Active mismatch on nodes , iteration 1</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node ndef1_FFR2AA1_0 =&gt; 5.171631 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node FFR3AA1_0 =&gt; 4.858410 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node ndef2_FFR1AA1_0 =&gt; 0.385406 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node DDE3AA1_0 =&gt; 0.088981 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node NNL2AA1_0 =&gt; 0.083160 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node DDE2AA1_0 =&gt; 0.082562 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE3AA1_1 =&gt; 0.060459 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node NNL3AA1_0 =&gt; 0.042875 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.007947 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node DDE1AA1_0 =&gt; 0.007930 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO"> Reactive mismatch on nodes, iteration 1</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">Iteration 1, norm 5.05e+01</rec>
+                                </ctxt>
+                                <ctxt nom="Iteration NR 2">
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">Iteration 2 : Iter Compens 0, Macro-iter 1, NewtonRaphson It 2</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO"> iter 2, updating variables, max value : phase=-2.10e-04 (node ndef1_FFR2AA1_0), u=0.00e+00 p.u. (node )</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO"> Active mismatch on nodes , iteration 2</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node FFR3AA1_0 =&gt; 0.000115 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node ndef1_FFR2AA1_0 =&gt; 0.000115 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node NNL2AA1_0 =&gt; 0.000002 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node DDE2AA1_0 =&gt; 0.000002 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node NNL3AA1_0 =&gt; 0.000001 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node DDE3AA1_0 =&gt; 0.000001 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE3AA1_1 =&gt; 0.000001 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node ndef2_FFR1AA1_0 =&gt; 0.000000 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node DDE1AA1_0 =&gt; 0.000000 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO"> Reactive mismatch on nodes, iteration 2</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">Iteration 2, norm 2.64e-08</rec>
+                                </ctxt>
+                            </ctxt>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">First LF before compensation, slack node mismatch = -0.100002</rec>
+                            <ctxt nom="End of Comp loop">
+                                <rec dt="26/01/2021 11:07:34" level="INFO">Load-generation balance 0, iter 2 : slack node mismatch = -0.100002</rec>
+                            </ctxt>
+                        </ctxt>
+                        <ctxt nom="End computation">
+                            <rec dt="26/01/2021 11:07:34" level="INFO">AC load flow; CONVERGENCE of load flow after 2 iterations with 0 compensations</rec>
+                        </ctxt>
+                    </ctxt>
+                    <ctxt nom="Processing">
+                        <rec dt="26/01/2021 11:07:34" level="INFO">Reinitialization for the sensitivity analysis of the voltage regulation status of the nodes which have been modified during the load-flow computation   </rec>
+                    </ctxt>
+                    <rec dt="26/01/2021 11:07:34" level="INFO">Contingency FFR1AA1  FFR2AA1  1 OK</rec>
+                </ctxt>
+                <ctxt nom="Contingency FFR1AA1  FFR3AA1  1">
+                    <ctxt nom="Init">
+                        <rec dt="26/01/2021 11:07:34" level="INFO">Compensation achieved = 0.1000 MW</rec>
+                    </ctxt>
+                    <ctxt nom="Processing">
+                        <ctxt nom="Loop Init">
+                            <rec dt="26/01/2021 11:07:34" level="INFO"> Active mismatch on nodes , iteration 0</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node ndef2_FFR3AA1_0 =&gt; 333.752082 MW</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node ndef1_FFR1AA1_0 =&gt; 333.735413 MW</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE3AA1_1 =&gt; 0.008334 MW</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node NNL1AA1_0 =&gt; 0.008333 MW</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node NNL3AA1_0 =&gt; 0.008333 MW</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node DDE1AA1_0 =&gt; 0.008333 MW</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.008333 MW</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node DDE2AA1_0 =&gt; 0.008333 MW</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node NNL2AA1_0 =&gt; 0.008332 MW</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node DDE3AA1_0 =&gt; 0.008332 MW</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO"> Reactive mismatch on nodes, iteration 0</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                            <ctxt nom="Macro Iter 1">
+                                <ctxt nom="Iteration NR 1">
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">Iteration 1 : Iter Compens 0, Macro-iter 1, NewtonRaphson It 1</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO"> iter 1, updating variables, max value : phase=-3.39e-02 (node ndef1_FFR1AA1_0), u=0.00e+00 p.u. (node )</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO"> Active mismatch on nodes , iteration 1</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node FFR2AA1_0 =&gt; 0.545385 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node ndef2_FFR3AA1_0 =&gt; 0.282115 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node ndef1_FFR1AA1_0 =&gt; 0.267790 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node DDE3AA1_0 =&gt; 0.005717 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node NNL2AA1_0 =&gt; 0.005056 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node DDE2AA1_0 =&gt; 0.005024 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE3AA1_1 =&gt; 0.003932 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node NNL3AA1_0 =&gt; 0.002541 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000498 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node DDE1AA1_0 =&gt; 0.000497 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO"> Reactive mismatch on nodes, iteration 1</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">Iteration 1, norm 4.49e-01</rec>
+                                </ctxt>
+                                <ctxt nom="Iteration NR 2">
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">Iteration 2 : Iter Compens 0, Macro-iter 1, NewtonRaphson It 2</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO"> iter 2, updating variables, max value : phase=-1.13e-05 (node FFR2AA1_0), u=0.00e+00 p.u. (node )</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO"> Active mismatch on nodes , iteration 2</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node FFR2AA1_0 =&gt; 0.000000 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node ndef2_FFR3AA1_0 =&gt; 0.000000 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node ndef1_FFR1AA1_0 =&gt; 0.000000 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node NNL2AA1_0 =&gt; 0.000000 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node DDE2AA1_0 =&gt; 0.000000 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE3AA1_1 =&gt; 0.000000 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node DDE3AA1_0 =&gt; 0.000000 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node NNL3AA1_0 =&gt; 0.000000 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node DDE1AA1_0 =&gt; 0.000000 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO"> Reactive mismatch on nodes, iteration 2</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">Iteration 2, norm 2.08e-13</rec>
+                                </ctxt>
+                            </ctxt>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">First LF before compensation, slack node mismatch = -0.100000</rec>
+                            <ctxt nom="End of Comp loop">
+                                <rec dt="26/01/2021 11:07:34" level="INFO">Load-generation balance 0, iter 2 : slack node mismatch = -0.100000</rec>
+                            </ctxt>
+                        </ctxt>
+                        <ctxt nom="End computation">
+                            <rec dt="26/01/2021 11:07:34" level="INFO">AC load flow; CONVERGENCE of load flow after 2 iterations with 0 compensations</rec>
+                        </ctxt>
+                    </ctxt>
+                    <ctxt nom="Processing">
+                        <rec dt="26/01/2021 11:07:34" level="INFO">Reinitialization for the sensitivity analysis of the voltage regulation status of the nodes which have been modified during the load-flow computation   </rec>
+                    </ctxt>
+                    <rec dt="26/01/2021 11:07:34" level="INFO">Contingency FFR1AA1  FFR3AA1  1 OK</rec>
+                </ctxt>
+                <ctxt nom="Contingency FFR2AA1  FFR3AA1  1">
+                    <ctxt nom="Init">
+                        <rec dt="26/01/2021 11:07:34" level="INFO">Compensation achieved = 0.1000 MW</rec>
+                    </ctxt>
+                    <ctxt nom="Processing">
+                        <ctxt nom="Loop Init">
+                            <rec dt="26/01/2021 11:07:34" level="INFO"> Active mismatch on nodes , iteration 0</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node ndef2_FFR3AA1_0 =&gt; 1666.044075 MW</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node ndef1_FFR2AA1_0 =&gt; 1666.027408 MW</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node FFR1AA1_0 =&gt; 0.008334 MW</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE3AA1_1 =&gt; 0.008334 MW</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node NNL1AA1_0 =&gt; 0.008333 MW</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node NNL3AA1_0 =&gt; 0.008333 MW</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node DDE1AA1_0 =&gt; 0.008333 MW</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.008333 MW</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node DDE2AA1_0 =&gt; 0.008333 MW</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node NNL2AA1_0 =&gt; 0.008332 MW</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO"> Reactive mismatch on nodes, iteration 0</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                            <ctxt nom="Macro Iter 1">
+                                <ctxt nom="Iteration NR 1">
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">Iteration 1 : Iter Compens 0, Macro-iter 1, NewtonRaphson It 1</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO"> iter 1, updating variables, max value : phase=-1.13e-01 (node ndef1_FFR2AA1_0), u=0.00e+00 p.u. (node )</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO"> Active mismatch on nodes , iteration 1</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node ndef1_FFR2AA1_0 =&gt; 4.907844 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node FFR1AA1_0 =&gt; 3.084612 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node ndef2_FFR3AA1_0 =&gt; 2.165864 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node NNL2AA1_0 =&gt; 0.412211 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node DDE2AA1_0 =&gt; 0.409192 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node DDE3AA1_0 =&gt; 0.405389 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE3AA1_1 =&gt; 0.270107 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node NNL3AA1_0 =&gt; 0.220669 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.037736 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node DDE1AA1_0 =&gt; 0.037661 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO"> Reactive mismatch on nodes, iteration 1</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">Iteration 1, norm 3.89e+01</rec>
+                                </ctxt>
+                                <ctxt nom="Iteration NR 2">
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">Iteration 2 : Iter Compens 0, Macro-iter 1, NewtonRaphson It 2</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO"> iter 2, updating variables, max value : phase=-2.79e-04 (node ndef1_FFR2AA1_0), u=0.00e+00 p.u. (node )</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO"> Active mismatch on nodes , iteration 2</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node ndef1_FFR2AA1_0 =&gt; 0.000103 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node FFR1AA1_0 =&gt; 0.000098 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node NNL2AA1_0 =&gt; 0.000007 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node ndef2_FFR3AA1_0 =&gt; 0.000006 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node DDE2AA1_0 =&gt; 0.000005 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node NNL3AA1_0 =&gt; 0.000003 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE3AA1_1 =&gt; 0.000001 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node DDE3AA1_0 =&gt; 0.000000 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node DDE1AA1_0 =&gt; 0.000000 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO"> Reactive mismatch on nodes, iteration 2</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">Iteration 2, norm 2.03e-08</rec>
+                                </ctxt>
+                            </ctxt>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">First LF before compensation, slack node mismatch = -0.100007</rec>
+                            <ctxt nom="End of Comp loop">
+                                <rec dt="26/01/2021 11:07:34" level="INFO">Load-generation balance 0, iter 2 : slack node mismatch = -0.100007</rec>
+                            </ctxt>
+                        </ctxt>
+                        <ctxt nom="End computation">
+                            <rec dt="26/01/2021 11:07:34" level="INFO">AC load flow; CONVERGENCE of load flow after 2 iterations with 0 compensations</rec>
+                        </ctxt>
+                    </ctxt>
+                    <ctxt nom="Processing">
+                        <rec dt="26/01/2021 11:07:34" level="INFO">Reinitialization for the sensitivity analysis of the voltage regulation status of the nodes which have been modified during the load-flow computation   </rec>
+                    </ctxt>
+                    <rec dt="26/01/2021 11:07:34" level="INFO">Contingency FFR2AA1  FFR3AA1  1 OK</rec>
+                </ctxt>
+                <ctxt nom="Contingency DDE1AA1  DDE2AA1  1">
+                    <ctxt nom="Init">
+                        <rec dt="26/01/2021 11:07:34" level="INFO">Compensation achieved = 0.1000 MW</rec>
+                    </ctxt>
+                    <ctxt nom="Processing">
+                        <ctxt nom="Loop Init">
+                            <rec dt="26/01/2021 11:07:34" level="INFO"> Active mismatch on nodes , iteration 0</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node ndef2_DDE2AA1_0 =&gt; 333.463406 MW</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node ndef1_DDE1AA1_0 =&gt; 333.446739 MW</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node FFR3AA1_0 =&gt; 0.008335 MW</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node FFR1AA1_0 =&gt; 0.008334 MW</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE3AA1_1 =&gt; 0.008334 MW</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node NNL1AA1_0 =&gt; 0.008333 MW</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node NNL3AA1_0 =&gt; 0.008333 MW</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.008333 MW</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node NNL2AA1_0 =&gt; 0.008332 MW</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node DDE3AA1_0 =&gt; 0.008332 MW</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO"> Reactive mismatch on nodes, iteration 0</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                            <ctxt nom="Macro Iter 1">
+                                <ctxt nom="Iteration NR 1">
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">Iteration 1 : Iter Compens 0, Macro-iter 1, NewtonRaphson It 1</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO"> iter 1, updating variables, max value : phase=-3.08e-02 (node ndef1_DDE1AA1_0), u=0.00e+00 p.u. (node )</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO"> Active mismatch on nodes , iteration 1</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node DDE3AA1_0 =&gt; 0.200428 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node ndef1_DDE1AA1_0 =&gt; 0.169173 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node ndef2_DDE2AA1_0 =&gt; 0.042367 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node NNL2AA1_0 =&gt; 0.004923 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE3AA1_1 =&gt; 0.003969 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node FFR2AA1_0 =&gt; 0.002769 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node NNL3AA1_0 =&gt; 0.002420 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node FFR3AA1_0 =&gt; 0.001206 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node FFR1AA1_0 =&gt; 0.000497 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000491 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO"> Reactive mismatch on nodes, iteration 1</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">Iteration 1, norm 7.06e-02</rec>
+                                </ctxt>
+                                <ctxt nom="Iteration NR 2">
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">Iteration 2 : Iter Compens 0, Macro-iter 1, NewtonRaphson It 2</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO"> iter 2, updating variables, max value : phase=-1.02e-05 (node ndef1_DDE1AA1_0), u=0.00e+00 p.u. (node )</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO"> Active mismatch on nodes , iteration 2</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node DDE3AA1_0 =&gt; 0.000000 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node ndef1_DDE1AA1_0 =&gt; 0.000000 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node NNL2AA1_0 =&gt; 0.000000 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node ndef2_DDE2AA1_0 =&gt; 0.000000 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node NNL3AA1_0 =&gt; 0.000000 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE3AA1_1 =&gt; 0.000000 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node NNL1AA1_0 =&gt; 0.000000 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node FFR3AA1_0 =&gt; 0.000000 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node FFR2AA1_0 =&gt; 0.000000 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO"> Reactive mismatch on nodes, iteration 2</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">Iteration 2, norm 6.31e-15</rec>
+                                </ctxt>
+                            </ctxt>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">First LF before compensation, slack node mismatch = -0.100000</rec>
+                            <ctxt nom="End of Comp loop">
+                                <rec dt="26/01/2021 11:07:34" level="INFO">Load-generation balance 0, iter 2 : slack node mismatch = -0.100000</rec>
+                            </ctxt>
+                        </ctxt>
+                        <ctxt nom="End computation">
+                            <rec dt="26/01/2021 11:07:34" level="INFO">AC load flow; CONVERGENCE of load flow after 2 iterations with 0 compensations</rec>
+                        </ctxt>
+                    </ctxt>
+                    <ctxt nom="Processing">
+                        <rec dt="26/01/2021 11:07:34" level="INFO">Reinitialization for the sensitivity analysis of the voltage regulation status of the nodes which have been modified during the load-flow computation   </rec>
+                    </ctxt>
+                    <rec dt="26/01/2021 11:07:34" level="INFO">Contingency DDE1AA1  DDE2AA1  1 OK</rec>
+                </ctxt>
+                <ctxt nom="Contingency DDE1AA1  DDE3AA1  1">
+                    <ctxt nom="Init">
+                        <rec dt="26/01/2021 11:07:34" level="INFO">Compensation achieved = 0.1000 MW</rec>
+                    </ctxt>
+                    <ctxt nom="Processing">
+                        <ctxt nom="Loop Init">
+                            <rec dt="26/01/2021 11:07:34" level="INFO"> Active mismatch on nodes , iteration 0</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node ndef2_DDE3AA1_0 =&gt; 666.553260 MW</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node ndef1_DDE1AA1_0 =&gt; 666.536594 MW</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node FFR3AA1_0 =&gt; 0.008335 MW</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node FFR1AA1_0 =&gt; 0.008334 MW</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE3AA1_1 =&gt; 0.008334 MW</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node NNL1AA1_0 =&gt; 0.008333 MW</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node NNL3AA1_0 =&gt; 0.008333 MW</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.008333 MW</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node DDE2AA1_0 =&gt; 0.008333 MW</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node NNL2AA1_0 =&gt; 0.008332 MW</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO"> Reactive mismatch on nodes, iteration 0</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                            <ctxt nom="Macro Iter 1">
+                                <ctxt nom="Iteration NR 1">
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">Iteration 1 : Iter Compens 0, Macro-iter 1, NewtonRaphson It 1</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO"> iter 1, updating variables, max value : phase=-5.75e-02 (node ndef1_DDE1AA1_0), u=0.00e+00 p.u. (node )</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO"> Active mismatch on nodes , iteration 1</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node ndef1_DDE1AA1_0 =&gt; 0.482284 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node ndef2_DDE3AA1_0 =&gt; 0.308108 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node DDE2AA1_0 =&gt; 0.129784 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node NNL2AA1_0 =&gt; 0.020178 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE3AA1_1 =&gt; 0.015337 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node FFR2AA1_0 =&gt; 0.010493 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node NNL3AA1_0 =&gt; 0.010225 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node FFR3AA1_0 =&gt; 0.005377 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node FFR1AA1_0 =&gt; 0.001987 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.001966 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO"> Reactive mismatch on nodes, iteration 1</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">Iteration 1, norm 3.45e-01</rec>
+                                </ctxt>
+                                <ctxt nom="Iteration NR 2">
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">Iteration 2 : Iter Compens 0, Macro-iter 1, NewtonRaphson It 2</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO"> iter 2, updating variables, max value : phase=-4.11e-05 (node ndef1_DDE1AA1_0), u=0.00e+00 p.u. (node )</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO"> Active mismatch on nodes , iteration 2</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node ndef1_DDE1AA1_0 =&gt; 0.000000 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node DDE2AA1_0 =&gt; 0.000000 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node ndef2_DDE3AA1_0 =&gt; 0.000000 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node NNL2AA1_0 =&gt; 0.000000 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node NNL3AA1_0 =&gt; 0.000000 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE3AA1_1 =&gt; 0.000000 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node FFR2AA1_0 =&gt; 0.000000 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node NNL1AA1_0 =&gt; 0.000000 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node FFR3AA1_0 =&gt; 0.000000 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO"> Reactive mismatch on nodes, iteration 2</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">Iteration 2, norm 3.19e-13</rec>
+                                </ctxt>
+                            </ctxt>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">First LF before compensation, slack node mismatch = -0.100000</rec>
+                            <ctxt nom="End of Comp loop">
+                                <rec dt="26/01/2021 11:07:34" level="INFO">Load-generation balance 0, iter 2 : slack node mismatch = -0.100000</rec>
+                            </ctxt>
+                        </ctxt>
+                        <ctxt nom="End computation">
+                            <rec dt="26/01/2021 11:07:34" level="INFO">AC load flow; CONVERGENCE of load flow after 2 iterations with 0 compensations</rec>
+                        </ctxt>
+                    </ctxt>
+                    <ctxt nom="Processing">
+                        <rec dt="26/01/2021 11:07:34" level="INFO">Reinitialization for the sensitivity analysis of the voltage regulation status of the nodes which have been modified during the load-flow computation   </rec>
+                    </ctxt>
+                    <rec dt="26/01/2021 11:07:34" level="INFO">Contingency DDE1AA1  DDE3AA1  1 OK</rec>
+                </ctxt>
+                <ctxt nom="Contingency DDE2AA1  DDE3AA1  1">
+                    <ctxt nom="Init">
+                        <rec dt="26/01/2021 11:07:34" level="INFO">Compensation achieved = 0.1000 MW</rec>
+                    </ctxt>
+                    <ctxt nom="Processing">
+                        <ctxt nom="Loop Init">
+                            <rec dt="26/01/2021 11:07:34" level="INFO"> Active mismatch on nodes , iteration 0</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node ndef2_DDE3AA1_0 =&gt; 333.242894 MW</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node ndef1_DDE2AA1_0 =&gt; 333.226228 MW</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node FFR3AA1_0 =&gt; 0.008335 MW</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node FFR1AA1_0 =&gt; 0.008334 MW</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE3AA1_1 =&gt; 0.008334 MW</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node NNL1AA1_0 =&gt; 0.008333 MW</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node NNL3AA1_0 =&gt; 0.008333 MW</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node DDE1AA1_0 =&gt; 0.008333 MW</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.008333 MW</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node NNL2AA1_0 =&gt; 0.008332 MW</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO"> Reactive mismatch on nodes, iteration 0</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                            <ctxt nom="Macro Iter 1">
+                                <ctxt nom="Iteration NR 1">
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">Iteration 1 : Iter Compens 0, Macro-iter 1, NewtonRaphson It 1</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO"> iter 1, updating variables, max value : phase=1.74e-02 (node ndef2_DDE3AA1_0), u=0.00e+00 p.u. (node )</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO"> Active mismatch on nodes , iteration 1</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node DDE1AA1_0 =&gt; 0.122293 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node ndef2_DDE3AA1_0 =&gt; 0.071661 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node ndef1_DDE2AA1_0 =&gt; 0.016616 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node NNL2AA1_0 =&gt; 0.015423 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE3AA1_1 =&gt; 0.011788 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node FFR2AA1_0 =&gt; 0.008076 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node NNL3AA1_0 =&gt; 0.007799 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node FFR3AA1_0 =&gt; 0.004085 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node FFR1AA1_0 =&gt; 0.001523 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.001507 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO"> Reactive mismatch on nodes, iteration 1</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">Iteration 1, norm 2.09e-02</rec>
+                                </ctxt>
+                                <ctxt nom="Iteration NR 2">
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">Iteration 2 : Iter Compens 0, Macro-iter 1, NewtonRaphson It 2</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO"> iter 2, updating variables, max value : phase=-5.87e-06 (node DDE1AA1_0), u=0.00e+00 p.u. (node )</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO"> Active mismatch on nodes , iteration 2</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node DDE1AA1_0 =&gt; 0.000000 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node ndef2_DDE3AA1_0 =&gt; 0.000000 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node NNL2AA1_0 =&gt; 0.000000 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node NNL3AA1_0 =&gt; 0.000000 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node ndef1_DDE2AA1_0 =&gt; 0.000000 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node FFR2AA1_0 =&gt; 0.000000 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE3AA1_1 =&gt; 0.000000 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node FFR3AA1_0 =&gt; 0.000000 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node NNL1AA1_0 =&gt; 0.000000 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO"> Reactive mismatch on nodes, iteration 2</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">Iteration 2, norm 3.37e-16</rec>
+                                </ctxt>
+                            </ctxt>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">First LF before compensation, slack node mismatch = -0.100000</rec>
+                            <ctxt nom="End of Comp loop">
+                                <rec dt="26/01/2021 11:07:34" level="INFO">Load-generation balance 0, iter 2 : slack node mismatch = -0.100000</rec>
+                            </ctxt>
+                        </ctxt>
+                        <ctxt nom="End computation">
+                            <rec dt="26/01/2021 11:07:34" level="INFO">AC load flow; CONVERGENCE of load flow after 2 iterations with 0 compensations</rec>
+                        </ctxt>
+                    </ctxt>
+                    <ctxt nom="Processing">
+                        <rec dt="26/01/2021 11:07:34" level="INFO">Reinitialization for the sensitivity analysis of the voltage regulation status of the nodes which have been modified during the load-flow computation   </rec>
+                    </ctxt>
+                    <rec dt="26/01/2021 11:07:34" level="INFO">Contingency DDE2AA1  DDE3AA1  1 OK</rec>
+                </ctxt>
+                <ctxt nom="Contingency NNL1AA1  NNL2AA1  1">
+                    <ctxt nom="Init">
+                        <rec dt="26/01/2021 11:07:34" level="INFO">Compensation achieved = 0.1000 MW</rec>
+                    </ctxt>
+                    <ctxt nom="Processing">
+                        <ctxt nom="Loop Init">
+                            <rec dt="26/01/2021 11:07:34" level="INFO"> Active mismatch on nodes , iteration 0</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node ndef1_NNL2AA1_0 =&gt; 166.808886 MW</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node ndef2_NNL1AA1_0 =&gt; 166.792220 MW</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node FFR3AA1_0 =&gt; 0.008335 MW</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node FFR1AA1_0 =&gt; 0.008334 MW</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE3AA1_1 =&gt; 0.008334 MW</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node NNL3AA1_0 =&gt; 0.008333 MW</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node DDE1AA1_0 =&gt; 0.008333 MW</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.008333 MW</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node DDE2AA1_0 =&gt; 0.008333 MW</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node DDE3AA1_0 =&gt; 0.008332 MW</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO"> Reactive mismatch on nodes, iteration 0</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                            <ctxt nom="Macro Iter 1">
+                                <ctxt nom="Iteration NR 1">
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">Iteration 1 : Iter Compens 0, Macro-iter 1, NewtonRaphson It 1</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO"> iter 1, updating variables, max value : phase=-1.79e-02 (node ndef2_NNL1AA1_0), u=0.00e+00 p.u. (node )</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO"> Active mismatch on nodes , iteration 1</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node NNL3AA1_0 =&gt; 0.067430 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node ndef1_NNL2AA1_0 =&gt; 0.033595 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node ndef2_NNL1AA1_0 =&gt; 0.033267 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node DDE3AA1_0 =&gt; 0.001433 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node DDE2AA1_0 =&gt; 0.001230 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE3AA1_1 =&gt; 0.000988 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node FFR2AA1_0 =&gt; 0.000688 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node FFR3AA1_0 =&gt; 0.000308 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node FFR1AA1_0 =&gt; 0.000125 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node DDE1AA1_0 =&gt; 0.000123 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO"> Reactive mismatch on nodes, iteration 1</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">Iteration 1, norm 6.79e-03</rec>
+                                </ctxt>
+                                <ctxt nom="Iteration NR 2">
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">Iteration 2 : Iter Compens 0, Macro-iter 1, NewtonRaphson It 2</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO"> iter 2, updating variables, max value : phase=-1.68e-06 (node NNL3AA1_0), u=0.00e+00 p.u. (node )</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO"> Active mismatch on nodes , iteration 2</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node NNL3AA1_0 =&gt; 0.000000 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node ndef1_NNL2AA1_0 =&gt; 0.000000 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node ndef2_NNL1AA1_0 =&gt; 0.000000 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node DDE3AA1_0 =&gt; 0.000000 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node FFR2AA1_0 =&gt; 0.000000 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE3AA1_1 =&gt; 0.000000 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node DDE2AA1_0 =&gt; 0.000000 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node FFR3AA1_0 =&gt; 0.000000 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node FFR1AA1_0 =&gt; 0.000000 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node DDE1AA1_0 =&gt; 0.000000 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO"> Reactive mismatch on nodes, iteration 2</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">Iteration 2, norm 1.20e-17</rec>
+                                </ctxt>
+                            </ctxt>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">First LF before compensation, slack node mismatch = -0.100000</rec>
+                            <ctxt nom="End of Comp loop">
+                                <rec dt="26/01/2021 11:07:34" level="INFO">Load-generation balance 0, iter 2 : slack node mismatch = -0.100000</rec>
+                            </ctxt>
+                        </ctxt>
+                        <ctxt nom="End computation">
+                            <rec dt="26/01/2021 11:07:34" level="INFO">AC load flow; CONVERGENCE of load flow after 2 iterations with 0 compensations</rec>
+                        </ctxt>
+                    </ctxt>
+                    <ctxt nom="Processing">
+                        <rec dt="26/01/2021 11:07:34" level="INFO">Reinitialization for the sensitivity analysis of the voltage regulation status of the nodes which have been modified during the load-flow computation   </rec>
+                    </ctxt>
+                    <rec dt="26/01/2021 11:07:34" level="INFO">Contingency NNL1AA1  NNL2AA1  1 OK</rec>
+                </ctxt>
+                <ctxt nom="Contingency NNL1AA1  NNL3AA1  1">
+                    <ctxt nom="Init">
+                        <rec dt="26/01/2021 11:07:34" level="INFO">Compensation achieved = 0.1000 MW</rec>
+                    </ctxt>
+                    <ctxt nom="Processing">
+                        <ctxt nom="Loop Init">
+                            <rec dt="26/01/2021 11:07:34" level="INFO"> Active mismatch on nodes , iteration 0</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node ndef2_NNL1AA1_0 =&gt; 666.808887 MW</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node ndef1_NNL3AA1_0 =&gt; 666.792220 MW</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node FFR3AA1_0 =&gt; 0.008335 MW</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node FFR1AA1_0 =&gt; 0.008334 MW</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE3AA1_1 =&gt; 0.008334 MW</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node DDE1AA1_0 =&gt; 0.008333 MW</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.008333 MW</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node DDE2AA1_0 =&gt; 0.008333 MW</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node NNL2AA1_0 =&gt; 0.008332 MW</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node DDE3AA1_0 =&gt; 0.008332 MW</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO"> Reactive mismatch on nodes, iteration 0</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                            <ctxt nom="Macro Iter 1">
+                                <ctxt nom="Iteration NR 1">
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">Iteration 1 : Iter Compens 0, Macro-iter 1, NewtonRaphson It 1</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO"> iter 1, updating variables, max value : phase=4.77e-02 (node ndef2_NNL1AA1_0), u=0.00e+00 p.u. (node )</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO"> Active mismatch on nodes , iteration 1</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node ndef1_NNL3AA1_0 =&gt; 0.637957 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node NNL2AA1_0 =&gt; 0.580752 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node ndef2_NNL1AA1_0 =&gt; 0.048180 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node DDE3AA1_0 =&gt; 0.023205 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node DDE2AA1_0 =&gt; 0.019358 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE3AA1_1 =&gt; 0.016104 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node FFR2AA1_0 =&gt; 0.011281 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node FFR3AA1_0 =&gt; 0.004647 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node FFR1AA1_0 =&gt; 0.001993 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.001969 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO"> Reactive mismatch on nodes, iteration 1</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">Iteration 1, norm 7.48e-01</rec>
+                                </ctxt>
+                                <ctxt nom="Iteration NR 2">
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">Iteration 2 : Iter Compens 0, Macro-iter 1, NewtonRaphson It 2</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO"> iter 2, updating variables, max value : phase=-3.10e-05 (node ndef1_NNL3AA1_0), u=0.00e+00 p.u. (node )</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO"> Active mismatch on nodes , iteration 2</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node ndef1_NNL3AA1_0 =&gt; 0.000001 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node NNL2AA1_0 =&gt; 0.000001 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node DDE3AA1_0 =&gt; 0.000000 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node FFR2AA1_0 =&gt; 0.000000 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE3AA1_1 =&gt; 0.000000 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node DDE2AA1_0 =&gt; 0.000000 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node FFR3AA1_0 =&gt; 0.000000 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node FFR1AA1_0 =&gt; 0.000000 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node ndef2_NNL1AA1_0 =&gt; 0.000000 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node DDE1AA1_0 =&gt; 0.000000 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO"> Reactive mismatch on nodes, iteration 2</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">Iteration 2, norm 1.48e-12</rec>
+                                </ctxt>
+                            </ctxt>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">First LF before compensation, slack node mismatch = -0.100000</rec>
+                            <ctxt nom="End of Comp loop">
+                                <rec dt="26/01/2021 11:07:34" level="INFO">Load-generation balance 0, iter 2 : slack node mismatch = -0.100000</rec>
+                            </ctxt>
+                        </ctxt>
+                        <ctxt nom="End computation">
+                            <rec dt="26/01/2021 11:07:34" level="INFO">AC load flow; CONVERGENCE of load flow after 2 iterations with 0 compensations</rec>
+                        </ctxt>
+                    </ctxt>
+                    <ctxt nom="Processing">
+                        <rec dt="26/01/2021 11:07:34" level="INFO">Reinitialization for the sensitivity analysis of the voltage regulation status of the nodes which have been modified during the load-flow computation   </rec>
+                    </ctxt>
+                    <rec dt="26/01/2021 11:07:34" level="INFO">Contingency NNL1AA1  NNL3AA1  1 OK</rec>
+                </ctxt>
+                <ctxt nom="Contingency NNL2AA1  NNL3AA1  1">
+                    <ctxt nom="Init">
+                        <rec dt="26/01/2021 11:07:34" level="INFO">Compensation achieved = 0.1000 MW</rec>
+                    </ctxt>
+                    <ctxt nom="Processing">
+                        <ctxt nom="Loop Init">
+                            <rec dt="26/01/2021 11:07:34" level="INFO"> Active mismatch on nodes , iteration 0</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node ndef1_NNL2AA1_0 =&gt; 833.428290 MW</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node ndef2_NNL3AA1_0 =&gt; 833.411624 MW</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node FFR3AA1_0 =&gt; 0.008335 MW</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node FFR1AA1_0 =&gt; 0.008334 MW</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE3AA1_1 =&gt; 0.008334 MW</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node NNL1AA1_0 =&gt; 0.008333 MW</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node DDE1AA1_0 =&gt; 0.008333 MW</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.008333 MW</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node DDE2AA1_0 =&gt; 0.008333 MW</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node DDE3AA1_0 =&gt; 0.008332 MW</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO"> Reactive mismatch on nodes, iteration 0</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                            <ctxt nom="Macro Iter 1">
+                                <ctxt nom="Iteration NR 1">
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">Iteration 1 : Iter Compens 0, Macro-iter 1, NewtonRaphson It 1</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO"> iter 1, updating variables, max value : phase=-6.51e-02 (node ndef2_NNL3AA1_0), u=0.00e+00 p.u. (node )</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO"> Active mismatch on nodes , iteration 1</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node ndef2_NNL3AA1_0 =&gt; 0.590614 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node NNL1AA1_0 =&gt; 0.383001 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node ndef1_NNL2AA1_0 =&gt; 0.164549 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node DDE3AA1_0 =&gt; 0.113048 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node DDE2AA1_0 =&gt; 0.090356 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE3AA1_1 =&gt; 0.079112 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node FFR2AA1_0 =&gt; 0.056045 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node FFR3AA1_0 =&gt; 0.020092 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node FFR1AA1_0 =&gt; 0.009525 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.009412 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO"> Reactive mismatch on nodes, iteration 1</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">Iteration 1, norm 5.54e-01</rec>
+                                </ctxt>
+                                <ctxt nom="Iteration NR 2">
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">Iteration 2 : Iter Compens 0, Macro-iter 1, NewtonRaphson It 2</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO"> iter 2, updating variables, max value : phase=-4.56e-05 (node ndef2_NNL3AA1_0), u=0.00e+00 p.u. (node )</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO"> Active mismatch on nodes , iteration 2</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node ndef2_NNL3AA1_0 =&gt; 0.000001 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node NNL1AA1_0 =&gt; 0.000001 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node DDE3AA1_0 =&gt; 0.000000 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node FFR2AA1_0 =&gt; 0.000000 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node ndef1_NNL2AA1_0 =&gt; 0.000000 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE3AA1_1 =&gt; 0.000000 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node FFR3AA1_0 =&gt; 0.000000 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node FFR1AA1_0 =&gt; 0.000000 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node DDE2AA1_0 =&gt; 0.000000 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node DDE1AA1_0 =&gt; 0.000000 MW</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO"> Reactive mismatch on nodes, iteration 2</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">   node BBE1AA1_0 =&gt; 0.000000 MVar</rec>
+                                    <rec dt="26/01/2021 11:07:34" level="INFO">Iteration 2, norm 1.20e-12</rec>
+                                </ctxt>
+                            </ctxt>
+                            <rec dt="26/01/2021 11:07:34" level="INFO">First LF before compensation, slack node mismatch = -0.100000</rec>
+                            <ctxt nom="End of Comp loop">
+                                <rec dt="26/01/2021 11:07:34" level="INFO">Load-generation balance 0, iter 2 : slack node mismatch = -0.100000</rec>
+                            </ctxt>
+                        </ctxt>
+                        <ctxt nom="End computation">
+                            <rec dt="26/01/2021 11:07:34" level="INFO">AC load flow; CONVERGENCE of load flow after 2 iterations with 0 compensations</rec>
+                        </ctxt>
+                    </ctxt>
+                    <ctxt nom="Processing">
+                        <rec dt="26/01/2021 11:07:34" level="INFO">Reinitialization for the sensitivity analysis of the voltage regulation status of the nodes which have been modified during the load-flow computation   </rec>
+                    </ctxt>
+                    <rec dt="26/01/2021 11:07:34" level="INFO">Contingency NNL2AA1  NNL3AA1  1 OK</rec>
+                </ctxt>
+            </ctxt>
+            <ctxt nom="Performances">
+                <rec dt="26/01/2021 11:07:34" level="INFO">PerfAS : cc = 1, nb of nodes = 12, nb of contingencies = 11, nb of threads = 1, elapsed time = 0 sec</rec>
+            </ctxt>
+        </ctxt>
+    </ctxt>
+</logs>

@@ -1,0 +1,937 @@
+{
+  "ok" : true,
+  "metrics" : {
+    "nbIter" : "2",
+    "dureeCalcul" : "0.001",
+    "cause" : "0",
+    "contraintes" : "4",
+    "statut" : "OK",
+    "csprMarcheForcee" : "0"
+  },
+  "values" : [ {
+    "factor" : {
+      "@c" : ".factors.BranchFlowPerPSTAngle",
+      "function" : {
+        "@c" : ".BranchFlow",
+        "id" : "BBE2AA1  FFR3AA1  1",
+        "name" : "BBE2AA1  FFR3AA1  1",
+        "branchId" : "BBE2AA1  FFR3AA1  1"
+      },
+      "variable" : {
+        "@c" : ".PhaseTapChangerAngle",
+        "id" : "BBE2AA1  BBE3AA1  1",
+        "name" : "BBE2AA1  BBE3AA1  1",
+        "phaseTapChangerId" : "BBE2AA1  BBE3AA1  1"
+      }
+    },
+    "value" : 27.858552932739258,
+    "functionReference" : 499.77947998046875,
+    "variableReference" : NaN
+  }, {
+    "factor" : {
+      "@c" : ".factors.BranchFlowPerPSTAngle",
+      "function" : {
+        "@c" : ".BranchFlow",
+        "id" : "FFR2AA1  DDE3AA1  1",
+        "name" : "FFR2AA1  DDE3AA1  1",
+        "branchId" : "FFR2AA1  DDE3AA1  1"
+      },
+      "variable" : {
+        "@c" : ".PhaseTapChangerAngle",
+        "id" : "BBE2AA1  BBE3AA1  1",
+        "name" : "BBE2AA1  BBE3AA1  1",
+        "phaseTapChangerId" : "BBE2AA1  BBE3AA1  1"
+      }
+    },
+    "value" : 27.858552932739258,
+    "functionReference" : 1499.779541015625,
+    "variableReference" : NaN
+  }, {
+    "factor" : {
+      "@c" : ".factors.BranchFlowPerPSTAngle",
+      "function" : {
+        "@c" : ".BranchFlow",
+        "id" : "DDE2AA1  NNL3AA1  1",
+        "name" : "DDE2AA1  NNL3AA1  1",
+        "branchId" : "DDE2AA1  NNL3AA1  1"
+      },
+      "variable" : {
+        "@c" : ".PhaseTapChangerAngle",
+        "id" : "BBE2AA1  BBE3AA1  1",
+        "name" : "BBE2AA1  BBE3AA1  1",
+        "phaseTapChangerId" : "BBE2AA1  BBE3AA1  1"
+      }
+    },
+    "value" : 27.858552932739258,
+    "functionReference" : -1000.2205200195312,
+    "variableReference" : NaN
+  }, {
+    "factor" : {
+      "@c" : ".factors.BranchFlowPerPSTAngle",
+      "function" : {
+        "@c" : ".BranchFlow",
+        "id" : "NNL2AA1  BBE3AA1  1",
+        "name" : "NNL2AA1  BBE3AA1  1",
+        "branchId" : "NNL2AA1  BBE3AA1  1"
+      },
+      "variable" : {
+        "@c" : ".PhaseTapChangerAngle",
+        "id" : "BBE2AA1  BBE3AA1  1",
+        "name" : "BBE2AA1  BBE3AA1  1",
+        "phaseTapChangerId" : "BBE2AA1  BBE3AA1  1"
+      }
+    },
+    "value" : 27.858552932739258,
+    "functionReference" : -1500.220458984375,
+    "variableReference" : NaN
+  } ],
+  "contingenciesValues" : {
+    "FFR1AA1  FFR3AA1  1" : [ {
+      "factor" : {
+        "@c" : ".factors.BranchFlowPerPSTAngle",
+        "function" : {
+          "@c" : ".BranchFlow",
+          "id" : "BBE2AA1  FFR3AA1  1",
+          "name" : "BBE2AA1  FFR3AA1  1",
+          "branchId" : "BBE2AA1  FFR3AA1  1"
+        },
+        "variable" : {
+          "@c" : ".PhaseTapChangerAngle",
+          "id" : "BBE2AA1  BBE3AA1  1",
+          "name" : "BBE2AA1  BBE3AA1  1",
+          "phaseTapChangerId" : "BBE2AA1  BBE3AA1  1"
+        }
+      },
+      "value" : 26.51591682434082,
+      "functionReference" : 451.89459228515625,
+      "variableReference" : NaN
+    }, {
+      "factor" : {
+        "@c" : ".factors.BranchFlowPerPSTAngle",
+        "function" : {
+          "@c" : ".BranchFlow",
+          "id" : "FFR2AA1  DDE3AA1  1",
+          "name" : "FFR2AA1  DDE3AA1  1",
+          "branchId" : "FFR2AA1  DDE3AA1  1"
+        },
+        "variable" : {
+          "@c" : ".PhaseTapChangerAngle",
+          "id" : "BBE2AA1  BBE3AA1  1",
+          "name" : "BBE2AA1  BBE3AA1  1",
+          "phaseTapChangerId" : "BBE2AA1  BBE3AA1  1"
+        }
+      },
+      "value" : 26.51591682434082,
+      "functionReference" : 1451.9195556640625,
+      "variableReference" : NaN
+    }, {
+      "factor" : {
+        "@c" : ".factors.BranchFlowPerPSTAngle",
+        "function" : {
+          "@c" : ".BranchFlow",
+          "id" : "DDE2AA1  NNL3AA1  1",
+          "name" : "DDE2AA1  NNL3AA1  1",
+          "branchId" : "DDE2AA1  NNL3AA1  1"
+        },
+        "variable" : {
+          "@c" : ".PhaseTapChangerAngle",
+          "id" : "BBE2AA1  BBE3AA1  1",
+          "name" : "BBE2AA1  BBE3AA1  1",
+          "phaseTapChangerId" : "BBE2AA1  BBE3AA1  1"
+        }
+      },
+      "value" : 26.51591682434082,
+      "functionReference" : -1048.055419921875,
+      "variableReference" : NaN
+    }, {
+      "factor" : {
+        "@c" : ".factors.BranchFlowPerPSTAngle",
+        "function" : {
+          "@c" : ".BranchFlow",
+          "id" : "NNL2AA1  BBE3AA1  1",
+          "name" : "NNL2AA1  BBE3AA1  1",
+          "branchId" : "NNL2AA1  BBE3AA1  1"
+        },
+        "variable" : {
+          "@c" : ".PhaseTapChangerAngle",
+          "id" : "BBE2AA1  BBE3AA1  1",
+          "name" : "BBE2AA1  BBE3AA1  1",
+          "phaseTapChangerId" : "BBE2AA1  BBE3AA1  1"
+        }
+      },
+      "value" : 26.51591682434082,
+      "functionReference" : -1548.0303955078125,
+      "variableReference" : NaN
+    } ],
+    "NNL1AA1  NNL3AA1  1" : [ {
+      "factor" : {
+        "@c" : ".factors.BranchFlowPerPSTAngle",
+        "function" : {
+          "@c" : ".BranchFlow",
+          "id" : "BBE2AA1  FFR3AA1  1",
+          "name" : "BBE2AA1  FFR3AA1  1",
+          "branchId" : "BBE2AA1  FFR3AA1  1"
+        },
+        "variable" : {
+          "@c" : ".PhaseTapChangerAngle",
+          "id" : "BBE2AA1  BBE3AA1  1",
+          "name" : "BBE2AA1  BBE3AA1  1",
+          "phaseTapChangerId" : "BBE2AA1  BBE3AA1  1"
+        }
+      },
+      "value" : 26.52372169494629,
+      "functionReference" : 595.0053100585938,
+      "variableReference" : NaN
+    }, {
+      "factor" : {
+        "@c" : ".factors.BranchFlowPerPSTAngle",
+        "function" : {
+          "@c" : ".BranchFlow",
+          "id" : "FFR2AA1  DDE3AA1  1",
+          "name" : "FFR2AA1  DDE3AA1  1",
+          "branchId" : "FFR2AA1  DDE3AA1  1"
+        },
+        "variable" : {
+          "@c" : ".PhaseTapChangerAngle",
+          "id" : "BBE2AA1  BBE3AA1  1",
+          "name" : "BBE2AA1  BBE3AA1  1",
+          "phaseTapChangerId" : "BBE2AA1  BBE3AA1  1"
+        }
+      },
+      "value" : 26.52372169494629,
+      "functionReference" : 1595.0302734375,
+      "variableReference" : NaN
+    }, {
+      "factor" : {
+        "@c" : ".factors.BranchFlowPerPSTAngle",
+        "function" : {
+          "@c" : ".BranchFlow",
+          "id" : "DDE2AA1  NNL3AA1  1",
+          "name" : "DDE2AA1  NNL3AA1  1",
+          "branchId" : "DDE2AA1  NNL3AA1  1"
+        },
+        "variable" : {
+          "@c" : ".PhaseTapChangerAngle",
+          "id" : "BBE2AA1  BBE3AA1  1",
+          "name" : "BBE2AA1  BBE3AA1  1",
+          "phaseTapChangerId" : "BBE2AA1  BBE3AA1  1"
+        }
+      },
+      "value" : 26.52372169494629,
+      "functionReference" : -904.9446411132812,
+      "variableReference" : NaN
+    }, {
+      "factor" : {
+        "@c" : ".factors.BranchFlowPerPSTAngle",
+        "function" : {
+          "@c" : ".BranchFlow",
+          "id" : "NNL2AA1  BBE3AA1  1",
+          "name" : "NNL2AA1  BBE3AA1  1",
+          "branchId" : "NNL2AA1  BBE3AA1  1"
+        },
+        "variable" : {
+          "@c" : ".PhaseTapChangerAngle",
+          "id" : "BBE2AA1  BBE3AA1  1",
+          "name" : "BBE2AA1  BBE3AA1  1",
+          "phaseTapChangerId" : "BBE2AA1  BBE3AA1  1"
+        }
+      },
+      "value" : 26.52372169494629,
+      "functionReference" : -1404.919677734375,
+      "variableReference" : NaN
+    } ],
+    "DDE2AA1  DDE3AA1  1" : [ {
+      "factor" : {
+        "@c" : ".factors.BranchFlowPerPSTAngle",
+        "function" : {
+          "@c" : ".BranchFlow",
+          "id" : "BBE2AA1  FFR3AA1  1",
+          "name" : "BBE2AA1  FFR3AA1  1",
+          "branchId" : "BBE2AA1  FFR3AA1  1"
+        },
+        "variable" : {
+          "@c" : ".PhaseTapChangerAngle",
+          "id" : "BBE2AA1  BBE3AA1  1",
+          "name" : "BBE2AA1  BBE3AA1  1",
+          "phaseTapChangerId" : "BBE2AA1  BBE3AA1  1"
+        }
+      },
+      "value" : 23.218843460083008,
+      "functionReference" : 416.5568542480469,
+      "variableReference" : NaN
+    }, {
+      "factor" : {
+        "@c" : ".factors.BranchFlowPerPSTAngle",
+        "function" : {
+          "@c" : ".BranchFlow",
+          "id" : "FFR2AA1  DDE3AA1  1",
+          "name" : "FFR2AA1  DDE3AA1  1",
+          "branchId" : "FFR2AA1  DDE3AA1  1"
+        },
+        "variable" : {
+          "@c" : ".PhaseTapChangerAngle",
+          "id" : "BBE2AA1  BBE3AA1  1",
+          "name" : "BBE2AA1  BBE3AA1  1",
+          "phaseTapChangerId" : "BBE2AA1  BBE3AA1  1"
+        }
+      },
+      "value" : 23.218843460083008,
+      "functionReference" : 1416.581787109375,
+      "variableReference" : NaN
+    }, {
+      "factor" : {
+        "@c" : ".factors.BranchFlowPerPSTAngle",
+        "function" : {
+          "@c" : ".BranchFlow",
+          "id" : "DDE2AA1  NNL3AA1  1",
+          "name" : "DDE2AA1  NNL3AA1  1",
+          "branchId" : "DDE2AA1  NNL3AA1  1"
+        },
+        "variable" : {
+          "@c" : ".PhaseTapChangerAngle",
+          "id" : "BBE2AA1  BBE3AA1  1",
+          "name" : "BBE2AA1  BBE3AA1  1",
+          "phaseTapChangerId" : "BBE2AA1  BBE3AA1  1"
+        }
+      },
+      "value" : 23.218843460083008,
+      "functionReference" : -1083.3931884765625,
+      "variableReference" : NaN
+    }, {
+      "factor" : {
+        "@c" : ".factors.BranchFlowPerPSTAngle",
+        "function" : {
+          "@c" : ".BranchFlow",
+          "id" : "NNL2AA1  BBE3AA1  1",
+          "name" : "NNL2AA1  BBE3AA1  1",
+          "branchId" : "NNL2AA1  BBE3AA1  1"
+        },
+        "variable" : {
+          "@c" : ".PhaseTapChangerAngle",
+          "id" : "BBE2AA1  BBE3AA1  1",
+          "name" : "BBE2AA1  BBE3AA1  1",
+          "phaseTapChangerId" : "BBE2AA1  BBE3AA1  1"
+        }
+      },
+      "value" : 23.218843460083008,
+      "functionReference" : -1583.3681640625,
+      "variableReference" : NaN
+    } ],
+    "NNL2AA1  NNL3AA1  1" : [ {
+      "factor" : {
+        "@c" : ".factors.BranchFlowPerPSTAngle",
+        "function" : {
+          "@c" : ".BranchFlow",
+          "id" : "BBE2AA1  FFR3AA1  1",
+          "name" : "BBE2AA1  FFR3AA1  1",
+          "branchId" : "BBE2AA1  FFR3AA1  1"
+        },
+        "variable" : {
+          "@c" : ".PhaseTapChangerAngle",
+          "id" : "BBE2AA1  BBE3AA1  1",
+          "name" : "BBE2AA1  BBE3AA1  1",
+          "phaseTapChangerId" : "BBE2AA1  BBE3AA1  1"
+        }
+      },
+      "value" : 23.21434211730957,
+      "functionReference" : 707.8984985351562,
+      "variableReference" : NaN
+    }, {
+      "factor" : {
+        "@c" : ".factors.BranchFlowPerPSTAngle",
+        "function" : {
+          "@c" : ".BranchFlow",
+          "id" : "FFR2AA1  DDE3AA1  1",
+          "name" : "FFR2AA1  DDE3AA1  1",
+          "branchId" : "FFR2AA1  DDE3AA1  1"
+        },
+        "variable" : {
+          "@c" : ".PhaseTapChangerAngle",
+          "id" : "BBE2AA1  BBE3AA1  1",
+          "name" : "BBE2AA1  BBE3AA1  1",
+          "phaseTapChangerId" : "BBE2AA1  BBE3AA1  1"
+        }
+      },
+      "value" : 23.21434211730957,
+      "functionReference" : 1707.9234619140625,
+      "variableReference" : NaN
+    }, {
+      "factor" : {
+        "@c" : ".factors.BranchFlowPerPSTAngle",
+        "function" : {
+          "@c" : ".BranchFlow",
+          "id" : "DDE2AA1  NNL3AA1  1",
+          "name" : "DDE2AA1  NNL3AA1  1",
+          "branchId" : "DDE2AA1  NNL3AA1  1"
+        },
+        "variable" : {
+          "@c" : ".PhaseTapChangerAngle",
+          "id" : "BBE2AA1  BBE3AA1  1",
+          "name" : "BBE2AA1  BBE3AA1  1",
+          "phaseTapChangerId" : "BBE2AA1  BBE3AA1  1"
+        }
+      },
+      "value" : 23.21434211730957,
+      "functionReference" : -792.051513671875,
+      "variableReference" : NaN
+    }, {
+      "factor" : {
+        "@c" : ".factors.BranchFlowPerPSTAngle",
+        "function" : {
+          "@c" : ".BranchFlow",
+          "id" : "NNL2AA1  BBE3AA1  1",
+          "name" : "NNL2AA1  BBE3AA1  1",
+          "branchId" : "NNL2AA1  BBE3AA1  1"
+        },
+        "variable" : {
+          "@c" : ".PhaseTapChangerAngle",
+          "id" : "BBE2AA1  BBE3AA1  1",
+          "name" : "BBE2AA1  BBE3AA1  1",
+          "phaseTapChangerId" : "BBE2AA1  BBE3AA1  1"
+        }
+      },
+      "value" : 23.21434211730957,
+      "functionReference" : -1292.0264892578125,
+      "variableReference" : NaN
+    } ],
+    "BBE1AA1  BBE2AA1  1" : [ {
+      "factor" : {
+        "@c" : ".factors.BranchFlowPerPSTAngle",
+        "function" : {
+          "@c" : ".BranchFlow",
+          "id" : "BBE2AA1  FFR3AA1  1",
+          "name" : "BBE2AA1  FFR3AA1  1",
+          "branchId" : "BBE2AA1  FFR3AA1  1"
+        },
+        "variable" : {
+          "@c" : ".PhaseTapChangerAngle",
+          "id" : "BBE2AA1  BBE3AA1  1",
+          "name" : "BBE2AA1  BBE3AA1  1",
+          "phaseTapChangerId" : "BBE2AA1  BBE3AA1  1"
+        }
+      },
+      "value" : 39.78589630126953,
+      "functionReference" : 618.760009765625,
+      "variableReference" : NaN
+    }, {
+      "factor" : {
+        "@c" : ".factors.BranchFlowPerPSTAngle",
+        "function" : {
+          "@c" : ".BranchFlow",
+          "id" : "FFR2AA1  DDE3AA1  1",
+          "name" : "FFR2AA1  DDE3AA1  1",
+          "branchId" : "FFR2AA1  DDE3AA1  1"
+        },
+        "variable" : {
+          "@c" : ".PhaseTapChangerAngle",
+          "id" : "BBE2AA1  BBE3AA1  1",
+          "name" : "BBE2AA1  BBE3AA1  1",
+          "phaseTapChangerId" : "BBE2AA1  BBE3AA1  1"
+        }
+      },
+      "value" : 39.78589630126953,
+      "functionReference" : 1618.7850341796875,
+      "variableReference" : NaN
+    }, {
+      "factor" : {
+        "@c" : ".factors.BranchFlowPerPSTAngle",
+        "function" : {
+          "@c" : ".BranchFlow",
+          "id" : "DDE2AA1  NNL3AA1  1",
+          "name" : "DDE2AA1  NNL3AA1  1",
+          "branchId" : "DDE2AA1  NNL3AA1  1"
+        },
+        "variable" : {
+          "@c" : ".PhaseTapChangerAngle",
+          "id" : "BBE2AA1  BBE3AA1  1",
+          "name" : "BBE2AA1  BBE3AA1  1",
+          "phaseTapChangerId" : "BBE2AA1  BBE3AA1  1"
+        }
+      },
+      "value" : 39.78589630126953,
+      "functionReference" : -881.1900024414062,
+      "variableReference" : NaN
+    }, {
+      "factor" : {
+        "@c" : ".factors.BranchFlowPerPSTAngle",
+        "function" : {
+          "@c" : ".BranchFlow",
+          "id" : "NNL2AA1  BBE3AA1  1",
+          "name" : "NNL2AA1  BBE3AA1  1",
+          "branchId" : "NNL2AA1  BBE3AA1  1"
+        },
+        "variable" : {
+          "@c" : ".PhaseTapChangerAngle",
+          "id" : "BBE2AA1  BBE3AA1  1",
+          "name" : "BBE2AA1  BBE3AA1  1",
+          "phaseTapChangerId" : "BBE2AA1  BBE3AA1  1"
+        }
+      },
+      "value" : 39.78589630126953,
+      "functionReference" : -1381.1650390625,
+      "variableReference" : NaN
+    } ],
+    "FFR2AA1  FFR3AA1  1" : [ {
+      "factor" : {
+        "@c" : ".factors.BranchFlowPerPSTAngle",
+        "function" : {
+          "@c" : ".BranchFlow",
+          "id" : "BBE2AA1  FFR3AA1  1",
+          "name" : "BBE2AA1  FFR3AA1  1",
+          "branchId" : "BBE2AA1  FFR3AA1  1"
+        },
+        "variable" : {
+          "@c" : ".PhaseTapChangerAngle",
+          "id" : "BBE2AA1  BBE3AA1  1",
+          "name" : "BBE2AA1  BBE3AA1  1",
+          "phaseTapChangerId" : "BBE2AA1  BBE3AA1  1"
+        }
+      },
+      "value" : 23.166051864624023,
+      "functionReference" : 82.42804718017578,
+      "variableReference" : NaN
+    }, {
+      "factor" : {
+        "@c" : ".factors.BranchFlowPerPSTAngle",
+        "function" : {
+          "@c" : ".BranchFlow",
+          "id" : "FFR2AA1  DDE3AA1  1",
+          "name" : "FFR2AA1  DDE3AA1  1",
+          "branchId" : "FFR2AA1  DDE3AA1  1"
+        },
+        "variable" : {
+          "@c" : ".PhaseTapChangerAngle",
+          "id" : "BBE2AA1  BBE3AA1  1",
+          "name" : "BBE2AA1  BBE3AA1  1",
+          "phaseTapChangerId" : "BBE2AA1  BBE3AA1  1"
+        }
+      },
+      "value" : 23.166051864624023,
+      "functionReference" : 1082.4530029296875,
+      "variableReference" : NaN
+    }, {
+      "factor" : {
+        "@c" : ".factors.BranchFlowPerPSTAngle",
+        "function" : {
+          "@c" : ".BranchFlow",
+          "id" : "DDE2AA1  NNL3AA1  1",
+          "name" : "DDE2AA1  NNL3AA1  1",
+          "branchId" : "DDE2AA1  NNL3AA1  1"
+        },
+        "variable" : {
+          "@c" : ".PhaseTapChangerAngle",
+          "id" : "BBE2AA1  BBE3AA1  1",
+          "name" : "BBE2AA1  BBE3AA1  1",
+          "phaseTapChangerId" : "BBE2AA1  BBE3AA1  1"
+        }
+      },
+      "value" : 23.166051864624023,
+      "functionReference" : -1417.52197265625,
+      "variableReference" : NaN
+    }, {
+      "factor" : {
+        "@c" : ".factors.BranchFlowPerPSTAngle",
+        "function" : {
+          "@c" : ".BranchFlow",
+          "id" : "NNL2AA1  BBE3AA1  1",
+          "name" : "NNL2AA1  BBE3AA1  1",
+          "branchId" : "NNL2AA1  BBE3AA1  1"
+        },
+        "variable" : {
+          "@c" : ".PhaseTapChangerAngle",
+          "id" : "BBE2AA1  BBE3AA1  1",
+          "name" : "BBE2AA1  BBE3AA1  1",
+          "phaseTapChangerId" : "BBE2AA1  BBE3AA1  1"
+        }
+      },
+      "value" : 23.166051864624023,
+      "functionReference" : -1917.4969482421875,
+      "variableReference" : NaN
+    } ],
+    "BBE1AA1  BBE3AA1  1" : [ {
+      "factor" : {
+        "@c" : ".factors.BranchFlowPerPSTAngle",
+        "function" : {
+          "@c" : ".BranchFlow",
+          "id" : "BBE2AA1  FFR3AA1  1",
+          "name" : "BBE2AA1  FFR3AA1  1",
+          "branchId" : "BBE2AA1  FFR3AA1  1"
+        },
+        "variable" : {
+          "@c" : ".PhaseTapChangerAngle",
+          "id" : "BBE2AA1  BBE3AA1  1",
+          "name" : "BBE2AA1  BBE3AA1  1",
+          "phaseTapChangerId" : "BBE2AA1  BBE3AA1  1"
+        }
+      },
+      "value" : 39.804466247558594,
+      "functionReference" : 476.0171203613281,
+      "variableReference" : NaN
+    }, {
+      "factor" : {
+        "@c" : ".factors.BranchFlowPerPSTAngle",
+        "function" : {
+          "@c" : ".BranchFlow",
+          "id" : "FFR2AA1  DDE3AA1  1",
+          "name" : "FFR2AA1  DDE3AA1  1",
+          "branchId" : "FFR2AA1  DDE3AA1  1"
+        },
+        "variable" : {
+          "@c" : ".PhaseTapChangerAngle",
+          "id" : "BBE2AA1  BBE3AA1  1",
+          "name" : "BBE2AA1  BBE3AA1  1",
+          "phaseTapChangerId" : "BBE2AA1  BBE3AA1  1"
+        }
+      },
+      "value" : 39.804466247558594,
+      "functionReference" : 1476.0421142578125,
+      "variableReference" : NaN
+    }, {
+      "factor" : {
+        "@c" : ".factors.BranchFlowPerPSTAngle",
+        "function" : {
+          "@c" : ".BranchFlow",
+          "id" : "DDE2AA1  NNL3AA1  1",
+          "name" : "DDE2AA1  NNL3AA1  1",
+          "branchId" : "DDE2AA1  NNL3AA1  1"
+        },
+        "variable" : {
+          "@c" : ".PhaseTapChangerAngle",
+          "id" : "BBE2AA1  BBE3AA1  1",
+          "name" : "BBE2AA1  BBE3AA1  1",
+          "phaseTapChangerId" : "BBE2AA1  BBE3AA1  1"
+        }
+      },
+      "value" : 39.804466247558594,
+      "functionReference" : -1024.0328369140625,
+      "variableReference" : NaN
+    }, {
+      "factor" : {
+        "@c" : ".factors.BranchFlowPerPSTAngle",
+        "function" : {
+          "@c" : ".BranchFlow",
+          "id" : "NNL2AA1  BBE3AA1  1",
+          "name" : "NNL2AA1  BBE3AA1  1",
+          "branchId" : "NNL2AA1  BBE3AA1  1"
+        },
+        "variable" : {
+          "@c" : ".PhaseTapChangerAngle",
+          "id" : "BBE2AA1  BBE3AA1  1",
+          "name" : "BBE2AA1  BBE3AA1  1",
+          "phaseTapChangerId" : "BBE2AA1  BBE3AA1  1"
+        }
+      },
+      "value" : 39.804466247558594,
+      "functionReference" : -1524.0079345703125,
+      "variableReference" : NaN
+    } ],
+    "DDE1AA1  DDE2AA1  1" : [ {
+      "factor" : {
+        "@c" : ".factors.BranchFlowPerPSTAngle",
+        "function" : {
+          "@c" : ".BranchFlow",
+          "id" : "BBE2AA1  FFR3AA1  1",
+          "name" : "BBE2AA1  FFR3AA1  1",
+          "branchId" : "BBE2AA1  FFR3AA1  1"
+        },
+        "variable" : {
+          "@c" : ".PhaseTapChangerAngle",
+          "id" : "BBE2AA1  BBE3AA1  1",
+          "name" : "BBE2AA1  BBE3AA1  1",
+          "phaseTapChangerId" : "BBE2AA1  BBE3AA1  1"
+        }
+      },
+      "value" : 26.536479949951172,
+      "functionReference" : 547.2817993164062,
+      "variableReference" : NaN
+    }, {
+      "factor" : {
+        "@c" : ".factors.BranchFlowPerPSTAngle",
+        "function" : {
+          "@c" : ".BranchFlow",
+          "id" : "FFR2AA1  DDE3AA1  1",
+          "name" : "FFR2AA1  DDE3AA1  1",
+          "branchId" : "FFR2AA1  DDE3AA1  1"
+        },
+        "variable" : {
+          "@c" : ".PhaseTapChangerAngle",
+          "id" : "BBE2AA1  BBE3AA1  1",
+          "name" : "BBE2AA1  BBE3AA1  1",
+          "phaseTapChangerId" : "BBE2AA1  BBE3AA1  1"
+        }
+      },
+      "value" : 26.536479949951172,
+      "functionReference" : 1547.3067626953125,
+      "variableReference" : NaN
+    }, {
+      "factor" : {
+        "@c" : ".factors.BranchFlowPerPSTAngle",
+        "function" : {
+          "@c" : ".BranchFlow",
+          "id" : "DDE2AA1  NNL3AA1  1",
+          "name" : "DDE2AA1  NNL3AA1  1",
+          "branchId" : "DDE2AA1  NNL3AA1  1"
+        },
+        "variable" : {
+          "@c" : ".PhaseTapChangerAngle",
+          "id" : "BBE2AA1  BBE3AA1  1",
+          "name" : "BBE2AA1  BBE3AA1  1",
+          "phaseTapChangerId" : "BBE2AA1  BBE3AA1  1"
+        }
+      },
+      "value" : 26.536479949951172,
+      "functionReference" : -952.668212890625,
+      "variableReference" : NaN
+    }, {
+      "factor" : {
+        "@c" : ".factors.BranchFlowPerPSTAngle",
+        "function" : {
+          "@c" : ".BranchFlow",
+          "id" : "NNL2AA1  BBE3AA1  1",
+          "name" : "NNL2AA1  BBE3AA1  1",
+          "branchId" : "NNL2AA1  BBE3AA1  1"
+        },
+        "variable" : {
+          "@c" : ".PhaseTapChangerAngle",
+          "id" : "BBE2AA1  BBE3AA1  1",
+          "name" : "BBE2AA1  BBE3AA1  1",
+          "phaseTapChangerId" : "BBE2AA1  BBE3AA1  1"
+        }
+      },
+      "value" : 26.536479949951172,
+      "functionReference" : -1452.6431884765625,
+      "variableReference" : NaN
+    } ],
+    "DDE1AA1  DDE3AA1  1" : [ {
+      "factor" : {
+        "@c" : ".factors.BranchFlowPerPSTAngle",
+        "function" : {
+          "@c" : ".BranchFlow",
+          "id" : "BBE2AA1  FFR3AA1  1",
+          "name" : "BBE2AA1  FFR3AA1  1",
+          "branchId" : "BBE2AA1  FFR3AA1  1"
+        },
+        "variable" : {
+          "@c" : ".PhaseTapChangerAngle",
+          "id" : "BBE2AA1  BBE3AA1  1",
+          "name" : "BBE2AA1  BBE3AA1  1",
+          "phaseTapChangerId" : "BBE2AA1  BBE3AA1  1"
+        }
+      },
+      "value" : 26.527576446533203,
+      "functionReference" : 404.67156982421875,
+      "variableReference" : NaN
+    }, {
+      "factor" : {
+        "@c" : ".factors.BranchFlowPerPSTAngle",
+        "function" : {
+          "@c" : ".BranchFlow",
+          "id" : "FFR2AA1  DDE3AA1  1",
+          "name" : "FFR2AA1  DDE3AA1  1",
+          "branchId" : "FFR2AA1  DDE3AA1  1"
+        },
+        "variable" : {
+          "@c" : ".PhaseTapChangerAngle",
+          "id" : "BBE2AA1  BBE3AA1  1",
+          "name" : "BBE2AA1  BBE3AA1  1",
+          "phaseTapChangerId" : "BBE2AA1  BBE3AA1  1"
+        }
+      },
+      "value" : 26.527576446533203,
+      "functionReference" : 1404.696533203125,
+      "variableReference" : NaN
+    }, {
+      "factor" : {
+        "@c" : ".factors.BranchFlowPerPSTAngle",
+        "function" : {
+          "@c" : ".BranchFlow",
+          "id" : "DDE2AA1  NNL3AA1  1",
+          "name" : "DDE2AA1  NNL3AA1  1",
+          "branchId" : "DDE2AA1  NNL3AA1  1"
+        },
+        "variable" : {
+          "@c" : ".PhaseTapChangerAngle",
+          "id" : "BBE2AA1  BBE3AA1  1",
+          "name" : "BBE2AA1  BBE3AA1  1",
+          "phaseTapChangerId" : "BBE2AA1  BBE3AA1  1"
+        }
+      },
+      "value" : 26.527576446533203,
+      "functionReference" : -1095.2784423828125,
+      "variableReference" : NaN
+    }, {
+      "factor" : {
+        "@c" : ".factors.BranchFlowPerPSTAngle",
+        "function" : {
+          "@c" : ".BranchFlow",
+          "id" : "NNL2AA1  BBE3AA1  1",
+          "name" : "NNL2AA1  BBE3AA1  1",
+          "branchId" : "NNL2AA1  BBE3AA1  1"
+        },
+        "variable" : {
+          "@c" : ".PhaseTapChangerAngle",
+          "id" : "BBE2AA1  BBE3AA1  1",
+          "name" : "BBE2AA1  BBE3AA1  1",
+          "phaseTapChangerId" : "BBE2AA1  BBE3AA1  1"
+        }
+      },
+      "value" : 26.527576446533203,
+      "functionReference" : -1595.25341796875,
+      "variableReference" : NaN
+    } ],
+    "NNL1AA1  NNL2AA1  1" : [ {
+      "factor" : {
+        "@c" : ".factors.BranchFlowPerPSTAngle",
+        "function" : {
+          "@c" : ".BranchFlow",
+          "id" : "BBE2AA1  FFR3AA1  1",
+          "name" : "BBE2AA1  FFR3AA1  1",
+          "branchId" : "BBE2AA1  FFR3AA1  1"
+        },
+        "variable" : {
+          "@c" : ".PhaseTapChangerAngle",
+          "id" : "BBE2AA1  BBE3AA1  1",
+          "name" : "BBE2AA1  BBE3AA1  1",
+          "phaseTapChangerId" : "BBE2AA1  BBE3AA1  1"
+        }
+      },
+      "value" : 26.53078842163086,
+      "functionReference" : 523.5557250976562,
+      "variableReference" : NaN
+    }, {
+      "factor" : {
+        "@c" : ".factors.BranchFlowPerPSTAngle",
+        "function" : {
+          "@c" : ".BranchFlow",
+          "id" : "FFR2AA1  DDE3AA1  1",
+          "name" : "FFR2AA1  DDE3AA1  1",
+          "branchId" : "FFR2AA1  DDE3AA1  1"
+        },
+        "variable" : {
+          "@c" : ".PhaseTapChangerAngle",
+          "id" : "BBE2AA1  BBE3AA1  1",
+          "name" : "BBE2AA1  BBE3AA1  1",
+          "phaseTapChangerId" : "BBE2AA1  BBE3AA1  1"
+        }
+      },
+      "value" : 26.53078842163086,
+      "functionReference" : 1523.580810546875,
+      "variableReference" : NaN
+    }, {
+      "factor" : {
+        "@c" : ".factors.BranchFlowPerPSTAngle",
+        "function" : {
+          "@c" : ".BranchFlow",
+          "id" : "DDE2AA1  NNL3AA1  1",
+          "name" : "DDE2AA1  NNL3AA1  1",
+          "branchId" : "DDE2AA1  NNL3AA1  1"
+        },
+        "variable" : {
+          "@c" : ".PhaseTapChangerAngle",
+          "id" : "BBE2AA1  BBE3AA1  1",
+          "name" : "BBE2AA1  BBE3AA1  1",
+          "phaseTapChangerId" : "BBE2AA1  BBE3AA1  1"
+        }
+      },
+      "value" : 26.53078842163086,
+      "functionReference" : -976.3942260742188,
+      "variableReference" : NaN
+    }, {
+      "factor" : {
+        "@c" : ".factors.BranchFlowPerPSTAngle",
+        "function" : {
+          "@c" : ".BranchFlow",
+          "id" : "NNL2AA1  BBE3AA1  1",
+          "name" : "NNL2AA1  BBE3AA1  1",
+          "branchId" : "NNL2AA1  BBE3AA1  1"
+        },
+        "variable" : {
+          "@c" : ".PhaseTapChangerAngle",
+          "id" : "BBE2AA1  BBE3AA1  1",
+          "name" : "BBE2AA1  BBE3AA1  1",
+          "phaseTapChangerId" : "BBE2AA1  BBE3AA1  1"
+        }
+      },
+      "value" : 26.53078842163086,
+      "functionReference" : -1476.3692626953125,
+      "variableReference" : NaN
+    } ],
+    "FFR1AA1  FFR2AA1  1" : [ {
+      "factor" : {
+        "@c" : ".factors.BranchFlowPerPSTAngle",
+        "function" : {
+          "@c" : ".BranchFlow",
+          "id" : "BBE2AA1  FFR3AA1  1",
+          "name" : "BBE2AA1  FFR3AA1  1",
+          "branchId" : "BBE2AA1  FFR3AA1  1"
+        },
+        "variable" : {
+          "@c" : ".PhaseTapChangerAngle",
+          "id" : "BBE2AA1  BBE3AA1  1",
+          "name" : "BBE2AA1  BBE3AA1  1",
+          "phaseTapChangerId" : "BBE2AA1  BBE3AA1  1"
+        }
+      },
+      "value" : 26.47986602783203,
+      "functionReference" : 307.91864013671875,
+      "variableReference" : NaN
+    }, {
+      "factor" : {
+        "@c" : ".factors.BranchFlowPerPSTAngle",
+        "function" : {
+          "@c" : ".BranchFlow",
+          "id" : "FFR2AA1  DDE3AA1  1",
+          "name" : "FFR2AA1  DDE3AA1  1",
+          "branchId" : "FFR2AA1  DDE3AA1  1"
+        },
+        "variable" : {
+          "@c" : ".PhaseTapChangerAngle",
+          "id" : "BBE2AA1  BBE3AA1  1",
+          "name" : "BBE2AA1  BBE3AA1  1",
+          "phaseTapChangerId" : "BBE2AA1  BBE3AA1  1"
+        }
+      },
+      "value" : 26.47986602783203,
+      "functionReference" : 1307.943603515625,
+      "variableReference" : NaN
+    }, {
+      "factor" : {
+        "@c" : ".factors.BranchFlowPerPSTAngle",
+        "function" : {
+          "@c" : ".BranchFlow",
+          "id" : "DDE2AA1  NNL3AA1  1",
+          "name" : "DDE2AA1  NNL3AA1  1",
+          "branchId" : "DDE2AA1  NNL3AA1  1"
+        },
+        "variable" : {
+          "@c" : ".PhaseTapChangerAngle",
+          "id" : "BBE2AA1  BBE3AA1  1",
+          "name" : "BBE2AA1  BBE3AA1  1",
+          "phaseTapChangerId" : "BBE2AA1  BBE3AA1  1"
+        }
+      },
+      "value" : 26.47986602783203,
+      "functionReference" : -1192.0313720703125,
+      "variableReference" : NaN
+    }, {
+      "factor" : {
+        "@c" : ".factors.BranchFlowPerPSTAngle",
+        "function" : {
+          "@c" : ".BranchFlow",
+          "id" : "NNL2AA1  BBE3AA1  1",
+          "name" : "NNL2AA1  BBE3AA1  1",
+          "branchId" : "NNL2AA1  BBE3AA1  1"
+        },
+        "variable" : {
+          "@c" : ".PhaseTapChangerAngle",
+          "id" : "BBE2AA1  BBE3AA1  1",
+          "name" : "BBE2AA1  BBE3AA1  1",
+          "phaseTapChangerId" : "BBE2AA1  BBE3AA1  1"
+        }
+      },
+      "value" : 26.47986602783203,
+      "functionReference" : -1692.00634765625,
+      "variableReference" : NaN
+    } ]
+  }
+}

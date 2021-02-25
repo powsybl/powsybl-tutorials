@@ -1,0 +1,16 @@
+metrix:
+  iidm-export-version: "1.5" # default to latest available version
+
+#  home-dir: "<PATH_TO_METRIX_INSTALLATION_DIRECTORY>" # required
+#  iidm-export-version: "1.5" # default to latest available version
+#  constant-loss-factor: false # enable constant loss factor
+#  chunk-size: 10 # size of the batch processed by Metrix
+#  result-limit: 10000 # max allowed output count
+#  debug: false # enable debug mode
+#  log-level: 2 # Metrix log level, available values: 0 (trace), 1 (debug), 2 (info), 3 (warn), 4 (error), 5 (critical)
+#  debug-log-level: 0 # Metrix log level when debug mode is enabled, available values: 0 (trace), 1 (debug), 2 (info), 3 (warn), 4 (error), 5 (critical)
+
+#metrix-default-parameters
+#  computation-type: LF # default computation type
+#  loss-factor: 0f # default loss factor value
+#  nominal-u: 100 # default nominal U

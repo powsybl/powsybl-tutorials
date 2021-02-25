@@ -22,12 +22,15 @@ public final class LoadflowTutorialComplete {
     private static final Logger LOG = LoggerFactory.getLogger(LoadflowTutorialComplete.class);
 
     public static void main(String[] args) {
-        // Load network file
+        // We first import the network from a XML file. The network is described in the
+        // iTesla Internal Data Model format.
         final String iidmFileName = "eurostag-tutorial1-lf.xml";
         final InputStream is = LoadflowTutorialComplete.class.getClassLoader().getResourceAsStream(iidmFileName);
         Network network = Importers.loadNetwork(iidmFileName, is);
 
-        // 1. Scan network topo: print substations and lines
+        // Let's scan the network.
+        // In this tutorial it is composed of two substations. Each substation has two voltage
+        // levels and one two-windings transformer.
         for (Substation substation : network.getSubstations()) {
             LOG.info("Substation " + substation.getNameOrId());
             LOG.info("Voltage levels :");
@@ -43,18 +46,80 @@ public final class LoadflowTutorialComplete {
                 LOG.info(" > " + threeWindingsTransfo.getNameOrId());
             }
         }
-
+        // There are two lines in the network.
         printLines(network);
-        // 2. Prepare loadflow calculation
+        // We now define a visitor and use it to print the energy sources
+        // and the loads of the network. Visitors are usually used to access
+        // the network equipments efficiently, and modify their properties
+        // for instance. Here we just print some data about the
+        // Generators and Loads.
+        final TopologyVisitor visitor = new DefaultTopologyVisitor() {
+            @Override
+            public void visitGenerator(Generator generator) {
+                LOG.info("Generator : " + generator.getNameOrId() + " [" + generator.getTerminal().getP() + " MW]");
+            }
+
+            @Override
+            public void visitLoad(Load load) {
+                LOG.info("Load : " + load.getNameOrId() + " [" + load.getTerminal().getP() + " MW]");
+            }
+        };
+        for (VoltageLevel voltageLevel : network.getVoltageLevels()) {
+            voltageLevel.visitEquipments(visitor);
+        }
+        // We are going to compute a load flow on this network.
+        // The load flow engine used should be defined in the config file.
+        // When executing this tutorial with Maven, a custom config.yml is used
+        // from the resources folder (check the pom.xml file).
+
+        // Note that by default the load flow is computed from the initial variant of the network
+        // and the computation results will be stored in it. Here we prefer to create a new variant.
+        // A variant of a network gathers all multi state variables (voltages, angles,
+        // active and reactive powers, tap changer positions, hvdc converter modes,
+        // switch positions, etc.). For an example of a load-flow computation that does not
+        // rely on several variants, please check the cgmes tutorial.
         final String variantId = "loadflowVariant";
         network.getVariantManager().cloneVariant(VariantManagerConstants.INITIAL_VARIANT_ID, variantId);
         network.getVariantManager().setWorkingVariant(variantId);
 
-        // 3. Run loadflow calculation
-        final LoadFlowParameters loadflowParams = LoadFlowParameters.load();
+        // Below are the parameters of the load flow. Here angles are set to zero and
+        // voltages are set to one per unit.
+        LoadFlowParameters loadflowParams = new LoadFlowParameters()
+                    .setVoltageInitMode(LoadFlowParameters.VoltageInitMode.UNIFORM_VALUES);
         LoadFlow.run(network, loadflowParams);
+        displayLoadflowResults(network, variantId);
 
-        // 4. Output results
+        // Apply contingency and perform loadflow computation again
+        // Disconnect a line and create a new variant from resulting network
+        network.getLine("NHV1_NHV2_1").getTerminal1().disconnect();
+        network.getLine("NHV1_NHV2_1").getTerminal2().disconnect();
+
+        // We are going to compute a load flow again.
+        // We create a new variant of the network in order to store the results.
+        final String contingencyVariantId = "contingencyLoadflowVariant";
+        network.getVariantManager().cloneVariant(variantId, contingencyVariantId);
+        network.getVariantManager().setWorkingVariant(contingencyVariantId);
+        // This time, load parameters from config.yml file
+        loadflowParams = LoadFlowParameters.load();
+        LoadFlow.run(network, loadflowParams);
+        LoadFlow.run(network);
+
+        // Show that lines are cut
+        printLines(network);
+        // Run visitor on each voltage level
+        for (VoltageLevel voltageLevel : network.getVoltageLevels()) {
+            voltageLevel.visitEquipments(visitor);
+        }
+    }
+
+    /**
+     * Display loadflow results :for each bus of provided network, show angle and tension difference
+     * between loadflow result and initial state
+     *
+     * @param network   a network
+     * @param variantId variant of the network in which loadflow was calculated
+     */
+    private static void displayLoadflowResults(final Network network, final String variantId) {
         double angle;
         double v;
         double oldAngle;
@@ -68,36 +133,6 @@ public final class LoadflowTutorialComplete {
             v = bus.getV();
             LOG.info("Angle difference   : " + (angle - oldAngle));
             LOG.info("Tension difference : " + (v - oldV));
-        }
-
-        // Part 2: Apply contingency and perform loadflow computation again
-        // Cut a line and create a new variant from resulting network
-        network.getLine("NHV1_NHV2_1").getTerminal1().disconnect();
-        network.getLine("NHV1_NHV2_1").getTerminal2().disconnect();
-
-        final String contingencyVariantId = "contingencyLoadflowVariant";
-        network.getVariantManager().cloneVariant(variantId, contingencyVariantId);
-        network.getVariantManager().setWorkingVariant(contingencyVariantId);
-        LoadFlow.run(network);
-
-        // Show that lines are cut
-        printLines(network);
-
-        // Visit network and display info about sources and loads
-        final DefaultTopologyVisitor visitor = new DefaultTopologyVisitor() {
-            @Override
-            public void visitGenerator(Generator generator) {
-                LOG.info("Generator : " + generator.getNameOrId() + " [" + generator.getTerminal().getP() + " MW]");
-            }
-
-            @Override
-            public void visitLoad(Load load) {
-                LOG.info("Load : " + load.getNameOrId() + " [" + load.getTerminal().getP() + " MW]");
-            }
-        };
-        // Run visitor on each voltage level
-        for (VoltageLevel voltageLevel : network.getVoltageLevels()) {
-            voltageLevel.visitEquipments(visitor);
         }
     }
 

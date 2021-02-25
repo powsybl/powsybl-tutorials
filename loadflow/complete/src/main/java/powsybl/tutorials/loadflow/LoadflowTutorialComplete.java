@@ -19,7 +19,7 @@ import java.io.InputStream;
  * @author Anne Tilloy <anne.tilloy at rte-france.com>
  */
 public final class LoadflowTutorialComplete {
-    private static final Logger LOG = LoggerFactory.getLogger(LoadflowTutorialComplete.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(LoadflowTutorialComplete.class);
 
     public static void main(String[] args) {
         // We first import the network from a XML file. The network is described in the
@@ -32,18 +32,18 @@ public final class LoadflowTutorialComplete {
         // In this tutorial it is composed of two substations. Each substation has two voltage
         // levels and one two-windings transformer.
         for (Substation substation : network.getSubstations()) {
-            LOG.info("Substation " + substation.getNameOrId());
-            LOG.info("Voltage levels :");
+            LOGGER.info("Substation " + substation.getNameOrId());
+            LOGGER.info("Voltage levels :");
             for (VoltageLevel voltageLevel : substation.getVoltageLevels()) {
-                LOG.info(" > " + voltageLevel.getNominalV());
+                LOGGER.info(" > " + voltageLevel.getNominalV());
             }
-            LOG.info("Two windings transformers :");
+            LOGGER.info("Two windings transformers :");
             for (TwoWindingsTransformer twoWindingsTransfo : substation.getTwoWindingsTransformers()) {
-                LOG.info(" > " + twoWindingsTransfo.getNameOrId());
+                LOGGER.info(" > " + twoWindingsTransfo.getNameOrId());
             }
-            LOG.info("Three windings transformers :");
+            LOGGER.info("Three windings transformers :");
             for (ThreeWindingsTransformer threeWindingsTransfo : substation.getThreeWindingsTransformers()) {
-                LOG.info(" > " + threeWindingsTransfo.getNameOrId());
+                LOGGER.info(" > " + threeWindingsTransfo.getNameOrId());
             }
         }
         // There are two lines in the network.
@@ -56,12 +56,12 @@ public final class LoadflowTutorialComplete {
         final TopologyVisitor visitor = new DefaultTopologyVisitor() {
             @Override
             public void visitGenerator(Generator generator) {
-                LOG.info("Generator : " + generator.getNameOrId() + " [" + generator.getTerminal().getP() + " MW]");
+                LOGGER.info("Generator : " + generator.getNameOrId() + " [" + generator.getTerminal().getP() + " MW]");
             }
 
             @Override
             public void visitLoad(Load load) {
-                LOG.info("Load : " + load.getNameOrId() + " [" + load.getTerminal().getP() + " MW]");
+                LOGGER.info("Load : " + load.getNameOrId() + " [" + load.getTerminal().getP() + " MW]");
             }
         };
         for (VoltageLevel voltageLevel : network.getVoltageLevels()) {
@@ -131,8 +131,8 @@ public final class LoadflowTutorialComplete {
             network.getVariantManager().setWorkingVariant(variantId);
             angle = bus.getAngle();
             v = bus.getV();
-            LOG.info("Angle difference   : " + (angle - oldAngle));
-            LOG.info("Tension difference : " + (v - oldV));
+            LOGGER.info("Angle difference   : " + (angle - oldAngle));
+            LOGGER.info("Tension difference : " + (v - oldV));
         }
     }
 
@@ -143,9 +143,9 @@ public final class LoadflowTutorialComplete {
      */
     private static void printLines(Network network) {
         for (Line line : network.getLines()) {
-            LOG.info("Line : " + line.getNameOrId());
-            LOG.info(" > Terminal 1 power : " + line.getTerminal1().getP());
-            LOG.info(" > Terminal 2 power : " + line.getTerminal2().getP());
+            LOGGER.info("Line : " + line.getNameOrId());
+            LOGGER.info(" > Terminal 1 power : " + line.getTerminal1().getP());
+            LOGGER.info(" > Terminal 2 power : " + line.getTerminal2().getP());
         }
     }
 

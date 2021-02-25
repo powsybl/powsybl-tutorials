@@ -33,15 +33,15 @@ public final class LoadflowTutorialComplete {
         // levels and one two-windings transformer.
         for (Substation substation : network.getSubstations()) {
             LOGGER.info("Substation " + substation.getNameOrId());
-            LOGGER.info("Voltage levels :");
+            LOGGER.info("Voltage levels:");
             for (VoltageLevel voltageLevel : substation.getVoltageLevels()) {
                 LOGGER.info(" > " + voltageLevel.getNominalV());
             }
-            LOGGER.info("Two windings transformers :");
+            LOGGER.info("Two windings transformers:");
             for (TwoWindingsTransformer twoWindingsTransfo : substation.getTwoWindingsTransformers()) {
                 LOGGER.info(" > " + twoWindingsTransfo.getNameOrId());
             }
-            LOGGER.info("Three windings transformers :");
+            LOGGER.info("Three windings transformers:");
             for (ThreeWindingsTransformer threeWindingsTransfo : substation.getThreeWindingsTransformers()) {
                 LOGGER.info(" > " + threeWindingsTransfo.getNameOrId());
             }
@@ -56,12 +56,12 @@ public final class LoadflowTutorialComplete {
         final TopologyVisitor visitor = new DefaultTopologyVisitor() {
             @Override
             public void visitGenerator(Generator generator) {
-                LOGGER.info("Generator : " + generator.getNameOrId() + " [" + generator.getTerminal().getP() + " MW]");
+                LOGGER.info("Generator: " + generator.getNameOrId() + " [" + generator.getTerminal().getP() + " MW]");
             }
 
             @Override
             public void visitLoad(Load load) {
-                LOGGER.info("Load : " + load.getNameOrId() + " [" + load.getTerminal().getP() + " MW]");
+                LOGGER.info("Load: " + load.getNameOrId() + " [" + load.getTerminal().getP() + " MW]");
             }
         };
         for (VoltageLevel voltageLevel : network.getVoltageLevels()) {
@@ -131,8 +131,8 @@ public final class LoadflowTutorialComplete {
             network.getVariantManager().setWorkingVariant(variantId);
             angle = bus.getAngle();
             v = bus.getV();
-            LOGGER.info("Angle difference   : " + (angle - oldAngle));
-            LOGGER.info("Tension difference : " + (v - oldV));
+            LOGGER.info("Angle difference  : " + (angle - oldAngle));
+            LOGGER.info("Tension difference: " + (v - oldV));
         }
     }
 
@@ -143,9 +143,9 @@ public final class LoadflowTutorialComplete {
      */
     private static void printLines(Network network) {
         for (Line line : network.getLines()) {
-            LOGGER.info("Line : " + line.getNameOrId());
-            LOGGER.info(" > Terminal 1 power : " + line.getTerminal1().getP());
-            LOGGER.info(" > Terminal 2 power : " + line.getTerminal2().getP());
+            LOGGER.info("Line: " + line.getNameOrId());
+            LOGGER.info(" > Terminal 1 power: " + line.getTerminal1().getP());
+            LOGGER.info(" > Terminal 2 power: " + line.getTerminal2().getP());
         }
     }
 

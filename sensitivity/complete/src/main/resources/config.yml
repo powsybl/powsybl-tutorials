@@ -6,7 +6,7 @@ computation-local:
     availableCore: 1
 
 hades2:
-    homeDir: <PATH_TO_HADES2>
+    homeDir: /home/tilloyann/simulators/hades2/hades2-V6.7.1.1/
     debug: true
 
 load-flow-default-parameters:

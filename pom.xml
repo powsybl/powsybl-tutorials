@@ -36,6 +36,7 @@
 
         <powsybl.core.version>4.0.1</powsybl.core.version>
         <powsybl.rte-core.version>3.0.0</powsybl.rte-core.version>
+        <powsybl.open-loadflow.version>0.9.0</powsybl.open-loadflow.version>
     </properties>
 
     <modules>

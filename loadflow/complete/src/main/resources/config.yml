@@ -1,9 +1,10 @@
 load-flow:
-  default-impl-name: Hades2
+  default-impl-name: OpenLoadFlow
 
 computation-local:
-    tmp-dir: /tmp
-    availableCore: 1
+  tmp-dir: /tmp
+  availableCore: 1
 
 hades2:
-    homeDir: <PATH_TO_HADES2>
+  homeDir: /home/tilloyann/simulators/hades2/hades2-V6.7.1.1/
+  debug: true

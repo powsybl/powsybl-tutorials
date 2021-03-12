@@ -22,11 +22,13 @@ public final class LoadflowTutorialComplete {
     private static final Logger LOGGER = LoggerFactory.getLogger(LoadflowTutorialComplete.class);
 
     public static void main(String[] args) {
+        LOGGER.info("Starting the load flow tutorial execution");
+
         // We first import the network from a XML file. The network is described in the
         // iTesla Internal Data Model format.
-        final String iidmFileName = "eurostag-tutorial1-lf.xml";
-        final InputStream is = LoadflowTutorialComplete.class.getClassLoader().getResourceAsStream(iidmFileName);
-        Network network = Importers.loadNetwork(iidmFileName, is);
+        final String networkFileName = "eurostag-tutorial1-lf.xml";
+        final InputStream is = LoadflowTutorialComplete.class.getClassLoader().getResourceAsStream(networkFileName);
+        Network network = Importers.loadNetwork(networkFileName, is);
 
         // Let's scan the network.
         // In this tutorial it is composed of two substations. Each substation has two voltage
@@ -35,15 +37,16 @@ public final class LoadflowTutorialComplete {
             LOGGER.info("Substation " + substation.getNameOrId());
             LOGGER.info("Voltage levels:");
             for (VoltageLevel voltageLevel : substation.getVoltageLevels()) {
-                LOGGER.info(" > " + voltageLevel.getNominalV());
+
+                LOGGER.info("Voltage level: " + voltageLevel.getId() + " " + voltageLevel.getNominalV() + "kV");
             }
             LOGGER.info("Two windings transformers:");
-            for (TwoWindingsTransformer twoWindingsTransfo : substation.getTwoWindingsTransformers()) {
-                LOGGER.info(" > " + twoWindingsTransfo.getNameOrId());
+            for (TwoWindingsTransformer t2wt : substation.getTwoWindingsTransformers()) {
+                LOGGER.info("Two winding transformer: " + t2wt.getNameOrId());
             }
             LOGGER.info("Three windings transformers:");
-            for (ThreeWindingsTransformer threeWindingsTransfo : substation.getThreeWindingsTransformers()) {
-                LOGGER.info(" > " + threeWindingsTransfo.getNameOrId());
+            for (ThreeWindingsTransformer t3wt : substation.getThreeWindingsTransformers()) {
+                LOGGER.info("Three winding transformer: " + t3wt.getNameOrId());
             }
         }
         // There are two lines in the network.
@@ -89,8 +92,7 @@ public final class LoadflowTutorialComplete {
         LoadFlow.run(network, loadflowParams);
         displayLoadflowResults(network, variantId);
 
-        // Apply contingency and perform loadflow computation again
-        // Disconnect a line and create a new variant from resulting network
+        // The line "NHV1_NHV2_1" is now disconnected.
         network.getLine("NHV1_NHV2_1").getTerminal1().disconnect();
         network.getLine("NHV1_NHV2_1").getTerminal2().disconnect();
 
@@ -104,7 +106,7 @@ public final class LoadflowTutorialComplete {
         LoadFlow.run(network, loadflowParams);
         LoadFlow.run(network);
 
-        // Show that lines are cut
+        // Let's analyze the results
         printLines(network);
         // Run visitor on each voltage level
         for (VoltageLevel voltageLevel : network.getVoltageLevels()) {

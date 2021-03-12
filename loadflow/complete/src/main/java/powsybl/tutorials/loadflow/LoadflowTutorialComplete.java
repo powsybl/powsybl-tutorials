@@ -1,3 +1,9 @@
+/**
+ * Copyright (c) 2019, RTE (http://www.rte-france.com)
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ */
 package powsybl.tutorials.loadflow;
 
 import com.powsybl.iidm.import_.Importers;
@@ -9,13 +15,7 @@ import org.slf4j.LoggerFactory;
 
 import java.io.InputStream;
 
-
 /**
- * Copyright (c) 2019, RTE (http://www.rte-france.com)
- * This Source Code Form is subject to the terms of the Mozilla Public
- * License, v. 2.0. If a copy of the MPL was not distributed with this
- * file, You can obtain one at http://mozilla.org/MPL/2.0/.
- *
  * @author Anne Tilloy <anne.tilloy at rte-france.com>
  */
 public final class LoadflowTutorialComplete {
@@ -115,7 +115,7 @@ public final class LoadflowTutorialComplete {
     }
 
     /**
-     * Display loadflow results :for each bus of provided network, show angle and tension difference
+     * Display loadflow results: for each bus of provided network, show angle and tension difference
      * between loadflow result and initial state
      *
      * @param network   a network

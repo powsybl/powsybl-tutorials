@@ -15,5 +15,5 @@ The configuration file is:
 You just need to execute the following command lines:
 ```
 cd <path_to_powsybl_tutorials>/loadflow/complete
-mvn compile exec:exec
+mvn clean package exec:exec
 ```

@@ -13,7 +13,7 @@ import com.powsybl.loadflow.LoadFlowParameters;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.File;
+import java.io.InputStream;
 
 /**
  * @author Anne Tilloy <anne.tilloy at rte-france.com>
@@ -22,61 +22,58 @@ public final class LoadflowTutorialComplete {
     private static final Logger LOGGER = LoggerFactory.getLogger(LoadflowTutorialComplete.class);
 
     public static void main(String[] args) {
-
         LOGGER.info("Starting the load flow tutorial execution");
 
         // We first import the network from a XML file. The network is described in the
         // iTesla Internal Data Model format.
-        File file = new File(LoadflowTutorialComplete.class.getResource("/eurostag-tutorial1-lf.xml").getPath());
-        Network network = Importers.loadNetwork(file.toString());
+        final String networkFileName = "eurostag-tutorial1-lf.xml";
+        final InputStream is = LoadflowTutorialComplete.class.getClassLoader().getResourceAsStream(networkFileName);
+        Network network = Importers.loadNetwork(networkFileName, is);
 
         // Let's scan the network.
         // In this tutorial it is composed of two substations. Each substation has two voltage
         // levels and one two-windings transformer.
         for (Substation substation : network.getSubstations()) {
-            System.out.println("Substation " + substation.getName());
-            System.out.println("Voltage levels: " + substation.getVoltageLevels());
-            System.out.println("Two windings transformers: "
-                    + substation.getTwoWindingsTransformers());
-            System.out.println("Three windings transformers: "
-                    + substation.getThreeWindingsTransformers());
+            LOGGER.info("Substation " + substation.getNameOrId());
+            LOGGER.info("Voltage levels:");
+            for (VoltageLevel voltageLevel : substation.getVoltageLevels()) {
+
+                LOGGER.info("Voltage level: " + voltageLevel.getId() + " " + voltageLevel.getNominalV() + "kV");
+            }
+            LOGGER.info("Two windings transformers:");
+            for (TwoWindingsTransformer t2wt : substation.getTwoWindingsTransformers()) {
+                LOGGER.info("Two winding transformer: " + t2wt.getNameOrId());
+            }
+            LOGGER.info("Three windings transformers:");
+            for (ThreeWindingsTransformer t3wt : substation.getThreeWindingsTransformers()) {
+                LOGGER.info("Three winding transformer: " + t3wt.getNameOrId());
+            }
         }
         // There are two lines in the network.
-        for (Line l : network.getLines()) {
-            System.out.println("Line: " + l.getName());
-            System.out.println("Line: " + l.getTerminal1().getP());
-            System.out.println("Line: " + l.getTerminal2().getP());
-        }
-
+        printLines(network);
         // We now define a visitor and use it to print the energy sources
         // and the loads of the network. Visitors are usually used to access
         // the network equipments efficiently, and modify their properties
         // for instance. Here we just print some data about the
         // Generators and Loads.
-        TopologyVisitor visitor = new DefaultTopologyVisitor() {
+        final TopologyVisitor visitor = new DefaultTopologyVisitor() {
             @Override
             public void visitGenerator(Generator generator) {
-                System.out.println("Generator " + generator.getName() + ": "
-                        + generator.getTerminal().getP() + " MW");
+                LOGGER.info("Generator: " + generator.getNameOrId() + " [" + generator.getTerminal().getP() + " MW]");
             }
 
             @Override
             public void visitLoad(Load load) {
-                System.out.println("Load " + load.getName() + ": "
-                        + load.getTerminal().getP() + " MW");
+                LOGGER.info("Load: " + load.getNameOrId() + " [" + load.getTerminal().getP() + " MW]");
             }
         };
-
-        for (VoltageLevel vl : network.getVoltageLevels()) {
-            vl.visitEquipments(visitor);
+        for (VoltageLevel voltageLevel : network.getVoltageLevels()) {
+            voltageLevel.visitEquipments(visitor);
         }
-
         // We are going to compute a load flow on this network.
         // The load flow engine used should be defined in the config file.
         // When executing this tutorial with Maven, a custom config.yml is used
         // from the resources folder (check the pom.xml file).
-        // If you are using IntelliJ, configure the corresponding VM Option for the Run:
-        // -Dpowsybl.config.dirs="$PATH_TO_TUTORIALS/sensitivity/target/classes"
 
         // Note that by default the load flow is computed from the initial variant of the network
         // and the computation results will be stored in it. Here we prefer to create a new variant.
@@ -84,32 +81,16 @@ public final class LoadflowTutorialComplete {
         // active and reactive powers, tap changer positions, hvdc converter modes,
         // switch positions, etc.). For an example of a load-flow computation that does not
         // rely on several variants, please check the cgmes tutorial.
-        network.getVariantManager().cloneVariant(VariantManagerConstants.INITIAL_VARIANT_ID,
-                "loadflowVariant");
-        network.getVariantManager().setWorkingVariant("loadflowVariant");
+        final String variantId = "loadflowVariant";
+        network.getVariantManager().cloneVariant(VariantManagerConstants.INITIAL_VARIANT_ID, variantId);
+        network.getVariantManager().setWorkingVariant(variantId);
 
         // Below are the parameters of the load flow. Here angles are set to zero and
         // voltages are set to one per unit.
-        LoadFlowParameters loadflowParameters = new LoadFlowParameters()
-                .setVoltageInitMode(LoadFlowParameters.VoltageInitMode.UNIFORM_VALUES);
-        LoadFlow.run(network, loadflowParameters);
-
-        // Note that voltages and angles are present in the initial variant based on a reference
-        // calculation. The following lines just compare the results.
-        double angle;
-        double v;
-        double angleInitial;
-        double vInitial;
-        for (Bus bus : network.getBusView().getBuses()) {
-            network.getVariantManager().setWorkingVariant(VariantManagerConstants.INITIAL_VARIANT_ID);
-            angleInitial = bus.getAngle();
-            vInitial = bus.getV();
-            network.getVariantManager().setWorkingVariant("loadflowVariant");
-            angle = bus.getAngle();
-            v = bus.getV();
-            System.out.println("Angle difference: " + (angle - angleInitial));
-            System.out.println("Tension difference: " + (v - vInitial));
-        }
+        LoadFlowParameters loadflowParams = new LoadFlowParameters()
+                    .setVoltageInitMode(LoadFlowParameters.VoltageInitMode.UNIFORM_VALUES);
+        LoadFlow.run(network, loadflowParams);
+        displayLoadflowResults(network, variantId);
 
         // The line "NHV1_NHV2_1" is now disconnected.
         network.getLine("NHV1_NHV2_1").getTerminal1().disconnect();
@@ -117,22 +98,57 @@ public final class LoadflowTutorialComplete {
 
         // We are going to compute a load flow again.
         // We create a new variant of the network in order to store the results.
-        network.getVariantManager().cloneVariant("loadflowVariant",
-                "contingencyLoadflowVariant");
-        network.getVariantManager().setWorkingVariant("contingencyLoadflowVariant");
-        LoadFlow.run(network, loadflowParameters);
+        final String contingencyVariantId = "contingencyLoadflowVariant";
+        network.getVariantManager().cloneVariant(variantId, contingencyVariantId);
+        network.getVariantManager().setWorkingVariant(contingencyVariantId);
+        // This time, load parameters from config.yml file
+        loadflowParams = LoadFlowParameters.load();
+        LoadFlow.run(network, loadflowParams);
+        LoadFlow.run(network);
 
-        // Let's analyze the results.
-        for (Line l : network.getLines()) {
-            System.out.println("Line: " + l.getName());
-            System.out.println("Line: " + l.getTerminal1().getP());
-            System.out.println("Line: " + l.getTerminal2().getP());
+        // Let's analyze the results
+        printLines(network);
+        // Run visitor on each voltage level
+        for (VoltageLevel voltageLevel : network.getVoltageLevels()) {
+            voltageLevel.visitEquipments(visitor);
         }
-        // The power now flows only through the line NHV1_NHV2_2, as expected.
-        for (VoltageLevel vl : network.getVoltageLevels()) {
-            vl.visitEquipments(visitor);
-        }
+    }
 
+    /**
+     * Display loadflow results: for each bus of provided network, show angle and tension difference
+     * between loadflow result and initial state
+     *
+     * @param network   a network
+     * @param variantId variant of the network in which loadflow was calculated
+     */
+    private static void displayLoadflowResults(final Network network, final String variantId) {
+        double angle;
+        double v;
+        double oldAngle;
+        double oldV;
+        for (Bus bus : network.getBusView().getBuses()) {
+            network.getVariantManager().setWorkingVariant(VariantManagerConstants.INITIAL_VARIANT_ID);
+            oldAngle = bus.getAngle();
+            oldV = bus.getV();
+            network.getVariantManager().setWorkingVariant(variantId);
+            angle = bus.getAngle();
+            v = bus.getV();
+            LOGGER.info("Angle difference  : " + (angle - oldAngle));
+            LOGGER.info("Tension difference: " + (v - oldV));
+        }
+    }
+
+    /**
+     * Print info on all lines in provided network
+     *
+     * @param network any network
+     */
+    private static void printLines(Network network) {
+        for (Line line : network.getLines()) {
+            LOGGER.info("Line: " + line.getNameOrId());
+            LOGGER.info(" > Terminal 1 power: " + line.getTerminal1().getP());
+            LOGGER.info(" > Terminal 2 power: " + line.getTerminal2().getP());
+        }
     }
 
     private LoadflowTutorialComplete() {

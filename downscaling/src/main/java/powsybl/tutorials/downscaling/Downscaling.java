@@ -1,7 +1,10 @@
 package powsybl.tutorials.downscaling;
 
+import com.github.jsonldjava.shaded.com.google.common.collect.Lists;
 import com.github.jsonldjava.shaded.com.google.common.collect.Streams;
 import com.google.common.collect.Range;
+import com.powsybl.commons.datasource.DataSource;
+import com.powsybl.commons.datasource.DataSourceUtil;
 import com.powsybl.iidm.import_.Importers;
 import com.powsybl.iidm.network.Country;
 import com.powsybl.iidm.network.Generator;
@@ -21,7 +24,7 @@ import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Collections;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.TreeSet;
@@ -46,10 +49,6 @@ public final class Downscaling {
             dslLoader = new TimeSeriesDslLoader(reader, mappingFilePath.getFileName().toString());
         }
 
-        // Prepare an output directory (from path in arguments)
-        // Both logs and mapping results will be saved into it
-        final Path outputPath = Paths.get(args[0]);
-
         // Iterate over each network to perform mapping
         for (final Network network : networks) {
             // Register the timeseries to use for this network's mapping
@@ -62,9 +61,7 @@ public final class Downscaling {
             Streams.stream(network.getGenerators())
                    .map(Generator::getEnergySource)
                    .distinct()
-                   .forEach(eSource -> {
-                       tsNames.add(eSource.toString() + "_" + country.toString());
-                   });
+                   .forEach(eSource -> tsNames.add(eSource.toString() + "_" + country.toString()));
             tsNames.add("LOAD_" + country.toString());
 
             // Build mapping config for this network
@@ -76,25 +73,32 @@ public final class Downscaling {
             mappingConfig.setMappedTimeSeriesNames(tsNames);
 
             // Initialize mapping parameters
+            final Range<Integer> pointRange = Range.closed(0, mappingConfig.checkIndexUnicity(tsStore).getPointCount() - 1);
             final TimeSeriesMapperParameters tsMappingParams = new TimeSeriesMapperParameters(
                         new TreeSet<>(tsStore.getTimeSeriesDataVersions()),
-                        Range.closed(0, mappingConfig.checkIndexUnicity(tsStore).getPointCount() - 1),
+                        pointRange,
                         true,
                         true,
                         mappingParameters.getToleranceThreshold()
             );
 
+            // Prepare an output directory (from path in arguments)
+            // Both logs and mapping results will be saved into it
+            final Path outputPath = Paths.get(args[0]);
             // Init output for this network : create a directory with the country name
             // equipment writer will produce a CSV file for each version (eg: version_1.csv)
             // logger will produce a logfile containing all warning information about mapping operation
             final Path networkOutputDir = outputPath.resolve(country.getName());
             Files.createDirectories(networkOutputDir);
-            TimeSeriesMapperObserver equipmentWriter = new EquipmentTimeSeriesWriter(networkOutputDir);
+            final TimeSeriesMapperObserver equipmentWriter = new EquipmentTimeSeriesWriter(networkOutputDir);
+            final DataSource dataSource = DataSourceUtil.createDataSource(networkOutputDir, "network", null);
+            final TimeSeriesMapperObserver networkPointWriter = new NetworkPointWriter(network, dataSource);
+            final ArrayList<TimeSeriesMapperObserver> observers = Lists.newArrayList(equipmentWriter, networkPointWriter);
             TimeSeriesMappingLogger logger = new TimeSeriesMappingLogger();
 
             // Perform mapping
             TimeSeriesMapper mapper = new TimeSeriesMapper(mappingConfig, network, logger);
-            mapper.mapToNetwork(tsStore, tsMappingParams, Collections.singletonList(equipmentWriter));
+            mapper.mapToNetwork(tsStore, tsMappingParams, observers);
             logger.writeCsv(networkOutputDir.resolve("mapping.log"));
         }
     }

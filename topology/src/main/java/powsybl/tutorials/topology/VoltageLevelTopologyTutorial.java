@@ -13,6 +13,9 @@ import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 
+/**
+ * @author Anne Tilloy <anne.tilloy at rte-france.com>
+ */
 public final class VoltageLevelTopologyTutorial {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(VoltageLevelTopologyTutorial.class);

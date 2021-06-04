@@ -35,10 +35,10 @@ public final class Downscaling {
 
     public static void main(String[] args) throws IOException, URISyntaxException {
         // Load all networks from resources
-        // Each network covers one country
+        // Each network corresponds to one country
         final Set<Network> networks = loadNetworks();
 
-        // Load ts store
+        // Load the time series store
         final ReadOnlyTimeSeriesStore tsStore = initTSStore();
 
         // Load mapping groovy script. Build a DSL loader with it

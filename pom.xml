@@ -18,6 +18,7 @@
         <version>3</version>
         <relativePath/>
     </parent>
+
     <groupId>com.powsybl.tutorials</groupId>
     <artifactId>powsybl-tutorials</artifactId>
     <version>1.3.0-SNAPSHOT</version>
@@ -34,8 +35,11 @@
         <slf4j.version>1.7.22</slf4j.version>
         <java.version>11</java.version>
 
-        <powsybl.core.version>4.0.1</powsybl.core.version>
-        <powsybl.rte-core.version>3.0.0</powsybl.rte-core.version>
+        <powsyblba.version>1.6.0-SNAPSHOT</powsyblba.version>
+        <powsyblcore.version>4.3.0-SNAPSHOT</powsyblcore.version>
+        <powsyblolf.version>0.11.0-SNAPSHOT</powsyblolf.version>
+        <powsyblentsoe.version>1.1.0-SNAPSHOT</powsyblentsoe.version>
+
     </properties>
 
     <modules>

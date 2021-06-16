@@ -61,7 +61,6 @@ public final class MergingViewTutorial {
 
         BalancesAdjustmentValidationParameters validationParameters = BalancesAdjustmentValidationParameters.load();
         log(validationParameters);
-        //LOAD_FLOW_PARAMETERS.getExtension(OpenLoadFlowParameters.class).setVoltagePerReactivePowerControl(true);
 
         // Import CGMES networks
         Map<String, Network> networks = importNetworks(validationParameters);
@@ -136,33 +135,33 @@ public final class MergingViewTutorial {
         for (Map.Entry<String, Network> entry : networks.entrySet()) {
             String name = entry.getKey();
             Network network = entry.getValue();
-//            if (name.contains("REE")) {
-//                network.getTwoWindingsTransformerStream().forEach(transformer -> {
-//                    RatioTapChanger tap_changer = transformer.getRatioTapChanger();
-//                    if (tap_changer != null) {
-//                        tap_changer.setRegulating(false);
-//                    }
-//                });
-//            }
-//            if (name.contains("SWISSGRID")){
-//                System.out.println(network.getThreeWindingsTransformerCount());
-//                network.getTwoWindingsTransformerStream().forEach(transformer -> {
-//                    PhaseTapChanger phase_tap_changer = transformer.getPhaseTapChanger();
-//                    if (phase_tap_changer != null){
-//                        phase_tap_changer.setRegulating(false);
-//                    }
-//                });
-//                network.getThreeWindingsTransformerStream().forEach(transformer -> {
-//                            transformer.getLegStream().forEach(leg -> {
-//                                PhaseTapChanger phase_tap_changer = leg.getPhaseTapChanger();
-//                                if (phase_tap_changer != null) {
-//                                    phase_tap_changer.setRegulating(false);
-//                                }
-//                            });
-//                        }
-//
-//                );
-//            }
+            if (name.contains("REE")) {
+                network.getTwoWindingsTransformerStream().forEach(transformer -> {
+                    RatioTapChanger tap_changer = transformer.getRatioTapChanger();
+                    if (tap_changer != null) {
+                        tap_changer.setRegulating(false);
+                    }
+                });
+            }
+            if (name.contains("SWISSGRID")){
+                System.out.println(network.getThreeWindingsTransformerCount());
+                network.getTwoWindingsTransformerStream().forEach(transformer -> {
+                    PhaseTapChanger phase_tap_changer = transformer.getPhaseTapChanger();
+                    if (phase_tap_changer != null){
+                        phase_tap_changer.setRegulating(false);
+                    }
+                });
+                network.getThreeWindingsTransformerStream().forEach(transformer -> {
+                            transformer.getLegStream().forEach(leg -> {
+                                PhaseTapChanger phase_tap_changer = leg.getPhaseTapChanger();
+                                if (phase_tap_changer != null) {
+                                    phase_tap_changer.setRegulating(false);
+                                }
+                            });
+                        }
+
+                );
+            }
         }
         return networks;
     }

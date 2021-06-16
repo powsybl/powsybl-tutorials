@@ -81,7 +81,7 @@
 
         <dependency>
             <groupId>com.powsybl</groupId>
-            <artifactId>powsybl-config-classic</artifactId> <!-- if you have errors for a specific TSO, you can use config-classic -->
+            <artifactId>powsybl-config-classic</artifactId>
             <version>${powsyblcore.version}</version>
             <scope>runtime</scope>
         </dependency>
@@ -97,18 +97,6 @@
             <version>${powsyblcore.version}</version>
         </dependency>
         <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>log4j-over-slf4j</artifactId>
-            <version>${slf4j.version}</version>
-            <scope>runtime</scope>
-        </dependency>
-        <dependency>
-            <groupId>ch.qos.logback</groupId>
-            <artifactId>logback-classic</artifactId>
-            <version>1.1.8</version>
-            <scope>runtime</scope>
-        </dependency>
-        <dependency>
             <groupId>com.powsybl</groupId>
             <artifactId>powsybl-entsoe-cgmes-balances-adjustment</artifactId>
             <version>${powsyblentsoe.version}</version>
@@ -116,19 +104,9 @@
         </dependency>
         <dependency>
             <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
-            <version>${slf4j.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.slf4j</groupId>
             <artifactId>slf4j-simple</artifactId>
             <version>${slf4j.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.rte-france.powsybl</groupId>
-            <artifactId>powsybl-balances-adjustment-validation</artifactId>
-            <version>1.0-SNAPSHOT</version>
-            <scope>compile</scope>
+            <scope>runtime</scope>
         </dependency>
     </dependencies>
 </project>

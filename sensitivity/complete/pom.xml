@@ -16,12 +16,9 @@
     <properties>
         <maven.exec.version>1.6.0</maven.exec.version>
         <slf4j.version>1.7.22</slf4j.version>
-        <powsybl.core.version>3.7.1</powsybl.core.version>
+        <powsybl.core.version>4.3.0-SNAPSHOT</powsybl.core.version>
+        <powsybl-open-loadflow.version>0.12.0-SNAPSHOT</powsybl-open-loadflow.version>
         <powsybl.rte-core.version>2.14.1</powsybl.rte-core.version>
-
-        <!-- These properties are only needed to run the tutorial easily -->
-        <exec.cleanupDaemonThreads>false</exec.cleanupDaemonThreads>
-        <exec.mainClass>powsybl.tutorials.sensitivity.SensitivityTutorialComplete</exec.mainClass>
     </properties>
 
     <!-- Configure the tutorial to use a locally defined config file-->
@@ -30,14 +27,15 @@
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>exec-maven-plugin</artifactId>
-                <version>${maven.exec.version}</version>
+                <version>1.6.0</version>
                 <configuration>
-                    <systemProperties>
-                        <systemProperty>
-                            <key>powsybl.config.dirs</key>
-                            <value>${project.build.directory}/classes</value>
-                        </systemProperty>
-                    </systemProperties>
+                    <executable>java</executable>
+                    <arguments>
+                        <argument>-Dpowsybl.config.dirs=${project.build.directory}/classes</argument>
+                        <argument>-classpath</argument>
+                        <classpath/>
+                        <argument>powsybl.tutorials.sensitivity.SensitivityTutorialComplete</argument>
+                    </arguments>
                 </configuration>
             </plugin>
         </plugins>
@@ -50,9 +48,14 @@
             <version>${powsybl.core.version}</version>
         </dependency>
         <dependency>
-            <groupId>com.rte-france.powsybl</groupId>
-            <artifactId>powsybl-hades2-integration</artifactId>
-            <version>${powsybl.rte-core.version}</version>
+            <groupId>com.powsybl</groupId>
+            <artifactId>powsybl-open-loadflow</artifactId>
+            <version>${powsybl-open-loadflow.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.powsybl</groupId>
+            <artifactId>powsybl-iidm-impl</artifactId>
+            <version>${powsybl.core.version}</version>
         </dependency>
         <dependency>
             <groupId>org.slf4j</groupId>
@@ -68,6 +71,12 @@
             <version>${slf4j.version}</version>
             <scope>runtime</scope>
         </dependency>
+        <dependency>
+            <groupId>com.powsybl</groupId>
+            <artifactId>powsybl-iidm-impl</artifactId>
+            <version>${powsybl.core.version}</version>
+        </dependency>
+
     </dependencies>
 
 </project>

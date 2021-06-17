@@ -25,8 +25,14 @@ import com.powsybl.sensitivity.factors.functions.BranchFlow;
 import com.powsybl.sensitivity.factors.variables.PhaseTapChangerAngle;
 import com.powsybl.sensitivity.json.JsonSensitivityAnalysisParameters;
 import com.powsybl.sensitivity.json.SensitivityFactorsJsonSerializer;
+import com.powsybl.computation.local.LocalComputationManager;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import com.powsybl.openloadflow.OpenLoadFlowParameters;
+import com.powsybl.openloadflow.network.*;
+import com.powsybl.openloadflow.sensi.*;
+import com.powsybl.iidm.network.VariantManagerConstants;
 
 import java.io.*;
 import java.nio.file.Files;
@@ -35,6 +41,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 import java.util.stream.Collectors;
 
 /**
@@ -47,8 +54,10 @@ public final class SensitivityTutorialComplete {
 
         // 1. Import the network from a XML file
         // The network is described in the iTesla Internal Data Model format.
-        Path networkPath = Paths.get(SensitivityTutorialComplete.class.getResource("/sensi_network_12_nodes.xml").getPath());
-        Network network = Importers.loadNetwork(networkPath.toString());
+        final String networkFileName = "sensi_network_12_nodes.xml";
+        final InputStream is = SensitivityTutorialComplete.class.getClassLoader().getResourceAsStream(networkFileName);
+        System.out.print(is);
+        Network network = Importers.loadNetwork(networkFileName, is);
         // In this tutorial the sensitivity is done on active power only, but this can be changed in the config file
         // by setting dcMode = false in the hades2-default-parameters. Then, the power flow will handle both P and Q.
 
@@ -76,7 +85,7 @@ public final class SensitivityTutorialComplete {
             List<SensitivityFactor> factors = new ArrayList<>();
             monitoredLines.forEach(l -> {
                 String monitoredBranchId = l.getId();
-                String monitoredBranchName = l.getName();
+                String monitoredBranchName = l.getNameOrId();
                 BranchFlow branchFlow = new BranchFlow(monitoredBranchId, monitoredBranchName, l.getId());
                 String twtId = network.getTwoWindingsTransformer("BBE2AA1  BBE3AA1  1").getId();
                 factors.add(new BranchFlowPerPSTAngle(branchFlow,
@@ -88,7 +97,10 @@ public final class SensitivityTutorialComplete {
         // 3. Run the sensitivity analysis
         // Run the analysis that will be performed on network working variant with default sensitivity analysis parameters
         // Default implementation defined in the platform configuration will be used.
-        SensitivityAnalysisResult sensiResults = SensitivityAnalysis.run(network, factorsProvider, Collections.emptyList());
+        SensitivityAnalysisParameters sensiParameters = createParameters(false);
+        sensiParameters.getLoadFlowParameters().setVoltageInitMode(LoadFlowParameters.VoltageInitMode.PREVIOUS_VALUES);
+        OpenSensitivityAnalysisProvider sensiProvider = new OpenSensitivityAnalysisProvider();
+        SensitivityAnalysisResult sensiResults = sensiProvider.run(network, VariantManagerConstants.INITIAL_VARIANT_ID, factorsProvider, Collections.emptyList(), sensiParameters, LocalComputationManager.getDefault()).join();
 
         // 4. Output the results
         // Print the sensitivity values in the terminal.
@@ -101,14 +113,14 @@ public final class SensitivityTutorialComplete {
         // The four monitored lines are affected identically, because in this very simple
         // network all lines have the same reactance.
         LOGGER.info("Initial sensitivity results");
-        sensiResults.getSensitivityValues().forEach(value ->
-                LOGGER.info("Value: {} MW/°", value.getValue()));
+        sensiResults.getSensitivityValues().forEach(value -> LOGGER.info("Value: {} MW/°", value.getValue()));
 
         // Write the sensitivity results in a JSON file.
         // You can check the results in the sensitivity/complete/target/sensi_result.json file.
         // TODO: modify POWSYBL to fill the variable reference value in the results, at the moment it is NaN
-        Path resultsPath = networkPath.getParent().getParent();
-        Path jsonSensiResultPath = resultsPath.resolve("sensi_result.json");
+//        Path resultsPath = networkPath.getParent().getParent();
+        Path resultPath = Paths.get("/home/piloquetcol/tmp");
+        Path jsonSensiResultPath = resultPath.resolve("sensi_result.json");
 
         SensitivityAnalysisResultExporter jsonExporter = new JsonSensitivityAnalysisResultExporter();
         try (OutputStream os = Files.newOutputStream(jsonSensiResultPath)) {
@@ -117,59 +129,71 @@ public final class SensitivityTutorialComplete {
             throw new UncheckedIOException(e);
         }
 
-        // 5. Perform a systematic sensitivity analysis
-        // A systematic sensitivity analysis consists of a series of sensitivity calculations
-        // performed on a network given a list of contingencies and sensitivity factors.
-        // Here we use the systematic sensitivity feature of Hades2, creating one variant on which all
-        // the calculations are done successively, without re-loading the network each time, by
-        // modifying the Jacobian matrix directly in the solver.
-
-        // Here the list of contingencies is composed of the lines that are not monitored
-        // in the sensitivity analysis.
-        List<Contingency> contingencies = network.getLineStream()
-            .filter(l -> {
-                final boolean[] isContingency = {true};
-                monitoredLines.forEach(monitoredLine -> {
-                    if (l.equals(monitoredLine)) {
-                        isContingency[0] = false;
-                        return;
-                    }
-                });
-                return isContingency[0];
-            })
-            .map(l -> Contingency.branch(l.getId()))
-            .collect(Collectors.toList());
-        // This makes a total of 11 contingencies
-        LOGGER.info("Number of contingencies: {}", contingencies.size());
-
-        // Now, read factors from a JSON file (this is the second example of how to create factors, actually
-        // we created the same twice)
-        Path factorsFile = Paths.get(SensitivityTutorialComplete.class.getResource("/factors.json").getPath());
-        SensitivityFactorsProvider jsonFactorsProvider = net -> {
-            try (InputStream is = Files.newInputStream(factorsFile)) {
-                return SensitivityFactorsJsonSerializer.read(new InputStreamReader(is));
-            } catch (IOException e) {
-                throw new UncheckedIOException(e);
-            }
-        };
-
-        // Run the sensitivity computation with respect to the PST tap position on that network.
-
-        Path parametersFile = Paths.get(SensitivityTutorialComplete.class.getResource("/sensi_parameters.json").getPath());
-        SensitivityAnalysisParameters params = SensitivityAnalysisParameters.load();
-        JsonSensitivityAnalysisParameters.update(params, parametersFile);
-
-        SensitivityAnalysisResult systematicSensiResults = SensitivityAnalysis.run(network, jsonFactorsProvider, contingencies, params);
-
-        // Export the results to a CSV file
-        Path csvResultPath = resultsPath.resolve("sensi_syst_result.csv");
-        SensitivityAnalysisResultExporter csvExporter = new CsvSensitivityAnalysisResultExporter();
-        try (OutputStream os = Files.newOutputStream(csvResultPath)) {
-            csvExporter.export(systematicSensiResults, new OutputStreamWriter(os));
-        } catch (IOException e) {
-            throw new UncheckedIOException(e);
-        }
+//        // 5. Perform a systematic sensitivity analysis
+//        // A systematic sensitivity analysis consists of a series of sensitivity calculations
+//        // performed on a network given a list of contingencies and sensitivity factors.
+//        // Here we use the systematic sensitivity feature of Hades2, creating one variant on which all
+//        // the calculations are done successively, without re-loading the network each time, by
+//        // modifying the Jacobian matrix directly in the solver.
+//
+//        // Here the list of contingencies is composed of the lines that are not monitored
+//        // in the sensitivity analysis.
+//        List<Contingency> contingencies = network.getLineStream()
+//            .filter(l -> {
+//                final boolean[] isContingency = {true};
+//                monitoredLines.forEach(monitoredLine -> {
+//                    if (l.equals(monitoredLine)) {
+//                        isContingency[0] = false;
+//                        return;
+//                    }
+//                });
+//                return isContingency[0];
+//            })
+//            .map(l -> Contingency.branch(l.getId()))
+//            .collect(Collectors.toList());
+//        // This makes a total of 11 contingencies
+//        LOGGER.info("Number of contingencies: {}", contingencies.size());
+//
+//        // Now, read factors from a JSON file (this is the second example of how to create factors, actually
+//        // we created the same twice)
+//        Path factorsFile = Paths.get(SensitivityTutorialComplete.class.getResource("/factors.json").getPath());
+//        SensitivityFactorsProvider jsonFactorsProvider = net -> {
+//            try (InputStream is = Files.newInputStream(factorsFile)) {
+//                return SensitivityFactorsJsonSerializer.read(new InputStreamReader(is));
+//            } catch (IOException e) {
+//                throw new UncheckedIOException(e);
+//            }
+//        };
+//
+//        // Run the sensitivity computation with respect to the PST tap position on that network.
+//
+//        Path parametersFile = Paths.get(SensitivityTutorialComplete.class.getResource("/sensi_parameters.json").getPath());
+//        SensitivityAnalysisParameters params = SensitivityAnalysisParameters.load();
+//        JsonSensitivityAnalysisParameters.update(params, parametersFile);
+//
+//        SensitivityAnalysisResult systematicSensiResults = SensitivityAnalysis.run(network, jsonFactorsProvider, contingencies, params);
+//
+//        // Export the results to a CSV file
+//        Path csvResultPath = resultsPath.resolve("sensi_syst_result.csv");
+//        SensitivityAnalysisResultExporter csvExporter = new CsvSensitivityAnalysisResultExporter();
+//        try (OutputStream os = Files.newOutputStream(csvResultPath)) {
+//            csvExporter.export(systematicSensiResults, new OutputStreamWriter(os));
+//        } catch (IOException e) {
+//            throw new UncheckedIOException(e);
+//        }
     }
+
+    protected static SensitivityAnalysisParameters createParameters(boolean dc) {
+        SensitivityAnalysisParameters sensiParameters = new SensitivityAnalysisParameters();
+        LoadFlowParameters lfParameters = sensiParameters.getLoadFlowParameters();
+        lfParameters.setDc(dc);
+        lfParameters.setDistributedSlack(true);
+        OpenLoadFlowParameters lfParametersExt = new OpenLoadFlowParameters()
+                .setSlackBusSelectionMode(SlackBusSelectionMode.MOST_MESHED);
+        lfParameters.addExtension(OpenLoadFlowParameters.class, lfParametersExt);
+        return sensiParameters;
+    }
+
 
     private SensitivityTutorialComplete() {
     }

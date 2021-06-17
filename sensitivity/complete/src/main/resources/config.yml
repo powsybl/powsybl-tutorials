@@ -1,27 +1,15 @@
 load-flow:
-  default-impl-name: Hades2
+  default-impl-name: "OpenLoadFlow"
 
 computation-local:
     tmp-dir: /tmp
     availableCore: 1
-
-hades2:
-    homeDir: <PATH_TO_HADES2>
-    debug: true
 
 load-flow-default-parameters:
     voltageInitMode: DC_VALUES
     transformerVoltageControlOn: false
     specificCompatibility: true
 
-hades2-default-parameters:
-    dcMode: false
-
-hades2-default-sensitivity-parameters:
-    computeInitialLoadflow: true
-    computeSensitivityToPsts: true
-    computeSensitivityToInjections: false
-    resultsThreshold: 0
 
 sensitivity-analysis:
-  default-impl-name: "Sensi2"
+  default-impl-name: "OpenLoadFlow"

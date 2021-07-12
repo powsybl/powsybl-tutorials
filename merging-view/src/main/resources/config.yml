@@ -1,5 +1,5 @@
 load-flow:
-  default-impl-name: "OpenLoadFlow"
-  
+  default-impl-name: OpenLoadFlow
+
 load-flow-default-parameters:
   voltageInitMode: DC_VALUES

@@ -14,7 +14,7 @@ import java.util.*;
 /**
  * @author Miora Ralambotiana <miora.ralambotiana at rte-france.com>
  */
-public class BalancesAdjustmentValidationParameters {
+public final class BalancesAdjustmentValidationParameters {
 
     private final Map<String, String> igmPaths = new HashMap<>();
     //private final List<String> excludedXnodes = new ArrayList<>();

@@ -2,20 +2,25 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <parent>
-        <artifactId>powsybl-tutorials</artifactId>
-        <groupId>com.powsybl.tutorials</groupId>
-        <version>1.3.0-SNAPSHOT</version>
-    </parent>
     <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.powsybl</groupId>
+        <artifactId>powsybl-parent</artifactId>
+        <version>3</version>
+        <relativePath/>
+    </parent>
 
-    <artifactId>merging-view</artifactId>
+    <artifactId>powsybl-emf</artifactId>
+    <name>Emf</name>
     <version>1.3.0-SNAPSHOT</version>
 
-    <!-- This property is only needed to run the tutorial easily -->
     <properties>
-        <exec.mainClass>powsybl.tutorials.mergingview.MergingViewTutorial</exec.mainClass>
-        <exec.cleanupDaemonThreads>false</exec.cleanupDaemonThreads>
+        <maven.exec.version>1.6.0</maven.exec.version>
+        <slf4j.version>1.7.22</slf4j.version>
+        <powsybl.core.version>4.2.0</powsybl.core.version>
+        <powsybl-open-loadflow.version>0.9.0</powsybl-open-loadflow.version>
+        <powsybl_ba.version>1.5.0</powsybl_ba.version>
+        <powsybl-entsoe.version>1.0.0</powsybl-entsoe.version>
     </properties>
 
     <build>
@@ -23,83 +28,83 @@
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>exec-maven-plugin</artifactId>
-                <version>1.6.0</version>
                 <configuration>
-                    <executable>java</executable>
-                    <arguments>
-                        <argument>-Dpowsybl.config.dirs=${project.build.directory}/classes</argument>
-                        <argument>-classpath</argument>
-                        <classpath/>
-                        <argument>powsybl.tutorials.mergingview.MergingViewTutorial</argument>
-                    </arguments>
+                    <systemProperties>
+                        <systemProperty>
+                            <key>powsybl.config.dirs</key>
+                            <value>${project.build.directory}/classes</value>
+                        </systemProperty>
+                    </systemProperties>
+                    <classpathScope>compile</classpathScope>
                 </configuration>
             </plugin>
         </plugins>
     </build>
 
+
     <dependencies>
         <dependency>
             <groupId>com.powsybl</groupId>
             <artifactId>powsybl-action-util</artifactId>
-            <version>${powsyblcore.version}</version>
+            <version>${powsybl.core.version}</version>
         </dependency>
         <dependency>
             <groupId>com.powsybl</groupId>
             <artifactId>powsybl-balances-adjustment</artifactId>
-            <version>${powsyblba.version}</version>
+            <version>${powsybl_ba.version}</version>
         </dependency>
         <dependency>
             <groupId>com.powsybl</groupId>
             <artifactId>powsybl-cgmes-conversion</artifactId>
-            <version>${powsyblcore.version}</version>
+            <version>${powsybl.core.version}</version>
         </dependency>
         <dependency>
             <groupId>com.powsybl</groupId>
             <artifactId>powsybl-cgmes-extensions</artifactId>
-            <version>${powsyblcore.version}</version>
+            <version>${powsybl.core.version}</version>
         </dependency>
         <dependency>
             <groupId>com.powsybl</groupId>
             <artifactId>powsybl-commons</artifactId>
-            <version>${powsyblcore.version}</version>
+            <version>${powsybl.core.version}</version>
         </dependency>
         <dependency>
             <groupId>com.powsybl</groupId>
             <artifactId>powsybl-iidm-converter-api</artifactId>
-            <version>${powsyblcore.version}</version>
+            <version>${powsybl.core.version}</version>
         </dependency>
         <dependency>
             <groupId>com.powsybl</groupId>
             <artifactId>powsybl-iidm-mergingview</artifactId>
-            <version>${powsyblcore.version}</version>
+            <version>${powsybl.core.version}</version>
         </dependency>
         <dependency>
             <groupId>com.powsybl</groupId>
             <artifactId>powsybl-open-loadflow</artifactId>
-            <version>${powsyblolf.version}</version>
+            <version>${powsybl-open-loadflow.version}</version>
         </dependency>
 
         <dependency>
             <groupId>com.powsybl</groupId>
             <artifactId>powsybl-config-classic</artifactId>
-            <version>${powsyblcore.version}</version>
+            <version>${powsybl.core.version}</version>
             <scope>runtime</scope>
         </dependency>
         <dependency>
             <groupId>com.powsybl</groupId>
             <artifactId>powsybl-iidm-impl</artifactId>
-            <version>${powsyblcore.version}</version>
+            <version>${powsybl.core.version}</version>
             <scope>runtime</scope>
         </dependency>
         <dependency>
             <groupId>com.powsybl</groupId>
             <artifactId>powsybl-triple-store-impl-rdf4j</artifactId>
-            <version>${powsyblcore.version}</version>
+            <version>${powsybl.core.version}</version>
         </dependency>
         <dependency>
             <groupId>com.powsybl</groupId>
             <artifactId>powsybl-entsoe-cgmes-balances-adjustment</artifactId>
-            <version>${powsyblentsoe.version}</version>
+            <version>${powsybl-entsoe.version}</version>
             <scope>compile</scope>
         </dependency>
         <dependency>

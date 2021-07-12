@@ -36,10 +36,10 @@
         <java.version>11</java.version>
 
         <powsyblba.version>1.6.0-SNAPSHOT</powsyblba.version>
-        <powsyblcore.version>4.3.0-SNAPSHOT</powsyblcore.version>
-        <powsyblolf.version>0.11.0-SNAPSHOT</powsyblolf.version>
+        <powsybl.core.version>4.3.0-SNAPSHOT</powsyblcore.version>
+        <powsybl.olf.version>0.11.0-SNAPSHOT</powsyblolf.version>
         <powsyblentsoe.version>1.1.0-SNAPSHOT</powsyblentsoe.version>
-
+        <powsybl.rte-core.version>3.0.0</powsybl.rte-core.version>
     </properties>
 
     <modules>

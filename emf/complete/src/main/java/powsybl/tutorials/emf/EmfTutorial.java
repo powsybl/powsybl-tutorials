@@ -39,6 +39,9 @@ import java.time.Instant;
 import java.util.*;
 import java.util.stream.Collectors;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 /**
  * @author Miora Ralambotiana <miora.ralambotiana at rte-france.com>
  * @author Coline Piloquet <coline.piloquet at rte-france.com>
@@ -58,6 +61,8 @@ public final class EmfTutorial {
     private static final boolean PREPARE_BALANCE_COMPUTATION = true; // To run a balances ajustment.
 
     private static final String SYNCHRONOUS_AREA_ID = "10YEU-CONT-SYNC0";
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(EmfTutorial.class);
 
     public static void main(String[] args) throws IOException, XMLStreamException {
 
@@ -144,7 +149,7 @@ public final class EmfTutorial {
             LoadFlowResult result = LoadFlow.run(network, LOAD_FLOW_PARAMETERS);
             System.out.println(name + " loadflow: " + result.isOk());
             if (!result.isOk()) {
-
+                LOGGER.error("Load flow did not converge on " + name + ", try relaxing the loadflow parameters");
                 validNetworks.remove(name);
             }
         });

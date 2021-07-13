@@ -44,9 +44,11 @@ import org.slf4j.LoggerFactory;
 
 /**
  * @author Miora Ralambotiana <miora.ralambotiana at rte-france.com>
+ * @author Coline Piloquet <coline.piloquet at rte-france.com>
  */
 public final class EmfTutorial {
 
+    // Load flow settings for EMF, that could be relaxed in case of divergence.
     private static final LoadFlowParameters LOAD_FLOW_PARAMETERS = new LoadFlowParameters()
             .setVoltageInitMode(LoadFlowParameters.VoltageInitMode.DC_VALUES)
             .setBalanceType(LoadFlowParameters.BalanceType.PROPORTIONAL_TO_GENERATION_P_MAX)
@@ -55,8 +57,8 @@ public final class EmfTutorial {
             .setTransformerVoltageControlOn(true)
             .setConnectedComponentMode(LoadFlowParameters.ConnectedComponentMode.ALL);
 
-    private static final boolean LOAD_FLOW_PREPROCESSING = true;
-    private static final boolean PREPARE_BALANCE_COMPUTATION = true;
+    private static final boolean LOAD_FLOW_PREPROCESSING = true; // To run load flows on IGMs.
+    private static final boolean PREPARE_BALANCE_COMPUTATION = true; // To run a balances ajustement.
 
     private static final String SYNCHRONOUS_AREA_ID = "10YEU-CONT-SYNC0";
 
@@ -67,32 +69,33 @@ public final class EmfTutorial {
         BalancesAdjustmentValidationParameters validationParameters = BalancesAdjustmentValidationParameters.load();
         log(validationParameters);
 
-        // Import CGMES networks
+        // Import CGMES networks.
         Map<String, Network> networks = importNetworks(validationParameters);
 
-        // Loadflow preprocessing
+        // Load flow preprocessing on each IGMs.
         Map<String, Network> validNetworks = new HashMap<>(networks);
         if (LOAD_FLOW_PREPROCESSING) {
             loadflowPreProcessing(networks, validNetworks);
         }
 
-        // Merging the IGMs
+        // Merging the IGMs using the merging view.
         MergingView mergingView = MergingView.create("merged", "validation");
         mergingView.merge(validNetworks.values().toArray(Network[]::new));
 
-        // Run loadflow on merging view
+        // Run load flow on merging view before balances ajustement.
         if (!PREPARE_BALANCE_COMPUTATION) {
             LOAD_FLOW_PARAMETERS.setReadSlackBus(false);
             LOAD_FLOW_PARAMETERS.setDistributedSlack(true);
             LoadFlowResult result = LoadFlow.run(mergingView, LOAD_FLOW_PARAMETERS);
             for (Generator gen : mergingView.getGenerators()) {
-                gen.setTargetP(-gen.getTerminal().getP()); // optional?
+                gen.setTargetP(-gen.getTerminal().getP()); // because of slack distibution on generators.
             }
             System.out.println(result.isOk());
             System.out.println(result.getMetrics());
         }
 
-        // IGM target and scalables creation (you can specify if you prepare the balance computation or not)
+        // IGM AC net positions from PEVF file and scalables creation (you can specify if you prepare the balance computation or not).
+        // The ficticious area is needed in case of partial merging.
         List<BalanceComputationArea> balanceComputationAreas = new ArrayList<>();
         DataExchanges dataExchanges;
         try (InputStream is = Files.newInputStream(Paths.get(validationParameters.getDataExchangesPath()))) {
@@ -107,20 +110,20 @@ public final class EmfTutorial {
         }
 
         if (PREPARE_BALANCE_COMPUTATION) {
-            // Create Balance computation parameters
+            // Create Balance computation parameters.
             BalanceComputationParameters parameters = new BalanceComputationParameters(1, 10);
             LOAD_FLOW_PARAMETERS.setReadSlackBus(false);
             LOAD_FLOW_PARAMETERS.setDistributedSlack(true);
             LOAD_FLOW_PARAMETERS.setBalanceType(LoadFlowParameters.BalanceType.PROPORTIONAL_TO_GENERATION_P_MAX);
             parameters.setLoadFlowParameters(LOAD_FLOW_PARAMETERS);
 
-            // Launch Balance computation
+            // Run the balances ajustement.
             BalanceComputation balanceComputation = new BalanceComputationFactoryImpl()
                     .create(balanceComputationAreas, new LoadFlow.Runner(new OpenLoadFlowProvider()), LocalComputationManager.getDefault());
             BalanceComputationResult result = balanceComputation.run(mergingView, mergingView.getVariantManager().getWorkingVariantId(), parameters).join();
             System.out.println(result.getStatus());
 
-            // Generate merged SV file (for the whole CGM)
+            // Generate merged SV file for the CGM.
             validationParameters.getOutputDir().ifPresent(outputDir -> {
                 try (OutputStream os = Files.newOutputStream(Paths.get(outputDir + "/SV.xml"))) {
                     XMLStreamWriter writer = XmlUtil.initializeWriter(true, "   ", os);
@@ -141,7 +144,7 @@ public final class EmfTutorial {
     }
 
     private static void loadflowPreProcessing(Map<String, Network> networks, Map<String, Network> validNetworks) {
-        // launch loadflow for each IGM
+        // Run load flow on each IGM.
         networks.forEach((name, network) -> {
             LoadFlowResult result = LoadFlow.run(network, LOAD_FLOW_PARAMETERS);
             System.out.println(name + " loadflow: " + result.isOk());
@@ -162,17 +165,17 @@ public final class EmfTutorial {
                                          BalancesAdjustmentValidationParameters validationParameters) {
         networks.forEach((name, network) -> {
 
-            // Retrieve CGMES control area
+            // Retrieve CGMES control area.
             CgmesControlArea controlArea = network.getExtension(CgmesControlAreas.class).getCgmesControlAreas().iterator().next();
 
-            // Retrieve target AC net position
+            // Retrieve target AC net position.
             double target = dataExchanges.getNetPosition(SYNCHRONOUS_AREA_ID, controlArea.getEnergyIdentificationCodeEIC(), Instant.parse(network.getCaseDate().toString()));
 
             NetworkAreaFactory factory = createFactory(controlArea, network, validationParameters);
             NetworkArea area = factory.create(mergingView);
             Scalable scalable = NetworkAreaUtil.createConformLoadScalable(area);
 
-            // Calculate AC net position
+            // Calculate AC net position.
             double real = area.getNetPosition();
 
             if (balanceComputationAreas != null) {
@@ -191,7 +194,7 @@ public final class EmfTutorial {
 
     private static void prepareFictitiousArea(Network mergingView, Map<String, Network> validNetworks, DataExchanges dataExchanges,
                                               List<BalanceComputationArea> balanceComputationAreas) {
-        // Create scalable
+        // Create dangling line scalables.
         List<CgmesControlArea> cgmesControlAreas = validNetworks.values().stream()
                 .map(n -> n.getExtension(CgmesControlAreas.class))
                 .filter(Objects::nonNull)
@@ -200,14 +203,14 @@ public final class EmfTutorial {
         Scalable scalable = createACDanglingLineScalable(mergingView, cgmesControlAreas);
 
         if (scalable == null) {
-            return; // Synchronous area is complete
+            return; // Synchronous area is complete.
         }
 
-        // Create fictitious CGMES control area
+        // Create fictitious CGMES control area.
         NetworkAreaFactory factory = new CgmesBoundariesAreaFactory(cgmesControlAreas);
         NetworkArea fictitiousArea = factory.create(mergingView);
 
-        // Retrieve target AC net position
+        // Retrieve target AC net position of this ficticious area.
         Map<String, Double> fictitiousTargets = dataExchanges.getNetPositionsWithInDomainId(SYNCHRONOUS_AREA_ID,
                 Instant.parse(validNetworks.values().iterator().next().getCaseDate().toString()));
         double definedTargets = fictitiousTargets.entrySet().stream()
@@ -258,11 +261,11 @@ public final class EmfTutorial {
                         || area.getBoundaries().stream().anyMatch(b -> b.getConnectable().getId().equals(dl.getId()))))
                 .collect(Collectors.toList());
         if (danglingLines.isEmpty()) {
-            return null; // there is no dangling line in the whole merging view
+            return null; // there is no dangling line in the CGM.
         }
         float totalP0 = (float) danglingLines.stream().mapToDouble(dl -> Math.abs(dl.getP0())).sum();
         if (totalP0 == 0.0) {
-            throw new PowsyblException("The sum of all dangling lines' active power flows is null"); // ??????
+            throw new PowsyblException("The sum of all dangling lines' active power flows is zero, scaling is impossible");
         }
         List<Float> percentages = danglingLines.stream().map(dl -> (float) (100f * Math.abs(dl.getP0()) / totalP0)).collect(Collectors.toList());
         return Scalable.proportional(percentages, danglingLines.stream().map(dl -> Scalable.onDanglingLine(dl.getId(), Scalable.ScalingConvention.LOAD)).collect(Collectors.toList()));

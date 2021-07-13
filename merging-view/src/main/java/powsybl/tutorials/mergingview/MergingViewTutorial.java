@@ -36,7 +36,6 @@ public final class MergingViewTutorial {
     private static final String TMP_DIR = System.getProperty("java.io.tmpdir"); // put your own directory output path
 
     public static void main(String[] args) throws IOException, XMLStreamException {
-
         File fileBe = new File(MergingViewTutorial.class.getResource("/MicroGridTestConfiguration_T4_BE_BB_Complete_v2.zip").getPath());
         Network n1 = Importers.loadNetwork(fileBe.toString());
         File fileNl = new File(MergingViewTutorial.class.getResource("/MicroGridTestConfiguration_T4_NL_BB_Complete_v2.zip").getPath());

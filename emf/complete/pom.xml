@@ -2,15 +2,37 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
     <parent>
-        <artifactId>powsybl-tutorials</artifactId>
-        <groupId>com.powsybl.tutorials</groupId>
-        <version>1.3.0-SNAPSHOT</version>
+        <groupId>com.powsybl</groupId>
+        <artifactId>powsybl-parent</artifactId>
+        <version>3</version>
+        <relativePath/>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>emf</artifactId>
-    <version>1.3.0-SNAPSHOT</version>
+    <artifactId>powsybl-emf</artifactId>
+    <name>Emf</name>
+
+    <properties>
+        <java.version>11</java.version>
+        <maven.exec.version>1.6.0</maven.exec.version>
+        <slf4j.version>1.7.22</slf4j.version>
+        <exec.cleanupDaemonThreads>false</exec.cleanupDaemonThreads>
+        <exec.mainClass>powsybl.tutorials.emf.EmfTutorial</exec.mainClass>
+
+        <maven.exec.version>1.6.0</maven.exec.version>
+        <maven.javafx.version>8.8.3</maven.javafx.version>
+        <autoservice.version>1.0-rc2</autoservice.version>
+        <guava.version>20.0</guava.version>
+        <javacsv.version>2.0</javacsv.version>
+
+        <powsybl.core.version>4.2.0</powsybl.core.version>
+        <powsybl.rte-core.version>3.0.0</powsybl.rte-core.version>
+        <powsybl.olf.version>0.11.0-SNAPSHOT</powsybl.olf.version>
+        <powsybl.ba.version>1.6.0-SNAPSHOT</powsybl.ba.version>
+        <powsybl.entsoe.version>1.1.0-SNAPSHOT</powsybl.entsoe.version>
+    </properties>
 
     <build>
         <plugins>
@@ -22,7 +44,6 @@
                     <arguments>
                         <argument>-Dpowsybl.config.dirs=${project.build.directory}/classes</argument>
                         <argument>-classpath</argument>
-                        <classpath/>
                         <argument>powsybl.tutorials.emf.EmfTutorial</argument>
                     </arguments>
                 </configuration>
@@ -35,60 +56,60 @@
         <dependency>
             <groupId>com.powsybl</groupId>
             <artifactId>powsybl-action-util</artifactId>
-            <version>${powsyblcore.version}</version>
+            <version>${powsybl.core.version}</version>
         </dependency>
         <dependency>
             <groupId>com.powsybl</groupId>
             <artifactId>powsybl-balances-adjustment</artifactId>
-            <version>${powsyblba.version}</version>
+            <version>${powsybl.ba.version}</version>
         </dependency>
         <dependency>
             <groupId>com.powsybl</groupId>
             <artifactId>powsybl-cgmes-conversion</artifactId>
-            <version>${powsyblcore.version}</version>
+            <version>${powsybl.core.version}</version>
         </dependency>
         <dependency>
             <groupId>com.powsybl</groupId>
             <artifactId>powsybl-cgmes-extensions</artifactId>
-            <version>${powsyblcore.version}</version>
+            <version>${powsybl.core.version}</version>
         </dependency>
         <dependency>
             <groupId>com.powsybl</groupId>
             <artifactId>powsybl-commons</artifactId>
-            <version>${powsyblcore.version}</version>
+            <version>${powsybl.core.version}</version>
         </dependency>
         <dependency>
             <groupId>com.powsybl</groupId>
             <artifactId>powsybl-iidm-converter-api</artifactId>
-            <version>${powsyblcore.version}</version>
+            <version>${powsybl.core.version}</version>
         </dependency>
         <dependency>
             <groupId>com.powsybl</groupId>
             <artifactId>powsybl-iidm-mergingview</artifactId>
-            <version>${powsyblcore.version}</version>
+            <version>${powsybl.core.version}</version>
         </dependency>
         <dependency>
             <groupId>com.powsybl</groupId>
             <artifactId>powsybl-open-loadflow</artifactId>
-            <version>${powsyblolf.version}</version>
+            <version>${powsybl.olf.version}</version>
         </dependency>
 
         <dependency>
             <groupId>com.powsybl</groupId>
             <artifactId>powsybl-config-classic</artifactId>
-            <version>${powsyblcore.version}</version>
+            <version>${powsybl.core.version}</version>
             <scope>runtime</scope>
         </dependency>
         <dependency>
             <groupId>com.powsybl</groupId>
             <artifactId>powsybl-iidm-impl</artifactId>
-            <version>${powsyblcore.version}</version>
+            <version>${powsybl.core.version}</version>
             <scope>runtime</scope>
         </dependency>
         <dependency>
             <groupId>com.powsybl</groupId>
             <artifactId>powsybl-triple-store-impl-rdf4j</artifactId>
-            <version>${powsyblcore.version}</version>
+            <version>${powsybl.core.version}</version>
         </dependency>
         <dependency>
             <groupId>org.slf4j</groupId>
@@ -105,7 +126,7 @@
         <dependency>
             <groupId>com.powsybl</groupId>
             <artifactId>powsybl-entsoe-cgmes-balances-adjustment</artifactId>
-            <version>${powsyblentsoe.version}</version>
+            <version>${powsybl.entsoe.version}</version>
             <scope>compile</scope>
         </dependency>
         <dependency>

@@ -82,10 +82,5 @@
             <version>${slf4j.version}</version>
             <scope>runtime</scope>
         </dependency>
-        <dependency>
-            <groupId>com.powsybl</groupId>
-            <artifactId>powsybl-cgmes-conversion</artifactId>
-            <version>4.0.1</version>
-        </dependency>
     </dependencies>
 </project>

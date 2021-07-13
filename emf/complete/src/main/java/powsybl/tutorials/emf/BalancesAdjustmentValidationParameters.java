@@ -17,7 +17,6 @@ import java.util.*;
 public final class BalancesAdjustmentValidationParameters {
 
     private final Map<String, String> igmPaths = new HashMap<>();
-    //private final List<String> excludedXnodes = new ArrayList<>();
 
     private String dataExchangesPath = null;
     private String outputDir = null;
@@ -32,7 +31,6 @@ public final class BalancesAdjustmentValidationParameters {
             parameters.putIgmPath(pathArray[0].replaceAll("\\s+", ""), pathArray[1].replaceAll("\\s+", ""));
         });
         parameters.setDataExchangesPath(config.getStringProperty("data-exchanges-path"));
-        //config.getOptionalStringListProperty("excluded-Xnodes").ifPresent(parameters::setExcludedXnodes);
         config.getOptionalStringProperty("output-dir").ifPresent(parameters::setOutputDir);
         return parameters;
     }
@@ -53,10 +51,6 @@ public final class BalancesAdjustmentValidationParameters {
         return dataExchangesPath;
     }
 
-    //private void setExcludedXnodes(List<String> excludedXnodes) {
-    //    this.excludedXnodes.addAll(Objects.requireNonNull(excludedXnodes));
-    //}
-
     public Optional<String> getOutputDir() {
         return Optional.ofNullable(outputDir);
     }
@@ -64,10 +58,6 @@ public final class BalancesAdjustmentValidationParameters {
     private void setOutputDir(String outputDir) {
         this.outputDir = Objects.requireNonNull(outputDir);
     }
-
-    //public List<String> getExcludedXnodes() {
-    //    return Collections.unmodifiableList(excludedXnodes);
-    //}
 
     private BalancesAdjustmentValidationParameters() {
     }

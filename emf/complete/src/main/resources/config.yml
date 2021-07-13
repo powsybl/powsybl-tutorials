@@ -10,26 +10,20 @@ open-loadflow-default-parameters:
   dcUseTransformerRatio: false
   
 import-export-parameters-default-value:
-  iidm.import.cgmes.boundary-location: /home/piloquetcol/.itools/cgmes/
+  iidm.import.cgmes.boundary-location: path-to-EQBD-TPBD
   iidm.import.cgmes.profile-used-for-initial-state-values: SSH
   iidm.import.cgmes.store-cgmes-conversion-context-as-network-extension: true
   iidm.export.xml.version: "1.5"
-  iidm.import.xml.version: "1.5"
-  iidm.import.xml.skip-extensions: false
-  iidm.export.adn.angle-perte: false
-  iidm.export.adn.with-minimum-reactance: true
-  iidm.export.adn.minimum-reactance-per-unit: 0.000625
   iidm.import.cgmes.ensure-id-alias-unicity: true
   iidm.import.cgmes.create-cgmes-export-mapping: true
   
   
 balances-adjustment-validation-parameters:
-  data-exchanges-path: /home/piloquetcol/data/IOP_data/Mai21/IGMs+PEVF/20210407_CGM_10V1001C--00012J_10V000000000011Q_A01_002.xml
-  
-  igm-paths: 
-    - D4, /home/piloquetcol/data/IOP_data/Mai21/IGMs+PEVF/20210407T0930Z_1D_D4.zip
-    - ELIA, /home/piloquetcol/data/IOP_data/Mai21/IGMs+PEVF/20210407T0930Z_1D_ELIA.zip
-    #- REE, /home/piloquetcol/data/IOP_data/Mai21/IGMs+PEVF/20210407T0930Z_1D_REE.zip
-    #- REN, /home/piloquetcol/data/IOP_data/Mai21/IGMs+PEVF/20210407T0930Z_1D_REN.zip
-    - RTEFRANCE, /home/piloquetcol/data/IOP_data/Mai21/IGMs+PEVF/20210407T0930Z_1D_RTEFRANCE.zip
-    #- SWISSGRID, /home/piloquetcol/data/IOP_data/Mai21/IGMs+PEVF/20210407T0930Z_1D_SWISSGRID.zip
+  data-exchanges-path: path-to-PEVF
+
+  igm-paths:
+    - IGM1-name, path-to-IGM1
+    - IGM2-name, path-to-IGM2
+
+  output-dir: path-to-directory
+

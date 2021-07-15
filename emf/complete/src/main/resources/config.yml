@@ -10,7 +10,7 @@ open-loadflow-default-parameters:
   dcUseTransformerRatio: false
   
 import-export-parameters-default-value:
-  iidm.import.cgmes.boundary-location: path-to-EQBD-TPBD
+  iidm.import.cgmes.boundary-location: path-EQBD-TPBD #complete with the path to your EQBD-TPBD files folder
   iidm.import.cgmes.profile-used-for-initial-state-values: SSH
   iidm.import.cgmes.store-cgmes-conversion-context-as-network-extension: true
   iidm.export.xml.version: "1.5"
@@ -19,11 +19,11 @@ import-export-parameters-default-value:
   
   
 balances-adjustment-validation-parameters:
-  data-exchanges-path: path-to-PEVF
+  data-exchanges-path: path-PEVF #complete with the path to your PEVF file
 
   igm-paths:
-    - IGM1-name, path-to-IGM1
-    - IGM2-name, path-to-IGM2
+    - IGM1-name, path-to-IGM1 #complete with the name of your first IGM and the path to the zipfile
+    - IGM2-name, path-to-IGM2 #complete with the name of your second IGM and the path to the zipfile
 
   output-dir: path-to-directory
 

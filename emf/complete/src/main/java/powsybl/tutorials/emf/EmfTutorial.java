@@ -58,7 +58,7 @@ public final class EmfTutorial {
             .setConnectedComponentMode(LoadFlowParameters.ConnectedComponentMode.ALL);
 
     private static final boolean LOAD_FLOW_PREPROCESSING = true; // To run load flows on IGMs.
-    private static final boolean PREPARE_BALANCE_COMPUTATION = true; // To run a balances ajustement.
+    private static final boolean PREPARE_BALANCE_COMPUTATION = true; // To run a balances ajustment.
 
     private static final String SYNCHRONOUS_AREA_ID = "10YEU-CONT-SYNC0";
 
@@ -82,7 +82,7 @@ public final class EmfTutorial {
         MergingView mergingView = MergingView.create("merged", "validation");
         mergingView.merge(validNetworks.values().toArray(Network[]::new));
 
-        // Run load flow on merging view before balances ajustement.
+        // Run load flow on merging view before balances ajustment.
         if (!PREPARE_BALANCE_COMPUTATION) {
             LOAD_FLOW_PARAMETERS.setReadSlackBus(false);
             LOAD_FLOW_PARAMETERS.setDistributedSlack(true);
@@ -117,7 +117,7 @@ public final class EmfTutorial {
             LOAD_FLOW_PARAMETERS.setBalanceType(LoadFlowParameters.BalanceType.PROPORTIONAL_TO_GENERATION_P_MAX);
             parameters.setLoadFlowParameters(LOAD_FLOW_PARAMETERS);
 
-            // Run the balances ajustement.
+            // Run the balances ajustment.
             BalanceComputation balanceComputation = new BalanceComputationFactoryImpl()
                     .create(balanceComputationAreas, new LoadFlow.Runner(new OpenLoadFlowProvider()), LocalComputationManager.getDefault());
             BalanceComputationResult result = balanceComputation.run(mergingView, mergingView.getVariantManager().getWorkingVariantId(), parameters).join();
@@ -235,7 +235,7 @@ public final class EmfTutorial {
     private static void log(BalancesAdjustmentValidationParameters validationParameters) {
         validationParameters.getOutputDir().ifPresent(outputDir -> {
             try {
-                System.setOut(new PrintStream(outputDir + "/output-balances-ajustement.log"));
+                System.setOut(new PrintStream(outputDir + "/output-balances-ajustment.log"));
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }

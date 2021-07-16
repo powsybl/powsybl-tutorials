@@ -9,7 +9,7 @@ package powsybl.tutorials.mergingview;
 import com.powsybl.cgmes.conversion.export.CgmesExportContext;
 import com.powsybl.cgmes.conversion.export.StateVariablesExport;
 import com.powsybl.cgmes.conversion.export.SteadyStateHypothesisExport;
-import com.powsybl.cgmes.conversion.extensions.CgmesSvMetadata;
+import com.powsybl.cgmes.extensions.CgmesSvMetadata;
 import com.powsybl.commons.xml.XmlUtil;
 import com.powsybl.iidm.import_.Importers;
 import com.powsybl.iidm.mergingview.MergingView;

@@ -21,16 +21,28 @@ public final class BalancesAdjustmentValidationParameters {
     private String dataExchangesPath = null;
     private String outputDir = null;
 
+    /**
+     * Load the parameters from the config.yml file
+     *
+     * @return a BalancesAdjustmentValidationParameters containing the IGM paths, the PEVF file and the output directory path
+     */
     public static BalancesAdjustmentValidationParameters load() {
         BalancesAdjustmentValidationParameters parameters = new BalancesAdjustmentValidationParameters();
-        PlatformConfig platformConfig = PlatformConfig.defaultConfig();
 
+        // Read parameters under balances-adjustment-validation-parameters module
+        PlatformConfig platformConfig = PlatformConfig.defaultConfig();
         ModuleConfig config = platformConfig.getModuleConfig("balances-adjustment-validation-parameters");
+
+        // Read each IGM path and put them in igmPaths
         config.getStringListProperty("igm-paths").forEach(path -> {
             String[] pathArray = path.split(",");
             parameters.putIgmPath(pathArray[0].replaceAll("\\s+", ""), pathArray[1].replaceAll("\\s+", ""));
         });
+
+        // Read the PEVF file path and put it in dataExchangesPath
         parameters.setDataExchangesPath(config.getStringProperty("data-exchanges-path"));
+
+        // Read the output directory file if it exists and put it in outputDir
         config.getOptionalStringProperty("output-dir").ifPresent(parameters::setOutputDir);
         return parameters;
     }

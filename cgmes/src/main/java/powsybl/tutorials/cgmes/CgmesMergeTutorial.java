@@ -18,11 +18,10 @@ import com.powsybl.iidm.network.*;
 import com.powsybl.iidm.network.util.Networks;
 import com.powsybl.loadflow.LoadFlow;
 import com.powsybl.loadflow.LoadFlowParameters;
-import com.powsybl.security.Security;
-import com.powsybl.security.SecurityAnalysis;
-import com.powsybl.security.SecurityAnalysisParameters;
-import com.powsybl.security.SecurityAnalysisResult;
-import com.rte_france.powsybl.hades2.Hades2SecurityAnalysisFactory;
+import com.powsybl.security.*;
+import com.powsybl.security.interceptors.SecurityAnalysisInterceptor;
+import com.rte_france.powsybl.hades2.Hades2SecurityAnalysisProvider;
+import com.powsybl.security.detectors.DefaultLimitViolationDetector;
 
 import java.io.File;
 import java.io.IOException;
@@ -113,7 +112,8 @@ public final class CgmesMergeTutorial {
 
         // We are going to perform a security analysis on the merged network.
         ComputationManager computationManager = LocalComputationManager.getDefault();
-        SecurityAnalysis securityAnalysis = new Hades2SecurityAnalysisFactory().create(networkBe, computationManager, 0);
+        SecurityAnalysisProvider securityAnalysisProvider = new Hades2SecurityAnalysisProvider();
+        //SecurityAnalysis securityAnalysis = new Hades2SecurityAnalysisFactory().create(networkBe, computationManager, 0);
         SecurityAnalysisParameters securityAnalysisParameters = new SecurityAnalysisParameters()
                 .setLoadFlowParameters(loadFlowParameters);
 
@@ -155,8 +155,12 @@ public final class CgmesMergeTutorial {
         System.out.println("Number of contingencies: " + contingenciesProvider2.getContingencies(networkBe).size());
 
         // We are going to run the security analysis on each contingency of the list.
-        SecurityAnalysisResult securityAnalysisResult = securityAnalysis.run(VariantManagerConstants.INITIAL_VARIANT_ID,
-                securityAnalysisParameters, contingenciesProvider2).join();
+        LimitViolationFilter filter = new LimitViolationFilter();
+        LimitViolationDetector detector = new DefaultLimitViolationDetector();
+        List<SecurityAnalysisInterceptor> interceptors = new ArrayList<>();
+        SecurityAnalysisReport securityAnalysisReport = securityAnalysisProvider.run(networkBe, VariantManagerConstants.INITIAL_VARIANT_ID,
+                detector, filter, computationManager, securityAnalysisParameters, contingenciesProvider2, interceptors).join();
+        SecurityAnalysisResult securityAnalysisResult = securityAnalysisReport.getResult();
 
         // Let's analyse the results.
         // For each contingency, only the two windings transformer NL-TR2_1 is overloaded.

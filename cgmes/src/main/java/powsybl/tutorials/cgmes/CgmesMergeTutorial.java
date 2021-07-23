@@ -113,7 +113,6 @@ public final class CgmesMergeTutorial {
         // We are going to perform a security analysis on the merged network.
         ComputationManager computationManager = LocalComputationManager.getDefault();
         SecurityAnalysisProvider securityAnalysisProvider = new Hades2SecurityAnalysisProvider();
-        //SecurityAnalysis securityAnalysis = new Hades2SecurityAnalysisFactory().create(networkBe, computationManager, 0);
         SecurityAnalysisParameters securityAnalysisParameters = new SecurityAnalysisParameters()
                 .setLoadFlowParameters(loadFlowParameters);
 

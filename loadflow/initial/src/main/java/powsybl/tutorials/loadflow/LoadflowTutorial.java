@@ -20,7 +20,7 @@ public final class LoadflowTutorial {
     private static final Logger LOGGER = LoggerFactory.getLogger(LoadflowTutorial.class);
 
     public static void main(String[] args) {
-        LOGGER.info("Starting the load flow tutorial execution");
+        LOGGER.info("Starting the load flow tutorial execution now");
     }
 
     private LoadflowTutorial() {

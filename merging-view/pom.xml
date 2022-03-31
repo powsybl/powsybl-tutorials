@@ -12,25 +12,34 @@
     <artifactId>merging-view</artifactId>
     <version>1.3.0-SNAPSHOT</version>
 
+    <properties>
+        <exec.cleanupDaemonThreads>false</exec.cleanupDaemonThreads>
+        <exec.mainClass>powsybl.tutorials.mergingview.MergingViewTutorial</exec.mainClass>
+    </properties>
+
     <build>
         <plugins>
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>exec-maven-plugin</artifactId>
                 <configuration>
-                    <executable>java</executable>
-                    <arguments>
-                        <argument>-Dpowsybl.config.dirs=${project.build.directory}/classes</argument>
-                        <argument>-classpath</argument>
-                        <classpath/>
-                        <argument>powsybl.tutorials.mergingview.MergingViewTutorial</argument>
-                    </arguments>
+                    <systemProperties>
+                        <systemProperty>
+                            <key>powsybl.config.dirs</key>
+                            <value>${project.basedir}/src/main/resources</value>
+                        </systemProperty>
+                    </systemProperties>
                 </configuration>
             </plugin>
         </plugins>
     </build>
 
     <dependencies>
+        <dependency>
+            <groupId>com.powsybl</groupId>
+            <artifactId>powsybl-config-classic</artifactId>
+            <version>${powsybl.core.version}</version>
+        </dependency>
         <dependency>
             <groupId>com.powsybl</groupId>
             <artifactId>powsybl-cgmes-conversion</artifactId>
@@ -52,12 +61,6 @@
             <version>${powsybl.core.version}</version>
         </dependency>
 
-        <dependency>
-            <groupId>com.powsybl</groupId>
-            <artifactId>powsybl-config-classic</artifactId>
-            <version>${powsybl.core.version}</version>
-            <scope>runtime</scope>
-        </dependency>
         <dependency>
             <groupId>com.powsybl</groupId>
             <artifactId>powsybl-iidm-impl</artifactId>

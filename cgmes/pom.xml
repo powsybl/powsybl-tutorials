@@ -24,14 +24,6 @@
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>exec-maven-plugin</artifactId>
-                <configuration>
-                    <systemProperties>
-                        <systemProperty>
-                            <key>powsybl.config.dirs</key>
-                            <value>${project.build.directory}/classes</value>
-                        </systemProperty>
-                    </systemProperties>
-                </configuration>
             </plugin>
         </plugins>
     </build>
@@ -39,20 +31,19 @@
     <dependencies>
         <dependency>
             <groupId>com.powsybl</groupId>
+            <artifactId>powsybl-config-test</artifactId>
+            <version>${powsybl.core.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.powsybl</groupId>
             <artifactId>powsybl-iidm-impl</artifactId>
             <version>${powsybl.core.version}</version>
         </dependency>
         <dependency>
-            <groupId>com.rte-france.powsybl</groupId>
-            <artifactId>powsybl-hades2-integration</artifactId>
-            <version>${powsybl.rte-core.version}</version>
-        </dependency>
-        <dependency>
             <groupId>com.powsybl</groupId>
-            <artifactId>powsybl-config-classic</artifactId>
-            <version>${powsybl.core.version}</version>
+            <artifactId>powsybl-open-loadflow</artifactId>
+            <version>${powsybl.olf.version}</version>
         </dependency>
-
 
         <!-- Runtime dependencies -->
         <dependency>

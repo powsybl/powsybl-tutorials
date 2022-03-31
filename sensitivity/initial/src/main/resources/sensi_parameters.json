@@ -1,9 +1,0 @@
-{
-  "extensions": {
-    "ADNSensitivityComputationParameters": {
-      "computeSensitivityToInjections": true,
-      "resultsThreshold": 0.1,
-      "hubPtdf": -1
-    }
-  }
-}

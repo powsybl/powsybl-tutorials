@@ -246,7 +246,7 @@ public final class EmfTutorial {
         CgmesExportContext context = new CgmesExportContext();
         context.setScenarioTime(mergingView.getCaseDate());
         validNetworks.forEach((name, n) -> {
-            context.addTopologicalNodeMappings(n);
+            context.addIidmMappings(n);
             context.getSvModelDescription().addDependencies(n.getExtension(CgmesSvMetadata.class).getDependencies());
         });
         context.setTopologyKind(CgmesTopologyKind.MIXED_TOPOLOGY);

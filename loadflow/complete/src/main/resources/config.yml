@@ -1,6 +1,0 @@
-load-flow:
-  default-impl-name: "OpenLoadFlow"
-
-open-loadflow-default-parameters:
-  slackBusSelectorType: Name
-  nameSlackBusSelectorBusId: VLHV2_0

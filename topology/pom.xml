@@ -19,43 +19,14 @@
         <exec.mainClass>powsybl.tutorials.topology.VoltageLevelTopologyTutorial</exec.mainClass>
     </properties>
 
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>exec-maven-plugin</artifactId>
-                <configuration>
-                    <systemProperties>
-                        <systemProperty>
-                            <key>powsybl.config.dirs</key>
-                            <value>${project.build.directory}/classes</value>
-                        </systemProperty>
-                    </systemProperties>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
-
     <dependencies>
         <dependency>
             <groupId>com.powsybl</groupId>
             <artifactId>powsybl-iidm-impl</artifactId>
             <version>${powsybl.core.version}</version>
         </dependency>
-        <dependency>
-            <groupId>com.powsybl</groupId>
-            <!-- Use powsybl-config-classic for your local config -->
-            <artifactId>powsybl-config-test</artifactId>
-            <version>${powsybl.core.version}</version>
-        </dependency>
 
         <!-- Runtime dependencies -->
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>log4j-over-slf4j</artifactId>
-            <version>${slf4j.version}</version>
-            <scope>runtime</scope>
-        </dependency>
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-simple</artifactId>

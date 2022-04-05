@@ -6,6 +6,7 @@
  */
 package powsybl.tutorials.sensitivity;
 
+import com.powsybl.commons.json.JsonUtil;
 import com.powsybl.contingency.Contingency;
 import com.powsybl.contingency.ContingencyContext;
 import com.powsybl.iidm.import_.Importers;
@@ -14,31 +15,31 @@ import com.powsybl.iidm.network.Network;
 import com.powsybl.loadflow.LoadFlow;
 import com.powsybl.loadflow.LoadFlowParameters;
 import com.powsybl.sensitivity.*;
+import com.powsybl.sensitivity.json.SensitivityJson;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.*;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * @author Agnes Leroy {@literal <agnes.leroy at rte-france.com>}
+ * @author Agnes Leroy <agnes.leroy at rte-france.com>
+ * @author Anne Tilloy <anne.tilloy at rte-france.com>
  */
 public final class SensitivityTutorial {
     private static final Logger LOGGER = LoggerFactory.getLogger(SensitivityTutorial.class);
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
 
         // 1. Import the network from a XML file
-        // The network is described in the iTesla Internal Data Model format.
-        Path networkPath = Paths.get(SensitivityTutorial.class.getResource("/sensi_network_12_nodes.xml").getPath());
-        Network network = Importers.loadNetwork(networkPath.toString());
-        // In this tutorial the sensitivity is done on active power only, but this can be changed in the config file
-        // by setting dcMode = false in the hades2-default-parameters. Then, the power flow will handle both P and Q.
+        // The network is described in iidm (the iTesla Internal Data Model format).
+        Network network = Importers.loadNetwork("sensi_network_12_nodes.xml",
+                SensitivityTutorial.class.getResourceAsStream("/sensi_network_12_nodes.xml"));
+        // In this tutorial the sensitivity is done on active and reactive powers, but this can be changed in
+        // the LoadFlowParameters by using setDc(true). Then, the power flow will handle active power only.
 
         // 2. Create a list of factors to be studied in the sensitivity computation
         // First, create the sensitivity factors in Java directly
@@ -59,14 +60,12 @@ public final class SensitivityTutorial {
         }
 
         // Then build the factors themselves.
-        List<SensitivityFactor> factors = new ArrayList<>();
-        monitoredLines.forEach(l -> {
+        List<SensitivityFactor> factors =  monitoredLines.stream().map(l -> {
             String monitoredBranchId = l.getId();
-            String monitoredBranchName = l.getName();
             String twtId = network.getTwoWindingsTransformer("BBE2AA1  BBE3AA1  1").getId();
-            factors.add(new SensitivityFactor(SensitivityFunctionType.BRANCH_ACTIVE_POWER, monitoredBranchId,
-                    SensitivityVariableType.TRANSFORMER_PHASE, twtId, false, ContingencyContext.all()));
-        });
+            return new SensitivityFactor(SensitivityFunctionType.BRANCH_ACTIVE_POWER, monitoredBranchId,
+                    SensitivityVariableType.TRANSFORMER_PHASE, twtId, false, ContingencyContext.all());
+        }).collect(Collectors.toList());
 
         // 3. Run the sensitivity analysis
         // Run the analysis that will be performed on network working variant with default sensitivity analysis parameters
@@ -79,8 +78,8 @@ public final class SensitivityTutorial {
         // means that for a 1° phase change introduced by the PST, the flow
         // through a given monitored line is modified by the value of the
         // factor (in MW).
-        // Here we see that each line will undergo a variation of 25MW for a phase change of 1°
-        // introduced by the PST (and -25MW for a -1° change).
+        // Here we see that each line will undergo a variation of 28MW for a phase change of 1°
+        // introduced by the PST (and -28MW for a -1° change).
         // The four monitored lines are affected identically, because in this very simple
         // network all lines have the same reactance.
         LOGGER.info("Initial sensitivity results");
@@ -90,23 +89,14 @@ public final class SensitivityTutorial {
         // 5. Perform a systematic sensitivity analysis
         // A systematic sensitivity analysis consists of a series of sensitivity calculations
         // performed on a network given a list of contingencies and sensitivity factors.
-        // Here we use the systematic sensitivity feature of Hades2, creating one variant on which all
+        // Here we use the systematic sensitivity feature of powsybl-open-loadflow, creating one variant on which all
         // the calculations are done successively, without re-loading the network each time, by
         // modifying the Jacobian matrix directly in the solver.
 
         // Here the list of contingencies is composed of the lines that are not monitored
         // in the sensitivity analysis.
         List<Contingency> contingencies = network.getLineStream()
-            .filter(l -> {
-                final boolean[] isContingency = {true};
-                monitoredLines.forEach(monitoredLine -> {
-                    if (l.equals(monitoredLine)) {
-                        isContingency[0] = false;
-                        return;
-                    }
-                });
-                return isContingency[0];
-            })
+            .filter(l -> monitoredLines.stream().noneMatch(l::equals))
             .map(l -> Contingency.branch(l.getId()))
             .collect(Collectors.toList());
         // This makes a total of 11 contingencies
@@ -114,6 +104,9 @@ public final class SensitivityTutorial {
 
         // Run the sensitivity computation with respect to the PST tap position on that network.
         SensitivityAnalysisResult results2 = SensitivityAnalysis.run(network, factors, contingencies);
+
+        // Write the sensitivity results in a JSON file. You can check the results in the file specified.
+        JsonUtil.writeJson(Path.of("/tmp/sensi_result.json"), results2, SensitivityJson.createObjectMapper());
     }
 
     private SensitivityTutorial() {

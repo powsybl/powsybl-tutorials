@@ -12,6 +12,7 @@
     <artifactId>merging-view</artifactId>
     <version>1.3.0-SNAPSHOT</version>
 
+    <!-- These properties are only needed to run the tutorial from the command line with mvn exec:java -->
     <properties>
         <exec.cleanupDaemonThreads>false</exec.cleanupDaemonThreads>
         <exec.mainClass>powsybl.tutorials.mergingview.MergingViewTutorial</exec.mainClass>

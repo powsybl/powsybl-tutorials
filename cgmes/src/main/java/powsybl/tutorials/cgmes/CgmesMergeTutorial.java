@@ -68,7 +68,7 @@ public final class CgmesMergeTutorial {
             @Override
             public void visitGenerator(Generator generator) {
                 System.out.println("Generator: " + generator.getName() + ": "
-                        + generator.getTerminal().getP() + " MW " + generator.getMaxP());
+                        + generator.getTerminal().getP() + " MW (max. " + generator.getMaxP() + " MW)");
             }
 
             @Override

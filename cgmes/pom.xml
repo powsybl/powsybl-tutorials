@@ -31,8 +31,7 @@
     <dependencies>
         <dependency>
             <groupId>com.powsybl</groupId>
-            <!-- Use powsybl-config-classic for your local config -->
-            <artifactId>powsybl-config-test</artifactId>
+            <artifactId>powsybl-config-classic</artifactId>
             <version>${powsybl.core.version}</version>
         </dependency>
         <dependency>

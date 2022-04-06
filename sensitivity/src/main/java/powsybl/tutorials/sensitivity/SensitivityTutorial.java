@@ -19,6 +19,8 @@ import com.powsybl.sensitivity.json.SensitivityJson;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -32,7 +34,7 @@ import java.util.stream.Collectors;
 public final class SensitivityTutorial {
     private static final Logger LOGGER = LoggerFactory.getLogger(SensitivityTutorial.class);
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
 
         // 1. Import the network from a XML file
         // The network is described in iidm (the iTesla Internal Data Model format).
@@ -105,8 +107,10 @@ public final class SensitivityTutorial {
         // Run the sensitivity computation with respect to the PST tap position on that network.
         SensitivityAnalysisResult results2 = SensitivityAnalysis.run(network, factors, contingencies);
 
-        // Write the sensitivity results in a JSON file. You can check the results in the file specified.
-        JsonUtil.writeJson(Path.of("/tmp/sensi_result.json"), results2, SensitivityJson.createObjectMapper());
+        // Write the sensitivity results in a JSON temporary file. You can check the results in that file or specify your own file.
+        Path jsonResultsFiles = Files.createTempFile("sensitivity_results_", ".json");
+        JsonUtil.writeJson(jsonResultsFiles, results2, SensitivityJson.createObjectMapper());
+        LOGGER.info("Results written in file {}", jsonResultsFiles);
     }
 
     private SensitivityTutorial() {

@@ -64,7 +64,7 @@ public final class EmfTutorial {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(EmfTutorial.class);
 
-    public static void main(String[] args) throws IOException, XMLStreamException {
+    public static void main(String[] args) throws IOException {
 
         BalancesAdjustmentValidationParameters validationParameters = BalancesAdjustmentValidationParameters.load();
         log(validationParameters);
@@ -149,7 +149,7 @@ public final class EmfTutorial {
             LoadFlowResult result = LoadFlow.run(network, LOAD_FLOW_PARAMETERS);
             System.out.println(name + " loadflow: " + result.isOk());
             if (!result.isOk()) {
-                LOGGER.error("Load flow did not converge on " + name + ", try relaxing the loadflow parameters");
+                LOGGER.error("Load flow did not converge on {}, try relaxing the loadflow parameters", name);
                 validNetworks.remove(name);
             }
         });
@@ -171,7 +171,7 @@ public final class EmfTutorial {
             // Retrieve target AC net position.
             double target = dataExchanges.getNetPosition(SYNCHRONOUS_AREA_ID, controlArea.getEnergyIdentificationCodeEIC(), Instant.parse(network.getCaseDate().toString()));
 
-            NetworkAreaFactory factory = createFactory(controlArea, network, validationParameters);
+            NetworkAreaFactory factory = createFactory(controlArea, network);
             NetworkArea area = factory.create(mergingView);
             Scalable scalable = NetworkAreaUtil.createConformLoadScalable(area);
 
@@ -228,16 +228,17 @@ public final class EmfTutorial {
         }
     }
 
-    private static NetworkAreaFactory createFactory(CgmesControlArea area, Network network, BalancesAdjustmentValidationParameters validationParameters) {
+    private static NetworkAreaFactory createFactory(CgmesControlArea area, Network network) {
         return new CgmesVoltageLevelsAreaFactory(area, null, network.getVoltageLevelStream().map(Identifiable::getId).collect(Collectors.toList()));
     }
 
     private static void log(BalancesAdjustmentValidationParameters validationParameters) {
         validationParameters.getOutputDir().ifPresent(outputDir -> {
+            String fileName = outputDir + "/output-balances-ajustment.log";
             try {
-                System.setOut(new PrintStream(outputDir + "/output-balances-ajustment.log"));
+                System.setOut(new PrintStream(fileName));
             } catch (FileNotFoundException e) {
-                e.printStackTrace();
+                LOGGER.warn("Could not create log file {}", fileName, e);
             }
         });
     }

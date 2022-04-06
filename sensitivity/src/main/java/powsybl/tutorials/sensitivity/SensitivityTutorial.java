@@ -19,9 +19,8 @@ import com.powsybl.sensitivity.json.SensitivityJson;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -108,9 +107,9 @@ public final class SensitivityTutorial {
         SensitivityAnalysisResult results2 = SensitivityAnalysis.run(network, factors, contingencies);
 
         // Write the sensitivity results in a JSON temporary file. You can check the results in that file or specify your own file.
-        Path jsonResultsFiles = Files.createTempFile("sensitivity_results_", ".json");
-        JsonUtil.writeJson(jsonResultsFiles, results2, SensitivityJson.createObjectMapper());
-        LOGGER.info("Results written in file {}", jsonResultsFiles);
+        File jsonResultsFile = File.createTempFile("sensitivity_results_", ".json", new File("/tutorials"));
+        JsonUtil.writeJson(jsonResultsFile.toPath(), results2, SensitivityJson.createObjectMapper());
+        LOGGER.info("Results written in file {}", jsonResultsFile);
     }
 
     private SensitivityTutorial() {

@@ -10,10 +10,7 @@ import com.google.auto.service.AutoService;
 import com.powsybl.commons.datasource.DataSource;
 import com.powsybl.commons.io.table.*;
 import com.powsybl.iidm.export.Exporter;
-import com.powsybl.iidm.network.Bus;
-import com.powsybl.iidm.network.Line;
-import com.powsybl.iidm.network.Network;
-import com.powsybl.iidm.network.VoltageLevel;
+import com.powsybl.iidm.network.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -82,8 +79,8 @@ public class CsvLinesExporter implements Exporter {
 
                     LOGGER.debug("export lineID {} ", line.getId());
                     formatter.writeCell(line.getId())
-                            .writeCell(vl1.getSubstation().getId())
-                            .writeCell(vl2.getSubstation().getId())
+                            .writeCell(vl1.getSubstation().map(Substation::getId).orElse("null"))
+                            .writeCell(vl2.getSubstation().map(Substation::getId).orElse("null"))
                             .writeCell(vl1.getId())
                             .writeCell(vl2.getId())
                             .writeCell(bus1Id)

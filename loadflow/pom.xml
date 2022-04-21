@@ -5,37 +5,31 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>com.powsybl</groupId>
-        <artifactId>powsybl-parent</artifactId>
-        <version>3</version>
-        <relativePath/>
+        <artifactId>powsybl-tutorials</artifactId>
+        <groupId>com.powsybl.tutorials</groupId>
+        <version>1.3.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>powsybl-sensitivity</artifactId>
+    <artifactId>loadflow</artifactId>
+    <name>Loadflow tutorial</name>
 
+    <!-- These properties are only needed to run the tutorial from the command line with mvn exec:java -->
     <properties>
-        <maven.exec.version>1.6.0</maven.exec.version>
-        <slf4j.version>1.7.22</slf4j.version>
-        <powsybl.core.version>4.0.1</powsybl.core.version>
-        <powsybl.rte-core.version>3.0.0</powsybl.rte-core.version>
-        
-        <!-- These properties are only needed to run the tutorial easily -->
         <exec.cleanupDaemonThreads>false</exec.cleanupDaemonThreads>
-        <exec.mainClass>powsybl.tutorials.sensitivity.SensitivityTutorialComplete</exec.mainClass>
+        <exec.mainClass>powsybl.tutorials.loadflow.LoadflowTutorial</exec.mainClass>
     </properties>
 
-    <!-- Configure the tutorial to use a locally defined config file-->
     <build>
         <plugins>
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>exec-maven-plugin</artifactId>
-                <version>${maven.exec.version}</version>
+                <version>1.6.0</version>
                 <configuration>
                     <systemProperties>
                         <systemProperty>
                             <key>powsybl.config.dirs</key>
-                            <value>${project.build.directory}/classes</value>
+                            <value>${project.basedir}/src/main/resources</value>
                         </systemProperty>
                     </systemProperties>
                 </configuration>
@@ -44,30 +38,31 @@
     </build>
 
     <dependencies>
+        <!-- Compilation dependencies -->
         <dependency>
             <groupId>com.powsybl</groupId>
             <artifactId>powsybl-config-classic</artifactId>
             <version>${powsybl.core.version}</version>
         </dependency>
         <dependency>
-            <groupId>com.rte-france.powsybl</groupId>
-            <artifactId>powsybl-hades2-integration</artifactId>
-            <version>${powsybl.rte-core.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>log4j-over-slf4j</artifactId>
-            <version>${slf4j.version}</version>
-            <scope>runtime</scope>
-        </dependency>
-
-        <!-- Runtime dependencies -->
-        <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-simple</artifactId>
             <version>${slf4j.version}</version>
-            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.powsybl</groupId>
+            <artifactId>powsybl-open-loadflow</artifactId>
+            <version>${powsybl.olf.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.powsybl</groupId>
+            <artifactId>powsybl-iidm-impl</artifactId>
+            <version>${powsybl.core.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.powsybl</groupId>
+            <artifactId>powsybl-iidm-api</artifactId>
+            <version>${powsybl.core.version}</version>
         </dependency>
     </dependencies>
-
 </project>

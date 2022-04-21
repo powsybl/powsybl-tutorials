@@ -8,12 +8,12 @@ In the tutorial, we use the OpenLoadFlow implementation. Please visit this page 
 # How to configure this tutorial
 The configuration file is:
 ```
-<path_to_powsybl_tutorials>/loadflow/complete/src/main/resources/config.yml
+<path_to_powsybl_tutorials>/loadflow/src/main/resources/config.yml
 ```
 
 # Running the tutorial
 You just need to execute the following command lines:
 ```
-cd <path_to_powsybl_tutorials>/loadflow/complete
+cd <path_to_powsybl_tutorials>/loadflow/
 mvn clean package exec:java
 ```

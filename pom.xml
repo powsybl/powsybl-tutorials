@@ -34,9 +34,11 @@
         <slf4j.version>1.7.22</slf4j.version>
         <java.version>11</java.version>
 
-        <powsybl.core.version>4.3.1</powsybl.core.version>
-        <powsybl.rte-core.version>3.3.1</powsybl.rte-core.version>
-        <powsybl.olf.version>0.12.0</powsybl.olf.version>
+        <powsybl.core.version>4.7.0</powsybl.core.version>
+        <powsybl.rte-core.version>3.7.0</powsybl.rte-core.version>
+        <powsybl.olf.version>0.19.0</powsybl.olf.version>
+        <powsybl.ba.version>1.11.0</powsybl.ba.version>
+        <powsybl.entsoe.version>1.3.1</powsybl.entsoe.version>
     </properties>
 
     <modules>
@@ -44,8 +46,11 @@
         <module>count-network-lines</module>
         <module>csv-exporter</module>
         <module>csv-importer</module>
+        <module>emf</module>
         <module>itools-packager</module>
+        <module>loadflow</module>
         <module>merging-view</module>
+        <module>sensitivity</module>
         <module>topology</module>
     </modules>
 

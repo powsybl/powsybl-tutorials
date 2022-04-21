@@ -18,9 +18,9 @@ import com.powsybl.iidm.network.*;
 import com.powsybl.iidm.network.util.Networks;
 import com.powsybl.loadflow.LoadFlow;
 import com.powsybl.loadflow.LoadFlowParameters;
+import com.powsybl.openloadflow.sa.OpenSecurityAnalysisProvider;
 import com.powsybl.security.*;
 import com.powsybl.security.interceptors.SecurityAnalysisInterceptor;
-import com.rte_france.powsybl.hades2.Hades2SecurityAnalysisProvider;
 import com.powsybl.security.detectors.DefaultLimitViolationDetector;
 
 import java.io.File;
@@ -68,7 +68,7 @@ public final class CgmesMergeTutorial {
             @Override
             public void visitGenerator(Generator generator) {
                 System.out.println("Generator: " + generator.getName() + ": "
-                        + generator.getTerminal().getP() + " MW");
+                        + generator.getTerminal().getP() + " MW (max. " + generator.getMaxP() + " MW)");
             }
 
             @Override
@@ -102,9 +102,7 @@ public final class CgmesMergeTutorial {
         // We are going to compute a load flow on this network. The load-flow engine used
         // is defined in the configuration file.
         // See the load-flow tutorial for more information.
-        LoadFlowParameters loadFlowParameters = LoadFlowParameters.load();
-         //       .setVoltageInitMode(LoadFlowParameters.VoltageInitMode.DC_VALUES);
-        // loadFlowParameters.addExtension(ADNLoadFlowParameters.class, new ADNLoadFlowParameters().setRemoteVoltage(false));
+        LoadFlowParameters loadFlowParameters = new LoadFlowParameters();
         LoadFlow.run(networkBe, loadFlowParameters);
 
         // This following function prints the active balance summary.
@@ -112,7 +110,7 @@ public final class CgmesMergeTutorial {
 
         // We are going to perform a security analysis on the merged network.
         ComputationManager computationManager = LocalComputationManager.getDefault();
-        SecurityAnalysisProvider securityAnalysisProvider = new Hades2SecurityAnalysisProvider();
+        SecurityAnalysisProvider securityAnalysisProvider = new OpenSecurityAnalysisProvider();
         SecurityAnalysisParameters securityAnalysisParameters = new SecurityAnalysisParameters()
                 .setLoadFlowParameters(loadFlowParameters);
 
@@ -169,7 +167,6 @@ public final class CgmesMergeTutorial {
                 new OutputStreamWriter(System.out),
                 new AsciiTableFormatterFactory(),
                 new Security.PostContingencyLimitViolationWriteConfig(null, TableFormatterConfig.load(), true, true));
-
     }
 
     // This function is needed to give a name to merged line.

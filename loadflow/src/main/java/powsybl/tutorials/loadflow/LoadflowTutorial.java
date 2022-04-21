@@ -18,8 +18,8 @@ import java.io.InputStream;
 /**
  * @author Anne Tilloy <anne.tilloy at rte-france.com>
  */
-public final class LoadflowTutorialComplete {
-    private static final Logger LOGGER = LoggerFactory.getLogger(LoadflowTutorialComplete.class);
+public final class LoadflowTutorial {
+    private static final Logger LOGGER = LoggerFactory.getLogger(LoadflowTutorial.class);
 
     public static void main(String[] args) {
         LOGGER.info("Starting the load flow tutorial execution");
@@ -27,26 +27,26 @@ public final class LoadflowTutorialComplete {
         // We first import the network from a XML file. The network is described in the
         // iTesla Internal Data Model format.
         final String networkFileName = "eurostag-tutorial1-lf.xml";
-        final InputStream is = LoadflowTutorialComplete.class.getClassLoader().getResourceAsStream(networkFileName);
+        final InputStream is = LoadflowTutorial.class.getClassLoader().getResourceAsStream(networkFileName);
         Network network = Importers.loadNetwork(networkFileName, is);
 
         // Let's scan the network.
         // In this tutorial it is composed of two substations. Each substation has two voltage
         // levels and one two-windings transformer.
         for (Substation substation : network.getSubstations()) {
-            LOGGER.info("Substation " + substation.getNameOrId());
+            LOGGER.info("Substation {}", substation.getNameOrId());
             LOGGER.info("Voltage levels:");
             for (VoltageLevel voltageLevel : substation.getVoltageLevels()) {
 
-                LOGGER.info("Voltage level: " + voltageLevel.getId() + " " + voltageLevel.getNominalV() + "kV");
+                LOGGER.info("Voltage level: {} {}kV", voltageLevel.getId(), voltageLevel.getNominalV());
             }
             LOGGER.info("Two windings transformers:");
             for (TwoWindingsTransformer t2wt : substation.getTwoWindingsTransformers()) {
-                LOGGER.info("Two winding transformer: " + t2wt.getNameOrId());
+                LOGGER.info("Two winding transformer: {}", t2wt.getNameOrId());
             }
             LOGGER.info("Three windings transformers:");
             for (ThreeWindingsTransformer t3wt : substation.getThreeWindingsTransformers()) {
-                LOGGER.info("Three winding transformer: " + t3wt.getNameOrId());
+                LOGGER.info("Three winding transformer: {}", t3wt.getNameOrId());
             }
         }
         // There are two lines in the network.
@@ -59,12 +59,12 @@ public final class LoadflowTutorialComplete {
         final TopologyVisitor visitor = new DefaultTopologyVisitor() {
             @Override
             public void visitGenerator(Generator generator) {
-                LOGGER.info("Generator: " + generator.getNameOrId() + " [" + generator.getTerminal().getP() + " MW]");
+                LOGGER.info("Generator: {} [{} MW]", generator.getNameOrId(), generator.getTerminal().getP());
             }
 
             @Override
             public void visitLoad(Load load) {
-                LOGGER.info("Load: " + load.getNameOrId() + " [" + load.getTerminal().getP() + " MW]");
+                LOGGER.info("Load: {} [{} MW]", load.getNameOrId(), load.getTerminal().getP());
             }
         };
         for (VoltageLevel voltageLevel : network.getVoltageLevels()) {
@@ -133,8 +133,8 @@ public final class LoadflowTutorialComplete {
             network.getVariantManager().setWorkingVariant(variantId);
             angle = bus.getAngle();
             v = bus.getV();
-            LOGGER.info("Angle difference  : " + (angle - oldAngle));
-            LOGGER.info("Tension difference: " + (v - oldV));
+            LOGGER.info("Angle difference  : {}", angle - oldAngle);
+            LOGGER.info("Tension difference: {}", v - oldV);
         }
     }
 
@@ -145,13 +145,13 @@ public final class LoadflowTutorialComplete {
      */
     private static void printLines(Network network) {
         for (Line line : network.getLines()) {
-            LOGGER.info("Line: " + line.getNameOrId());
-            LOGGER.info(" > Terminal 1 power: " + line.getTerminal1().getP());
-            LOGGER.info(" > Terminal 2 power: " + line.getTerminal2().getP());
+            LOGGER.info("Line: {}", line.getNameOrId());
+            LOGGER.info(" > Terminal 1 power: {}", line.getTerminal1().getP());
+            LOGGER.info(" > Terminal 2 power: {}", line.getTerminal2().getP());
         }
     }
 
-    private LoadflowTutorialComplete() {
+    private LoadflowTutorial() {
     }
 
 }

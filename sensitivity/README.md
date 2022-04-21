@@ -17,33 +17,17 @@ Finally, we define contingencies on each of the lines that are not monitored,
 and compute a sensitivity analysis for each of them. The factors' values are printed
 in the terminal.
 
-# How to install the loadflow simulator  
-In the tutorial, we use Hades2, a RTE load-flow tool. 
-Please visit the [Hades2 documentation](https://rte-france.github.io/hades2/index.html) to learn how to install Hades2 on your computer. 
-Note that Hades2 only works on Linux and Windows at the moment.
+# The loadflow simulator  
+In the tutorial, we use [powsybl-open-loadflow](https://github.com/powsybl/powsybl-open-loadflow), the powsybl load-flow tool.
 
 # How to configure this tutorial
-The configuration file is :
-```
-<path_to_powsybl_tutorials>/sensitivity/complete/src/main/resources/config.yml
-```
-In order to compute a sensitivity analysis on this network,
-the sensitivity engine used should be defined in the local config file.
-Here we use the Hades2 sensitivity engine, which comes together with the
-loadflow. The configuration is thus the same as the loadflow.
-Please check the loadflow tutorial for more information on the configuration,
-as well as the [loadflow feature page](https://rte-france.github.io/hades2/features/loadflow.html) of the website.
-
-You also have to configure the path to a local computation directory (Hades2 temporary files will be stored here). 
-Please visit [this page](https://www.powsybl.org/pages/documentation/user/configuration/computation-local.html) to learn how to do it.
-
-The calculations are done in DC mode, but this can be changed in the 
-configuration file by setting dcMode = false in the hades2-default-parameters.
-
+To configure the loadflow, simply change the LoadFlowParameters passed on when launching the simulator with `LoadFlow.run`.
+If you want to use another loadflow implementation, you can use a configuration file to select which implementation you want, as specified in the [loadflow documentation](https://www.powsybl.org/pages/documentation/simulation/powerflow/#configuration).
+Or simply ensure that there is only one LoadFlowProvider in the classpath (remove the powsybl-open-loadflow artifact from the pom.xml).
 
 # Running the tutorial
-You just need to execute the following command lines:
+You just need to launch the `SensitivityTutorial::main` with your IDE or execute the following command lines:
 ```
-cd <path_to_powsybl_tutorials>/sensitivity/complete
+cd <path_to_powsybl_tutorials>/sensitivity
 mvn package exec:java
 ```

@@ -13,7 +13,7 @@ branch('S_SO_2') {
   }
 
 load('SE_L1'){
-preventiveSheddingPercentage 100
+curativeSheddingPercentage 100
 curativeSheddingCost 10
 onContingencies 'S_SO_1'
 }

@@ -1,11 +1,6 @@
 # Metrix tutorial
 This tutorial aims to show how to perform OPF using Metrix on a small fictive network.
 
-Translation types
-Text translation
-Source text
-2,106 / 5,000
-Translation results
 ---
 author:
 - Mathilde Bongrain
@@ -62,7 +57,4 @@ HVDC and a TD. It also features 4 groups and three loads.\
    In mapping output you should have the following network\
    ![image](images/result_mapping_ss_HVDC.png)
    More about this source text
-   Source text required for additional translation information
-   Send feedback
-   Side panels
-   5,000 character limit. Use the arrows to translate more.
+  

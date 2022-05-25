@@ -3,6 +3,12 @@ computationType OPF
 withRedispatchingResults true
 }
 
+for (l in network.branches){
+branch(l.id){
+baseCaseFlowResults true
+maxThreatFlowResults true
+}
+}
 
 branch('S_SO_2') {
   baseCaseFlowResults true

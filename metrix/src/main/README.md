@@ -1,8 +1,4 @@
-Translation types
-Text translation
-Source text
-5,000 / 5,000
-Translation results
+
 ---
 author:
 - Mathilde Bongrain

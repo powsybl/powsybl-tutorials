@@ -1,4 +1,8 @@
-
+Translation types
+Text translation
+Source text
+5,000 / 5,000
+Translation results
 ---
 author:
 - Mathilde Bongrain
@@ -13,9 +17,9 @@ results obtained.
 
 The network used for this lab consists of 6 stations, all connected
 by two parallel lines with the same electrotechnical characteristics
-(same resistors and same reactances for each line), as well as two
+(same resistances and same reactances for each line), as well as two
 HVDC and a TD. It also features 4 groups and three loads.\
-![image](images/reseau_6_noeuds_ss_HVDC.png)
+![image](images/reseau_6_noeuds_ss_HDVC.png)
 
 # To get started:
 
@@ -53,7 +57,7 @@ HVDC and a TD. It also features 4 groups and three loads.\
         well received the good chronicle and that the final balance sheet is nil.
 
     In mapping output you should have the following network\
-    ![image](images/result_mapping_ss_HVDC.png)
+    ![image](images/result_mapping_ss_HDVC.png)
 
 
 # Load Flow mode: Understanding flows

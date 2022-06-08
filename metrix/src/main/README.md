@@ -25,13 +25,22 @@ In this chapter we will install Powsybl-METRIX on your environment. You can skip
 
 The network used for this lab consists of 6 stations, all connected
 by two parallel lines with the same electrotechnical characteristics
-(same resistors and same reactances for each line), as well as two
+(same resistances and same reactances for each line), as well as two
 HVDC and a TD. It also features 4 groups and three loads.\
-![image](images/reseau_6_noeuds_ss_HVDC.png)
+![image](images/reseau_6_noeuds_ss_HDVC.png)
 
 The network is described in an "iidm" format (which is the native Powsybl network representation format).
 It can be found in the folder `src/main/resources/3A/data/reseau_6noeuds.xiidm`.
 
+in this TP,each node and line's name refers to cardinal points:
+- NO: North West
+- N: North
+- NE: North East
+- SE: South East
+- S: South
+- SO: South West
+
+# To get started:
 Along with the network file, you can find a timeseries file at the path :
 `src/main/resources/3A/data/ts/time-series-tp.csv`. It will contains time series to map to each demand and/or fatal production of the network.
 
@@ -39,6 +48,17 @@ Note : These two files (network file and timeseries file) are the same used in a
 
 ## Load Flow mode: Understanding flows
 
+    - Create a \"multi-situation\" object with these elements then
+        launch the analysis of the mapping to verify that each element has
+        well received the good chronicle and that the final balance sheet is nil.
+
+    In mapping output you should have the following network:\
+    ![image](images/result_mapping_ss_HDVC.png)
+
+
+# Load Flow mode: Understanding flows
+
+The Metrix load flow makes it possible to calculate the transits in active only on
 The Metrix load flow calculates the DC power flows on
 structures in N and N-1 on the basis of network information (topology
 and electrotechnical characteristics), production timeseries and

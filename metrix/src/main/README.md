@@ -21,18 +21,18 @@ In this chapter we will install Powsybl-METRIX on your environment. You can skip
 2. **Install Metrix** : go in the cloned repository, and run the script `./install.sh`.
    When you are asked if you want a full or a metrix installation, select "full". When you are asked if you want to add Powsybl-metrix to the path, select "yes".
 
-## Network presentation
+## 1- Network presentation
 
 The network used for this lab consists of 6 stations, all connected
 by two parallel lines with the same electrotechnical characteristics
-(same resistances and same reactances for each line), as well as two
+(same resistance and same reactance for each line), as well as two
 HVDC and a TD. It also features 4 groups and three loads.\
 ![image](images/reseau_6_noeuds_ss_HDVC.png)
 
 The network is described in an "iidm" format (which is the native Powsybl network representation format).
 It can be found in the folder `src/main/resources/3A/data/reseau_6noeuds.xiidm`.
 
-in this TP,each node and line's name refers to cardinal points:
+in this TP,each station and line's name refers to cardinal points:
 - NO: North West
 - N: North
 - NE: North East
@@ -40,29 +40,30 @@ in this TP,each node and line's name refers to cardinal points:
 - S: South
 - SO: South West
 
-# To get started:
+# 2- To get started:
 Along with the network file, you can find a timeseries file at the path :
-`src/main/resources/3A/data/ts/time-series-tp.csv`. It will contains time series to map to each demand and/or fatal production of the network.
+`src/main/resources/3A/data/ts/time-series-tp.csv`. It will contains time series to map to each demand and/or 
+unavoidable production of the network.
 
 Note : These two files (network file and timeseries file) are the same used in all exercises of the tutorial.
 
-## Load Flow mode: Understanding flows
-
-    - Create a \"multi-situation\" object with these elements then
-        launch the analysis of the mapping to verify that each element has
-        well received the good chronicle and that the final balance sheet is nil.
-
-    In mapping output you should have the following network:\
-    ![image](images/result_mapping_ss_HDVC.png)
+In mapping output you should have the following network:\
+![image](images/result_mapping_ss_HDVC.png)
 
 
-# Load Flow mode: Understanding flows
+# 3- Load Flow mode: Understanding flows
 
-The Metrix load flow makes it possible to calculate the transits in active only on
-The Metrix load flow calculates the DC power flows on
-structures in N and N-1 on the basis of network information (topology
-and electrotechnical characteristics), production timeseries and
-consumption and a list of contingencies. It does not optimize anything.
+The load flow Metrix allows the calculation of active-only flows on structures in N and N-1 based on network
+information (topology, and electrotechnical characteristics), production and load timeseries and a list of contingencies.
+It does not  optimize anything. To launch a load flow, it is necessary:
+![image](images/mode_LF_fichiers.png)
+The multi-situation contrains the network information and the timeseries. The Metrix configuration script is a script 
+that allows to hold all parameters and options of the simulation (in particular the calculation mode, the cyhoixes of
+modeling of the structures and the data tro be acquired in output). The contingencies script denotes the list of defects and the 
+options related to them.
+
+
+
 
 ### Action 3A - Launch in simple LF mode
 
@@ -85,21 +86,26 @@ network in the nominal case (N) and when line S_SO_S1 is removed (N-1).
   (see reminder of the previous section if necessary).
 
 - Launch the calculation and note the flows on the structures on the
-  different time steps.5T9ZA
+  different time steps.
 
-#### Syntax help:
+[//]: # ()
+[//]: # (#### Syntax help:)
 
-Results on all network works:[link
-wiki](https://wikicvg.rte-france.com/xwiki/bin/view/imaGrid/4.+Configure+and+launch+Metrix#HOuvragessurveillE9setouvragesavecrE9sultats)
+[//]: # ()
+[//]: # (Results on all network works:[link)
 
-Create a defect list:[link
-wiki](https://wikicvg.rte-france.com/xwiki/bin/view/imaGrid/4.+Configure+and+launch+Metrix#HListed27incidents)
+[//]: # (wiki]&#40;https://wikicvg.rte-france.com/xwiki/bin/view/imaGrid/4.+Configure+and+launch+Metrix#HOuvragessurveillE9setouvragesavecrE9sultats&#41;)
+
+[//]: # ()
+[//]: # (Create a defect list:[link)
+
+[//]: # (wiki]&#40;https://wikicvg.rte-france.com/xwiki/bin/view/imaGrid/4.+Configure+and+launch+Metrix#HListed27incidents&#41;)
 
 ### Action 3A - Launch in single LF mode - Fix
 
 #### Scripts:
 
-Metrix setup script:
+Metrix configuration script: (conf.groovy)
 
     for (l in network. branches) {
        branch(l.id) {
@@ -108,7 +114,7 @@ Metrix setup script:
        }
     }
 
-Default script:
+Contingencies script: (contingencies.groovy)
 
     contingency('S_SO_1') { equipments 'S_SO_1'}
 
@@ -122,22 +128,17 @@ in N on the left and in N-1 on the right.
 More specifically, on the S_SO_2 structure in N and N-1 on the various
 no time, we get:\
 
-All FLOW_S\_SO_2 MAX_THREAT_1\_FLOW_S\_SO_2 MAX_THREAT_1\_NAME_S\_SO_2
-  ----- -------------- ---------------------------- --- -------------------------
-T01 -290.5 -484.2 S_SO_1
-T02 -290.5 -484.2 S_SO_1
-T03 -290.5 -484.2 S_SO_1
+| Ts    | FLOW_S\_SO_2 | MAX_THREAT_1\_FLOW_S\_SO_1 | MAX_THREAT_1\_FLOW_S\_SO_2 |
+|-------|--------------|----------------------------|----------------------------|
+| T01   | -290.5       | -484.2                     | S_SO_1                     |
+| T02   | -290.5       | -484.2                     | S_SO_1                     |
+| T03   | -290.5       | -484.2                     | S_SO_1                     |
 
-In N, as the groups and the consumptions are aTranslation types
-Text translation
-Source text
 
-5,000 / 5,000
-Translation results
-south, the
+In N, as the groups and the consumptions are south, the
 network is less impedant and we see that the flows pass through it
 mostly. There is also flow on the TD, and to the north. The
-trnasits are the same on the 3 time steps because the only difference
+flows are the same on the 3 time steps because the only difference
 is that production moves from group SO_G2 to group S0_G1 which are on
 the same post.
 
@@ -190,11 +191,12 @@ OVERLOAD\_ BASECASE (which represent the difference between the flow in N
 and N-1 on the work) and OVERLOAD_OUTAGES (which represent the
 difference between the flow in N-1 and the threshold).
 
-Ts OVERLOAD_BASECASE OVERLOAD_OUTAGES
-  ----- ------------------- ------------------ --
-T01 0 84.2
-T02 0 84.2
-T03 190.5 384.2
+| Ts    | OVERLOAD_BASECASE | OVERLOAD_OUTAGES | 
+|-------|-------------------|------------------|
+| T01   | 0                 | 84.2             | 
+| T02   | 0                 | 84.2             | 
+| T03   | 190.5              | 384.2            | 
+
 
 There is no constraint in N on the first two time steps then
 that there are on the third. This is due to the change in the value of the
@@ -288,7 +290,7 @@ On the 3rd time step, the constraint in N remains unchanged.
 
 The goal here is to see if the use of the phase-shifting transformer allows
 alone to solve the constraints. The phase shifts of the TDs are by
-default set to their value in the multi-situation (choice of socket),
+contingencies set to their value in the multi-situation (choice of socket),
 you can ask Metrix to optimize them preventively and on certain
 incidents. What sign of phase shift would relieve the
 N and N-K constraints identified? Positive which slows down the flow between NO

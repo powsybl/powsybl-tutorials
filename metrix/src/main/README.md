@@ -43,7 +43,14 @@ in this TP,each station and line's name refers to cardinal points:
 # 2- To get started:
 Along with the network file, you can find a timeseries file at the path :
 `src/main/resources/3A/data/ts/time-series-tp.csv`. It will contains time series to map to each demand and/or 
-unavoidable production of the network.
+unavoidable production of the network. It is organized as follows:
+
+
+| Ts    | Version | SE_L1 | SO_G1 | SO_G2 | seuilN | seuilAM |
+|-------|---------|-------|-------|-------|--------|---------|
+| T01   | 1       | 960   | 0     | 960   | 400    | 480     |
+| T02   | 1       | 960   | 960   | 0     | 400    | 480     |
+| T03   | 1       | 960   | 960   | 0     | 100    | 480     |
 
 Note : These two files (network file and timeseries file) are the same used in all exercises of the tutorial.
 
@@ -154,7 +161,7 @@ analyze.
 #### In practice
 
 - Modify the Metrix configuration script to monitor the structure
-  S_SO_2 in N and on incidents.
+  S_SO_2 in N and on contingenciess.
 
 - Declare as threshold in N and N-k the timeseries 'thresholdN' provided in
   the set of entry timeseries (see syntax).
@@ -191,11 +198,11 @@ OVERLOAD\_ BASECASE (which represent the difference between the flow in N
 and N-1 on the work) and OVERLOAD_OUTAGES (which represent the
 difference between the flow in N-1 and the threshold).
 
-| Ts    | OVERLOAD_BASECASE | OVERLOAD_OUTAGES | 
+| Ts    | OVERLOAD_BASECASE | OVERLOAD_OUTAGES |   
 |-------|-------------------|------------------|
 | T01   | 0                 | 84.2             | 
 | T02   | 0                 | 84.2             | 
-| T03   | 190.5              | 384.2            | 
+| T03   | 190.5             | 384.2            | 
 
 
 There is no constraint in N on the first two time steps then
@@ -203,7 +210,7 @@ that there are on the third. This is due to the change in the value of the
 threshold from 400 to 100 MW in the 'thresholdN' timeseries. There are
 overruns on all time steps in N-1.
 
-## OPF mode without redispatching: Optimize RTE's manual actions
+## 4- OPF mode without redispatching: Optimize RTE's manual actions
 
 ### Action 4A - Use topological countermeasures to solve constraints
 
@@ -217,7 +224,7 @@ nodes in a post) could be effective?
 
 #### In practice:
 
-- In the \"Metrix simulation\" object, define the following 4 parries
+- In the \"Metrix simulation\" object, define the following 4 parades
   on the S_SO_1 contingency (see syntax):
 
     - opening of the circuit breaker SS1_SS1_DJ_OMN (this goes to two nodes
@@ -231,7 +238,7 @@ nodes in a post) could be effective?
     - opening of the S_SO_2 line
 
 - Configure in the Metrix script the launch below and observe
-  the activations of parries at the different time steps as well as
+  the activations of parades at the different time steps as well as
   the evolution of the constraints (cf description of the Metrix results) .
 
 #### Syntax help:
@@ -245,7 +252,7 @@ wiki](https://wikicvg.rte-france.com/xwiki/bin/view/imaGrid/4.+Configure+and+lau
 
 #### Scripts:
 
-Parry files
+Parade file: (parades.csv)
 
     NB;4;
     S_SO_1;1;SS1_SS1_DJ_OMN;
@@ -279,7 +286,7 @@ Text translation
 Source text
 5,000 / 5,000
 Translation results
-list of parries: with identical effectiveness, the parries
+list of parades: with identical effectiveness, the parades
 are chosen in the order of the list.
 
 On the 3rd time step, the constraint in N remains unchanged.
@@ -292,7 +299,7 @@ The goal here is to see if the use of the phase-shifting transformer allows
 alone to solve the constraints. The phase shifts of the TDs are by
 contingencies set to their value in the multi-situation (choice of socket),
 you can ask Metrix to optimize them preventively and on certain
-incidents. What sign of phase shift would relieve the
+contingencies. What sign of phase shift would relieve the
 N and N-K constraints identified? Positive which slows down the flow between NO
 and NE or negative which accentuates the flow between NO and NE
 
@@ -347,28 +354,29 @@ that Metrix plays on the phase shift of the TD in curative on all the steps of
 time and preventively on the third time step. Constraints
 are fully lifted:\
 
-Result T01 T02 T03
-  --------------- ------- ------- -------
-PST_CUR_NE_NO_1\_S_SO_1 -0.32 -0.32 -1.01
-PST_NE_NO_1 // -0.75
-PST_CUR_TAP_NE_NO_1\_S_SO_1 1 1 1
-PST_TAP_NE_NO_1 // 1
-OVERLOAD_BASECASE 0 0 0
-OVERLOAD_OUTAGES 0 0 0
 
-## OPF mode: Optimize all actions
+| Results                     | T01   | T02   | T03   | 
+|:----------------------------|-------|-------|-------|
+| PST_CUR_NE_NO_1\_S_SO_1     | -0.19 | -0.19 | -1.05 | 
+| PST_NE_NO_1                 | 0.01  | 0.01  | -1.05 | 
+| PST_CUR_TAP_NE_NO_1\_S_SO_1 | 1     | 1     | 1     | 
+| PST_TAP_NE_NO_1             | 17    | 17    | 1     |
+| OVERLOAD_BASECASE           | 0     | 0     | 0     |
+| OVERLOAD_OUTAGES            | 0     | 0     | 220   |
+
+
+## 5- OPF mode: Optimize all actions
 
 ### Action 5A - Configure adjustable groups in preventive
 
 #### Goal:
 
 The goal here is to take care of the residual stresses after the
-\"free\" actions that constitute the parries (it is assumed that the TD
-is not available/does not exist). We recall that in part 4A,
+"free" actions that constitute the parades (it is assumed that the TD
+is not available/does not exist). Let`s remind that in part 4A,
 the parades had not been able to resolve the constraints as a preventive measure. We
 therefore proposes to see if the use of groups as a preventive measure makes it possible to
-resolve these constraints. At what power of the groups can we
-to expect? preventive or curative?
+resolve these constraints. What power from groups should we expect?
 
 #### In practice:
 
@@ -376,7 +384,7 @@ to expect? preventive or curative?
   can move in preventive with costs upwards of 100 and at
   decreasing by 1 (see syntax)
 
-- Change simulation mode to \"OPF\", resume parries, and
+- Change simulation mode to \"OPF\", resume parades, and
   start the calculation
 
 - Observe the actions taken by Metrix (see description of the results
@@ -384,12 +392,17 @@ to expect? preventive or curative?
 
 NB: the SE_G group has a Pmax of 600MW
 
-#### Syntax help:
+[//]: # ()
+[//]: # (#### Syntax help:)
 
-Configure groups:[link
-wiki](https://wikicvg.rte-france.com/xwiki/bin/view/imaGrid/4.+Configure+and+launch+Metrix#HGE9nE9rateurs)
-Description of Metrix results: [link
-wiki](https://wikicvg.rte-france.com/xwiki/bin/view/imaGrid/4.+Configure+and+launch+Metrix#HSortiesdeMetrix)
+[//]: # ()
+[//]: # (Configure groups:[link)
+
+[//]: # (wiki]&#40;https://wikicvg.rte-france.com/xwiki/bin/view/imaGrid/4.+Configure+and+launch+Metrix#HGE9nE9rateurs&#41;)
+
+[//]: # (Description of Metrix results: [link)
+
+[//]: # (wiki]&#40;https://wikicvg.rte-france.com/xwiki/bin/view/imaGrid/4.+Configure+and+launch+Metrix#HSortiesdeMetrix&#41;)
 
 ### Action 5A - Configure adjustable groups in preventive - Fix
 
@@ -416,10 +429,10 @@ Metrix configuration file:
 #### Results and Analysis:
 
 By launching the OPF calculation with the previous parades and the groups in
-preventive, we can clearly see that Metrix used the parries in priority
+preventive, we can clearly see that Metrix used the parades in priority
 on the curative and makes it possible to solve the constraints in N-k. For the
 deviations in N observed at the 4C action, he is forced to use the
-preventive groups (because parries cannot act in N). There are
+preventive groups (because parades cannot act in N). There are
 so redispatchinTranslation types
 Text translation
 Source text
@@ -436,29 +449,31 @@ In the end, there are no constraints left (this is always the case in mode
 OPF) and the flow on the monitored structure is reduced to exactly 100MW
 in N on the 3rd time step.
 
-Result T01 T02 T03
-  ------------------- ----- ----- ---------
-OVERLOAD_BASECASE 0 0 0
-OVERLOAD_OUTAGES 0 0 0
-GEN_COST 0 0 67695.2
-GEN_SO_G1 // -670.2
-GEN_SE_G // 600
-GEN_N\_G // 70.2
+| Result            | T01 | T02 | T03     | 
+|:------------------|-----|-----|---------|
+| OVERLOAD_BASECASE | 0   | 0   | 0       | 
+| OVERLOAD_OUTAGES  | 0   | 0   | 0       | 
+| GEN_COST          | 0   | 0   | 78470.4 | 
+| GEN_SO_G1         | /   | /   | -776.9  |
+| GEN_SE_G          | /   | /   | 600     |
+| GEN_N\_G          | /   | /   | 176.9   |
 
-### Action 5B - Configure adjustable groups in healing
+
+
+### Action 5B - Configure adjustable groups in curative
 
 #### Goal:
 
 The goal here is to see how curative redispatching operates in
 relation to preventive redispatching. In order to see their use, it
-is necessary to remove parries that have zero cost and are
+is necessary to remove parades that have zero cost and are
 therefore priority over any costly parry.
 
 #### In practice:
 
-- Configure adjustable groups in healing
+- Configure adjustable groups in curative
 
-- Specify that groups can also act on the incident
+- Specify that groups can also act on the contingency
   'S_SO_1' (see syntax)
 
 - Remove the use of parades, and launch the calculation
@@ -466,12 +481,15 @@ therefore priority over any costly parry.
 - Observe the actions taken by Metrix on the groups in preventive
   and curative, as well as the cost of redispatching
 
-#### Syntax help:
+[//]: # ()
+[//]: # (#### Syntax help:)
 
-Configure groups:[link
-wiki](https://wikicvg.rte-france.com/xwiki/bin/view/imaGrid/4.+Configure+and+launch+Metrix#HGE9nE9rateurs)
+[//]: # ()
+[//]: # (Configure groups:[link)
 
-### Action 5B - Configure Adjustable Groups in Healing - Fix
+[//]: # (wiki]&#40;https://wikicvg.rte-france.com/xwiki/bin/view/imaGrid/4.+Configure+and+launch+Metrix#HGE9nE9rateurs&#41;)
+
+### Action 5B - Configure Adjustable Groups in curative - Fix
 
 #### Scripts:
 
@@ -496,28 +514,29 @@ Metrix configuration file:
 
 #### Results and Analysis:
 
-Keeping the parries, adding healing adjustments does not modify
+Keeping the parades, adding curative adjustments does not modify
 the results. In fact, the parades make it possible to remove the constraints
 at almost zero cost compared to group adjustments, they are therefore
 implemented on a priority basis.
 
 If we remove the parades, Metrix also performs redispatching
-curative on the first two time steps. On the 3rd, it does not
-of curative adjustment because preventive adjustment already makes it possible to prevent
-Incident constraints.
+curative on the first two time steps. On the 3rd, it does not do curative adjustment because preventive adjustment 
+already makes it possible to prevent contingency constraints.
 
-Result T01 T02 T03
-  ----------------------- -------- -------- ---------
-GEN_COST 0 0 67688.1
-GEN_SO_G1 // -670.2
-GEN_SE_G // 600
-GEN_N\_G // 70.2
-GEN_CUR_SO_G1_S\_SO_1 / -168.5 -266.7
-GEN_CUR_SO_G2_S\_SO_1 -168.5 / /
-GEN_CUR_SE_G\_S_SO_1 168.5 168.5 /
-GEN_CUR_N\_G_S\_SO_1 // 266.7
 
-### Action 5C - Remove essential group from healing
+| Result                | T01    | T02    | T03     | 
+|:----------------------|--------|--------|---------|
+| GEN_COST              | 0      | 0      | 78465.1 | 
+| GEN_SO_G1             | /      | /      | -776.9  | 
+| GEN_SE_G              | /      | /      | 600     | 
+| GEN_N\_G              | /      | /      | 176.9   |
+| GEN_CUR_SO_G1_S\_SO_1 | /      | -168.4 | -160    |
+| GEN_CUR_SO_G2_S\_SO_1 | -168.4 | /      | /       |
+| GEN_CUR_SE_G\_S_SO_1  | 168.4  | 168.4  | /       |
+| GEN_CUR_N\_G_S\_SO_1  | /      | /      | 160     |
+
+
+### Action 5C - Remove essential group from curative
 
 #### Goal:
 
@@ -534,7 +553,7 @@ essential group of redispatching in curative.
 
 - Observe the actions taken by Metrix on the groups
 
-### Action 5C - Remove essential group from healing - Correction
+### Action 5C - Remove essential group from curative - Correction
 
 #### Scripts:
 
@@ -557,7 +576,7 @@ Metrix configuration file:
      }
     }
 
-Parries file to take into account.
+parades file to take into account.
 
 #### Results and Analysis:
 
@@ -565,22 +584,17 @@ Once SE_G's group is raised to Pmax, Metrix has no other group
 available to compensate for the decrease in the group of the SO post. He cuts
 then 35MW of consumption at SE.
 
-Result T01 T02 T03
-  ------------------ ------------------ -------- ------ ----
-FLOW_S\_S0_2 -290.5 -290.5 -100
-LOAD_COST 0 0 386416.7
-LOAD_SE_L1 // 35.1
-GEN_SO_G2 // -635.1
-GEN_SE_G // 600
-TOPOLOGY_S\_SO_1 SOO1_SOO1_DJ_OMN S_SO_2 S_SO_2
 
-### Action 5D - Authorize consumption in advance
-Translation types
-Text translation
-Source text
-5,000 / 5,000
-Translation results
-windy
+| Result           | T01              | T02    | T03      | 
+|:-----------------|------------------|--------|----------|
+| FLOW_S_SO_2      | -290.5           | -290.5 | -90.6    | 
+| LOAD_COST        | 0                | 0      | 862935.1 | 
+| LOAD_SE_L1       | /                | /      | 66.4     | 
+| GEN_SO_G1        | /                | /      | -666.4   |
+| GEN_SE_G         | /                | /      | 600      |
+| TOPOLOGY_S\_SO_1 | SOO1_SOO1_DJ_OMN | S_SO_2 | S_SO_2   |
+
+### Action 5D - Authorize consumption in preventive
 
 #### Goal:
 
@@ -599,10 +613,13 @@ groups SE (Pmax)600) and SO?
 - Observe the actions taken by Metrix on the groups and the
   consumption
 
-#### Syntax help:
+[//]: # ()
+[//]: # (#### Syntax help:)
 
-Configure consumptions:[link
-wiki](https://wikicvg.rte-france.com/xwiki/bin/view/imaGrid/4.+Configure+and+launch+Metrix#HConsummations)
+[//]: # ()
+[//]: # (Configure consumptions:[link)
+
+[//]: # (wiki]&#40;https://wikicvg.rte-france.com/xwiki/bin/view/imaGrid/4.+Configure+and+launch+Metrix#HConsummations&#41;)
 
 ### Action 5D - Authorize preventive consumption - Correction
 
@@ -661,7 +678,7 @@ SO_G1, SO_G1, SE_G and N_G?
 
 - authorize groups SO_G1, SO_G1, SE_G and N_G
 
-- do not allow parries
+- do not allow parades
 
 - authorize consumption 'SE_L1' to move in preventive and curative mode
   (see syntax)
@@ -669,10 +686,13 @@ SO_G1, SO_G1, SE_G and N_G?
 - Observe the actions taken by Metrix on the groups and the
   consumption
 
-#### Syntax help:
+[//]: # ()
+[//]: # (#### Syntax help:)
 
-Configure consumptions:[link
-wiki](https://wikicvg.rte-france.com/xwiki/bin/view/imaGrid/4.+Configure+and+launch+Metrix#HConsummations)
+[//]: # ()
+[//]: # (Configure consumptions:[link)
+
+[//]: # (wiki]&#40;https://wikicvg.rte-france.com/xwiki/bin/view/imaGrid/4.+Configure+and+launch+Metrix#HConsummations&#41;)
 
 ### Action 5E - Authorize curative consumption - Correction
 
@@ -709,19 +729,21 @@ No parade file.
 #### Results and Analysis:
 
 As a reminder, before this modification, without the parades, Metrix had to
-make healing group adjustments on the first two steps of
+make curative group adjustments on the first two steps of
 time: he lowered the group to SW and raised the group to SE. The
 results by allowing the consumption of SE to move with a cost of
 10 euros/MW are:
 
-Result T01 T02 T03
-  --------- -------- -------- --------
-GEN_CUR_SO_G1_S\_SO_1 / -168.5 -133.3
-GEN_CUR_SO_G2_S\_SO_1 -168.5 / /
-LOAD_CUR_SE_L1_S\_SO_1 -168.5 -168/5 -133.3
-GEN_SO_G1 // -670.2
-GEN_SE_G // 600
-GEN_N\_G // 70.2
+
+| Result                | T01    | T02     | T03    | 
+|:----------------------|--------|---------|--------|
+| GEN_CUR_SO_G1_S_SO_1  | /      | -168.4  | -80    | 
+| GEN_CUR_SO_G2_S_SO_1  | -168.4 | /       | /      | 
+| LOAD_CUR_SE_L1_S_SO_1 | -168.4 | -168.53 | -80    | 
+| GEN_SO_G1             | /      | /       | -776.9 |
+| GEN_SE_G              | /      | /       | 600    |
+| GEN_N_G               | /      | /       | 176.9  |
+
 
 We see that Metrix then prefers to lower the consumption to SE rather
 that mount the SE group on the first two time steps in
@@ -737,21 +759,23 @@ can modify the actions chosen by Metrix.
 
 #### In practice:
 
-- add a threshold of 480 before healing on S_SO_2
+- add a threshold of 480 before curative on S_SO_2
 
 - authorize groups SO_G1, SO_G1, SE_G and N_G in preventive and
   curative
 
-- do not allow parries
+- do not allow parades
 
 - do not define a preventive or curative consumption parade
 
 -   Compare the actions taken by Metrix in relation to the 5E action.
 
-#### Syntax help:
+[//]: # (#### Syntax help:)
 
-Configure monitored sections:[link
-wiki](https://wikicvg.rte-france.com/xwiki/bin/view/imaGrid/4.+Configure+and+launch+Metrix#HSectionssurveillE9es)
+[//]: # ()
+[//]: # (Configure monitored sections:[link)
+
+[//]: # (wiki]&#40;https://wikicvg.rte-france.com/xwiki/bin/view/imaGrid/4.+Configure+and+launch+Metrix#HSectionssurveillE9es&#41;)
 
 ### Action 5F - Configure the thresholds before maneuver - Correction
 
@@ -786,8 +810,8 @@ No parade file.
 #### Results and Analysis:
 
 Activating the threshold before maneuver without defining it leads to the appearance
-a new column \"MAX_TMP_THREAT_FLOW_S\_SO_2\" which contains the
-worst flow after incident and before manoeuvre. It is here 484 MW on the
+a new column \"MAX_TMP_THREAT_FLOW_S_SO_2" which contains the
+worst flow after contingency and before manoeuvre. It is here 484 MW on the
 first two time steps.
 
 When we define a maximum threshold of 480 MW before operation, we see that
@@ -796,12 +820,14 @@ in N or after parade, Metrix does preventive redispatching. In effect,
 the flow before operation was 484MW for a threshold of 480 MW. metrix
 therefore performs 8 MW of preventive redispatching to respect this threshold.
 
-Result T01 T02 T03
-  ----------------------------- ------------------ --- ----- ---------
-MAX_TMP_THREAT_FLOW_S\_SO_2 -480 -480 -166.65
-GEN_COST 852.6 857.2 67695.2
-GEN_SO_G1 / -8.5 -670.2
-GEN_SO_G2 -8.4 / /
-GEN_SE_G 8.4 8.4 600
-GEN_N\_G // 70.2
-TOPOLOGY_S\_SO_1 SOO1_SOO1_DJ_OMN S_SO_2 S_SO_2
+
+
+| Result                      | T01              | T02    | T03     | 
+|:----------------------------|------------------|--------|---------|
+| MAX_TMP_THREAT_FLOW_S\_SO_2 | -480             | -480   | -140    |
+| GEN_COST                    | 845.9            | 850.5  | 78470.4 | 
+| GEN_SO_G1                   | /                | -8.4   | -776.9  | 
+| GEN_SO_G2                   | -8.4             | /      | /       |
+| GEN_SE_G                    | 8.4              | 8.4    | 600     |
+| GEN_N_G                     | /                | /      | 176.9   |
+| TOPOLOGY_S_SO_1             | SOO1_SOO1_DJ_OMN | S_SO_2 | S_SO_2  |

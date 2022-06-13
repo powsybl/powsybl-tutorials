@@ -281,11 +281,6 @@ On time steps 2 and 3, this parry does not work because the
 production is on the other node of the SO post. Metrix then chooses the
 parade which consists in opening the work in constraint. He had not
 retained this parry on the first time step because it was declared in
-below in the lTranslation types
-Text translation
-Source text
-5,000 / 5,000
-Translation results
 list of parades: with identical effectiveness, the parades
 are chosen in the order of the list.
 
@@ -433,12 +428,7 @@ preventive, we can clearly see that Metrix used the parades in priority
 on the curative and makes it possible to solve the constraints in N-k. For the
 deviations in N observed at the 4C action, he is forced to use the
 preventive groups (because parades cannot act in N). There are
-so redispatchinTranslation types
-Text translation
-Source text
-5,000 / 5,000
-Translation results
-g on the 3rd time step; Metrix chooses to
+so redispatching on the 3rd time step; Metrix chooses to
 lower the unit to SO which delivers on the structure under stress and
 mount the one to SE which is on the same post as the load. He rides it
 up to its Pmax but must then pick up the group on the station

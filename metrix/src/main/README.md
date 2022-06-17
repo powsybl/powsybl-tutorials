@@ -1,12 +1,12 @@
 # Powsybl-METRIX tutorial
 author:
-- Mathilde Bongrain
-  title: "**TP Metrix - 6 node network - Statement**"
+- RTE
+  title: "**Metrix tutorial - 6 node network**"
 ---
 
-**Objectives of the practical work:** On a very simple network (6 workstations), to appropriate
-Metrix settings and outputs, and knowing how to explain the
-results obtained.
+**Objectives of the practical work:** On a very simple network (6 substations), learn how to use
+PowSyBl-Metrix settings and outputs, and how to explain the
+obtained results.
 
 ## What do you need ?
 - About 4 hours
@@ -16,23 +16,23 @@ results obtained.
 
 ## How to install metrix
 In this chapter we will install Powsybl-METRIX on your environment. You can skip this part if Powsybl-METRIX is already set up.
-1. **Clone the repository** : open a terminal in the directory of your choice, and enter the following command line :
+1. **Clone the repository**: open a terminal in the directory of your choice, and enter the following command line:
    <code> git clone https://github.com/powsybl/powsybl-metrix.git </code>
-2. **Install Metrix** : go in the cloned repository, and run the script `./install.sh`.
+2. **Install Metrix**: go in the cloned repository directory, and run the script `./install.sh`.
    When you are asked if you want a full or a metrix installation, select "full". When you are asked if you want to add Powsybl-metrix to the path, select "yes".
 
 ## 1- Network presentation
 
-The network used for this lab consists of 6 stations, all connected
+The network used for this practicals consists of 6 substations, all connected
 by two parallel lines with the same electrotechnical characteristics
 (same resistance and same reactance for each line), as well as two
-HVDC and a TD. It also features 4 groups and three loads.\
+HVDC lines and a Phase-Shifter Transformer (PST). It also features 4 groups and three loads.\
 ![image](images/reseau_6_noeuds_ss_HDVC.png)
 
-The network is described in an "iidm" format (which is the native Powsybl network representation format).
+The network is described in a file in the "iIDM" format (the native Powsybl network representation format).
 It can be found in the folder `src/main/resources/3A/data/reseau_6noeuds.xiidm`.
 
-in this TP,each station and line's name refers to cardinal points:
+In this practicals, each station and line's name refers to cardinal points:
 - NO: North West
 - N: North
 - NE: North East
@@ -41,7 +41,7 @@ in this TP,each station and line's name refers to cardinal points:
 - SO: South West
 
 # 2- To get started:
-Along with the network file, you can find a timeseries file at the path :
+Along with the network file, you can find a timeseries file at the path:
 `src/main/resources/3A/data/ts/time-series-tp.csv`. It will contains time series to map to each demand and/or 
 unavoidable production of the network. It is organized as follows:
 
@@ -52,21 +52,21 @@ unavoidable production of the network. It is organized as follows:
 | T02   | 1       | 960   | 960   | 0     | 400    | 480     |
 | T03   | 1       | 960   | 960   | 0     | 100    | 480     |
 
-Note : These two files (network file and timeseries file) are the same used in all exercises of the tutorial.
+Note: These two files (network file and timeseries file) are used throughout all exercises of the tutorial.
 
-In mapping output you should have the following network:\
+In mapping output, you should have the following network:\
 ![image](images/result_mapping_ss_HDVC.png)
 
 
 # 3- Load Flow mode: Understanding flows
 
-The load flow Metrix allows the calculation of active-only flows on structures in N and N-1 based on network
+The load flow Metrix allows for the computation of active flows on all network elements in N and N-1 based on network
 information (topology, and electrotechnical characteristics), production and load timeseries and a list of contingencies.
-It does not  optimize anything. To launch a load flow, it is necessary:
+It does not optimize anything. To launch a load flow, it is necessary:
 ![image](images/mode_LF_fichiers.png)
-The multi-situation contrains the network information and the timeseries. The Metrix configuration script is a script 
-that allows to hold all parameters and options of the simulation (in particular the calculation mode, the cyhoixes of
-modeling of the structures and the data tro be acquired in output). The contingencies script denotes the list of defects and the 
+The multi-situation contains the network information and the timeseries. The Metrix configuration script is a script 
+that allows to hold all parameters and options of the simulation (in particular the calculation mode, the
+modeling choices, and the wanted output data). The contingencies script denotes the list of defects and the 
 options related to them.
 
 
@@ -76,20 +76,19 @@ options related to them.
 
 #### Goal:
 
-We want to observe the flows on all the structures of our
-network in the nominal case (N) and when line S_SO_S1 is removed (N-1).
+We want to observe the flows on all the network elements in the base case (N) and when line S_SO_S1 is removed (N-1).
 
 #### In practice
 
 - Create a Metrix configuration script in which we declare
-  want results on all the works of the network (if necessary,
+  that we want results on all the network elements of the network (if necessary,
   see syntax below).
 
 - Create a list of defects containing only the N-1 on the work
   S_SO_1 (if needed, see syntax below).
 
-- Create a Metrix calculation that points to the defined multi-situation
-  previously, the configuration script and the list of contingencies
+- Create a Metrix calculation that points to the previously defined multi-situation,
+  the configuration script and the list of contingencies
   (see reminder of the previous section if necessary).
 
 - Launch the calculation and note the flows on the structures on the
@@ -132,8 +131,8 @@ in N on the left and in N-1 on the right.
 
 ![image](images/result_LF_simple.png)
 
-More specifically, on the S_SO_2 structure in N and N-1 on the various
-no time, we get:\
+More specifically, on the S_SO_2 line in N and N-1 on the various
+time steps, the following results are obtained:\
 
 | Ts    | FLOW_S\_SO_2 | MAX_THREAT_1\_FLOW_S\_SO_1 | MAX_THREAT_1\_FLOW_S\_SO_2 |
 |-------|--------------|----------------------------|----------------------------|
@@ -142,21 +141,20 @@ no time, we get:\
 | T03   | -290.5       | -484.2                     | S_SO_1                     |
 
 
-In N, as the groups and the consumptions are south, the
-network is less impedant and we see that the flows pass through it
-mostly. There is also flow on the TD, and to the north. The
+In the base case (N), as the generation units and the consumptions are located at the south, the
+network is less impedant and we see that the flows pass mostly through it. There is also flow on the PST, and to the north. The
 flows are the same on the 3 time steps because the only difference
-is that production moves from group SO_G2 to group S0_G1 which are on
-the same post.
+is that production moves from the SO_G2 group to S0_G1 group which are on
+the same substation.
 
 ### Action 3B - Monitor S_SO_2
 
 #### Goal:
 
-We want to monitor certain structures (here S_SO_2), i.e.
-observe flows and threshold overruns only on
-the supervised structure. This reduces the amount of results to
+We want to monitor some network elements (here S_SO_2), i.e.:
+- in load flow mode, flows and violations are reported only for the monitored elements. This reduces the amount of results to
 analyze.
+- in optimization mode, only the maximum flows constraints of these monitored elements are taken into account. This reduces the computation time.
 
 #### In practice
 
@@ -193,10 +191,9 @@ Metrix setup script:
 
 #### Results and Analysis:
 
-You need to get new columns in the output file
-OVERLOAD\_ BASECASE (which represent the difference between the flow in N
-and N-1 on the work) and OVERLOAD_OUTAGES (which represent the
-difference between the flow in N-1 and the threshold).
+You need to ask for new columns in the output file
+OVERLOAD\_ BASECASE (Difference between the flow in N
+and the maximum allowed flow in the base case) and OVERLOAD_OUTAGES (Difference between the flow in N-1 and the maximum allowed flow after contingency).
 
 | Ts    | OVERLOAD_BASECASE | OVERLOAD_OUTAGES |   
 |-------|-------------------|------------------|
@@ -205,10 +202,10 @@ difference between the flow in N-1 and the threshold).
 | T03   | 190.5             | 384.2            | 
 
 
-There is no constraint in N on the first two time steps then
+There is no constraint violation in N on the first two time steps then
 that there are on the third. This is due to the change in the value of the
 threshold from 400 to 100 MW in the 'thresholdN' timeseries. There are
-overruns on all time steps in N-1.
+overloads on all time steps in N-1.
 
 ## 4- OPF mode without redispatching: Optimize RTE's manual actions
 
@@ -216,15 +213,14 @@ overruns on all time steps in N-1.
 
 #### Goal:
 
-We want to see if RTE's actions are sufficient to
-solve the constraints previously studied. For this, we propose
-in a first to offer the use of topological parades. In our
-case, which topological parades (opening of line or passage to two
-nodes in a post) could be effective?
+We want to see which dispatcher's remedial actions are enough to
+address the previously observed constraint violations. For this, we first want
+the use of topological parades. In this
+case, which topological parades (opening of line or splitting a substation into 2 electrical nodes) could be effective?
 
 #### In practice:
 
-- In the \"Metrix simulation\" object, define the following 4 parades
+- In the \"Metrix simulation\" object, define the following 4 remedial actions
   on the S_SO_1 contingency (see syntax):
 
     - opening of the circuit breaker SS1_SS1_DJ_OMN (this goes to two nodes

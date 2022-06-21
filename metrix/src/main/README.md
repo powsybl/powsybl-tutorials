@@ -337,34 +337,15 @@ At last there are no more constraint violation (as it is always the case in OPF 
 
 #### Goal:
 
-The goal here is to see how curative redispatching operates in
-relation to preventive redispatching. In order to see their use, it
-is necessary to remove parades that have zero cost and are
-therefore priority over any costly parry.
+Now we would like to see how curative redispatch operates in
+relation to preventive redispatching. We will have to remove parades with a null costin order to trigger curative redispatch (whose cost is not null).
 
 #### In practice:
 
-- Configure adjustable groups in curative
+- In the configuration script: 
+    - Configure adjustable groups in curative
+    - Specify that groups can also act on the contingency 'S_SO_1'
 
-- Specify that groups can also act on the contingency
-  'S_SO_1' (see syntax)
-
-- Remove the use of parades, and launch the calculation
-
-- Observe the actions taken by Metrix on the groups in preventive
-  and curative, as well as the cost of redispatching
-
-[//]: # ()
-[//]: # (#### Syntax help:)
-
-[//]: # ()
-[//]: # (Configure groups:[link)
-
-[//]: # (wiki]&#40;https://wikicvg.rte-france.com/xwiki/bin/view/imaGrid/4.+Configure+and+launch+Metrix#HGE9nE9rateurs&#41;)
-
-### Action 5B - Configure Adjustable Groups in curative - Fix
-
-#### Scripts:
 
 Metrix configuration file:
 
@@ -385,16 +366,18 @@ Metrix configuration file:
      }
     }
 
+- Remove the use of parades, and run the calculation
+
+- Observe the actions taken by Metrix on the groups in preventive
+  and curative, as well as the cost of redispatching.
+
 #### Results and Analysis:
 
-Keeping the parades, adding curative adjustments does not modify
-the results. In fact, the parades make it possible to remove the constraints
-at almost zero cost compared to group adjustments, they are therefore
-implemented on a priority basis.
+When topological parades are kept, adding curative adjustments does not modify the results. Indeed, parades allows to remove the constraint violations at a much lower cost than redispatch, and  therefore are activated on a priority basis.
 
-If we remove the parades, Metrix also performs redispatching
-curative on the first two time steps. On the 3rd, it does not do curative adjustment because preventive adjustment 
-already makes it possible to prevent contingency constraints.
+When parades are removed, Metrix performs curative redispatch
+ on the first two time steps. On the third one, there is no curative adjustment because preventive adjustment 
+already prevents contingency constraints.
 
 
 | Result                | T01    | T02    | T03     | 
@@ -409,26 +392,15 @@ already makes it possible to prevent contingency constraints.
 | GEN_CUR_N\_G_S\_SO_1  | /      | /      | 160     |
 
 
-### Action 5C - Remove essential group from curative
+### Action 5C - Remove an essential production site
 
 #### Goal:
 
-The goal here is to see how Metrix will react when you remove a
-essential group of redispatching in curative.
+Now we are going to look how Metrix reacts in curative mode when an essential generation site is removed from the network.
 
 #### In practice:
 
-- resume the same configuration as the previous action
-
-- remove group N_G from adjustable groups
-
-- resume topological parades
-
-- Observe the actions taken by Metrix on the groups
-
-### Action 5C - Remove essential group from curative - Correction
-
-#### Scripts:
+- Resume with the same configuration as in 5B
 
 Metrix configuration file:
 
@@ -449,13 +421,15 @@ Metrix configuration file:
      }
     }
 
-parades file to take into account.
+- Remove group N_G from adjustable groups
+
+- Resume topological parades
+
+- Run Metrix and observe the actions taken by Metrix on the groups
 
 #### Results and Analysis:
 
-Once SE_G's group is raised to Pmax, Metrix has no other group
-available to compensate for the decrease in the group of the SO post. He cuts
-then 35MW of consumption at SE.
+Once SE_G's ggeneration is raised to Pmax, There is no more available production to compensate for the decrease in the group of the SO post. Therefore, Metrix cuts 35MW of consumption at SE.
 
 
 | Result           | T01              | T02    | T03      | 
@@ -467,38 +441,23 @@ then 35MW of consumption at SE.
 | GEN_SE_G         | /                | /      | 600      |
 | TOPOLOGY_S\_SO_1 | SOO1_SOO1_DJ_OMN | S_SO_2 | S_SO_2   |
 
-### Action 5D - Authorize consumption in preventive
+### Action 5D - Modify curtailment policy
 
 #### Goal:
 
-The goal here is to see how Metrix will solve the constraints
-when preventive load shedding is authorized on SO and only the
-groups SE (Pmax)600) and SO?
+We want to look how Metrix solves the problem when preventive load shedding is restricted to certain areas.
 
 #### In practice:
 
-- repeat the same configuration as the previous action (still in
+We will authorize consumption curtailment only on SO.
+
+- Repeat the same configuration as the previous action (still in
   removing the N_G group from the adjustable groups, and without parades)
 
-- authorize consumptions 'SO_L' to move preventively (see
-  syntax)
+- Authorize consumptions 'SO_L' to vary preventively
 
-- Observe the actions taken by Metrix on the groups and the
-  consumption
 
-[//]: # ()
-[//]: # (#### Syntax help:)
-
-[//]: # ()
-[//]: # (Configure consumptions:[link)
-
-[//]: # (wiki]&#40;https://wikicvg.rte-france.com/xwiki/bin/view/imaGrid/4.+Configure+and+launch+Metrix#HConsummations&#41;)
-
-### Action 5D - Authorize preventive consumption - Correction
-
-#### Scripts:
-
-Metrix configuration file:
+  Metrix configuration file:
 
     parameters {computationType OPF}
 
@@ -522,54 +481,27 @@ Metrix configuration file:
 
     }
 
-No parade file.
+- Ensure that parades are disabled.
+
+- Run the calculation and observe the actions taken by Metrix on the groups and the following consumption.
 
 #### Results and Analysis:
 
-In this case, an error code 1 is observed on the third time step.\
-Indeed, we saw just before that Metrix had to resort to load shedding
-to SE to find a solution, but this load shedding is not authorized here
-explicitly but another one that is not useful. With the means
-allowed, Metrix cannot find a solution that respects the thresholds of the
-works, it returns an error.\
-This example illustrates the importance of the configuration of the means
-of action. It must be a good balance between too many means
-of actions (if too many are authorized, the calculation times lengthen and
-understanding of the results is difficult) and not enough (there is a risk
-then not to have a solution to the problem).
+In this case, an error code 1 is observed on the third time step.
+Indeed, as we have seen in 5C, Metrix has to perform load shedding on SE to find a solution, but this load shedding is not authorized at this node. In this case Metrix cannot find a solution that respects the network capacity, and it returns an error.
+This example illustrates the importance of the configuration of the means of action. It must be a good balance between too many means of actions (in which case the calculation time increases and the results become hard to analyse) and not enough (in which case there is a risk to make the problem infeasible).
 
 ### Action 5E - Authorize curative consumption
 
 #### Goal:
 
-The goal here is to see how Metrix will solve the constraints
-when faced with several options. Will he prefer the action of
-the SE_L1 consumption in curative and preventive or the action of the groups
-SO_G1, SO_G1, SE_G and N_G?
-
+Now we are going to leave different options for Metrix to solve the constraint violation: redispatch, or curative and preventive demand curtailment.
 #### In practice:
+- Authorize redispatch on SO_G1, SO_G1, SE_G and N_G
 
-- authorize groups SO_G1, SO_G1, SE_G and N_G
+- Do not allow parades
 
-- do not allow parades
-
-- authorize consumption 'SE_L1' to move in preventive and curative mode
-  (see syntax)
-
-- Observe the actions taken by Metrix on the groups and the
-  consumption
-
-[//]: # ()
-[//]: # (#### Syntax help:)
-
-[//]: # ()
-[//]: # (Configure consumptions:[link)
-
-[//]: # (wiki]&#40;https://wikicvg.rte-france.com/xwiki/bin/view/imaGrid/4.+Configure+and+launch+Metrix#HConsummations&#41;)
-
-### Action 5E - Authorize curative consumption - Correction
-
-#### Scripts:
+- Authorize consumption 'SE_L1' to move in preventive and curative mode
 
 Metrix configuration file:
 
@@ -597,13 +529,13 @@ Metrix configuration file:
 
     }
 
-No parade file.
 
+- Run Metrix, observe the actions taken by Metrix on the production and
+  consumption
 #### Results and Analysis:
 
-As a reminder, before this modification, without the parades, Metrix had to
-make curative group adjustments on the first two steps of
-time: he lowered the group to SW and raised the group to SE. The
+As a reminder, before this modification, without the parades, Metrix had to make curative group adjustments on the first two steps of
+time: he lowered the generation on SW and raised the generation on SE. The
 results by allowing the consumption of SE to move with a cost of
 10 euros/MW are:
 
@@ -618,41 +550,26 @@ results by allowing the consumption of SE to move with a cost of
 | GEN_N_G               | /      | /       | 176.9  |
 
 
-We see that Metrix then prefers to lower the consumption to SE rather
-that mount the SE group on the first two time steps in
-curative. Indeed, we have fixed the cost of the groups at 100 euros
-against 10 euros for the drop in consumption.
+We can see that it is more beneficial to lower the consumption to SE rather than to increase the SE generation on the first two time steps in
+curative. Indeed, we have fixed the cost of the redispatch at 100 euros
+against 10 euros for the loss of consumption.
 
-### Action 5F - Configure thresholds before maneuver
+### Action 5F - Configure thresholds before curative
 
 #### Goal:
 
-The aim here is to see how the definition of a threshold before maneuver
-can modify the actions chosen by Metrix.
+Finally, we are going to see how the definition of a threshold before a curative action can modify the actions chosen by Metrix.
 
 #### In practice:
 
-- add a threshold of 480 before curative on S_SO_2
+- Add a threshold of 480 before curative on S_SO_2
 
-- authorize groups SO_G1, SO_G1, SE_G and N_G in preventive and
+- Authorize groups SO_G1, SO_G1, SE_G and N_G in preventive and
   curative
 
-- do not allow parades
+- Do not allow parades
 
-- do not define a preventive or curative consumption parade
-
--   Compare the actions taken by Metrix in relation to the 5E action.
-
-[//]: # (#### Syntax help:)
-
-[//]: # ()
-[//]: # (Configure monitored sections:[link)
-
-[//]: # (wiki]&#40;https://wikicvg.rte-france.com/xwiki/bin/view/imaGrid/4.+Configure+and+launch+Metrix#HSectionssurveillE9es&#41;)
-
-### Action 5F - Configure the thresholds before maneuver - Correction
-
-#### Scripts:
+- Do not define a preventive or curative consumption parade
 
 Metrix configuration file:
 
@@ -678,19 +595,18 @@ Metrix configuration file:
      }
     }
 
-No parade file.
+
+- Run Metrix and compare the actions taken by Metrix in relation to the 5E action.
 
 #### Results and Analysis:
 
-Activating the threshold before maneuver without defining it leads to the appearance
-a new column \"MAX_TMP_THREAT_FLOW_S_SO_2" which contains the
-worst flow after contingency and before manoeuvre. It is here 484 MW on the
-first two time steps.
+Activating the threshold before curative without defining it leads to the appearance a new column \"MAX_TMP_THREAT_FLOW_S_SO_2" which contains the
+worst flow after contingency and before the curative action. It is here 484 MW on the first two time steps.
 
-When we define a maximum threshold of 480 MW before operation, we see that
+When we define a maximum threshold of 480 MW before curative, we see that
 on the first two time steps, although there was no constraint
-in N or after parade, Metrix does preventive redispatching. In effect,
-the flow before operation was 484MW for a threshold of 480 MW. metrix
+in N or after parade, Metrix performs preventive redispatch. Indeed,
+the flow before operation was 484MW for a threshold of 480 MW. Metrix
 therefore performs 8 MW of preventive redispatching to respect this threshold.
 
 

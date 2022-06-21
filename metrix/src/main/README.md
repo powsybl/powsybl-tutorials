@@ -29,7 +29,7 @@ by two parallel lines with the same electrotechnical characteristics
 HVDC lines and a Phase-Shifter Transformer (PST). It also features 4 groups and three loads.\
 ![image](images/reseau_6_noeuds_ss_HDVC.png)
 
-The network is described in a file in the "iIDM" format (the native Powsybl network representation format).
+The network is described in a file in the "IIDM" format (the native Powsybl network representation format).
 It can be found in the folder `src/main/resources/3A/data/reseau_6noeuds.xiidm`.
 
 In this practicals, each station and line's name refers to cardinal points:
@@ -60,9 +60,9 @@ In mapping output, you should have the following network:\
 
 # 3- Load Flow mode: Understanding flows
 
-The load flow Metrix allows for the computation of active flows on all network elements in N and N-1 based on network
+In load flow mode, Metrix computes active flows on all network elements in N and N-1 based on network
 information (topology, and electrotechnical characteristics), production and load timeseries and a list of contingencies.
-It does not optimize anything. To launch a load flow, it is necessary:
+It does not optimize anything. The following figure summarizes the inputs and outputs of this Mode:
 ![image](images/mode_LF_fichiers.png)
 The multi-situation contains the network information and the timeseries. The Metrix configuration script is a script 
 that allows to hold all parameters and options of the simulation (in particular the calculation mode, the
@@ -71,8 +71,7 @@ options related to them.
 
 
 
-
-### Action 3A - Launch in simple LF mode
+### Action 3A - Run in simple LF mode
 
 #### Goal:
 
@@ -81,35 +80,7 @@ We want to observe the flows on all the network elements in the base case (N) an
 #### In practice
 
 - Create a Metrix configuration script in which we declare
-  that we want results on all the network elements of the network (if necessary,
-  see syntax below).
-
-- Create a list of defects containing only the N-1 on the work
-  S_SO_1 (if needed, see syntax below).
-
-- Create a Metrix calculation that points to the previously defined multi-situation,
-  the configuration script and the list of contingencies
-  (see reminder of the previous section if necessary).
-
-- Launch the calculation and note the flows on the structures on the
-  different time steps.
-
-[//]: # ()
-[//]: # (#### Syntax help:)
-
-[//]: # ()
-[//]: # (Results on all network works:[link)
-
-[//]: # (wiki]&#40;https://wikicvg.rte-france.com/xwiki/bin/view/imaGrid/4.+Configure+and+launch+Metrix#HOuvragessurveillE9setouvragesavecrE9sultats&#41;)
-
-[//]: # ()
-[//]: # (Create a defect list:[link)
-
-[//]: # (wiki]&#40;https://wikicvg.rte-france.com/xwiki/bin/view/imaGrid/4.+Configure+and+launch+Metrix#HListed27incidents&#41;)
-
-### Action 3A - Launch in single LF mode - Fix
-
-#### Scripts:
+  that we want results on all the network elements of the network:
 
 Metrix configuration script: (conf.groovy)
 
@@ -120,9 +91,16 @@ Metrix configuration script: (conf.groovy)
        }
     }
 
+
+- Create a list of contingencies containing only the N-1 on the work
+  S_SO_1:
+
 Contingencies script: (contingencies.groovy)
 
     contingency('S_SO_1') { equipments 'S_SO_1'}
+
+
+- Run the calculation and note the flows on the structures on the different time steps.
 
 #### Results and Analysis:
 
@@ -154,33 +132,14 @@ the same substation.
 We want to monitor some network elements (here S_SO_2), i.e.:
 - in load flow mode, flows and violations are reported only for the monitored elements. This reduces the amount of results to
 analyze.
-- in optimization mode, only the maximum flows constraints of these monitored elements are taken into account. This reduces the computation time.
+- in optimization mode (see below), only the maximum flows constraints of these monitored elements are taken into account. This reduces the computation time.
 
 #### In practice
 
 - Modify the Metrix configuration script to monitor the structure
   S_SO_2 in N and on contingenciess.
 
-- Declare as threshold in N and N-k the timeseries 'thresholdN' provided in
-  the set of entry timeseries (see syntax).
-
-- No longer ask for results on other works to reduce
-  reading the results later.
-
-- Launch the calculation and analyze the new results.
-
-#### Syntax help:
-
-Declare a threshold:[link
-wiki](https://wikicvg.rte-france.com/xwiki/bin/view/imaGrid/4.+Configure+and+launch+Metrix#HOuvragessurveillE9setouvragesavecrE9sultats)
-Description of Metrix results: [link
-wiki](https://wikicvg.rte-france.com/xwiki/bin/view/imaGrid/4.+Configure+and+launch+Metrix#HSortiesdeMetrix)
-
-### Action 3B - Monitor S_SO_2 - Fix
-
-#### Scripts:
-
-Metrix setup script:
+Metrix configuration script: (conf.groovy)
 
     branch('S_SO_2') {
        baseCaseFlowResults true // results in N
@@ -188,6 +147,8 @@ Metrix setup script:
        branchRatingsBaseCase 'thresholdN' // threshold in N
        branchRatingsOnContingency 'thresholdN' // threshold in N-k
     }
+
+- Run the calculation and analyze the new results.
 
 #### Results and Analysis:
 
@@ -202,27 +163,22 @@ and the maximum allowed flow in the base case) and OVERLOAD_OUTAGES (Difference 
 | T03   | 190.5             | 384.2            | 
 
 
-There is no constraint violation in N on the first two time steps then
-that there are on the third. This is due to the change in the value of the
-threshold from 400 to 100 MW in the 'thresholdN' timeseries. There are
-overloads on all time steps in N-1.
+There is no constraint violation in N on the first two time steps then that there are on the third. This is due to the change in the value of the threshold from 400 to 100 MW in the 'thresholdN' timeseries. There are overloads on all time steps in N-1.
 
-## 4- OPF mode without redispatching: Optimize RTE's manual actions
+## 4- OPF mode without redispatching
+
+In this mode, Metrix is allowed to use topological parades in oorder to minimize the violation of line capacities. However, it does not change the dispatch: production and consumption at each node cannot be modified.
 
 ### Action 4A - Use topological countermeasures to solve constraints
 
 #### Goal:
 
-We want to see which dispatcher's remedial actions are enough to
-address the previously observed constraint violations. For this, we first want
-the use of topological parades. In this
+We would like to know if the dispatcher's remedial actions are enough to address the previously observed constraint violations. For this, we first want the use of topological parades. In this
 case, which topological parades (opening of line or splitting a substation into 2 electrical nodes) could be effective?
 
 #### In practice:
 
-- In the \"Metrix simulation\" object, define the following 4 remedial actions
-  on the S_SO_1 contingency (see syntax):
-
+- In the \"Metrix simulation\" object, define the following 4 remedial actions on the S_SO_1 contingency
     - opening of the circuit breaker SS1_SS1_DJ_OMN (this goes to two nodes
       post S)
 
@@ -233,21 +189,6 @@ case, which topological parades (opening of line or splitting a substation into 
 
     - opening of the S_SO_2 line
 
-- Configure in the Metrix script the launch below and observe
-  the activations of parades at the different time steps as well as
-  the evolution of the constraints (cf description of the Metrix results) .
-
-#### Syntax help:
-
-Definition of a contingency response:[link
-wiki](https://wikicvg.rte-france.com/xwiki/bin/view/imaGrid/4.+Configure+and+launch+Metrix#HFichierdeparadestopologiques)
-Description of Metrix results: [link
-wiki](https://wikicvg.rte-france.com/xwiki/bin/view/imaGrid/4.+Configure+and+launch+Metrix#HSortiesdeMetrix)
-
-### Action 4A - Use topological countermeasures to solve constraints - Fix
-
-#### Scripts:
-
 Parade file: (parades.csv)
 
     NB;4;
@@ -256,7 +197,9 @@ Parade file: (parades.csv)
     S_SO_1;2;SS1_SS1_DJ_OMN;SOO1_SOO1_DJ_OMN;
     S_SO_1;1;S_SO_2;
 
-Metrix configuration file:
+- Configure the Metrix script as shown below :
+
+Metrix configuration file (conf.groovy)
 
     parameters {computationType OPF_WITHOUT_REDISPATCHING}
 
@@ -266,6 +209,8 @@ Metrix configuration file:
        branchRatingsBaseCase 'thresholdN' // threshold in N
        branchRatingsOnContingency 'thresholdN' // threshold in N-k
     }
+
+-  Run Metrix and observe the activations of parades at the different time steps as well as  the evolution of the constraints (cf description of the Metrix results) .
 
 #### Results and Analysis:
 
@@ -286,63 +231,43 @@ On the 3rd time step, the constraint in N remains unchanged.
 
 #### Goal:
 
-The goal here is to see if the use of the phase-shifting transformer allows
-alone to solve the constraints. The phase shifts of the TDs are by
-contingencies set to their value in the multi-situation (choice of socket),
-you can ask Metrix to optimize them preventively and on certain
-contingencies. What sign of phase shift would relieve the
-N and N-K constraints identified? Positive which slows down the flow between NO
-and NE or negative which accentuates the flow between NO and NE
+Now we want to check if the use of the phase-shifting transformer by itself is enough to solve the constraints. We can ask Metrix to optimize the phase shifts of the PST, both preventively and on certain contingencies. What sign of phase shift would relieve the N and N-K constraints identified? Positive which slows down the flow between NO and NE or negative which accentuates the flow between NO and NE?
 
 #### In practice:
 
 In the Metrix configuration file:
 
-- authorize the TD NE_NO_1 to move preventively and on the contingency
+- authorize the PST NE_NO_1 to move preventively and on the contingency
   S_SO_1 (see syntax).
-
-- Launch the calculation without parades
-
-- Observe the actions on the TD and the evolution of the constraints (cf
-  description of Metrix results).
-
-For the rest of the tutorial, we will no longer use the TD, remember to
-remove from the Metrix configuration for the next steps.
-
-#### Syntax help:
-
-Authorization of a TD to move in preventive and / or curative: [link
-wiki](https://wikicvg.rte-france.com/xwiki/bin/view/imaGrid/4.+Configure+and+launch+Metrix#HTransfo-dE9phaseurs)
-Description of Metrix results: [link
-wiki](https://wikicvg.rte-france.com/xwiki/bin/view/imaGrid/4.+Configure+and+launch+Metrix#HSortiesdeMetrix)
-
-### Action 4B - Use phase-shifting transformer - Fix
-
-#### Scripts:
 
 Metrix configuration file:
 
-    parameters {
-        computationType OPF_WITHOUT_REDISPATCHING
-    }
+  parameters {
+      computationType OPF_WITHOUT_REDISPATCHING
+  }
 
-    branch('S_SO_2') {
-       baseCaseFlowResults true // results in N
-       maxThreatFlowResults true // results on N-k
-       branchRatingsBaseCase 'thresholdN' // threshold in N
-       branchRatingsOnContingency 'thresholdN' // threshold in N-k
-    }
+  branch('S_SO_2') {
+      baseCaseFlowResults true // results in N
+      maxThreatFlowResults true // results on N-k
+      branchRatingsBaseCase 'thresholdN' // threshold in N
+      branchRatingsOnContingency 'thresholdN' // threshold in N-k
+  }
 
-    phaseShifter('NE_NO_1') {
-      controlType OPTIMIZED_ANGLE_CONTROL
-      onContingency 'S_SO_1'
-    }
+  phaseShifter('NE_NO_1') {
+    controlType OPTIMIZED_ANGLE_CONTROL
+    onContingency 'S_SO_1'
+  }
+
+- Run the calculation without parades
+
+- Observe the actions on the PST and the evolution of the constraints (cf
+  description of Metrix results).
+
+For the rest of the tutorial, we will no longer use the PST, remember to remove it from the Metrix configuration for the next steps.
 
 #### Results and Analysis:
 
-By launching the OPF_WITHOUT_REDISPATCHING calculation without parade, we observe
-that Metrix plays on the phase shift of the TD in curative on all the steps of
-time and preventively on the third time step. Constraints
+After running the OPF_WITHOUT_REDISPATCHING calculation without parade, we observe that Metrix plays on the phase shift of the PST in curative on all the steps of time and preventively on the third time step. Constraints
 are fully lifted:\
 
 
@@ -362,42 +287,11 @@ are fully lifted:\
 
 #### Goal:
 
-The goal here is to take care of the residual stresses after the
-"free" actions that constitute the parades (it is assumed that the TD
-is not available/does not exist). Let`s remind that in part 4A,
-the parades had not been able to resolve the constraints as a preventive measure. We
-therefore proposes to see if the use of groups as a preventive measure makes it possible to
-resolve these constraints. What power from groups should we expect?
+The goal here is to take care of the residual violations remaining after the "free" actions that are constituted by the parades (it is assumed that the PST is not available/does not exist). As we have seen in part 4A, the parades had not been enough to respect the constraints in preventive mode. Hence we would like to check if the preventing redispatch allows to address these constraints violations. What level of redispatch should we expect?
 
 #### In practice:
 
-- Define in the Metrix configuration file that all groups
-  can move in preventive with costs upwards of 100 and at
-  decreasing by 1 (see syntax)
-
-- Change simulation mode to \"OPF\", resume parades, and
-  start the calculation
-
-- Observe the actions taken by Metrix (see description of the results
-  Metrix) whose cost of redispatching
-
-NB: the SE_G group has a Pmax of 600MW
-
-[//]: # ()
-[//]: # (#### Syntax help:)
-
-[//]: # ()
-[//]: # (Configure groups:[link)
-
-[//]: # (wiki]&#40;https://wikicvg.rte-france.com/xwiki/bin/view/imaGrid/4.+Configure+and+launch+Metrix#HGE9nE9rateurs&#41;)
-
-[//]: # (Description of Metrix results: [link)
-
-[//]: # (wiki]&#40;https://wikicvg.rte-france.com/xwiki/bin/view/imaGrid/4.+Configure+and+launch+Metrix#HSortiesdeMetrix&#41;)
-
-### Action 5A - Configure adjustable groups in preventive - Fix
-
-#### Scripts:
+- Define in the Metrix configuration file that all dispatchable production can move in preventive with costs upwards of 100 and at decreasing by 1:
 
 Metrix configuration file:
 
@@ -417,23 +311,17 @@ Metrix configuration file:
      }
     }
 
+- Change simulation mode to \"OPF\", resume parades, and run the calculation
+
+- Observe the actions taken by Metrix and the associated cost of redispatching
+
+NB: the SE_G group has a Pmax of 600MW.
+
 #### Results and Analysis:
 
-By launching the OPF calculation with the previous parades and the groups in
-preventive, we can clearly see that Metrix used the parades in priority
-on the curative and makes it possible to solve the constraints in N-k. For the
-deviations in N observed at the 4C action, he is forced to use the
-preventive groups (because parades cannot act in N). There are
-so redispatching on the 3rd time step; Metrix chooses to
-lower the unit to SO which delivers on the structure under stress and
-mount the one to SE which is on the same post as the load. He rides it
-up to its Pmax but must then pick up the group on the station
-N. The cost of redispatching is equal to the volumes called multiplied by
-their costs.
+By running the OPF calculation with the previous parades and the groups in preventive, we can clearly see that Metrix uses the parades in priority in curative mode, which is enough to solve the constraints in N-k. Concerning the violations in N observed in Chapter 4C, Metrix has to perform preventive redispatch, since parades cannot perform in N. We can observe redispatch on the 3rd time step; Metrix chooses to lower the generating unit on SO, increase the one on SE up to its Pmax, and complete it with a slight increase of the production on node N. The cost of redispatching is equal to the required volumes multiplied by their costs.
 
-In the end, there are no constraints left (this is always the case in mode
-OPF) and the flow on the monitored structure is reduced to exactly 100MW
-in N on the 3rd time step.
+At last there are no more constraint violation (as it is always the case in OPF mode) and the flow on the monitored structure is reduced to exactly 100MW in N on the 3rd time step.
 
 | Result            | T01 | T02 | T03     | 
 |:------------------|-----|-----|---------|
@@ -443,7 +331,6 @@ in N on the 3rd time step.
 | GEN_SO_G1         | /   | /   | -776.9  |
 | GEN_SE_G          | /   | /   | 600     |
 | GEN_N\_G          | /   | /   | 176.9   |
-
 
 
 ### Action 5B - Configure adjustable groups in curative

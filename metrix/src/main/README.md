@@ -26,7 +26,7 @@ In this chapter we will install Powsybl-METRIX on your environment. You can skip
 The network used for this practicals consists of 6 substations, all connected
 by two parallel lines with the same electrotechnical characteristics
 (same resistance and same reactance for each line), as well as two
-HVDC lines and a Phase-Shifter Transformer (PST). It also features 4 groups and three loads.\
+HVDC lines and a Phase-Shifter Transformer (PST). It also features 4 generation units and three loads.\
 ![image](images/reseau_6_noeuds_ss_HDVC.png)
 
 The network is described in a file in the "IIDM" format (the native Powsybl network representation format).
@@ -122,7 +122,7 @@ time steps, the following results are obtained:\
 In the base case (N), as the generation units and the consumptions are located at the south, the
 network is less impedant and we see that the flows pass mostly through it. There is also flow on the PST, and to the north. The
 flows are the same on the 3 time steps because the only difference
-is that production moves from the SO_G2 group to S0_G1 group which are on
+is that production moves from the SO_G2 unit to S0_G1 unit which are on
 the same substation.
 
 ### Action 3B - Monitor S_SO_2
@@ -283,7 +283,7 @@ are fully lifted:\
 
 ## 5- OPF mode: Optimize all actions
 
-### Action 5A - Configure adjustable groups in preventive
+### Action 5A - Configure adjustable units in preventive
 
 #### Goal:
 
@@ -315,11 +315,11 @@ Metrix configuration file:
 
 - Observe the actions taken by Metrix and the associated cost of redispatching
 
-NB: the SE_G group has a Pmax of 600MW.
+NB: the SE_G unit has a Pmax of 600MW.
 
 #### Results and Analysis:
 
-By running the OPF calculation with the previous parades and the groups in preventive, we can clearly see that Metrix uses the parades in priority in curative mode, which is enough to solve the constraints in N-k. Concerning the violations in N observed in Chapter 4C, Metrix has to perform preventive redispatch, since parades cannot perform in N. We can observe redispatch on the 3rd time step; Metrix chooses to lower the generating unit on SO, increase the one on SE up to its Pmax, and complete it with a slight increase of the production on node N. The cost of redispatching is equal to the required volumes multiplied by their costs.
+By running the OPF calculation with the previous parades and the units in preventive, we can clearly see that Metrix uses the parades in priority in curative mode, which is enough to solve the constraints in N-k. Concerning the violations in N observed in Chapter 4C, Metrix has to perform preventive redispatch, since parades cannot perform in N. We can observe redispatch on the 3rd time step; Metrix chooses to lower the generating unit on SO, increase the one on SE up to its Pmax, and complete it with a slight increase of the production on node N. The cost of redispatching is equal to the required volumes multiplied by their costs.
 
 At last there are no more constraint violation (as it is always the case in OPF mode) and the flow on the monitored structure is reduced to exactly 100MW in N on the 3rd time step.
 
@@ -333,7 +333,7 @@ At last there are no more constraint violation (as it is always the case in OPF 
 | GEN_N\_G          | /   | /   | 176.9   |
 
 
-### Action 5B - Configure adjustable groups in curative
+### Action 5B - Configure adjustable units in curative
 
 #### Goal:
 
@@ -343,8 +343,8 @@ relation to preventive redispatching. We will have to remove parades with a null
 #### In practice:
 
 - In the configuration script: 
-    - Configure adjustable groups in curative
-    - Specify that groups can also act on the contingency 'S_SO_1'
+    - Configure adjustable units in curative
+    - Specify that units can also act on the contingency 'S_SO_1'
 
 
 Metrix configuration file:
@@ -368,7 +368,7 @@ Metrix configuration file:
 
 - Remove the use of parades, and run the calculation
 
-- Observe the actions taken by Metrix on the groups in preventive
+- Observe the actions taken by Metrix on the units in preventive
   and curative, as well as the cost of redispatching.
 
 #### Results and Analysis:
@@ -421,15 +421,15 @@ Metrix configuration file:
      }
     }
 
-- Remove group N_G from adjustable groups
+- Remove unit N_G from adjustable units
 
 - Resume topological parades
 
-- Run Metrix and observe the actions taken by Metrix on the groups
+- Run Metrix and observe the actions taken by Metrix on the units
 
 #### Results and Analysis:
 
-Once SE_G's ggeneration is raised to Pmax, There is no more available production to compensate for the decrease in the group of the SO post. Therefore, Metrix cuts 35MW of consumption at SE.
+Once SE_G's ggeneration is raised to Pmax, There is no more available production to compensate for the decrease in the unit of the SO post. Therefore, Metrix cuts 35MW of consumption at SE.
 
 
 | Result           | T01              | T02    | T03      | 
@@ -452,7 +452,7 @@ We want to look how Metrix solves the problem when preventive load shedding is r
 We will authorize consumption curtailment only on SO.
 
 - Repeat the same configuration as the previous action (still in
-  removing the N_G group from the adjustable groups, and without parades)
+  removing the N_G unit from the adjustable units, and without parades)
 
 - Authorize consumptions 'SO_L' to vary preventively
 
@@ -483,7 +483,7 @@ We will authorize consumption curtailment only on SO.
 
 - Ensure that parades are disabled.
 
-- Run the calculation and observe the actions taken by Metrix on the groups and the following consumption.
+- Run the calculation and observe the actions taken by Metrix on the units and the following consumption.
 
 #### Results and Analysis:
 
@@ -534,7 +534,7 @@ Metrix configuration file:
   consumption
 #### Results and Analysis:
 
-As a reminder, before this modification, without the parades, Metrix had to make curative group adjustments on the first two steps of
+As a reminder, before this modification, without the parades, Metrix had to make curative unit adjustments on the first two steps of
 time: he lowered the generation on SW and raised the generation on SE. The
 results by allowing the consumption of SE to move with a cost of
 10 euros/MW are:
@@ -564,7 +564,7 @@ Finally, we are going to see how the definition of a threshold before a curative
 
 - Add a threshold of 480 before curative on S_SO_2
 
-- Authorize groups SO_G1, SO_G1, SE_G and N_G in preventive and
+- Authorize units SO_G1, SO_G1, SE_G and N_G in preventive and
   curative
 
 - Do not allow parades

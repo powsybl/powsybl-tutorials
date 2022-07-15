@@ -48,7 +48,7 @@
 
     <!-- This property is only needed to run the tutorial easily -->
     <properties>
-      <exec.mainClass>powsybl.tutorials.csv.export.Main</exec.mainClass>
+      <exec.mainClass>com.powsybl.tutorials.csv.export.Main</exec.mainClass>
     </properties>
 
 </project>

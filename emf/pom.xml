@@ -16,7 +16,7 @@
     <!-- These properties are only needed to run the tutorial from the command line with mvn exec:java -->
     <properties>
         <exec.cleanupDaemonThreads>false</exec.cleanupDaemonThreads>
-        <exec.mainClass>powsybl.tutorials.emf.EmfTutorial</exec.mainClass>
+        <exec.mainClass>com.powsybl.tutorials.emf.EmfTutorial</exec.mainClass>
     </properties>
 
     <build>

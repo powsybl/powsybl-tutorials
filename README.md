@@ -46,7 +46,7 @@ $ mvn compile exec:java
 [INFO] 
 [...snip...]
 [INFO] --- exec-maven-plugin:1.6.0:java (default-cli) @ powsybl-csv-exporter ---
-[powsybl.tutorials.csv.export.Main.main()] INFO powsybl.tutorials.csv.export.CsvLinesExporter - CSV export done in 8 ms
+[com.powsybl.tutorials.csv.export.Main.main()] INFO com.powsybl.tutorials.csv.export.CsvLinesExporter - CSV export done in 8 ms
 [INFO] ------------------------------------------------------------------------
 [INFO] BUILD SUCCESS
 

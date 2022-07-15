@@ -28,7 +28,6 @@ import com.powsybl.iidm.network.*;
 import com.powsybl.loadflow.LoadFlow;
 import com.powsybl.loadflow.LoadFlowParameters;
 import com.powsybl.loadflow.LoadFlowResult;
-import com.powsybl.openloadflow.OpenLoadFlowProvider;
 
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamWriter;
@@ -119,7 +118,7 @@ public final class EmfTutorial {
 
             // Run the balances ajustment.
             BalanceComputation balanceComputation = new BalanceComputationFactoryImpl()
-                    .create(balanceComputationAreas, new LoadFlow.Runner(new OpenLoadFlowProvider()), LocalComputationManager.getDefault());
+                    .create(balanceComputationAreas, LoadFlow.find(), LocalComputationManager.getDefault());
             BalanceComputationResult result = balanceComputation.run(mergingView, mergingView.getVariantManager().getWorkingVariantId(), parameters).join();
             System.out.println(result.getStatus());
 

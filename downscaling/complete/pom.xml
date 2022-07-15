@@ -19,7 +19,7 @@
         <slf4j.version>1.7.22</slf4j.version>
         <powsybl.core.version>4.0.0</powsybl.core.version>
         <exec.cleanupDaemonThreads>false</exec.cleanupDaemonThreads>
-        <exec.mainClass>powsybl.tutorials.downscaling.Downscaling</exec.mainClass>
+        <exec.mainClass>com.powsybl.tutorials.downscaling.Downscaling</exec.mainClass>
     </properties>
 
     <build>

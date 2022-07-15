@@ -6,7 +6,6 @@
  */
 package com.powsybl.tutorials.emf;
 
-import com.powsybl.action.util.Scalable;
 import com.powsybl.balances_adjustment.balance_computation.*;
 import com.powsybl.entsoe.cgmes.balances_adjustment.data_exchange.DataExchanges;
 import com.powsybl.entsoe.cgmes.balances_adjustment.data_exchange.DataExchangesXml;
@@ -24,6 +23,7 @@ import com.powsybl.entsoe.cgmes.balances_adjustment.util.CgmesVoltageLevelsAreaF
 import com.powsybl.entsoe.cgmes.balances_adjustment.util.CgmesBoundariesAreaFactory;
 import com.powsybl.iidm.import_.Importers;
 import com.powsybl.iidm.mergingview.MergingView;
+import com.powsybl.iidm.modification.scalable.Scalable;
 import com.powsybl.iidm.network.*;
 import com.powsybl.loadflow.LoadFlow;
 import com.powsybl.loadflow.LoadFlowParameters;

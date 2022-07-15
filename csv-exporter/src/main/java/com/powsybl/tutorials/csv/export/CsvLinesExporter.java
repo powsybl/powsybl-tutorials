@@ -95,7 +95,6 @@ public class CsvLinesExporter implements Exporter {
                 LOGGER.info("CSV export done in {} ms", System.currentTimeMillis() - startTime);
             }
         } catch (IOException e) {
-            LOGGER.error(e.toString(), e);
             throw new UncheckedIOException(e);
         }
     }

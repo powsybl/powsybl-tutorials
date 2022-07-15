@@ -15,7 +15,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
-import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.Properties;
 
 /**
@@ -50,11 +50,11 @@ public class CsvLinesImporter implements Importer {
 
     @Override
     public Network importData(ReadOnlyDataSource data, Properties props) {
-        Network network = NetworkFactory.create("Network_2Lines_Example", EXTENSION);
+        Network network = Network.create("Network_2Lines_Example", EXTENSION);
         LOGGER.debug("Start import from file {}", data.getBaseName());
         long startTime = System.currentTimeMillis();
         try {
-            CsvReader reader = new CsvReader(data.newInputStream(null, EXTENSION), Charset.forName("UTF-8"));
+            CsvReader reader = new CsvReader(data.newInputStream(null, EXTENSION), StandardCharsets.UTF_8);
             reader.readHeaders();
             while (reader.readRecord()) {
                 String id = reader.get("LineId");

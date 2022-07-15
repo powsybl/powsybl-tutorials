@@ -11,8 +11,6 @@ import com.powsybl.iidm.network.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.IOException;
-
 /**
  * @author Anne Tilloy <anne.tilloy at rte-france.com>
  */
@@ -20,7 +18,7 @@ public final class VoltageLevelTopologyTutorial {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(VoltageLevelTopologyTutorial.class);
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
 
         // This tutorial comes as a comprehensive illustration of the different network representations in Powsybl:
         // node/breaker, bus/breaker, bus view.

@@ -26,7 +26,6 @@
             <plugin>
                 <groupId>com.powsybl</groupId>
                 <artifactId>powsybl-itools-packager-maven-plugin</artifactId>
-                <version>${powsybl.core.version}</version>
                 <executions>
                     <execution>
                         <phase>package</phase>
@@ -54,19 +53,16 @@
         <dependency>
             <groupId>com.powsybl</groupId>
             <artifactId>powsybl-computation-local</artifactId>
-            <version>${powsybl.core.version}</version>
             <scope>runtime</scope>
         </dependency>
         <dependency>
             <groupId>com.powsybl</groupId>
             <artifactId>powsybl-config-classic</artifactId>
-            <version>${powsybl.core.version}</version>
             <scope>runtime</scope>
         </dependency>
         <dependency>
             <groupId>com.powsybl</groupId>
             <artifactId>powsybl-tools</artifactId>
-            <version>${powsybl.core.version}</version>
             <scope>runtime</scope>
         </dependency>
     </dependencies>

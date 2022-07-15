@@ -8,20 +8,14 @@ package com.powsybl.tutorials.cgmes;
 
 import com.powsybl.commons.io.table.AsciiTableFormatterFactory;
 import com.powsybl.commons.io.table.TableFormatterConfig;
-import com.powsybl.computation.ComputationManager;
-import com.powsybl.computation.local.LocalComputationManager;
 import com.powsybl.contingency.BranchContingency;
-import com.powsybl.contingency.ContingenciesProvider;
 import com.powsybl.contingency.Contingency;
 import com.powsybl.iidm.import_.Importers;
 import com.powsybl.iidm.network.*;
 import com.powsybl.iidm.network.util.Networks;
 import com.powsybl.loadflow.LoadFlow;
 import com.powsybl.loadflow.LoadFlowParameters;
-import com.powsybl.openloadflow.sa.OpenSecurityAnalysisProvider;
 import com.powsybl.security.*;
-import com.powsybl.security.interceptors.SecurityAnalysisInterceptor;
-import com.powsybl.security.detectors.DefaultLimitViolationDetector;
 
 import java.io.File;
 import java.io.IOException;
@@ -97,7 +91,7 @@ public final class CgmesMergeTutorial {
             System.out.println(networkBe.getName() + " :" + component.getNum() + " " + component.getSize() + " buses");
         }
 
-        networkBe.getGenerator("_3a3b27be-b18b-4385-b557-6735d733baf0").setVoltageRegulatorOn(false);
+        networkBe.getGenerator("3a3b27be-b18b-4385-b557-6735d733baf0").setVoltageRegulatorOn(false);
 
         // We are going to compute a load flow on this network. The load-flow engine used
         // is defined in the configuration file.
@@ -109,54 +103,20 @@ public final class CgmesMergeTutorial {
         Networks.printBalanceSummary("Balance: ", networkBe, new PrintWriter(System.out));
 
         // We are going to perform a security analysis on the merged network.
-        ComputationManager computationManager = LocalComputationManager.getDefault();
-        SecurityAnalysisProvider securityAnalysisProvider = new OpenSecurityAnalysisProvider();
-        SecurityAnalysisParameters securityAnalysisParameters = new SecurityAnalysisParameters()
-                .setLoadFlowParameters(loadFlowParameters);
 
-        // A security analysis needs a contingencies provider in order to create a list of contingencies.
-        // We are going to learn how to implement a contingencies provider.
-        // This is the easy way (but not really the modern way).
-        ContingenciesProvider contingenciesProvider = new ContingenciesProvider() {
-            @Override
-            public List<Contingency> getContingencies(Network network) {
-                List<Contingency> contingencies = new ArrayList<>();
-                for (Line line : network.getLines()) {
-                    if (line.getTerminal1().getVoltageLevel().getNominalV() < 300) {
-                        Contingency contingency = new Contingency(getName(line), new BranchContingency(line.getId()));
-                        contingencies.add(contingency);
-                    }
-                }
-                return contingencies;
-            }
-        };
-
-        // These previous lines are equivalent to the following ones.
-        ContingenciesProvider contingenciesProvider1 = new ContingenciesProvider() {
-            @Override
-            public List<Contingency> getContingencies(Network network) {
-                return network.getLineStream()
-                        .filter(l -> l.getTerminal1().getVoltageLevel().getNominalV() < 300)
-                        .map(l -> new Contingency(getName(l), new BranchContingency(l.getId())))
-                        .collect(Collectors.toList());
-            }
-        };
-
-        // And finally, the best way to implement a contingencies provider is this one:
+        // A security analysis needs a list of contingencies.
         // The list is composed of all lines which voltage is less than 300 kV.
-        ContingenciesProvider contingenciesProvider2 = n -> n.getLineStream()
+        List<Contingency> contingencies = networkBe.getLineStream()
                 .filter(l -> l.getTerminal1().getVoltageLevel().getNominalV() < 300)
-                .map(l -> new Contingency(getName(l), new BranchContingency(l.getId())))
+                .map(l -> new Contingency(l.getName(), new BranchContingency(l.getId())))
                 .collect(Collectors.toList());
 
-        System.out.println("Number of contingencies: " + contingenciesProvider2.getContingencies(networkBe).size());
+        System.out.println("Number of contingencies: " + contingencies.size());
 
         // We are going to run the security analysis on each contingency of the list.
-        LimitViolationFilter filter = new LimitViolationFilter();
-        LimitViolationDetector detector = new DefaultLimitViolationDetector();
-        List<SecurityAnalysisInterceptor> interceptors = new ArrayList<>();
-        SecurityAnalysisReport securityAnalysisReport = securityAnalysisProvider.run(networkBe, VariantManagerConstants.INITIAL_VARIANT_ID,
-                detector, filter, computationManager, securityAnalysisParameters, contingenciesProvider2, interceptors).join();
+        SecurityAnalysisParameters securityAnalysisParameters = new SecurityAnalysisParameters()
+                .setLoadFlowParameters(loadFlowParameters);
+        SecurityAnalysisReport securityAnalysisReport = SecurityAnalysis.run(networkBe,  contingencies, securityAnalysisParameters);
         SecurityAnalysisResult securityAnalysisResult = securityAnalysisReport.getResult();
 
         // Let's analyse the results.
@@ -167,16 +127,6 @@ public final class CgmesMergeTutorial {
                 new OutputStreamWriter(System.out),
                 new AsciiTableFormatterFactory(),
                 new Security.PostContingencyLimitViolationWriteConfig(null, TableFormatterConfig.load(), true, true));
-    }
-
-    // This function is needed to give a name to merged line.
-    private static String getName(Line line) {
-        if (line.isTieLine()) {
-            TieLine tieLine = (TieLine) line;
-            return tieLine.getHalf1().getName() + " + " + tieLine.getHalf2().getName();
-        } else {
-            return line.getName();
-        }
     }
 
     private CgmesMergeTutorial() {

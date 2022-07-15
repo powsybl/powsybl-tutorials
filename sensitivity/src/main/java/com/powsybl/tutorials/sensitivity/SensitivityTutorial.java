@@ -14,14 +14,13 @@ import com.powsybl.iidm.network.Line;
 import com.powsybl.iidm.network.Network;
 import com.powsybl.loadflow.LoadFlow;
 import com.powsybl.loadflow.LoadFlowParameters;
+import com.powsybl.security.json.SecurityAnalysisJsonModule;
 import com.powsybl.sensitivity.*;
-import com.powsybl.sensitivity.json.SensitivityJson;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -39,34 +38,33 @@ public final class SensitivityTutorial {
         // The network is described in iidm (the iTesla Internal Data Model format).
         Network network = Importers.loadNetwork("sensi_network_12_nodes.xml",
                 SensitivityTutorial.class.getResourceAsStream("/sensi_network_12_nodes.xml"));
+
         // In this tutorial the sensitivity is done on active and reactive powers, but this can be changed in
         // the LoadFlowParameters by using setDc(true). Then, the power flow will handle active power only.
 
         // 2. Create a list of factors to be studied in the sensitivity computation
         // First, create the sensitivity factors in Java directly
         // Start by defining the monitored lines.
-        List<Line> monitoredLines = new ArrayList<>();
-        monitoredLines.add(network.getLine("BBE2AA1  FFR3AA1  1"));
-        monitoredLines.add(network.getLine("FFR2AA1  DDE3AA1  1"));
-        monitoredLines.add(network.getLine("DDE2AA1  NNL3AA1  1"));
-        monitoredLines.add(network.getLine("NNL2AA1  BBE3AA1  1"));
+        List<Line> monitoredLines = List.of(network.getLine("BBE2AA1  FFR3AA1  1"),
+                                            network.getLine("FFR2AA1  DDE3AA1  1"),
+                                            network.getLine("DDE2AA1  NNL3AA1  1"),
+                                            network.getLine("NNL2AA1  BBE3AA1  1"));
 
         // Print the initial flow through each of the monitored lines.
         // These are the values of the "function reference" in the
         // JSON result file.
-        LoadFlow.run(network, LoadFlowParameters.load());
+        LoadFlowParameters parameters = new LoadFlowParameters();
+        LoadFlow.run(network, parameters);
         LOGGER.info("Initial active power through the four monitored lines");
         for (Line line : monitoredLines) {
             LOGGER.info("LINE {} - P: {} MW", line.getId(), line.getTerminal1().getP());
         }
 
         // Then build the factors themselves.
-        List<SensitivityFactor> factors =  monitoredLines.stream().map(l -> {
-            String monitoredBranchId = l.getId();
-            String twtId = network.getTwoWindingsTransformer("BBE2AA1  BBE3AA1  1").getId();
-            return new SensitivityFactor(SensitivityFunctionType.BRANCH_ACTIVE_POWER, monitoredBranchId,
-                    SensitivityVariableType.TRANSFORMER_PHASE, twtId, false, ContingencyContext.all());
-        }).collect(Collectors.toList());
+        List<SensitivityFactor> factors =  monitoredLines.stream()
+                .map(l -> new SensitivityFactor(SensitivityFunctionType.BRANCH_ACTIVE_POWER_1, l.getId(),
+                                                SensitivityVariableType.TRANSFORMER_PHASE, "BBE2AA1  BBE3AA1  1",
+                                                false, ContingencyContext.all())).collect(Collectors.toList());
 
         // 3. Run the sensitivity analysis
         // Run the analysis that will be performed on network working variant with default sensitivity analysis parameters
@@ -107,8 +105,11 @@ public final class SensitivityTutorial {
         SensitivityAnalysisResult results2 = SensitivityAnalysis.run(network, factors, contingencies);
 
         // Write the sensitivity results in a JSON temporary file. You can check the results in that file or specify your own file.
-        File jsonResultsFile = File.createTempFile("sensitivity_results_", ".json", new File("/tutorials"));
-        JsonUtil.writeJson(jsonResultsFile.toPath(), results2, SensitivityJson.createObjectMapper());
+        File jsonResultsFile = File.createTempFile("sensitivity_results_", ".json");
+        JsonUtil.createObjectMapper()
+                .registerModule(new SecurityAnalysisJsonModule())
+                .writerWithDefaultPrettyPrinter()
+                .writeValue(jsonResultsFile, results2);
         LOGGER.info("Results written in file {}", jsonResultsFile);
     }
 

@@ -23,7 +23,6 @@
         <dependency>
             <groupId>com.powsybl</groupId>
             <artifactId>powsybl-iidm-impl</artifactId>
-            <version>${powsybl.core.version}</version>
         </dependency>
 
         <!-- Runtime dependencies -->

@@ -26,6 +26,7 @@
             <plugin>
                 <groupId>com.powsybl</groupId>
                 <artifactId>powsybl-itools-packager-maven-plugin</artifactId>
+                <version>4.9.1</version> <!-- to fix by adding this artifact to core dependency management -->
                 <executions>
                     <execution>
                         <phase>package</phase>
@@ -46,7 +47,6 @@
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
-            <version>${logback.version}</version>
             <scope>runtime</scope>
         </dependency>
 

@@ -43,6 +43,7 @@
         <module>loadflow</module>
         <module>merging-view</module>
         <module>sensitivity</module>
+        <module>sld-custom-node</module>
         <module>topology</module>
     </modules>
 

@@ -15,7 +15,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
-import java.nio.charset.Charset;
+import java.io.UncheckedIOException;
+import java.nio.charset.StandardCharsets;
 import java.util.Properties;
 
 /**
@@ -49,44 +50,46 @@ public class CsvLinesImporter implements Importer {
     }
 
     @Override
-    public Network importData(ReadOnlyDataSource data, Properties props) {
-        Network network = NetworkFactory.create("Network_2Lines_Example", EXTENSION);
-        LOGGER.debug("Start import from file {}", data.getBaseName());
-        long startTime = System.currentTimeMillis();
+    public Network importData(ReadOnlyDataSource dataSource, NetworkFactory networkFactory, Properties parameters) {
+        Network network = networkFactory.createNetwork("Network_2Lines_Example", EXTENSION);
+        LOGGER.debug("Start import from file {}", dataSource.getBaseName());
         try {
-            CsvReader reader = new CsvReader(data.newInputStream(null, EXTENSION), Charset.forName("UTF-8"));
-            reader.readHeaders();
-            while (reader.readRecord()) {
-                String id = reader.get("LineId");
-                LOGGER.info("import lineID {}", id);
-                Substation s1 = getSubstation(reader.get("SubstationId1"), network, Country.FR);
-                Substation s2 = getSubstation(reader.get("SubstationId2"), network, Country.BE);
-                VoltageLevel vl1 = getVoltageLevel(reader.get("VoltageLevelId1"), network, s1, 220, TopologyKind.BUS_BREAKER);
-                VoltageLevel vl2 = getVoltageLevel(reader.get("VoltageLevelId2"), network, s2, 220, TopologyKind.BUS_BREAKER);
-                Bus nhv1 = getBus(vl1, reader.get("BusId1"));
-                Bus nhv2 = getBus(vl2, reader.get("BusId2"));
-                network.newLine()
-                        .setId(id)
-                        .setVoltageLevel1(vl1.getId())
-                        .setVoltageLevel2(vl2.getId())
-                        .setBus1(nhv1.getId())
-                        .setConnectableBus1(nhv1.getId())
-                        .setBus2(nhv2.getId())
-                        .setConnectableBus2(nhv2.getId())
-                        .setR(Double.valueOf(reader.get("R")))
-                        .setX(Double.valueOf(reader.get("X")))
-                        .setG1(Double.valueOf(reader.get("G1")))
-                        .setB1(Double.valueOf(reader.get("B1")))
-                        .setG2(Double.valueOf(reader.get("G2")))
-                        .setB2(Double.valueOf(reader.get("B2")))
-                        .add();
+            CsvReader reader = new CsvReader(dataSource.newInputStream(null, EXTENSION), StandardCharsets.UTF_8);
+            try {
+                reader.readHeaders();
+                while (reader.readRecord()) {
+                    String id = reader.get("LineId");
+                    LOGGER.info("import lineID {}", id);
+                    Substation s1 = getSubstation(reader.get("SubstationId1"), network, Country.FR);
+                    Substation s2 = getSubstation(reader.get("SubstationId2"), network, Country.BE);
+                    VoltageLevel vl1 = getVoltageLevel(reader.get("VoltageLevelId1"), network, s1, 220, TopologyKind.BUS_BREAKER);
+                    VoltageLevel vl2 = getVoltageLevel(reader.get("VoltageLevelId2"), network, s2, 220, TopologyKind.BUS_BREAKER);
+                    Bus nhv1 = getBus(vl1, reader.get("BusId1"));
+                    Bus nhv2 = getBus(vl2, reader.get("BusId2"));
+                    network.newLine()
+                            .setId(id)
+                            .setVoltageLevel1(vl1.getId())
+                            .setVoltageLevel2(vl2.getId())
+                            .setBus1(nhv1.getId())
+                            .setConnectableBus1(nhv1.getId())
+                            .setBus2(nhv2.getId())
+                            .setConnectableBus2(nhv2.getId())
+                            .setR(Double.valueOf(reader.get("R")))
+                            .setX(Double.valueOf(reader.get("X")))
+                            .setG1(Double.valueOf(reader.get("G1")))
+                            .setB1(Double.valueOf(reader.get("B1")))
+                            .setG2(Double.valueOf(reader.get("G2")))
+                            .setB2(Double.valueOf(reader.get("B2")))
+                            .add();
+                }
+            } finally {
+                reader.close();
             }
-            LOGGER.debug("{} import done in {} ms", EXTENSION, System.currentTimeMillis() - startTime);
+            LOGGER.debug("{} import done", EXTENSION);
             return network;
 
         } catch (IOException e) {
-            LOGGER.error(e.toString(), e);
-            return null;
+            throw new UncheckedIOException(e);
         }
     }
 

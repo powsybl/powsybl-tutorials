@@ -11,8 +11,6 @@ import com.powsybl.iidm.network.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.IOException;
-
 /**
  * @author Anne Tilloy <anne.tilloy at rte-france.com>
  */
@@ -20,7 +18,7 @@ public final class VoltageLevelTopologyTutorial {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(VoltageLevelTopologyTutorial.class);
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
 
         // This tutorial comes as a comprehensive illustration of the different network representations in Powsybl:
         // node/breaker, bus/breaker, bus view.
@@ -30,39 +28,38 @@ public final class VoltageLevelTopologyTutorial {
         Network network1 = VoltageLevelTopologyTutorial.createNodeBreakerNetwork();
 
         // Now let us print the network data through its bus/breaker view.
-        LOGGER.info(network1.getId() + " in bus/breaker view:");
+        LOGGER.info("{} in bus/breaker view:", network1.getId());
         for (VoltageLevel vl : network1.getVoltageLevels()) {
             for (Bus bus : vl.getBusBreakerView().getBuses()) {
-                LOGGER.info("Bus: " + bus.getId());
+                LOGGER.info("Bus: {}", bus.getId());
                 for (Generator gen : bus.getGenerators()) {
-                    LOGGER.info("\t Generators: " + gen.getId());
+                    LOGGER.info("\t Generators: {}", gen.getId());
                 }
                 for (Load load : bus.getLoads()) {
-                    LOGGER.info("\t Loads: " + load.getId() +
-                            ", connected component: " + bus.getConnectedComponent());
+                    LOGGER.info("\t Loads: {}, connected component: {}", load.getId(), bus.getConnectedComponent());
                 }
                 for (TwoWindingsTransformer twt : bus.getTwoWindingsTransformers()) {
-                    LOGGER.info("\t T2W: " + twt.getId());
+                    LOGGER.info("\t T2W: {}", twt.getId());
                 }
             }
             for (Switch sw : vl.getBusBreakerView().getSwitches()) {
-                LOGGER.info("Switch: " + sw.getId());
+                LOGGER.info("Switch: {}", sw.getId());
             }
         }
 
         // We can also print the network data through its bus view.
-        LOGGER.info(network1.getId() + " in bus view: ");
+        LOGGER.info("{} in bus view: ", network1.getId());
         for (VoltageLevel vl : network1.getVoltageLevels()) {
             for (Bus bus : vl.getBusView().getBuses()) {
-                LOGGER.info("Bus:" + bus.getId());
+                LOGGER.info("Bus: {}", bus.getId());
                 for (Generator gen : bus.getGenerators()) {
-                    LOGGER.info("\t Generators: " + gen.getId());
+                    LOGGER.info("\t Generators: {}", gen.getId());
                 }
                 for (Load load : bus.getLoads()) {
-                    LOGGER.info("\t Loads: " + load.getId());
+                    LOGGER.info("\t Loads: {}", load.getId());
                 }
                 for (TwoWindingsTransformer twt : bus.getTwoWindingsTransformers()) {
-                    LOGGER.info("\t T2Ws: " + twt.getId());
+                    LOGGER.info("\t T2Ws: {}", twt.getId());
                 }
             }
         }
@@ -72,39 +69,38 @@ public final class VoltageLevelTopologyTutorial {
         Network network2 = VoltageLevelTopologyTutorial.createBusBreakerNetwork();
 
         // Now we print the network data through its bus/breaker view.
-        LOGGER.info("\n" + network2.getId() + " in bus/breaker view:");
+        LOGGER.info("\n {} in bus/breaker view:", network2.getId());
         for (VoltageLevel vl : network2.getVoltageLevels()) {
             for (Bus bus : vl.getBusBreakerView().getBuses()) {
-                LOGGER.info("Bus: " + bus.getId());
+                LOGGER.info("Bus: {}", bus.getId());
                 for (Generator gen : bus.getGenerators()) {
-                    LOGGER.info("\t Generators: " + gen.getId());
+                    LOGGER.info("\t Generators: {}", gen.getId());
                 }
                 for (Load load : bus.getLoads()) {
-                    LOGGER.info("\t Loads: " + load.getId() +
-                            ", connected component: " + bus.getConnectedComponent());
+                    LOGGER.info("\t Loads: {}, connected component: {}", load.getId(), bus.getConnectedComponent());
                 }
                 for (TwoWindingsTransformer twt : bus.getTwoWindingsTransformers()) {
-                    LOGGER.info("\t T2Ws: " + twt.getId());
+                    LOGGER.info("\t T2Ws: {}", twt.getId());
                 }
             }
             for (Switch sw : vl.getBusBreakerView().getSwitches()) {
-                LOGGER.info("Switches: " + sw.getId());
+                LOGGER.info("Switches: {}", sw.getId());
             }
         }
 
         // Finally, we visit the network through its bus view.
-        LOGGER.info(network2.getId() + " in bus view: ");
+        LOGGER.info("{} in bus view: ", network2.getId());
         for (VoltageLevel vl : network2.getVoltageLevels()) {
             for (Bus bus : vl.getBusView().getBuses()) {
-                LOGGER.info("Bus:" + bus.getId());
+                LOGGER.info("Bus: {}", bus.getId());
                 for (Generator gen : bus.getGenerators()) {
-                    LOGGER.info("\t Generators: " + gen.getId());
+                    LOGGER.info("\t Generators: {}", gen.getId());
                 }
                 for (Load load : bus.getLoads()) {
-                    LOGGER.info("\t Loads: " + load.getId());
+                    LOGGER.info("\t Loads: {}", load.getId());
                 }
                 for (TwoWindingsTransformer twt : bus.getTwoWindingsTransformers()) {
-                    LOGGER.info("\t T2Ws: " + twt.getId());
+                    LOGGER.info("\t T2Ws: {}", twt.getId());
                 }
             }
         }

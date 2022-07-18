@@ -6,7 +6,6 @@
  */
 package com.powsybl.tutorials.emf;
 
-import com.powsybl.action.util.Scalable;
 import com.powsybl.balances_adjustment.balance_computation.*;
 import com.powsybl.entsoe.cgmes.balances_adjustment.data_exchange.DataExchanges;
 import com.powsybl.entsoe.cgmes.balances_adjustment.data_exchange.DataExchangesXml;
@@ -24,11 +23,11 @@ import com.powsybl.entsoe.cgmes.balances_adjustment.util.CgmesVoltageLevelsAreaF
 import com.powsybl.entsoe.cgmes.balances_adjustment.util.CgmesBoundariesAreaFactory;
 import com.powsybl.iidm.import_.Importers;
 import com.powsybl.iidm.mergingview.MergingView;
+import com.powsybl.iidm.modification.scalable.Scalable;
 import com.powsybl.iidm.network.*;
 import com.powsybl.loadflow.LoadFlow;
 import com.powsybl.loadflow.LoadFlowParameters;
 import com.powsybl.loadflow.LoadFlowResult;
-import com.powsybl.openloadflow.OpenLoadFlowProvider;
 
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamWriter;
@@ -119,7 +118,7 @@ public final class EmfTutorial {
 
             // Run the balances ajustment.
             BalanceComputation balanceComputation = new BalanceComputationFactoryImpl()
-                    .create(balanceComputationAreas, new LoadFlow.Runner(new OpenLoadFlowProvider()), LocalComputationManager.getDefault());
+                    .create(balanceComputationAreas, LoadFlow.find(), LocalComputationManager.getDefault());
             BalanceComputationResult result = balanceComputation.run(mergingView, mergingView.getVariantManager().getWorkingVariantId(), parameters).join();
             System.out.println(result.getStatus());
 

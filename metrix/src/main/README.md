@@ -6,7 +6,7 @@ author:
 
 **Objectives of the practical work:** On a very simple network (6 substations), learn how to use
 PowSyBl-Metrix settings and outputs, and how to explain the
-obtained results.
+obtained results. A video presenting the content of the tutorial is available [here](https://vimeo.com/722882701). The corresponding presentation is available [here](https://github.com/powsybl/powsybl-tutorials/blob/metrix/metrix/src/main/resources/PowSyBl-metrix-6-node-tutorial-presentation.pdf).
 
 ## What do you need ?
 - About 4 hours

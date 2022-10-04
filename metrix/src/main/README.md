@@ -19,7 +19,38 @@ In this chapter we will install Powsybl-METRIX on your environment. You can skip
 1. **Clone the repository**: open a terminal in the directory of your choice, and enter the following command line:
    <code> git clone https://github.com/powsybl/powsybl-metrix.git </code>
 2. **Install Metrix**: go in the cloned repository directory, and run the script `./install.sh`.
-   When you are asked if you want a full or a metrix installation, select "full". When you are asked if you want to add Powsybl-metrix to the path, select "yes".
+   When you are asked if you want a full or a metrix installation, select "full".
+3. **Edit paths**: In your *.bashrc* file, add the paths to Metrix binaries :
+
+```bash
+export PATH=[...]:.local/opt/powsybl-metrix/bin:[METRIX_INSTALL_DIR]/powsybl-metrix/metrix-distribution/target/metrix/bin
+```
+
+where METRIX_INSTALL_DIR is the directory in which you have launched the installation script.
+
+4. **Add the metrix configuration file** : in your itools repository (which is by default located at  *~/.itools*), create a file named *config.yml*, or modify the extant one with the following content (replace the METRIX_INSTALL_DIR tag with your Metrix installation path):
+
+```yaml
+metrix:
+        home-dir: "METRIX_INSTALL_DIR/powsybl-metrix" # required
+
+        iidm-export-version: "1.5" # default to latest available version
+        constant-loss-factor: false # enable constant loss factor
+        chunk-size: 10 # size of the batch processed by metrix
+        result-limit: 10000 # max allowed output count
+        debug: false # enable debug mode
+        log-level: 2 # Metrix log level (0: trace, 1: debug, 2 : info, 3: warn, 4: error, 5: critical)
+        debug-log-level: 0 # Log level when debug mode is enabled.
+
+mapping-default-parameters:
+        tolerance-threshold: 0.0001f
+
+metrix-default-parameters:
+        computation-type: LF # default computation type
+        loss-factor: 0f # default loss factor value
+        nominal-u: 100 # default nominal U
+```
+You are now all set to use Powsybl-METRIX !
 
 ## 1- Network presentation
 
@@ -40,7 +71,7 @@ In this practicals, each station and line's name refers to cardinal points:
 - S: South
 - SO: South West
 
-# 2- To get started:
+# 2- Mapping presentation
 Along with the network file, you can find a timeseries file at the path:
 `src/main/resources/3A/data/ts/time-series-tp.csv`. It will contains time series to map to each demand and/or 
 unavoidable production of the network. It is organized as follows:
@@ -54,7 +85,7 @@ unavoidable production of the network. It is organized as follows:
 
 Note: These two files (network file and timeseries file) are used throughout all exercises of the tutorial.
 
-In mapping output, you should have the following network:\
+All of the following exercices will start with a mapping of the timeseries to the network. After the mapping phase, you will have the following network:\
 ![image](images/result_mapping_ss_HDVC.png)
 
 
@@ -112,7 +143,7 @@ in N on the left and in N-1 on the right.
 More specifically, on the S_SO_2 line in N and N-1 on the various
 time steps, the following results are obtained:\
 
-| Ts    | FLOW_S\_SO_2 | MAX_THREAT_1\_FLOW_S\_SO_1 | MAX_THREAT_1\_FLOW_S\_SO_2 |
+| Ts    | FLOW_S\_SO_2 | MAX_THREAT_1\_FLOW_S\_SO_2 | MAX_THREAT_1\_NAME_FLOW_S\_SO_2 |
 |-------|--------------|----------------------------|----------------------------|
 | T01   | -290.5       | -484.2                     | S_SO_1                     |
 | T02   | -290.5       | -484.2                     | S_SO_1                     |

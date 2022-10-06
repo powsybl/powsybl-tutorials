@@ -15,7 +15,7 @@
     <parent>
         <groupId>com.powsybl</groupId>
         <artifactId>powsybl-parent</artifactId>
-        <version>3</version>
+        <version>8</version>
         <relativePath/>
     </parent>
     <groupId>com.powsybl.tutorials</groupId>
@@ -27,18 +27,10 @@
     <properties>
         <maven.exec.version>1.6.0</maven.exec.version>
         <maven.javafx.version>8.8.3</maven.javafx.version>
-        <autoservice.version>1.0-rc2</autoservice.version>
-        <guava.version>20.0</guava.version>
         <javacsv.version>2.0</javacsv.version>
-        <logback.version>1.2.9</logback.version>
-        <slf4j.version>1.7.22</slf4j.version>
         <java.version>11</java.version>
 
-        <powsybl.core.version>4.7.0</powsybl.core.version>
-        <powsybl.rte-core.version>3.7.0</powsybl.rte-core.version>
-        <powsybl.olf.version>0.19.0</powsybl.olf.version>
-        <powsybl.ba.version>1.11.0</powsybl.ba.version>
-        <powsybl.entsoe.version>1.3.1</powsybl.entsoe.version>
+        <powsybl-dependencies.version>1.2.1</powsybl-dependencies.version>
     </properties>
 
     <modules>
@@ -65,4 +57,17 @@
             </plugins>
         </pluginManagement>
     </build>
+
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.powsybl</groupId>
+                <artifactId>powsybl-dependencies</artifactId>
+                <version>${powsybl-dependencies.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 </project>

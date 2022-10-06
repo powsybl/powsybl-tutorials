@@ -16,7 +16,7 @@
     <!-- These properties are only needed to run the tutorial from the command line with mvn exec:java -->
     <properties>
         <exec.cleanupDaemonThreads>false</exec.cleanupDaemonThreads>
-        <exec.mainClass>powsybl.tutorials.loadflow.LoadflowTutorial</exec.mainClass>
+        <exec.mainClass>com.powsybl.tutorials.loadflow.LoadflowTutorial</exec.mainClass>
     </properties>
 
     <build>
@@ -42,27 +42,23 @@
         <dependency>
             <groupId>com.powsybl</groupId>
             <artifactId>powsybl-config-classic</artifactId>
-            <version>${powsybl.core.version}</version>
         </dependency>
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-simple</artifactId>
-            <version>${slf4j.version}</version>
+            <scope>runtime</scope>
         </dependency>
         <dependency>
             <groupId>com.powsybl</groupId>
             <artifactId>powsybl-open-loadflow</artifactId>
-            <version>${powsybl.olf.version}</version>
         </dependency>
         <dependency>
             <groupId>com.powsybl</groupId>
             <artifactId>powsybl-iidm-impl</artifactId>
-            <version>${powsybl.core.version}</version>
         </dependency>
         <dependency>
             <groupId>com.powsybl</groupId>
             <artifactId>powsybl-iidm-api</artifactId>
-            <version>${powsybl.core.version}</version>
         </dependency>
     </dependencies>
 </project>

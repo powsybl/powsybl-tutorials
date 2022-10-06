@@ -18,37 +18,34 @@
         <dependency>
             <groupId>com.google.auto.service</groupId>
             <artifactId>auto-service</artifactId>
-            <version>${autoservice.version}</version>
         </dependency>
+
         <dependency>
             <groupId>com.powsybl</groupId>
             <artifactId>powsybl-iidm-converter-api</artifactId>
-            <version>${powsybl.core.version}</version>
         </dependency>
         <dependency>
             <groupId>com.powsybl</groupId>
             <artifactId>powsybl-iidm-test</artifactId>
-            <version>${powsybl.core.version}</version>
         </dependency>
 
         <!-- Runtime dependencies -->
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-simple</artifactId>
-            <version>${slf4j.version}</version>
             <scope>runtime</scope>
         </dependency>
+
         <dependency>
             <groupId>com.powsybl</groupId>
             <artifactId>powsybl-iidm-impl</artifactId>
-            <version>${powsybl.core.version}</version>
             <scope>runtime</scope>
         </dependency>
     </dependencies>
 
     <!-- This property is only needed to run the tutorial easily -->
     <properties>
-      <exec.mainClass>powsybl.tutorials.csv.export.Main</exec.mainClass>
+      <exec.mainClass>com.powsybl.tutorials.csv.export.Main</exec.mainClass>
     </properties>
 
 </project>

@@ -16,21 +16,19 @@
     <!-- These properties are only needed to run the tutorial from the command line with mvn exec:java -->
     <properties>
         <exec.cleanupDaemonThreads>false</exec.cleanupDaemonThreads>
-        <exec.mainClass>powsybl.tutorials.topology.VoltageLevelTopologyTutorial</exec.mainClass>
+        <exec.mainClass>com.powsybl.tutorials.topology.VoltageLevelTopologyTutorial</exec.mainClass>
     </properties>
 
     <dependencies>
         <dependency>
             <groupId>com.powsybl</groupId>
             <artifactId>powsybl-iidm-impl</artifactId>
-            <version>${powsybl.core.version}</version>
         </dependency>
 
         <!-- Runtime dependencies -->
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-simple</artifactId>
-            <version>${slf4j.version}</version>
             <scope>runtime</scope>
         </dependency>
     </dependencies>

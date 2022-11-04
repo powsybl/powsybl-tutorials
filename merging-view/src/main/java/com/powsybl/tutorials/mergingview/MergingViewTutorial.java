@@ -11,7 +11,6 @@ import com.powsybl.cgmes.conversion.export.StateVariablesExport;
 import com.powsybl.cgmes.conversion.export.SteadyStateHypothesisExport;
 import com.powsybl.cgmes.extensions.CgmesSvMetadata;
 import com.powsybl.commons.xml.XmlUtil;
-import com.powsybl.iidm.import_.Importers;
 import com.powsybl.iidm.mergingview.MergingView;
 import com.powsybl.iidm.network.Network;
 import com.powsybl.loadflow.LoadFlow;
@@ -37,9 +36,9 @@ public final class MergingViewTutorial {
 
     public static void main(String[] args) throws IOException, XMLStreamException {
         File fileBe = new File(MergingViewTutorial.class.getResource("/MicroGridTestConfiguration_T4_BE_BB_Complete_v2.zip").getPath());
-        Network n1 = Importers.loadNetwork(fileBe.toString());
+        Network n1 = Network.read(fileBe.toString());
         File fileNl = new File(MergingViewTutorial.class.getResource("/MicroGridTestConfiguration_T4_NL_BB_Complete_v2.zip").getPath());
-        Network n2 = Importers.loadNetwork(fileNl.toString());
+        Network n2 = Network.read(fileNl.toString());
 
         MergingView mergingView = MergingView.create("merge", "test");
         mergingView.merge(n1, n2);

@@ -7,8 +7,6 @@
 package com.powsybl.tutorials.emf;
 
 import com.powsybl.balances_adjustment.balance_computation.*;
-import com.powsybl.entsoe.cgmes.balances_adjustment.data_exchange.DataExchanges;
-import com.powsybl.entsoe.cgmes.balances_adjustment.data_exchange.DataExchangesXml;
 import com.powsybl.balances_adjustment.util.NetworkArea;
 import com.powsybl.balances_adjustment.util.NetworkAreaFactory;
 import com.powsybl.balances_adjustment.util.NetworkAreaUtil;
@@ -19,15 +17,21 @@ import com.powsybl.commons.PowsyblException;
 import com.powsybl.commons.exceptions.UncheckedXmlStreamException;
 import com.powsybl.commons.xml.XmlUtil;
 import com.powsybl.computation.local.LocalComputationManager;
-import com.powsybl.entsoe.cgmes.balances_adjustment.util.CgmesVoltageLevelsAreaFactory;
+import com.powsybl.entsoe.cgmes.balances_adjustment.data_exchange.DataExchanges;
+import com.powsybl.entsoe.cgmes.balances_adjustment.data_exchange.DataExchangesXml;
 import com.powsybl.entsoe.cgmes.balances_adjustment.util.CgmesBoundariesAreaFactory;
-import com.powsybl.iidm.import_.Importers;
+import com.powsybl.entsoe.cgmes.balances_adjustment.util.CgmesVoltageLevelsAreaFactory;
 import com.powsybl.iidm.mergingview.MergingView;
 import com.powsybl.iidm.modification.scalable.Scalable;
-import com.powsybl.iidm.network.*;
+import com.powsybl.iidm.network.DanglingLine;
+import com.powsybl.iidm.network.Generator;
+import com.powsybl.iidm.network.Identifiable;
+import com.powsybl.iidm.network.Network;
 import com.powsybl.loadflow.LoadFlow;
 import com.powsybl.loadflow.LoadFlowParameters;
 import com.powsybl.loadflow.LoadFlowResult;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamWriter;
@@ -37,9 +41,6 @@ import java.nio.file.Paths;
 import java.time.Instant;
 import java.util.*;
 import java.util.stream.Collectors;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  * @author Miora Ralambotiana <miora.ralambotiana at rte-france.com>
@@ -138,7 +139,7 @@ public final class EmfTutorial {
 
     private static Map<String, Network> importNetworks(BalancesAdjustmentValidationParameters validationParameters) {
         Map<String, Network> networks = new HashMap<>();
-        validationParameters.getIgmPaths().forEach((name, path) -> networks.put(name, Importers.loadNetwork(Paths.get(path))));
+        validationParameters.getIgmPaths().forEach((name, path) -> networks.put(name, Network.read(Paths.get(path))));
         return networks;
     }
 

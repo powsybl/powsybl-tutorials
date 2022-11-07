@@ -22,10 +22,6 @@
 
         <dependency>
             <groupId>com.powsybl</groupId>
-            <artifactId>powsybl-iidm-converter-api</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.powsybl</groupId>
             <artifactId>powsybl-iidm-test</artifactId>
         </dependency>
 

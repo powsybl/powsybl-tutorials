@@ -6,7 +6,7 @@
  */
 package com.powsybl.tutorials.csv.import_;
 
-import com.powsybl.iidm.import_.Importers;
+import com.powsybl.iidm.network.Network;
 
 /**
  * @author Miora Ralambotiana <miora.ralambotiana at rte-france.com>
@@ -16,7 +16,7 @@ import com.powsybl.iidm.import_.Importers;
 public final class Main {
 
     public static void main(String[] args) {
-        Importers.loadNetwork("eurostag-tutorial-example1.csv", Main.class.getResourceAsStream("/eurostag-tutorial-example1.csv"));
+        Network.read("eurostag-tutorial-example1.csv", Main.class.getResourceAsStream("/eurostag-tutorial-example1.csv"));
     }
 
     private Main() {

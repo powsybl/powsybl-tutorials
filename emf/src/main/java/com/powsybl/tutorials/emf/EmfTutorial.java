@@ -11,7 +11,7 @@ import com.powsybl.balances_adjustment.util.NetworkArea;
 import com.powsybl.balances_adjustment.util.NetworkAreaFactory;
 import com.powsybl.balances_adjustment.util.NetworkAreaUtil;
 import com.powsybl.cgmes.conversion.export.CgmesExportContext;
-import com.powsybl.cgmes.conversion.export.StateVariablesExport;
+import com.powsybl.cgmes.conversion.export.CgmesProfileExporterFactory;
 import com.powsybl.cgmes.extensions.*;
 import com.powsybl.commons.PowsyblException;
 import com.powsybl.commons.exceptions.UncheckedXmlStreamException;
@@ -127,7 +127,7 @@ public final class EmfTutorial {
             validationParameters.getOutputDir().ifPresent(outputDir -> {
                 try (OutputStream os = Files.newOutputStream(Paths.get(outputDir + "/SV.xml"))) {
                     XMLStreamWriter writer = XmlUtil.initializeWriter(true, "   ", os);
-                    StateVariablesExport.write(mergingView, writer, createContext(mergingView, validNetworks));
+                    CgmesProfileExporterFactory.create("SV", createContext(mergingView, validNetworks), writer).export();
                 } catch (XMLStreamException e) {
                     throw new UncheckedXmlStreamException(e);
                 } catch (IOException e) {
@@ -244,7 +244,7 @@ public final class EmfTutorial {
     }
 
     private static CgmesExportContext createContext(MergingView mergingView, Map<String, Network> validNetworks) {
-        CgmesExportContext context = new CgmesExportContext();
+        CgmesExportContext context = new CgmesExportContext(mergingView);
         context.setScenarioTime(mergingView.getCaseDate());
         validNetworks.forEach((name, n) -> {
             context.addIidmMappings(n);

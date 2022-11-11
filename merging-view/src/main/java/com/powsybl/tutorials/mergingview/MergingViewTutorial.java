@@ -7,8 +7,7 @@
 package com.powsybl.tutorials.mergingview;
 
 import com.powsybl.cgmes.conversion.export.CgmesExportContext;
-import com.powsybl.cgmes.conversion.export.StateVariablesExport;
-import com.powsybl.cgmes.conversion.export.SteadyStateHypothesisExport;
+import com.powsybl.cgmes.conversion.export.CgmesProfileExporterFactory;
 import com.powsybl.cgmes.extensions.CgmesSvMetadata;
 import com.powsybl.commons.xml.XmlUtil;
 import com.powsybl.iidm.mergingview.MergingView;
@@ -50,22 +49,22 @@ public final class MergingViewTutorial {
         // Generate updated SSH files (one by IGM)
         try (OutputStream os = Files.newOutputStream(Paths.get(TMP_DIR + "/MicroGridTestConfiguration_T4_BE_BB_SSH_v2_TEST.xml"))) {
             XMLStreamWriter writer = XmlUtil.initializeWriter(true, INDENT, os);
-            SteadyStateHypothesisExport.write(n1, writer, new CgmesExportContext(n1));
+            CgmesProfileExporterFactory.create("SSH", new CgmesExportContext(n1), writer).export();
         }
         try (OutputStream os = Files.newOutputStream(Paths.get(TMP_DIR + "/MicroGridTestConfiguraton_T4_NL_BB_SSH_v2_TEST.xml"))) {
             XMLStreamWriter writer = XmlUtil.initializeWriter(true, INDENT, os);
-            SteadyStateHypothesisExport.write(n2, writer, new CgmesExportContext(n2));
+            CgmesProfileExporterFactory.create("SSH", new CgmesExportContext(n2), writer).export();
         }
 
         // Generate merged SV file (for the whole CGM)
         try (OutputStream os = Files.newOutputStream(Paths.get(TMP_DIR + "/MicroGridTestConfiguration_T4_BE_NL_BB_SV_v2_TEST.xml"))) {
             XMLStreamWriter writer = XmlUtil.initializeWriter(true, INDENT, os);
-            StateVariablesExport.write(mergingView, writer, createContext(mergingView, n1, n2));
+            CgmesProfileExporterFactory.create("SV", createContext(mergingView, n1, n2), writer).export();
         }
     }
 
     private static CgmesExportContext createContext(MergingView mergingView, Network n1, Network n2) {
-        CgmesExportContext context = new CgmesExportContext();
+        CgmesExportContext context = new CgmesExportContext(mergingView);
         context.setScenarioTime(mergingView.getCaseDate())
                 .getSvModelDescription()
                 .addDependencies(n1.getExtension(CgmesSvMetadata.class).getDependencies())

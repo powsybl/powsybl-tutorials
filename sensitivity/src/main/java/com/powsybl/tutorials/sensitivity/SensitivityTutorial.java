@@ -9,7 +9,6 @@ package com.powsybl.tutorials.sensitivity;
 import com.powsybl.commons.json.JsonUtil;
 import com.powsybl.contingency.Contingency;
 import com.powsybl.contingency.ContingencyContext;
-import com.powsybl.iidm.import_.Importers;
 import com.powsybl.iidm.network.Line;
 import com.powsybl.iidm.network.Network;
 import com.powsybl.loadflow.LoadFlow;
@@ -36,7 +35,7 @@ public final class SensitivityTutorial {
 
         // 1. Import the network from a XML file
         // The network is described in iidm (the iTesla Internal Data Model format).
-        Network network = Importers.loadNetwork("sensi_network_12_nodes.xml",
+        Network network = Network.read("sensi_network_12_nodes.xml",
                 SensitivityTutorial.class.getResourceAsStream("/sensi_network_12_nodes.xml"));
 
         // In this tutorial the sensitivity is done on active and reactive powers, but this can be changed in

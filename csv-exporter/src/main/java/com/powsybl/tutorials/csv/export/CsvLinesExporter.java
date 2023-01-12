@@ -9,7 +9,6 @@ package com.powsybl.tutorials.csv.export;
 import com.google.auto.service.AutoService;
 import com.powsybl.commons.datasource.DataSource;
 import com.powsybl.commons.io.table.*;
-import com.powsybl.iidm.export.Exporter;
 import com.powsybl.iidm.network.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -8,15 +8,13 @@ package com.powsybl.tutorials.tools;
 
 import java.nio.file.Path;
 
+import com.powsybl.iidm.network.Network;
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.Option;
 import org.apache.commons.cli.Options;
 
 import com.google.auto.service.AutoService;
 import com.powsybl.commons.PowsyblException;
-import com.powsybl.iidm.import_.ImportConfig;
-import com.powsybl.iidm.import_.Importers;
-import com.powsybl.iidm.network.Network;
 import com.powsybl.tools.Command;
 import com.powsybl.tools.Tool;
 import com.powsybl.tools.ToolRunningContext;
@@ -71,7 +69,7 @@ public class CountNetworkLinesTool implements Tool {
     public void run(CommandLine line, ToolRunningContext context) {
         Path caseFile = context.getFileSystem().getPath(line.getOptionValue(CASE_FILE));
         context.getOutputStream().println("Loading network '" + caseFile + "'");
-        Network network = Importers.loadNetwork(caseFile, context.getShortTimeExecutionComputationManager(), ImportConfig.load(), null);
+        Network network = Network.read(caseFile);
         if (network == null) {
             throw new PowsyblException("Case '" + caseFile + "' not found");
         }

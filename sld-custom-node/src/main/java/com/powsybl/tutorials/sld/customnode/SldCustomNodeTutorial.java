@@ -16,11 +16,9 @@ import com.powsybl.sld.builders.NetworkGraphBuilder;
 import com.powsybl.sld.layout.LayoutParameters;
 import com.powsybl.sld.layout.SmartVoltageLevelLayoutFactory;
 import com.powsybl.sld.library.ResourcesComponentLibrary;
+import com.powsybl.sld.model.graphs.NodeFactory;
 import com.powsybl.sld.model.graphs.VoltageLevelGraph;
-import com.powsybl.sld.model.nodes.FeederNode;
-import com.powsybl.sld.model.nodes.FeederType;
 import com.powsybl.sld.model.nodes.Node;
-import com.powsybl.sld.model.nodes.feeders.BaseFeeder;
 import com.powsybl.sld.svg.DefaultDiagramLabelProvider;
 import com.powsybl.sld.svg.DefaultSVGWriter;
 import com.powsybl.sld.util.TopologicalStyleProvider;
@@ -94,8 +92,7 @@ public final class SldCustomNodeTutorial {
             // in case of a generator with wind as energy source, replace default generic generator node
             // by a custom one with WIND_TURBINE type.
             if (generator.getEnergySource() == EnergySource.WIND) {
-                var node = new FeederNode(generator.getId(), generator.getOptionalName().orElse(null), "G", "WIND_TURBINE", false, new BaseFeeder(FeederType.INJECTION), null);
-                graph.addNode(node);
+                var node = NodeFactory.createFeederInjectionNode(graph, generator.getId(), "G", "WIND_TURBINE");
                 addFeeder(node, generator.getTerminal());
             } else {
                 super.visitGenerator(generator);

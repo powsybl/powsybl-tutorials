@@ -6,7 +6,6 @@
  */
 package com.powsybl.tutorials.csv.export;
 
-import com.powsybl.iidm.export.Exporters;
 import com.powsybl.iidm.network.Network;
 import com.powsybl.iidm.network.test.EurostagTutorialExample1Factory;
 
@@ -21,7 +20,7 @@ public final class Main {
 
     public static void main(String[] args) {
         Network network = EurostagTutorialExample1Factory.create();
-        Exporters.export("CSV", network, null, Paths.get(System.getProperty("java.io.tmpdir"), "test.csv"));
+        network.write("CSV", null, Paths.get(System.getProperty("java.io.tmpdir"), "test.csv"));
     }
 
     private Main() {

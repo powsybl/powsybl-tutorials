@@ -9,7 +9,7 @@ network = FourSubstationsNodeBreakerWithExtensionsFactory.create()
 
 // Create line adder
 lineAdder = network.newLine()
-        .setId("newLine")
+        .setId("new_line")
         .setVoltageLevel1("S1VL2")
         .setVoltageLevel2("S2VL1")
         .setR(5.0)

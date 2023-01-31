@@ -7,7 +7,7 @@ import com.powsybl.iidm.network.extensions.FourSubstationsNodeBreakerWithExtensi
 network = FourSubstationsNodeBreakerWithExtensionsFactory.create()
 
 // Create load adder
-loadAdder = network.getVoltageLevel("S1VL2").newLoad().setId("newLoad").setP0(100).setQ0(50)
+loadAdder = network.getVoltageLevel("S1VL2").newLoad().setId("new_load").setP0(100).setQ0(50)
 
 // Create network modification to add load
 modification = new CreateFeederBayBuilder()

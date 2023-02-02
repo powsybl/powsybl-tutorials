@@ -24,6 +24,17 @@ The voltage level S1VL2 will look like that after applying the modification:
 
 It is possible to create a builder with any kind of injection adder and thus create any type of injection.
 
+Here are the options that must/can be filled:
+
+| Parameter              | Default value       | Description                                                                                                                                                                       |
+|------------------------|---------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| InjectionAdder         | /                   | The adder corresponding to the injection to be added. <br/>Should be created beforehand and contain all the required information.                                                 |
+| BusOrBusbarSectionId   | /                   | The ID of the busbar (node/breaker network) or of the bus (bus/breaker network) on which the injection should be connected.                                                       |
+| InjectionPositionOrder | /                   | Required in Node/Breaker. The order position of the injection to create the corresponding extension. <br/> The injection will be positioned accordingly on the busbar section.    |
+| InjectionFeederName    | Id of the injection | Only in Node/Breaker. An optional name to be put in the ConnectablePosition extension and that will be displayed on the diagrams.                                                 |
+| InjectionDirection     | BOTTOM              | Only in Node/Breaker. An optional direction to be put in the ConnectablePosition extension and that will correspond to the direction of the injection in the Single line diagram. |
+
+
 # CreateLineBay.groovy
 
 In this script, the same node/breaker network is loaded and a line is created between two voltage levels S1VL2 and S2VL1.
@@ -43,3 +54,18 @@ The voltage levels will then look like that after adding the line:
 ![S2VL1 with new line](.github/nb_network_with_new_line_s2vl1.png "S2VL1 with new line")
 
 The same method can be used to create a two-windings transformer on a network.
+
+Here are the options that must/can be filled:
+
+| Parameter             | Default value    | Description                                                                                                                                                                                                               |
+|-----------------------|------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| BranchAdder           | /                | The adder corresponding to the branch to be added. <br/>Should be created beforehand and contain all the required information.                                                                                            |
+| BusOrBusbarSectionId1 | /                | The ID of the busbar (node/breaker network) or of the bus (bus/breaker network) on which the branch should be connected on side 1.                                                                                        |
+| BusOrBusbarSectionId2 | /                | The ID of the busbar (node/breaker network) or of the bus (bus/breaker network) on which the branch should be connected on side 1.                                                                                        |
+| PositionOrder1        | /                | Required in Node/Breaker. The order position of the branch on side 1 to create the corresponding extension. <br/> The branch will be positioned accordingly on the busbar section 1.                                      |
+| PositionOrder2        | /                | Required in Node/Breaker. The order position of the branch on side 2 to create the corresponding extension. <br/> The branch will be positioned accordingly on the busbar section 2.                                      |
+| FeederName1           | Id of the branch | Only in Node/Breaker. An optional name to be put in the ConnectablePosition extension for the side 1 and that will be displayed on the diagrams.                                                                          |
+| FeederName2           | Id of the branch | Only in Node/Breaker. An optional name to be put in the ConnectablePosition extension for the side 1 and that will be displayed on the diagrams.                                                                          |
+| Direction1            | TOP              | Only in Node/Breaker. An optional direction for the side 1 of the branch to be put in the ConnectablePosition extension and that will correspond to the direction of the side 1 of the branch in the Single line diagram. |
+| Direction2            | TOP              | Only in Node/Breaker. An optional direction for the side 1 of the branch to be put in the ConnectablePosition extension and that will correspond to the direction of the side 1 of the branch in the Single line diagram. |
+

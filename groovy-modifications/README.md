@@ -69,3 +69,21 @@ Here are the options that must/can be filled:
 | Direction1            | TOP              | Only in Node/Breaker. An optional direction for the side 1 of the branch to be put in the ConnectablePosition extension and that will correspond to the direction of the side 1 of the branch in the Single line diagram. |
 | Direction2            | TOP              | Only in Node/Breaker. An optional direction for the side 1 of the branch to be put in the ConnectablePosition extension and that will correspond to the direction of the side 1 of the branch in the Single line diagram. |
 
+# RemoveLoaBay.groovy
+
+In this script, a load is removed from the initial node/breaker network. 
+The load with id LD2 is removed from the voltage level S1VL2. 
+
+Before removing the load, the voltage level is:
+![S1VL2](.github/nb_network_s1vl2.png "S1VL2")
+
+After the modification:
+![S1VL2 without LD2](.github/nb_network_without_ld2.png)
+
+In this method, the only parameter to give is the id of the connectable that we want to remove. It works for injection as well as branches. In this case, the branch and its topology is removed on both sides.
+
+The parameters that must be fill is:
+
+| Parameter     | Default value    | Description                                                           |
+|---------------|------------------|-----------------------------------------------------------------------|
+| ConnectableId | /                | The ID of the connectable to be removed (cannot be a busbar section). |

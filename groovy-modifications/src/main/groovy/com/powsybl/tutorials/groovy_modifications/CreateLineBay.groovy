@@ -1,5 +1,3 @@
-package com.powsybl.tutorials.groovy_modifications
-
 import com.powsybl.iidm.modification.topology.CreateBranchFeederBaysBuilder
 import com.powsybl.iidm.network.extensions.ConnectablePosition
 import com.powsybl.iidm.network.extensions.FourSubstationsNodeBreakerWithExtensionsFactory

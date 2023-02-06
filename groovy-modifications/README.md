@@ -1,11 +1,14 @@
 # Tutorial on how to use network modifications methods in Groovy
 
-In this tutorial, you will find two scripts explaining how to add a load and a line with the associated topology to a network.
+In this tutorial, you will find three scripts explaining how to add a load and a line with the associated topology to a network and how to remove a load.
 
 The network element is added to the network and the switches are also created to connect the element 
 to a given busbar section with a closed disconnector and a breaker. Open switches are also added to every parallel busbar sections.
+When removing an element, the element itself is removed as well as all the breakers and disconnectors.
 
 Other similar functions are available to add every kind of injections and branches.
+
+NB: The design of these scripts is not groovy-friendly. The methods will be wrapped later.
 
 # CreateLoadBay.groovy
 

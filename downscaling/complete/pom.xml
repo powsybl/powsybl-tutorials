@@ -17,7 +17,7 @@
     <properties>
         <maven.exec.version>1.6.0</maven.exec.version>
         <slf4j.version>1.7.22</slf4j.version>
-        <powsybl.core.version>4.0.0</powsybl.core.version>
+        <powsybl.core.version>5.1.1</powsybl.core.version>
         <exec.cleanupDaemonThreads>false</exec.cleanupDaemonThreads>
         <exec.mainClass>com.powsybl.tutorials.downscaling.Downscaling</exec.mainClass>
     </properties>
@@ -61,11 +61,6 @@
         <dependency>
             <groupId>com.powsybl</groupId>
             <artifactId>powsybl-iidm-impl</artifactId>
-            <version>${powsybl.core.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.powsybl</groupId>
-            <artifactId>powsybl-iidm-converter-api</artifactId>
             <version>${powsybl.core.version}</version>
         </dependency>
         <dependency>

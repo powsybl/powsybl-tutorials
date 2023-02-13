@@ -5,6 +5,7 @@ import com.github.jsonldjava.shaded.com.google.common.collect.Streams;
 import com.google.common.collect.Range;
 import com.powsybl.commons.datasource.DataSource;
 import com.powsybl.commons.datasource.DataSourceUtil;
+import com.powsybl.iidm.import_.Importers;
 import com.powsybl.iidm.network.Country;
 import com.powsybl.iidm.network.Generator;
 import com.powsybl.iidm.network.Network;
@@ -128,7 +129,7 @@ public final class Downscaling {
              .filter(f -> f.toString().endsWith(".zip"))
              .forEach(zipFile -> {
                  try {
-                     final Network network = Network.read(zipFile.toFile().toString());
+                     final Network network = Importers.loadNetwork(zipFile.toFile().toString());
                      networks.add(network);
                  } catch (Exception e) {
                      LOGGER.error("Could not load network from file [" + zipFile.getFileName().toString() + "]", e);

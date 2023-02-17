@@ -93,7 +93,7 @@ public final class SldCustomNodeTutorial {
             // by a custom one with WIND_TURBINE type.
             if (generator.getEnergySource() == EnergySource.WIND) {
                 var node = NodeFactory.createFeederInjectionNode(graph, generator.getId(), "G", "WIND_TURBINE");
-                addFeeder(node, generator.getTerminal());
+                addTerminalNode(node, generator.getTerminal());
             } else {
                 super.visitGenerator(generator);
             }

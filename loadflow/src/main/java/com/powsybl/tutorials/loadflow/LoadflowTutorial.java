@@ -103,7 +103,6 @@ public final class LoadflowTutorial {
         // This time, load parameters from config.yml file
         loadflowParams = LoadFlowParameters.load();
         LoadFlow.run(network, loadflowParams);
-        LoadFlow.run(network);
 
         // Let's analyze the results
         printLines(network);

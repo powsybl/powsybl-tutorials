@@ -24,10 +24,7 @@ import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Set;
-import java.util.TreeSet;
+import java.util.*;
 
 public final class Downscaling {
 
@@ -79,6 +76,7 @@ public final class Downscaling {
                         pointRange,
                         true,
                         true,
+                        false,
                         mappingParameters.getToleranceThreshold()
             );
 

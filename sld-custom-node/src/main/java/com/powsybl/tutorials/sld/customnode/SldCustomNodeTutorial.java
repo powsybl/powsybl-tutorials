@@ -19,9 +19,10 @@ import com.powsybl.sld.library.ResourcesComponentLibrary;
 import com.powsybl.sld.model.graphs.NodeFactory;
 import com.powsybl.sld.model.graphs.VoltageLevelGraph;
 import com.powsybl.sld.model.nodes.Node;
-import com.powsybl.sld.svg.DefaultDiagramLabelProvider;
+import com.powsybl.sld.svg.DefaultLabelProvider;
 import com.powsybl.sld.svg.DefaultSVGWriter;
-import com.powsybl.sld.util.TopologicalStyleProvider;
+import com.powsybl.sld.svg.SvgParameters;
+import com.powsybl.sld.svg.styles.iidm.TopologicalStyleProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -131,21 +132,22 @@ public final class SldCustomNodeTutorial {
                 .buildVoltageLevelGraph("VL");
 
         // run layout
-        var parameters = new LayoutParameters();
+        var layoutParameters = new LayoutParameters();
         var layout = new SmartVoltageLevelLayoutFactory(network)
                 .create(graph);
-        layout.run(parameters);
+        layout.run(layoutParameters);
 
         // render SVG
+        var svgParameters = new SvgParameters();
         var componentLibrary = new CustomLibrary();
-        var svgWriter = new DefaultSVGWriter(componentLibrary, parameters);
-        var labelProvider = new DefaultDiagramLabelProvider(network, componentLibrary, parameters);
+        var svgWriter = new DefaultSVGWriter(componentLibrary, layoutParameters, svgParameters);
+        var labelProvider = new DefaultLabelProvider(network, componentLibrary, layoutParameters, svgParameters);
         var styleProvider = new TopologicalStyleProvider(network);
 
         Path svgFile = Paths.get(System.getProperty("java.io.tmpdir"), "sld.svg");
         LOGGER.info("Writing {}", svgFile);
         try (Writer writer = Files.newBufferedWriter(svgFile, StandardCharsets.UTF_8)) {
-            svgWriter.write("", graph, labelProvider, styleProvider, writer);
+            svgWriter.write(graph, labelProvider, styleProvider, writer);
         }
 
     }

@@ -26,7 +26,7 @@
             <plugin>
                 <groupId>com.powsybl</groupId>
                 <artifactId>powsybl-itools-packager-maven-plugin</artifactId>
-                <version>4.9.1</version> <!-- to fix by adding this artifact to core dependency management -->
+                <version>6.0.1</version> <!-- to fix by adding this artifact to core dependency management -->
                 <executions>
                     <execution>
                         <phase>package</phase>

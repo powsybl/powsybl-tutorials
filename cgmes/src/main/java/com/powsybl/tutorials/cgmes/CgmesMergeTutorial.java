@@ -43,7 +43,7 @@ public final class CgmesMergeTutorial {
 
         // These lines print the number of buses of the "networkBe" network.
         for (Component component : networkBe.getBusView().getConnectedComponents()) {
-            System.out.println(networkBe.getName() + " :" + component.getNum() + " " + component.getSize() + " buses");
+            System.out.println(networkBe.getNameOrId() + " :" + component.getNum() + " " + component.getSize() + " buses");
         }
 
         // A micro grid from Tennet TSO (Netherlands).
@@ -60,19 +60,19 @@ public final class CgmesMergeTutorial {
         TopologyVisitor visitor = new DefaultTopologyVisitor() {
             @Override
             public void visitGenerator(Generator generator) {
-                System.out.println("Generator: " + generator.getName() + ": "
+                System.out.println("Generator: " + generator.getNameOrId() + ": "
                         + generator.getTerminal().getP() + " MW (max. " + generator.getMaxP() + " MW)");
             }
 
             @Override
             public void visitLoad(Load load) {
-                System.out.println("Load: " + load.getName() + ": "
+                System.out.println("Load: " + load.getNameOrId() + ": "
                         + load.getTerminal().getP() + " MW");
             }
         };
         // Let's apply it to our two networks.
         for (Network n : networks) {
-            System.out.println("Network: " + n.getName());
+            System.out.println("Network: " + n.getNameOrId());
             for (VoltageLevel vl : n.getVoltageLevels()) {
                 vl.visitEquipments(visitor);
             }
@@ -80,14 +80,14 @@ public final class CgmesMergeTutorial {
 
         // We are going to merge the two previous networks.
         // Note that the second network is merged in the first one.
-        networkBe.merge(networkNl);
-        for (VoltageLevel vl : networkBe.getVoltageLevels()) {
+        Network mergedNetwork = Network.merge(networkBe, networkNl);
+        for (VoltageLevel vl : mergedNetwork.getVoltageLevels()) {
             vl.visitEquipments(visitor);
         }
 
         // We check if the number of buses have increased.
-        for (Component component : networkBe.getBusView().getConnectedComponents()) {
-            System.out.println(networkBe.getName() + " :" + component.getNum() + " " + component.getSize() + " buses");
+        for (Component component : mergedNetwork.getBusView().getConnectedComponents()) {
+            System.out.println(mergedNetwork.getNameOrId() + " :" + component.getNum() + " " + component.getSize() + " buses");
         }
 
         networkBe.getGenerator("3a3b27be-b18b-4385-b557-6735d733baf0").setVoltageRegulatorOn(false);
@@ -96,18 +96,18 @@ public final class CgmesMergeTutorial {
         // is defined in the configuration file.
         // See the load-flow tutorial for more information.
         LoadFlowParameters loadFlowParameters = new LoadFlowParameters();
-        LoadFlow.run(networkBe, loadFlowParameters);
+        LoadFlow.run(mergedNetwork, loadFlowParameters);
 
         // This following function prints the active balance summary.
-        Networks.printBalanceSummary("Balance: ", networkBe, new PrintWriter(System.out));
+        Networks.printBalanceSummary("Balance: ", mergedNetwork, new PrintWriter(System.out));
 
         // We are going to perform a security analysis on the merged network.
 
         // A security analysis needs a list of contingencies.
         // The list is composed of all lines which voltage is less than 300 kV.
-        List<Contingency> contingencies = networkBe.getLineStream()
+        List<Contingency> contingencies = mergedNetwork.getLineStream()
                 .filter(l -> l.getTerminal1().getVoltageLevel().getNominalV() < 300)
-                .map(l -> new Contingency(l.getName(), new BranchContingency(l.getId())))
+                .map(l -> new Contingency(l.getNameOrId(), new BranchContingency(l.getId())))
                 .collect(Collectors.toList());
 
         System.out.println("Number of contingencies: " + contingencies.size());
@@ -115,14 +115,14 @@ public final class CgmesMergeTutorial {
         // We are going to run the security analysis on each contingency of the list.
         SecurityAnalysisParameters securityAnalysisParameters = new SecurityAnalysisParameters()
                 .setLoadFlowParameters(loadFlowParameters);
-        SecurityAnalysisReport securityAnalysisReport = SecurityAnalysis.run(networkBe,  contingencies, securityAnalysisParameters);
+        SecurityAnalysisReport securityAnalysisReport = SecurityAnalysis.run(mergedNetwork,  contingencies, securityAnalysisParameters);
         SecurityAnalysisResult securityAnalysisResult = securityAnalysisReport.getResult();
 
         // Let's analyse the results.
         // For each contingency, only the two windings transformer NL-TR2_1 is overloaded.
         // Current permanent limit at each side of the transformer is reached.
         Security.print(securityAnalysisResult,
-                networkBe,
+                mergedNetwork,
                 new OutputStreamWriter(System.out),
                 new AsciiTableFormatterFactory(),
                 new Security.PostContingencyLimitViolationWriteConfig(null, TableFormatterConfig.load(), true, true));

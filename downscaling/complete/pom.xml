@@ -7,7 +7,7 @@
     <parent>
         <groupId>com.powsybl</groupId>
         <artifactId>powsybl-parent</artifactId>
-        <version>3</version>
+        <version>15</version>
         <relativePath/>
     </parent>
 
@@ -17,7 +17,7 @@
     <properties>
         <maven.exec.version>1.6.0</maven.exec.version>
         <slf4j.version>1.7.22</slf4j.version>
-        <powsybl.core.version>4.7.0</powsybl.core.version>
+        <powsybl.core.version>6.0.1</powsybl.core.version>
         <exec.cleanupDaemonThreads>false</exec.cleanupDaemonThreads>
         <exec.mainClass>com.powsybl.tutorials.downscaling.Downscaling</exec.mainClass>
     </properties>

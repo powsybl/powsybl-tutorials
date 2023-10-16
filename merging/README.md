@@ -1,4 +1,4 @@
-# Merging View and SV export of CGM
+# Merging and SV export of CGM
 
 In this tutorial, we learn how to import IGM CGMES files, merge them, run a load flow and export updated SSH files and a merged SV file of the CGM composed of these IGM. The CGMES files are from two bordering countries: Belgium and Netherlands.
 
@@ -10,7 +10,7 @@ In the tutorial, we use the OpenLoadFlow implementation. Please visit this [page
 # How to configure this tutorial
 The configuration file is:
 ```
-<path_to_powsybl_tutorials>/merging-view/src/main/resources/config.yml
+<path_to_powsybl_tutorials>/merging/src/main/resources/config.yml
 ```
 In this tutorial, we only need:
 ```
@@ -24,6 +24,6 @@ load-flow-default-parameters:
 # Running the tutorial
 To run this tutorial, you just need to execute the following command lines:
 ```
-cd <path_to_powsybl_tutorials>/merging-view/
+cd <path_to_powsybl_tutorials>/merging/
 mvn clean package exec:exec
 ```

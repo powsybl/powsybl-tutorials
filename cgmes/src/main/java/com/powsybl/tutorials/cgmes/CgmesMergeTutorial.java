@@ -22,7 +22,6 @@ import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * @author Anne Tilloy <anne.tilloy at rte-france.com>
@@ -90,7 +89,7 @@ public final class CgmesMergeTutorial {
             System.out.println(mergedNetwork.getNameOrId() + " :" + component.getNum() + " " + component.getSize() + " buses");
         }
 
-        networkBe.getGenerator("3a3b27be-b18b-4385-b557-6735d733baf0").setVoltageRegulatorOn(false);
+        mergedNetwork.getGenerator("3a3b27be-b18b-4385-b557-6735d733baf0").setVoltageRegulatorOn(false);
 
         // We are going to compute a load flow on this network. The load-flow engine used
         // is defined in the configuration file.
@@ -108,7 +107,7 @@ public final class CgmesMergeTutorial {
         List<Contingency> contingencies = mergedNetwork.getLineStream()
                 .filter(l -> l.getTerminal1().getVoltageLevel().getNominalV() < 300)
                 .map(l -> new Contingency(l.getNameOrId(), new BranchContingency(l.getId())))
-                .collect(Collectors.toList());
+                .toList();
 
         System.out.println("Number of contingencies: " + contingencies.size());
 

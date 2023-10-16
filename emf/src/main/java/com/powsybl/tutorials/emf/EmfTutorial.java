@@ -11,7 +11,9 @@ import com.powsybl.balances_adjustment.util.NetworkArea;
 import com.powsybl.balances_adjustment.util.NetworkAreaFactory;
 import com.powsybl.balances_adjustment.util.NetworkAreaUtil;
 import com.powsybl.cgmes.conversion.CgmesExport;
-import com.powsybl.cgmes.extensions.*;
+import com.powsybl.cgmes.extensions.CgmesControlArea;
+import com.powsybl.cgmes.extensions.CgmesControlAreas;
+import com.powsybl.cgmes.extensions.CgmesDanglingLineBoundaryNode;
 import com.powsybl.commons.PowsyblException;
 import com.powsybl.computation.local.LocalComputationManager;
 import com.powsybl.entsoe.cgmes.balances_adjustment.data_exchange.DataExchanges;
@@ -29,7 +31,10 @@ import com.powsybl.loadflow.LoadFlowResult;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.*;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.PrintStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -73,10 +78,10 @@ public final class EmfTutorial {
             loadflowPreProcessing(networks, validNetworks);
         }
 
-        // Merging the IGMs using the merging view.
+        // Merging the IGMs.
         Network mergedNetwork = Network.merge(validNetworks.values().toArray(Network[]::new));
 
-        // Run load flow on merging view before balances ajustment.
+        // Run load flow on merged network before balances ajustment.
         if (!PREPARE_BALANCE_COMPUTATION) {
             LOAD_FLOW_PARAMETERS.setReadSlackBus(false);
             LOAD_FLOW_PARAMETERS.setDistributedSlack(true);
@@ -152,12 +157,12 @@ public final class EmfTutorial {
         networks.forEach((name, network) -> {
 
             // Retrieve CGMES control area.
-            CgmesControlArea controlArea = network.getExtension(CgmesControlAreas.class).getCgmesControlAreas().iterator().next();
+            CgmesControlArea controlArea = mergedNetwork.getSubnetwork(network.getId()).getExtension(CgmesControlAreas.class).getCgmesControlAreas().iterator().next();
 
             // Retrieve target AC net position.
             double target = dataExchanges.getNetPosition(SYNCHRONOUS_AREA_ID, controlArea.getEnergyIdentificationCodeEIC(), Instant.parse(network.getCaseDate().toString()));
 
-            NetworkAreaFactory factory = createFactory(controlArea, network);
+            NetworkAreaFactory factory = createFactory(controlArea, mergedNetwork);
             NetworkArea area = factory.create(mergedNetwork);
             Scalable scalable = NetworkAreaUtil.createConformLoadScalable(area);
 
@@ -185,7 +190,7 @@ public final class EmfTutorial {
                 .map(n -> n.getExtension(CgmesControlAreas.class))
                 .filter(Objects::nonNull)
                 .map(cgmesControlAreaList -> ((CgmesControlAreas) cgmesControlAreaList).getCgmesControlAreas().iterator().next())
-                .collect(Collectors.toList());
+                .toList();
         Scalable scalable = createACDanglingLineScalable(mergedNetwork, cgmesControlAreas);
 
         if (scalable == null) {
@@ -215,7 +220,7 @@ public final class EmfTutorial {
     }
 
     private static NetworkAreaFactory createFactory(CgmesControlArea area, Network network) {
-        return new CgmesVoltageLevelsAreaFactory(area, null, network.getVoltageLevelStream().map(Identifiable::getId).collect(Collectors.toList()));
+        return new CgmesVoltageLevelsAreaFactory(area, null, network.getVoltageLevelStream().map(Identifiable::getId).toList());
     }
 
     private static void log(BalancesAdjustmentValidationParameters validationParameters) {
@@ -229,13 +234,13 @@ public final class EmfTutorial {
         });
     }
 
-    private static Scalable createACDanglingLineScalable(Network mergingView, List<CgmesControlArea> areas) {
-        List<DanglingLine> danglingLines = mergingView.getDanglingLineStream()
+    private static Scalable createACDanglingLineScalable(Network mergedNetwork, List<CgmesControlArea> areas) {
+        List<DanglingLine> danglingLines = mergedNetwork.getDanglingLineStream()
                 .filter(dl -> dl.getExtension(CgmesDanglingLineBoundaryNode.class) == null || !dl.getExtension(CgmesDanglingLineBoundaryNode.class).isHvdc())
                 .filter(dl -> dl.getTerminal().getBusView().getBus() != null && dl.getTerminal().getBusView().getBus().isInMainSynchronousComponent())
                 .filter(dl -> areas.stream().anyMatch(area -> area.getTerminals().stream().anyMatch(t -> t.getConnectable().getId().equals(dl.getId()))
                         || area.getBoundaries().stream().anyMatch(b -> b.getDanglingLine().getId().equals(dl.getId()))))
-                .collect(Collectors.toList());
+                .toList();
         if (danglingLines.isEmpty()) {
             return null; // there is no dangling line in the CGM.
         }
@@ -243,7 +248,7 @@ public final class EmfTutorial {
         if (totalP0 == 0.0) {
             throw new PowsyblException("The sum of all dangling lines' active power flows is zero, scaling is impossible");
         }
-        List<Double> percentages = danglingLines.stream().map(dl -> 100f * Math.abs(dl.getP0()) / totalP0).collect(Collectors.toList());
+        List<Double> percentages = danglingLines.stream().map(dl -> 100f * Math.abs(dl.getP0()) / totalP0).toList();
         return Scalable.proportional(percentages, danglingLines.stream().map(dl -> Scalable.onDanglingLine(dl.getId(), Scalable.ScalingConvention.LOAD)).collect(Collectors.toList()));
     }
 

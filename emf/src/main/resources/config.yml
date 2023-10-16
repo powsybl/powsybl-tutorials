@@ -25,5 +25,5 @@ balances-adjustment-validation-parameters:
     - IGM1-name, path-to-IGM1 #complete with the name of your first IGM and the path to the zipfile
     - IGM2-name, path-to-IGM2 #complete with the name of your second IGM and the path to the zipfile
 
-  output-dir: path-to-directory
+  output-dir: path-to-directory #complete with the path to the directory where you want the output files to be saved
 

@@ -12,9 +12,7 @@ import com.powsybl.loadflow.LoadFlow;
 import com.powsybl.loadflow.LoadFlowParameters;
 import com.powsybl.loadflow.LoadFlowResult;
 
-import javax.xml.stream.XMLStreamException;
 import java.io.File;
-import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Objects;
 import java.util.Properties;
@@ -27,7 +25,7 @@ public final class MergingTutorial {
 
     private static final String TMP_DIR = System.getProperty("java.io.tmpdir"); // put your own directory output path
 
-    public static void main(String[] args) throws IOException, XMLStreamException {
+    public static void main(String[] args) {
         File fileBe = new File(MergingTutorial.class.getResource("/MicroGridTestConfiguration_T4_BE_BB_Complete_v2.zip").getPath());
         Network n1 = Network.read(fileBe.toString());
         String n1Id = n1.getId();

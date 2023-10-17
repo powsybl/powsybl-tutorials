@@ -101,10 +101,10 @@ public final class EmfTutorial {
             dataExchanges = DataExchangesXml.parse(is);
         }
         if (PREPARE_BALANCE_COMPUTATION) {
-            igmPreprocessing(mergedNetwork, validNetworks, dataExchanges, balanceComputationAreas, validationParameters);
+            igmPreprocessing(mergedNetwork, dataExchanges, balanceComputationAreas, validationParameters);
             prepareFictitiousArea(mergedNetwork, validNetworks, dataExchanges, balanceComputationAreas);
         } else {
-            igmPreprocessing(mergedNetwork, validNetworks, dataExchanges, validationParameters);
+            igmPreprocessing(mergedNetwork, dataExchanges, validationParameters);
             prepareFictitiousArea(mergedNetwork, validNetworks, dataExchanges);
         }
 
@@ -146,18 +146,18 @@ public final class EmfTutorial {
         });
     }
 
-    private static void igmPreprocessing(Network mergedNetwork, Map<String, Network> networks, DataExchanges dataExchanges,
+    private static void igmPreprocessing(Network mergedNetwork, DataExchanges dataExchanges,
                                          BalancesAdjustmentValidationParameters validationParameters) {
-        igmPreprocessing(mergedNetwork, networks, dataExchanges, null, validationParameters);
+        igmPreprocessing(mergedNetwork, dataExchanges, null, validationParameters);
     }
 
-    private static void igmPreprocessing(Network mergedNetwork, Map<String, Network> networks, DataExchanges dataExchanges,
+    private static void igmPreprocessing(Network mergedNetwork, DataExchanges dataExchanges,
                                          List<BalanceComputationArea> balanceComputationAreas,
                                          BalancesAdjustmentValidationParameters validationParameters) {
-        networks.forEach((name, network) -> {
+        mergedNetwork.getSubnetworks().forEach(network -> {
 
             // Retrieve CGMES control area.
-            CgmesControlArea controlArea = mergedNetwork.getSubnetwork(network.getId()).getExtension(CgmesControlAreas.class).getCgmesControlAreas().iterator().next();
+            CgmesControlArea controlArea = network.getExtension(CgmesControlAreas.class).getCgmesControlAreas().iterator().next();
 
             // Retrieve target AC net position.
             double target = dataExchanges.getNetPosition(SYNCHRONOUS_AREA_ID, controlArea.getEnergyIdentificationCodeEIC(), Instant.parse(network.getCaseDate().toString()));
@@ -174,7 +174,7 @@ public final class EmfTutorial {
             }
 
             if (!PREPARE_BALANCE_COMPUTATION) {
-                System.out.println(name + ": " + target + " (target AC net position) / " + real + " (calculated AC net position)");
+                System.out.println(network.getNameOrId() + ": " + target + " (target AC net position) / " + real + " (calculated AC net position)");
             }
         });
     }

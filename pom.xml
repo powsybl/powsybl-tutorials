@@ -26,11 +26,10 @@
 
     <properties>
         <maven.exec.version>1.6.0</maven.exec.version>
-        <maven.javafx.version>8.8.3</maven.javafx.version>
         <javacsv.version>2.0</javacsv.version>
-        <java.version>11</java.version>
+        <java.version>17</java.version>
 
-        <powsybl-dependencies.version>2023.0.1</powsybl-dependencies.version>
+        <powsybl-dependencies.version>2023.3.1</powsybl-dependencies.version>
     </properties>
 
     <modules>
@@ -41,7 +40,7 @@
         <module>emf</module>
         <module>itools-packager</module>
         <module>loadflow</module>
-        <module>merging-view</module>
+        <module>merging</module>
         <module>sensitivity</module>
         <module>sld-custom-node</module>
         <module>topology</module>

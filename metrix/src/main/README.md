@@ -12,6 +12,7 @@ obtained results. A video presenting the content of the tutorial is available [h
 - About 4 hours
 - A UNIX environment
 - git (to be able to clone the repository)
+- JAVA 17 at least
 - ...and that's it.
 
 ## How to install metrix
@@ -23,17 +24,17 @@ In this chapter we will install Powsybl-METRIX on your environment. You can skip
 3. **Edit paths**: In your *.bashrc* file, add the paths to Metrix binaries :
 
 ```bash
-export PATH=[...]:.local/opt/powsybl-metrix/bin:[METRIX_INSTALL_DIR]/powsybl-metrix/metrix-distribution/target/metrix/bin
+export PATH=.local/opt/powsybl-metrix/bin:[GIT_CLONE_FOLDER]/powsybl-metrix/metrix-distribution/target/metrix/bin:$PATH
 ```
 
-where METRIX_INSTALL_DIR is the directory in which you have launched the installation script.
+where GIT_CLONE_FOLDER is the directory in which you have downloaded the whole package (and launched the installation script).
 
-4. **Add the metrix configuration file** : in your itools repository (which is by default located at  *~/.itools*), create a file named *config.yml*, or modify the extant one with the following content (replace the METRIX_INSTALL_DIR tag with your Metrix installation path):
+4. **Add the metrix configuration file** : in your itools repository (which is by default located at  *~/.itools*), create a file named *config.yml*, or modify the extant one with the following content (replace the METRIX_INSTALL_DIR tag with your Metrix installation path, by default *"/root/.local/opt/powsybl-metrix"*):
 
 ```yaml
 metrix:
         home-dir: "METRIX_INSTALL_DIR/powsybl-metrix" # required
-
+        command: metrix-simulator # equired
         iidm-export-version: "1.5" # default to latest available version
         constant-loss-factor: false # enable constant loss factor
         chunk-size: 10 # size of the batch processed by metrix

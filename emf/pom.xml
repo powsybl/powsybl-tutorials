@@ -49,7 +49,7 @@
 
         <dependency>
             <groupId>com.powsybl</groupId>
-            <artifactId>powsybl-action-util</artifactId>
+            <artifactId>powsybl-action-ial-util</artifactId>
         </dependency>
         <dependency>
             <groupId>com.powsybl</groupId>

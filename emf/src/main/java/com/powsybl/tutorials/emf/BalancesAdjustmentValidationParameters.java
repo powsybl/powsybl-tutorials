@@ -6,6 +6,7 @@
  */
 package com.powsybl.tutorials.emf;
 
+import com.powsybl.commons.PowsyblException;
 import com.powsybl.commons.config.ModuleConfig;
 import com.powsybl.commons.config.PlatformConfig;
 
@@ -31,7 +32,8 @@ public final class BalancesAdjustmentValidationParameters {
 
         // Read parameters under balances-adjustment-validation-parameters module
         PlatformConfig platformConfig = PlatformConfig.defaultConfig();
-        ModuleConfig config = platformConfig.getModuleConfig("balances-adjustment-validation-parameters");
+        ModuleConfig config = platformConfig.getOptionalModuleConfig("balances-adjustment-validation-parameters")
+            .orElseThrow(() -> new PowsyblException("Could not find parameters for balances adjustment validation."));
 
         // Read each IGM path and put them in igmPaths
         config.getStringListProperty("igm-paths").forEach(path -> {

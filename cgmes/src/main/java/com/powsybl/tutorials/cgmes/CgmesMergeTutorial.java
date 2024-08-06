@@ -112,8 +112,8 @@ public final class CgmesMergeTutorial {
         System.out.println("Number of contingencies: " + contingencies.size());
 
         // We are going to run the security analysis on each contingency of the list.
-        SecurityAnalysisParameters securityAnalysisParameters = new SecurityAnalysisParameters()
-                .setLoadFlowParameters(loadFlowParameters);
+        SecurityAnalysisRunParameters securityAnalysisParameters = new SecurityAnalysisRunParameters()
+            .setSecurityAnalysisParameters(new SecurityAnalysisParameters().setLoadFlowParameters(loadFlowParameters));
         SecurityAnalysisReport securityAnalysisReport = SecurityAnalysis.run(mergedNetwork,  contingencies, securityAnalysisParameters);
         SecurityAnalysisResult securityAnalysisResult = securityAnalysisReport.getResult();
 

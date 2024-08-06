@@ -32,10 +32,8 @@ public final class BalancesAdjustmentValidationParameters {
 
         // Read parameters under balances-adjustment-validation-parameters module
         PlatformConfig platformConfig = PlatformConfig.defaultConfig();
-        ModuleConfig config = platformConfig.getOptionalModuleConfig("balances-adjustment-validation-parameters").orElse(null);
-        if (config == null) {
-            throw new PowsyblException("Could not find parameters for balances adjustment validation.");
-        }
+        ModuleConfig config = platformConfig.getOptionalModuleConfig("balances-adjustment-validation-parameters")
+            .orElseThrow(() -> new PowsyblException("Could not find parameters for balances adjustment validation."));
 
         // Read each IGM path and put them in igmPaths
         config.getStringListProperty("igm-paths").forEach(path -> {

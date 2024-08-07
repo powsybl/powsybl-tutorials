@@ -129,7 +129,7 @@ public final class Downscaling {
              .filter(f -> f.toString().endsWith(".zip"))
              .forEach(zipFile -> {
                  try {
-                     final Network network = Importers.loadNetwork(zipFile.toFile().toString());
+                     final Network network = Network.read(zipFile.toFile().toString());
                      networks.add(network);
                  } catch (Exception e) {
                      LOGGER.error("Could not load network from file [" + zipFile.getFileName().toString() + "]", e);

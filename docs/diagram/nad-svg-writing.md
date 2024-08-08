@@ -97,7 +97,7 @@ NetworkAreaDiagram.draw(network, Path.of("/tmp/diagram.svg"));
 
 We end up with the following diagram:
 
-![wholeNetwork](img/nad-writing/nad300.jpg){: width="70%" .center-image}
+![wholeNetwork](img/nad-writing/nad300.jpg){width="70%" .center-image}
 
 ## Generating SVG for part of the input network
 
@@ -113,7 +113,7 @@ NetworkAreaDiagram.draw(network, Path.of("/tmp/partial_diagram_25.svg"), "VL25",
 
 This leads to the following SVG:
 
-![VL25](img/nad-writing/partial_diagram_25.svg){: width="70%" .center-image}
+![VL25](img/nad-writing/partial_diagram_25.svg){width="70%" .center-image class="forced-white-background"}
 
 Now let's generate the subgraph with voltage levels at a maximum distance of 2 from `"VL1"` and `"VL25"`:
 
@@ -124,4 +124,4 @@ NetworkAreaDiagram.draw(network, Path.of("/tmp/partial_diagram_1_25.svg"), List.
 This gives us the diagram below. Note that nothing ensures that the parts displayed in resulting diagram are connected.
 That is, the voltage levels between two voltage levels which are connected in the full graph are not necessarily drawn.
 
-![VL1_VL25](img/nad-writing/partial_diagram_1_25.svg){: width="70%" .center-image}
+![VL1_VL25](img/nad-writing/partial_diagram_1_25.svg){width="70%" .center-image class="forced-white-background"}

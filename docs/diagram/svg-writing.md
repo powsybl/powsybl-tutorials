@@ -4,7 +4,7 @@ layout: default
 
 # Single Line Diagram - SVG Writing
 
-![Amsterdam_substation](img/svg-writing/example_AmsterdamSubstation.svg)
+![Amsterdam_substation](img/svg-writing/example_AmsterdamSubstation.svg){class="forced-white-background"}
 
 We are showing in this guide how to create some single line diagrams, like the one above. 
 We first generate such a diagram from a test network, then from a [CGMES](../../../grid/formats/cim-cgmes.md) file.
@@ -113,7 +113,7 @@ SingleLineDiagram.drawVoltageLevel(network, "N", "/tmp/n.svg");
 
 We obtain the following SVG:
 
-![N_voltageLevel](img/svg-writing/example_n.svg){: width="70%" .center-image}
+![N_voltageLevel](img/svg-writing/example_n.svg){width="70%" .center-image class="forced-white-background"}
 
 Similarly, we could generate a SVG for voltage level `C`:
  
@@ -123,7 +123,7 @@ SingleLineDiagram.draw(network, "C", "/tmp/c.svg");
  
 leading to the following diagram:
 
-![C_voltageLevel](img/svg-writing/example_c.svg){: width="18%" .center-image}
+![C_voltageLevel](img/svg-writing/example_c.svg){width="18%" .center-image class="forced-white-background"}
 
 ### Generating the substation diagram
 In order to build the diagram for the whole substation, named `A`, containing both voltage levels displayed previously, we may use the same interface:
@@ -138,7 +138,7 @@ SingleLineDiagram.drawSubstation(network, "A", "/tmp/a.svg");
 
 In both cases, we obtain the following wider SVG file:
 
-![A_substation](img/svg-writing/example_a.svg){: width="85%" .center-image}
+![A_substation](img/svg-writing/example_a.svg){width="85%" .center-image class="forced-white-background"}
 
 ## Diagrams from a CGMES file
 
@@ -168,7 +168,7 @@ SingleLineDiagram.draw(network, "8bbd7e74-ae20-4dce-8780-c20f8e18c2e0", Paths.ge
 
 We obtain the following SVG:
 
-![Brussels_voltageLevel](img/svg-writing/example_Brussels110.svg){: width="40%" .center-image}
+![Brussels_voltageLevel](img/svg-writing/example_Brussels110.svg){width="40%" .center-image class="forced-white-background"}
 
 ### Generating a substation diagram
 Similarly to voltage level diagrams, we can generate substation diagrams. 
@@ -185,7 +185,7 @@ SingleLineDiagram.draw(network, "c49942d6-8b01-4b01-b5e8-f1180f84906c", Paths.ge
 
 We then obtain the following SVG file representing the whole PP_Amsterdam substation with its three voltage levels:
 
-![Amsterdam_substation](img/svg-writing/example_AmsterdamSubstation.svg)
+![Amsterdam_substation](img/svg-writing/example_AmsterdamSubstation.svg){class="forced-white-background"}
 
 That's it, you are now able to generate diagrams for substations and voltage levels! You can now try to change the default layout settings by reading the next guide [SVG Layouts]().
 

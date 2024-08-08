@@ -11,7 +11,7 @@ The tutorial can be expressed in a short and easy workflow: all the input data i
 Then, a load flow simulator is launched to get flows on all nodes. In this tutorial, the simulator is Open Loadflow, but it could be another load flow simulator, 
 as long as the API contract is respected. A contingency is created and finally, the flows are computed again in order to get the final state.  
 
-![Workflow](./img/loadflow/Workflow.svg){: width="75%" .center-image}
+![Workflow](./img/loadflow/Workflow.svg){width="75%" .center-image}
 
 ## What will you need?
 - About 1/2 hour
@@ -151,7 +151,7 @@ In this way, PowSyBl will be set to use the OpenLoadflow implementation for the 
 In this tutorial, the network is quite simple and made of two lines in parallel, with a generator on the left side and a load on the right side. 
 The load consumes 600 MW and the generator produces 606.5 MW. 
 
-![Initial simple network](./img/loadflow/Network_Simple_Initial.svg){: width="50%" .center-image}
+![Initial simple network](./img/loadflow/Network_Simple_Initial.svg){width="50%" .center-image}
 
 First, create a logger outside your main method. We will use it to display information about the objects we handle.
 ```java
@@ -271,7 +271,7 @@ for (Bus bus : network.getBusView().getBuses()) {
 
 ## Apply a contingency on the network and run a load flow again
 
-![Final simple network](./img/loadflow/Network_Simple_Final.svg){: width="50%" .center-image}
+![Final simple network](./img/loadflow/Network_Simple_Final.svg){width="50%" .center-image}
 
 <br />
 <img src="./img/loadflow/Modify_N-1.svg" alt="" style="vertical-align: bottom"/>

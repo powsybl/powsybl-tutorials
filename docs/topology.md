@@ -15,12 +15,15 @@ The first voltage level VL1 has 2 busbar sections BBS1 and BBS2, a generator GN,
 The second voltage level VL2 has a single busbar section BBS3, a line LN and is connected to voltage level VL1 through transformer TR.
 Below is a diagram of the substation:
 
-![Node breaker topology](./img/topology/nodeBreakerTopology.svg){width="50%" .center-image}
+![Node breaker topology](./img/topology/nodeBreakerTopology.svg){width="75%" .center-image class="only-light"}
+![Node breaker topology](./img/topology/dark-mode/nodeBreakerTopology.svg){width="75%" .center-image class="only-dark"}
 
 The node/breaker topology model is stored inside the voltage level as a graph, in which the vertices correspond to connectivity nodes and the edges correspond to switches (or internal connections).
 The next diagram shows how to map the substation topology to a graph.
 
-![Node breaker graph](./img/topology/nodeBreakerTopologyGraph.svg){width="50%" .center-image}
+![Node breaker graph](./img/topology/nodeBreakerTopologyGraph.svg){width="75%" .center-image class="only-light"}
+![Node breaker graph](./img/topology/dark-mode/nodeBreakerTopologyGraph.svg){width="75%" .center-image class="only-dark"}
+
 
 - Each voltage level has its own topology graph. Voltage level VL1 has 8 connectivity nodes. Generator GN is connected to node 1, load LD to node 5, busbar sections BBS1 and BBS2 to node 3 and 4. 2, 6 and 7 are internal connectivity nodes.
 - Voltage level VL2 has 3 nodes, line LN is connected to node 1, busbar section BBS3 to node 2.
@@ -35,7 +38,8 @@ The following diagram shows the computed bus/breaker topology.
 Compared to the node/breaker topology, only the equipments (GN, LD, TR, LN) and the switches flagged as retained (BR3) remain in the network description.
 The equipments are now connected through buses (B1, B2 and B3).
 
-![Bus breaker graph](./img/topology/busBreakerTopology.svg){width="50%" .center-image}
+![Bus breaker graph](./img/topology/busBreakerTopology.svg){width="75%" .center-image class="only-light"}
+![Bus breaker graph](./img/topology/dark-mode/busBreakerTopology.svg){width="75%" .center-image class="only-dark"}
 
 We can switch to a bus/breaker view on the substation voltage level VL1.
 VL1 contains 2 buses in the bus/breaker view.
@@ -60,7 +64,8 @@ Bus: VL2_1
 
 The following diagram shows the computed bus topology. Compared to bus/breaker topology, there is no switches anymore. There remains only equipments (GN, TR, LN) connected through buses. LD is not connected.
 
-![Bus graph](./img/topology/busTopology.svg){width="50%" .center-image}
+![Bus graph](./img/topology/busTopology.svg){width="75%" .center-image class="only-light"}
+![Bus graph](./img/topology/dark-mode/busTopology.svg){width="75%" .center-image class="only-dark"}
 
 We can switch to a bus view on substation voltage level VL1. VL1 contains 1 bus in the bus view. This bus connects all the equipments of voltage level VL1. Here are the corresponding prints in the tutorial:
 

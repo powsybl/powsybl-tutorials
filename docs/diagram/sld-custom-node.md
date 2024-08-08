@@ -29,7 +29,8 @@ In the generated diagram, the wind-powered generators are then displayed with th
 ## SVG writing
 
 The final SVG, including the customized icon for the wind turbine, is the following:
-![final_svg](img/sld.svg){: width="20%" .center-image}
+
+![final_svg](img/sld.svg){width="20%" .center-image class="forced-white-background"}
 
 
 

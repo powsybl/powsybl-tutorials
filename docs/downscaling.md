@@ -16,7 +16,7 @@ Input data is quite simple and is stored in three files:
 
 These files are imported to load a set of networks, a time series store and a DSL loader. All of these objects are then used in the downscaling process to map time series on network elements. You will also note that output generation is performed at the same time as the mapping for better performances.
 
-![downscaling](./img/downscaling/downscaling.png){: width="50%" .center-image}
+![downscaling](./img/downscaling/downscaling.png){width="50%" .center-image}
 
 ## What will you need?
 - About 1 hour

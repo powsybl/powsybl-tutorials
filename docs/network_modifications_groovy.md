@@ -12,7 +12,7 @@ Other similar functions are available to add every kind of injections and branch
 
 NB: The design of these scripts is not groovy-friendly. The methods will be wrapped later.
 
-# CreateLoadBay.groovy
+## CreateLoadBay.groovy
 
 In this script, a node/breaker network is first loaded. Then a load is added on the busbar section BBS1 of the voltage level named S1VL2 and the network is exported.
 
@@ -40,7 +40,7 @@ Here are the options that must/can be filled:
 | InjectionDirection     | no        | BOTTOM              | Only in Node/Breaker. An optional direction to be put in the ConnectablePosition extension and that will correspond to the direction of the injection in the single-line-diagram. |
 
 
-# CreateLineBay.groovy
+## CreateLineBay.groovy
 
 In this script, the same node/breaker network is loaded and a line is created between two voltage levels S1VL2 and S2VL1.
 
@@ -75,7 +75,7 @@ Here are the options that must/can be filled:
 | Direction1            | no        | TOP              | Only in Node/Breaker. An optional direction for the side 1 of the branch to be put in the ConnectablePosition extension and that will correspond to the direction of the side 1 of the branch in the single-line-diagram. |
 | Direction2            | no        | TOP              | Only in Node/Breaker. An optional direction for the side 1 of the branch to be put in the ConnectablePosition extension and that will correspond to the direction of the side 1 of the branch in the single-line-diagram. |
 
-# RemoveLoaBay.groovy
+## RemoveLoaBay.groovy
 
 In this script, a load is removed from the initial node/breaker network.
 The load with id LD2 is removed from the voltage level S1VL2.

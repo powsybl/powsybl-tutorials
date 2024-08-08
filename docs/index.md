@@ -4,21 +4,18 @@ layout: default
 
 ```{toctree}
 ---
-maxdepth: 1
+maxdepth: 2
 hidden: true
 ---
 intellij.md
-itools/itools-packager.md
-itools/itools-command.md
-loadflow.md
-sensitivity-analysis.md
-topology.md
-diagram/svg-writing.md
-diagram/sld-custom-node.md
-diagram/nad-svg-writing.md
-downscaling.md
-emf.md
-network_modifications_groovy.md
+iTools<itools/index.md>
+Load flow<loadflow.md>
+Sensitivity analysis<sensitivity-analysis.md>
+Topology<topology.md>
+Diagrams<diagram/index.md>
+Downscaling<downscaling.md>
+European merging function<emf.md>
+Network modifications in Groovy<network_modifications_groovy.md>
 ```
 
 # Tutorials

@@ -5,9 +5,6 @@ layout: default
 # Write the Java code to perform power flows
 This tutorial shows you how to write a Java code to perform load flow calculations on a network, just on its current state but also on an N-1 state by applying a contingencies. You'll see how to configure PowSyBl, through a YML file and overwriting it with a JSON file, how to provide the input network, and how to output the load flow results to the terminal.
 
-* TOC
-{:toc}
-
 ## What will you build?
 
 The tutorial can be expressed in a short and easy workflow: all the input data is stored in an XIIDM file. This file is imported with the IIDM importer. 

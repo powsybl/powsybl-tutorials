@@ -5,9 +5,6 @@ layout: default
 # Write the Java code to perform sensitivity analysis
 This tutorial shows you how to write a Java code to perform sensitivity analysis on a network, just on its current state but also on N-1 states by providing a set of contingencies. You'll see how to configure PowSyBl, through a YML file and overwriting it with a JSON file, how to provide input sensitivity factors, and how to output the sensitivity results to a JSON file. Please find [here](https://github.com/powsybl/powsybl-tutorials/tree/main/sensitivity) the code described in this tutorial
 
-* TOC
-{:toc}
-
 ## What will you build?
 You will create a Java code to run a single sensitivity analysis on a network, and also a sensitivity analysis on various network states by providing a set of contingencies. You will use a small fictive network constituted of 12 buses, considering schematic exchanges between France, Belgium, Germany and the Netherlands. The setup is the following:
 - 3 buses per country

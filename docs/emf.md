@@ -8,9 +8,6 @@ latex: true
 This tutorial shows how to merge multiple IGMs from different TSOs and scale the resulting CGM according to actual market data. It implements the [European Merging Function](https://eepublicdownloads.entsoe.eu/clean-documents/Network%20codes%20documents/Implementation/cacm/cgmm/European_Merging_Function_Requirements_Specification.pdf) whose requirements can be found on the website of ENTSOE. 
 The forecast net positions of the IGMs are computed through the [Pan European Verification Function](https://eepublicdownloads.entsoe.eu/clean-documents/EDI/Library/cim_based/schema/PEVF%20Implementation%20Guide_V1.0.pdf).
 
-* TOC 
-{:toc}
-
 ## What will you build?
 First, your individual CGMES files will be imported and merged. Optionally, you will be able to compute a power flow on each IGM before merging. Then a load flow will be run on the CGM. The load flow simulator used in this tutorial is [OpenLoadFlow](../../simulation/powerflow/openlf.md).
 After the load flow performed on the merged area, the net positions of each control area will be computed. The algorithm used for the balance computation is in the `powsybl-balances-adjustment` API. The PEVF (for Pan European Verification Function) file will be read and gives the expected AC net positions (DC net positions are not yet supported), and the balance adjustment is computed. Then the SV file of the CGM will be exported.

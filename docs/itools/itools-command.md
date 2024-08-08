@@ -23,9 +23,6 @@ $> cd powsybl-tutorials/count-network-lines
 $> mvn package
 ``` 
 
-* TOC
-{:toc}
-
 ## Maven dependencies
 
 After creating a new Maven project, you need to add the necessary dependencies to your `pom.xml` file. 

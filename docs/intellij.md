@@ -5,9 +5,6 @@ layout: default
 # Working a tutorial with IntelliJ IDEA
 This guide walks you through using [IntelliJ IDEA](https://www.jetbrains.com/idea/) to build one of the tutorials.
 
-* TOC
-{:toc}
-
 ## What you will build?
 You’ll pick a tutorial and import it into IntelliJ IDEA. Then you can read the guide, work on the code, and run the project.
 

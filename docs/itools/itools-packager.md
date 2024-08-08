@@ -5,9 +5,6 @@ layout: default
 # Bundle an iTools package with maven
 This tutorial shows you how to bundle an `iTools` package using the `itools-packager` maven plugin.
 
-* TOC
-{:toc}
-
 ## What will you build?
 You will create an `iTools` redistribuable package with only a single `plugins-info` command. You will learn to how to configure the `itools-packager` plugin to override the default configurations.
 

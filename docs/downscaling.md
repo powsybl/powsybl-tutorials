@@ -8,9 +8,6 @@ This tutorial shows how to write Java code to perform downscaling of global data
 
 In this tutorial, we will import networks in CIM-CGMES format and map time series representing, for each network, their global active power generation set point and their global active power consumption set point. This mapping on generators and on loads will be performed using a mapping script in a DSL format. Then, we will output the results in CSV files.
 
-* TOC
-{:toc}
-
 ## What will you build?
 Input data is quite simple and is stored in three files:
 - A folder containing zip archives for CIM-CGMES networks ;

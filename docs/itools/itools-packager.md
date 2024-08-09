@@ -178,7 +178,7 @@ Plugins:
 ```
 
 ## Play with itools-packager
-The `itools-packager` plugin can be configured to change the distribution or the archive name, to change the settings in `itools.conf` or to provide a default PowSyBl configuration. Refer to the [iTools-packager](../itools-packager.md) documentation to know all available options.
+The `itools-packager` plugin can be configured to change the distribution or the archive name, to change the settings in `itools.conf` or to provide a default PowSyBl configuration.
 
 ### Configure the packaging
 Add the following `configuration` section to the `itools-packager` plugin.
@@ -247,10 +247,9 @@ Misc:
 ``` 
 
 ## Summary
-You have learnt to create a redistribuable `iTools` package, and to configure the `itools-packager` plugin. Refer to the [iTools manual](../../user/itools/index.md#available-commands) to know the list of available commands, and the [itools-packager manual](../itools-packager.md) to configure more deeply your `iTools` distribution.  
+You have learnt to create a redistribuable `iTools` package, and to configure the `itools-packager` plugin. Refer to the [iTools manual](inv:powsyblcore:std:doc#user/itools/index.html#available-commands) to know the list of available commands. 
 
 ## Going further
 The following links could also be useful:
-- [iTools manual](../../user/itools/index.md): Learn how to use `iTools`, and which commands are available
-- [itools-packager manual](../itools-packager.md): Learn all the features of the maven plugin
+- [iTools manual](inv:powsyblcore:std:doc#user/itools/index): Learn how to use `iTools`, and which commands are available
 - [Create an iTools command](itools-command.md): Learn how to create your own `iTools` command

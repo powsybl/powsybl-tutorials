@@ -7,8 +7,8 @@ layout: default
 ![Amsterdam_substation](img/svg-writing/example_AmsterdamSubstation.svg){class="forced-white-background"}
 
 We are showing in this guide how to create some single line diagrams, like the one above. 
-We first generate such a diagram from a test network, then from a [CGMES](../../../grid/formats/cim-cgmes.md) file.
-To that end, we use the `com.powsybl.sld.SingleLineDiagram` class, which is the central API of [powsybl-single-line-diagram](../../repositories/powsybl-diagram.md). 
+We first generate such a diagram from a test network, then from a [CGMES](inv:powsyblcore:std:doc#grid_exchange_formats/cgmes/index) file.
+To that end, we use the `com.powsybl.sld.SingleLineDiagram` class, which is the central API of [powsybl-single-line-diagram](inv:powsybldiagram:std:doc#single_line_diagrams/index). 
 
 ## Prerequisites
 
@@ -81,7 +81,7 @@ First of all, we need some Maven dependencies.
 {% endhighlight %}
 
 <div markdown="1">
-Here are some details about these dependencies (see also the [powsybl artifacts documentation page](../../artifacts.md)):
+Here are some details about these dependencies (see also the [powsybl artifacts documentation page]()):
 - `powsybl-single-line-diagram-core` is the core module of single-line-diagram,
 - `powsybl-iidm-impl` is used to deal with the network model,
 - `powsybl-iidm-test` is used to load the test network,

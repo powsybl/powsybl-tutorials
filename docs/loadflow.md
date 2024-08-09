@@ -148,7 +148,7 @@ In this way, PowSyBl will be set to use the OpenLoadflow implementation for the 
 
 ## Import the network from an XML IIDM file
 Now we are going to write the main Java class of this tutorial. In `loadflow/src/main/java/com/powsybl/tutorials/loadflow/`,
-create a class `LoadFlowTutorial.java`. Don't forget to specify the package: 
+create a class `LoadFlowTutorial.java`. Remember to specify the package: 
 ```java
 package com.powsybl.tutorials.loadflow;
 ```
@@ -165,7 +165,7 @@ The load consumes 600 MW and the generator produces 606.5 MW.
 
 ![Initial simple network](./img/loadflow/Network_Simple_Initial.svg){width="50%" .center-image}
 
-![File](./img/loadflow/File.svg){width="3%"} The network is modeled in [IIDM](../../grid/formats/xiidm.md), which is the
+![File](./img/loadflow/File.svg){width="3%"} The network is modeled in [IIDM](inv:powsyblcore:std:doc#grid_exchange_formats/iidm/index), which is the
 internal model of Powsybl. This model can be serialized in an XML format for experimental purposes.
 It is available on GitHub in the [tutorial repository](https://github.com/powsybl/powsybl-tutorials) under 
 `powsybl-tutorials/loadflow/src/main/resources/eurostag-tutorial1-lf.xml`. You can download it and add it to your 
@@ -217,7 +217,7 @@ for (Line line : network.getLines()) {
 ![compute_lf](./img/loadflow/Compute_LF.svg){width="5%"}
 Then, flows are computed with a load flow simulator. In this tutorial, we use the OpenLoadflow implementation, which is 
 open-source software, natively based on the Powsybl network grid model. For more details, please visit the 
-[documentation](../../simulation/powerflow/openlf.md) to learn more about it. 
+[documentation](inv:powsyblopenloadflow:std:doc#index) to learn more about it. 
 
 A load flow is run on a variant of the network. 
 A network variant is close to a state vector and gathers variables such as injections, productions, tap positions, 
@@ -234,7 +234,7 @@ network.getVariantManager().setWorkingVariant(variantId);
 Here we have saved the initial variant and set the new variant as the one to be used.
 
 In order to run the load flow calculation, we also need to define the set of parameters to be used.
-The default parameters are listed [here](../configuration/parameters/LoadFlowParameters.md). Here, angles are set to zero and voltages are set to one per unit. 
+The default parameters are listed [here](inv:powsyblcore:std:doc#simulation/loadflow/configuration.html#parameters). Here, angles are set to zero and voltages are set to one per unit. 
 
 ```java
 LoadFlowParameters loadflowParameters = new LoadFlowParameters()
@@ -344,5 +344,5 @@ parameters. We've also seen how to output the results in the terminal.
 
 ## Going further
 The following links could also be useful:
-- [Run a power flow through an iTools command](../../user/itools/loadflow.md): Learn how to perform a power flow calculation from the command line 
+- [Run a power flow through an iTools command](inv:powsyblcore:std:doc#user/itools/loadflow): Learn how to perform a power flow calculation from the command line 
 - [Sensitivity analysis tutorial](./sensitivity-analysis.md): Learn how to write the Java code to perform sensitivity analyses

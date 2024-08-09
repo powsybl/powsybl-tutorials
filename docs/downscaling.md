@@ -244,7 +244,7 @@ store.importTimeSeries(reader);
 ```
 
 ## Load mapping DSL script
-Metrix integration mapping defines a DSL in groovy language that allows you to script actions that will be executed during Metrix execution. Please refer to  [mapping DSL documentation](../../simulation/simulation/metrix/mapping.md) for further information.
+Metrix integration mapping defines a DSL in groovy language that allows you to script actions that will be executed during Metrix execution. Please refer to  [mapping DSL documentation](inv:powsyblmetrix:std:doc#mapping) for further information.
 
 A `TimeSeriesDslLoader` data structure needs to be built to load the DSL script:
 

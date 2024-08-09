@@ -128,6 +128,10 @@ todo_include_todos = True
 
 # Links to external documentations
 intersphinx_mapping = {
+    "powsyblcore": ("https://powsybl.readthedocs.io/projects/powsybl-core/en/latest/", None),
+    "powsybldiagram": ("https://powsybl.readthedocs.io/projects/powsybl-diagram/en/latest/", None),
+    "powsyblmetrix": ("https://powsybl.readthedocs.io/projects/powsybl-metrix/en/latest/", None),
+    "powsyblopenloadflow": ("https://powsybl.readthedocs.io/projects/powsybl-open-loadflow/en/latest/", None)
 }
 intersphinx_disabled_reftypes = ["*"]
 

@@ -247,7 +247,7 @@ Misc:
 ``` 
 
 ## Summary
-You have learnt to create a redistribuable `iTools` package, and to configure the `itools-packager` plugin. Refer to the [iTools manual](inv:powsyblcore:std:doc#user/itools/index.html#available-commands) to know the list of available commands. 
+You have learnt to create a redistribuable `iTools` package, and to configure the `itools-packager` plugin. Refer to the [iTools manual](inv:powsyblcore:std:doc#user/itools/index) to know the list of available commands. 
 
 ## Going further
 The following links could also be useful:

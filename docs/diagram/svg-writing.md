@@ -7,8 +7,8 @@ layout: default
 ![Amsterdam_substation](img/svg-writing/example_AmsterdamSubstation.svg){class="forced-white-background"}
 
 We are showing in this guide how to create some single line diagrams, like the one above. 
-We first generate such a diagram from a test network, then from a [CGMES](inv:powsyblcore:std:doc#grid_exchange_formats/cgmes/index) file.
-To that end, we use the `com.powsybl.sld.SingleLineDiagram` class, which is the central API of [powsybl-single-line-diagram](inv:powsybldiagram:std:doc#single_line_diagrams/index). 
+We first generate such a diagram from a test network, then from a [CGMES](inv:powsyblcore:*:*#grid_exchange_formats/cgmes/index) file.
+To that end, we use the `com.powsybl.sld.SingleLineDiagram` class, which is the central API of [powsybl-single-line-diagram](inv:powsybldiagram:*:*#single_line_diagrams/index). 
 
 ## Prerequisites
 

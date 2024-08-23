@@ -244,7 +244,7 @@ store.importTimeSeries(reader);
 ```
 
 ## Load mapping DSL script
-Metrix integration mapping defines a DSL in groovy language that allows you to script actions that will be executed during Metrix execution. Please refer to  [mapping DSL documentation](inv:powsyblmetrix:std:doc#mapping) for further information.
+Metrix integration mapping defines a DSL in groovy language that allows you to script actions that will be executed during Metrix execution. Please refer to [mapping DSL documentation](inv:powsyblmetrix:*:*#mapping) for further information.
 
 A `TimeSeriesDslLoader` data structure needs to be built to load the DSL script:
 
@@ -394,4 +394,4 @@ mapper.mapToNetwork(tsStore, tsMappingParams, observers);
 We have learnt how to write Java and Groovy code to run a mapping in a downscaling context. We've shown how to load network files in CIM-CGMES format, how to load local CSV time series files, and how to define a mapping DSL script. We have defined what are mapping observers and how to use them to output mapping results in files.
 
 ## Going further
-Learn more about [Metrix simulator](../../simulation/metrix/index.md).
+Learn more about [Metrix simulator](inv:powsyblmetrix:*:*#index).

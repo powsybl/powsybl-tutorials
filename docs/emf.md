@@ -9,7 +9,7 @@ This tutorial shows how to merge multiple IGMs from different TSOs and scale the
 The forecast net positions of the IGMs are computed through the [Pan European Verification Function](https://eepublicdownloads.entsoe.eu/clean-documents/EDI/Library/cim_based/schema/PEVF%20Implementation%20Guide_V1.0.pdf).
 
 ## What will you build?
-First, your individual CGMES files will be imported and merged. Optionally, you will be able to compute a power flow on each IGM before merging. Then a load flow will be run on the CGM. The load flow simulator used in this tutorial is [OpenLoadFlow](inv:powsyblopenloadflow:std:doc#index).
+First, your individual CGMES files will be imported and merged. Optionally, you will be able to compute a power flow on each IGM before merging. Then a load flow will be run on the CGM. The load flow simulator used in this tutorial is [OpenLoadFlow](inv:powsyblopenloadflow:*:*#index).
 After the load flow performed on the merged area, the net positions of each control area will be computed. The algorithm used for the balance computation is in the `powsybl-balances-adjustment` API. The PEVF (for Pan European Verification Function) file will be read and gives the expected AC net positions (DC net positions are not yet supported), and the balance adjustment is computed. Then the SV file of the CGM will be exported.
 
 ## What will you need?
@@ -91,7 +91,7 @@ You also need to configure the pom file in order to use a configuration file tak
 Now, we add all the **required** maven dependencies:
 - `com.powsybl:powsybl-config-classic`: to provide a way to read the configuration.
 - `org.slf4j:slf4j-simple`: to provide an implementation of `slf4j`.
-- `com.powsybl:powsybl-open-loadflow`: to provide an [implementation]((inv:powsyblopenloadflow:std:doc#index)) for the load flow calculation.
+- `com.powsybl:powsybl-open-loadflow`: to provide an [implementation](inv:powsyblopenloadflow:*:*#index) for the load flow calculation.
 - `com.powsybl:powsybl-iidm-impl`: to work with network core model API and in-memory implementation.
 - `com.powsybl:powsybl-action-util`: to provide a set of common actions such as scaling.
 - `com.powsybl:powsybl-balances-adjustment` and `com.powsybl:powsybl-entsoe-cgmes-balances-adjustment`: to provide an implementation to run an active power balance adjustment computation over several control areas. Through this API, it is possible to keep the power factor constant during the process by readjusting the reactive power as well (since version 1.6.0 indeed).
@@ -200,7 +200,7 @@ balances-adjustment-validation-parameters:
 First, we create a java class called `BalancesAdjustmentValidationParameters` containing the parameters that we want to use, such as the paths of the IGMs, the path to the PEVF file and the output directory. All these parameters are read from the configuration file created before. This class has a method to load the parameters from the configuration file. 
 
 The IGM paths are stored in a HashMap and the output directory and PEVF in Strings. You can also create the getter/setter associated with each variable. Then, you need create a method `load` that will read the inputs from the configuration file and store the data in each variable. If you have difficulties creating this class, you can check the result `powsybl-tutorials/emf` from the Github repository.
-If you want to learn more about the configuration file and how it is  handled by Powsybl, you can find more details [here]((inv:powsyblcore:std:doc#user/configuration/index)).
+If you want to learn more about the configuration file and how it is  handled by Powsybl, you can find more details [here](inv:powsyblcore:*:*#user/configuration/index).
 
 Now with this class, we are able to read the extra parameters from the `config.yml` file. We will move on to create the `EmfTutorial` main class, that will perform the merging and the balance computation.
 
@@ -210,7 +210,7 @@ In everything that follows, if you have difficulties creating the methods, you c
 
 ### Set the load flow parameters
 Once you have created the `EmfTutorial` class, just before the main method, define the variable `LOAD_FLOW_PARAMETERS` of type `LoadFlowParameters`.
-This variable gathers all the parameters to be used in the load flow pre-processing of the IGMs, in the load flow calculation on the CGM and for the balance computation iterations. In this tutorial, we set the initial angle values to angles computed through a DC power flow, the balance type to proportional to the maximum active power target of generators, the `ReadSlackBus` to true (the slack bus defined in each IGM). The tap changers regulation is also set to true (either for phase tap changers than for ratio tap changers), and the power flow must be computed over all connected components. These parameters are chosen to comply with the European merging function. For more information on the power flow parameters available and how to implement them, you can visit this [page]((inv:powsyblopenloadflow:std:doc#index)). In case of non-convergence, these parameters can be relaxed.
+This variable gathers all the parameters to be used in the load flow pre-processing of the IGMs, in the load flow calculation on the CGM and for the balance computation iterations. In this tutorial, we set the initial angle values to angles computed through a DC power flow, the balance type to proportional to the maximum active power target of generators, the `ReadSlackBus` to true (the slack bus defined in each IGM). The tap changers regulation is also set to true (either for phase tap changers than for ratio tap changers), and the power flow must be computed over all connected components. These parameters are chosen to comply with the European merging function. For more information on the power flow parameters available and how to implement them, you can visit this [page](inv:powsyblopenloadflow:*:*#index). In case of non-convergence, these parameters can be relaxed.
 
 ### Create parameters to add options to the calculation
 Then we define three parameters: a boolean indicating whether we want to perform the load flow pre-processing on the IGMs, a boolean indicating whether we want to prepare the balance computation or not and the name of the synchronous area, set to `10YEU-CONT-SYNC0`, representing Continental Europe.

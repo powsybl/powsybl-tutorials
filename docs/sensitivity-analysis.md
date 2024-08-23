@@ -16,7 +16,7 @@ You will create a Java code to run a single sensitivity analysis on a network, a
   - the Netherlands - Belgium
 - they will be monitored with respect to the phase-shift transformer's tap position, or to the generators' injections.
 
-A standard sensitivity analysis input comprises a list of sensitivity factors, each one composed of a sensitivity variable (the variable of impact), a sensitivity function (the observed function) and a contingency context (that could be `NONE`). They correspond to partial derivatives measuring the sensitivity of the observed function (for example the flow through a line) with respect to the variable of impact (for example a phase tap changer tap position or an injection). There are several sensitivity factors available, check the [sensitivity analysis documentation](inv:powsyblcore:std:doc#simulation/sensitivity/index.html#sensitivity-factors) for more information. Here we study the effect of the Belgian phase shift transformer on the flow through each of the lines connecting the countries. We thus define these lines as monitored branches, and create one factor (with sensitivity function type `BRANCH_ACTIVE_POWER_1` and sensitivity variable type `TRANSFORMER_PHASE`) for each monitoredBranch. We create the factors twice in order to show different ways to do it:
+A standard sensitivity analysis input comprises a list of sensitivity factors, each one composed of a sensitivity variable (the variable of impact), a sensitivity function (the observed function) and a contingency context (that could be `NONE`). They correspond to partial derivatives measuring the sensitivity of the observed function (for example the flow through a line) with respect to the variable of impact (for example a phase tap changer tap position or an injection). There are several sensitivity factors available, check the [sensitivity analysis documentation](inv:powsyblcore:*:*#simulation/sensitivity/index) for more information. Here we study the effect of the Belgian phase shift transformer on the flow through each of the lines connecting the countries. We thus define these lines as monitored branches, and create one factor (with sensitivity function type `BRANCH_ACTIVE_POWER_1` and sensitivity variable type `TRANSFORMER_PHASE`) for each monitoredBranch. We create the factors twice in order to show different ways to do it:
 - once directly with Java code
 - once by reading a JSON factors file
 
@@ -146,4 +146,4 @@ We have learnt how to write Java code to run sensitivity analysis in single mode
 
 ## Going further
 The following links could also be useful:
-- [Run a sensitivity analysis through an iTools command](inv:powsyblcore:std:doc#user/itools/sensitivity-computation): Learn how to perform a sensitivity analysis from the command line 
+- [Run a sensitivity analysis through an iTools command](inv:powsyblcore:*:*#user/itools/sensitivity-computation): Learn how to perform a sensitivity analysis from the command line 

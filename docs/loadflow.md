@@ -21,7 +21,7 @@ A contingency is created, and finally, the flows are recalculated to get the fin
 - JDK 1.17 or later
 - You can also import the code straight into your IDE:
     - [IntelliJ IDEA](intellij.md)
-- A network to work with, it can either be your own network (see supported formats [here]()) or the example network from
+- A network to work with, it can either be your own network (see supported formats [here](inv:powsyblcore:*:*#grid_exchange_formats/index)) or the example network from
 this tutorial available on GitHub [here](https://github.com/powsybl/powsybl-tutorials/tree/main/loadflow/src/main/resources). 
 
 ## How to complete this tutorial?
@@ -165,7 +165,7 @@ The load consumes 600 MW and the generator produces 606.5 MW.
 
 ![Initial simple network](./img/loadflow/Network_Simple_Initial.svg){width="50%" .center-image}
 
-![File](./img/loadflow/File.svg){width="3%"} The network is modeled in [IIDM](inv:powsyblcore:std:doc#grid_exchange_formats/iidm/index), which is the
+![File](./img/loadflow/File.svg){width="3%"} The network is modeled in [IIDM](inv:powsyblcore:*:*#grid_exchange_formats/iidm/index), which is the
 internal model of Powsybl. This model can be serialized in an XML format for experimental purposes.
 It is available on GitHub in the [tutorial repository](https://github.com/powsybl/powsybl-tutorials) under 
 `powsybl-tutorials/loadflow/src/main/resources/eurostag-tutorial1-lf.xml`. You can download it and add it to your 
@@ -217,7 +217,7 @@ for (Line line : network.getLines()) {
 ![compute_lf](./img/loadflow/Compute_LF.svg){width="5%"}
 Then, flows are computed with a load flow simulator. In this tutorial, we use the OpenLoadflow implementation, which is 
 open-source software, natively based on the Powsybl network grid model. For more details, please visit the 
-[documentation](inv:powsyblopenloadflow:std:doc#index) to learn more about it. 
+[documentation](inv:powsyblopenloadflow:*:*#index) to learn more about it. 
 
 A load flow is run on a variant of the network. 
 A network variant is close to a state vector and gathers variables such as injections, productions, tap positions, 
@@ -234,7 +234,7 @@ network.getVariantManager().setWorkingVariant(variantId);
 Here we have saved the initial variant and set the new variant as the one to be used.
 
 In order to run the load flow calculation, we also need to define the set of parameters to be used.
-The default parameters are listed [here](inv:powsyblcore:std:doc#simulation/loadflow/configuration.html#parameters). Here, angles are set to zero and voltages are set to one per unit. 
+The default parameters are listed [here](inv:powsyblcore:*:*#simulation/loadflow/configuration). Here, angles are set to zero and voltages are set to one per unit. 
 
 ```java
 LoadFlowParameters loadflowParameters = new LoadFlowParameters()

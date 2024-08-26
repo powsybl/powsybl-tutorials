@@ -14,7 +14,7 @@
     <name>Downscaling</name>
 
     <properties>
-        <powsybl.metrix.version>1.0.0-SNAPSHOT</powsybl.metrix.version>
+        <powsybl.metrix.version>2.3.0</powsybl.metrix.version>
         <exec.cleanupDaemonThreads>false</exec.cleanupDaemonThreads>
         <exec.mainClass>com.powsybl.tutorials.downscaling.Downscaling</exec.mainClass>
     </properties>

@@ -5,7 +5,6 @@ import com.github.jsonldjava.shaded.com.google.common.collect.Streams;
 import com.google.common.collect.Range;
 import com.powsybl.commons.datasource.DataSource;
 import com.powsybl.commons.datasource.DataSourceUtil;
-import com.powsybl.iidm.import_.Importers;
 import com.powsybl.iidm.network.Country;
 import com.powsybl.iidm.network.Generator;
 import com.powsybl.iidm.network.Network;
@@ -24,7 +23,10 @@ import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.TreeSet;
 
 public final class Downscaling {
 
@@ -66,11 +68,12 @@ public final class Downscaling {
             //     - computation range : control timeseries versions span for the mapping (here only first version)
             final MappingParameters mappingParameters = MappingParameters.load();
             final ComputationRange computationRange = new ComputationRange(tsStore.getTimeSeriesDataVersions(), 1, 1);
-            final TimeSeriesMappingConfig mappingConfig = dslLoader.load(network, mappingParameters, tsStore, computationRange);
+            final TimeSeriesMappingConfig mappingConfig = dslLoader.load(network, mappingParameters, tsStore, new DataTableStore(), computationRange);
             mappingConfig.setMappedTimeSeriesNames(tsNames);
 
             // Initialize mapping parameters
-            final Range<Integer> pointRange = Range.closed(0, mappingConfig.checkIndexUnicity(tsStore).getPointCount() - 1);
+            final TimeSeriesMappingConfigTableLoader loader = new TimeSeriesMappingConfigTableLoader(mappingConfig, tsStore);
+            final Range<Integer> pointRange = Range.closed(0, loader.checkIndexUnicity().getPointCount() - 1);
             final TimeSeriesMapperParameters tsMappingParams = new TimeSeriesMapperParameters(
                         new TreeSet<>(tsStore.getTimeSeriesDataVersions()),
                         pointRange,
@@ -88,15 +91,15 @@ public final class Downscaling {
             // logger will produce a logfile containing all warning information about mapping operation
             final Path networkOutputDir = outputPath.resolve(country.getName());
             Files.createDirectories(networkOutputDir);
-            final TimeSeriesMapperObserver equipmentWriter = new EquipmentTimeSeriesWriter(networkOutputDir);
+            final TimeSeriesMapperObserver equipmentWriter = new EquipmentTimeSeriesWriterObserver(network, mappingConfig, 10, pointRange, networkOutputDir);
             final DataSource dataSource = DataSourceUtil.createDataSource(networkOutputDir, "network", null);
             final TimeSeriesMapperObserver networkPointWriter = new NetworkPointWriter(network, dataSource);
             final ArrayList<TimeSeriesMapperObserver> observers = Lists.newArrayList(equipmentWriter, networkPointWriter);
             TimeSeriesMappingLogger logger = new TimeSeriesMappingLogger();
 
             // Perform mapping
-            TimeSeriesMapper mapper = new TimeSeriesMapper(mappingConfig, network, logger);
-            mapper.mapToNetwork(tsStore, tsMappingParams, observers);
+            TimeSeriesMapper mapper = new TimeSeriesMapper(mappingConfig, tsMappingParams, network, logger);
+            mapper.mapToNetwork(tsStore, observers);
             logger.writeCsv(networkOutputDir.resolve("mapping.log"));
         }
     }

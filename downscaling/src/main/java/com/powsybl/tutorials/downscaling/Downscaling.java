@@ -50,7 +50,7 @@ public final class Downscaling {
 
         // Iterate over each network to perform mapping
         for (final Network network : networks) {
-            // Register the timeseries to use for this network's mapping
+            // Register the time series to use for this network mapping
             // For each country, we need :
             //    - A LOAD_<country name> TS (for loads mapping)
             //    - An <energy type>_<country_name> TS for each of the networks energy type (for generators mapping)
@@ -64,8 +64,8 @@ public final class Downscaling {
             tsNames.add("LOAD_" + country.toString());
 
             // Build mapping config for this network
-            //     - mapping parameters : control mapping behavior (loaded from config.yml)
-            //     - computation range : control timeseries versions span for the mapping (here only first version)
+            //     - mapping parameters: control mapping behavior (loaded from config.yml)
+            //     - computation range : control time series versions span for the mapping (here only first version)
             final MappingParameters mappingParameters = MappingParameters.load();
             final ComputationRange computationRange = new ComputationRange(tsStore.getTimeSeriesDataVersions(), 1, 1);
             final TimeSeriesMappingConfig mappingConfig = dslLoader.load(network, mappingParameters, tsStore, new DataTableStore(), computationRange);
@@ -83,10 +83,10 @@ public final class Downscaling {
                         mappingParameters.getToleranceThreshold()
             );
 
-            // Prepare an output directory (from path in arguments)
+            // Prepare an output directory (from the path in arguments)
             // Both logs and mapping results will be saved into it
             final Path outputPath = Paths.get(args[0]);
-            // Init output for this network : create a directory with the country name
+            // Init output for this network: create a directory with the country name
             // equipment writer will produce a CSV file for each version (eg: version_1.csv)
             // logger will produce a logfile containing all warning information about mapping operation
             final Path networkOutputDir = outputPath.resolve(country.getName());
@@ -107,7 +107,7 @@ public final class Downscaling {
     /**
      * Load TS store from resources ts-test.csv file
      *
-     * @return a ReadOnlyTimeSeriesStore containing all timeseries
+     * @return a ReadOnlyTimeSeriesStore containing all time series
      */
     private static ReadOnlyTimeSeriesStore initTSStore() {
         final InMemoryTimeSeriesStore store = new InMemoryTimeSeriesStore();
@@ -120,7 +120,7 @@ public final class Downscaling {
     /**
      * Load all networks in CGMES format. Ignore invalid import files.
      * Iterate over each file in "networks" directory
-     * If the file is a zipfile, try to load it as a CGMES network input
+     * If the file is a zip file, try to load it as a CGMES network input
      *
      * @return produce a set containing al loaded networks
      */

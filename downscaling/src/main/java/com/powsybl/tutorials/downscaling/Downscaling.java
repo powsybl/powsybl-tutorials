@@ -27,6 +27,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.TreeSet;
+import java.util.stream.Stream;
 
 public final class Downscaling {
 
@@ -127,17 +128,18 @@ public final class Downscaling {
     private static Set<Network> loadNetworks() throws IOException, URISyntaxException {
         Set<Network> networks = new HashSet<>();
         final URL networksDir = Downscaling.class.getClassLoader().getResource("networks");
-        Files.walk(Paths.get(networksDir.toURI()))
-             .filter(Files::isRegularFile)
-             .filter(f -> f.toString().endsWith(".zip"))
-             .forEach(zipFile -> {
-                 try {
-                     final Network network = Network.read(zipFile.toFile().toString());
-                     networks.add(network);
-                 } catch (Exception e) {
-                     LOGGER.error("Could not load network from file [" + zipFile.getFileName().toString() + "]", e);
-                 }
-             });
+        try (Stream<Path> walk = Files.walk(Paths.get(networksDir.toURI()))) {
+            walk.filter(Files::isRegularFile)
+                .filter(f -> f.toString().endsWith(".zip"))
+                .forEach(zipFile -> {
+                    try {
+                        final Network network = Network.read(zipFile.toFile().toString());
+                        networks.add(network);
+                    } catch (Exception e) {
+                        LOGGER.error("Could not load network from file [" + zipFile.getFileName().toString() + "]", e);
+                    }
+                });
+        }
         return networks;
     }
 

@@ -1,5 +1,5 @@
 metrix:
-  iidm-export-version: "1.5" # default to latest available version
+  iidm-export-version: "1.13" # default to latest available version
   ignoreEmptyFilter: true
 
 load-flow:

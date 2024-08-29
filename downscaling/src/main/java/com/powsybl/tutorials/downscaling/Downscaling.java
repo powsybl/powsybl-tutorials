@@ -1,7 +1,5 @@
 package com.powsybl.tutorials.downscaling;
 
-import com.github.jsonldjava.shaded.com.google.common.collect.Lists;
-import com.github.jsonldjava.shaded.com.google.common.collect.Streams;
 import com.google.common.collect.Range;
 import com.powsybl.commons.datasource.DataSource;
 import com.powsybl.commons.datasource.DataSourceUtil;
@@ -23,8 +21,8 @@ import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 import java.util.stream.Stream;
@@ -34,6 +32,7 @@ public final class Downscaling {
     private static final Logger LOGGER = LoggerFactory.getLogger(Downscaling.class);
 
     public static void main(String[] args) throws IOException, URISyntaxException {
+        LOGGER.warn("args[0]: {}", args[0]);
         // Load all networks from resources
         // Each network corresponds to one country
         final Set<Network> networks = loadNetworks();
@@ -58,7 +57,7 @@ public final class Downscaling {
             // Iterate over all generators in the network to know which energy types will be required
             Country country = network.getCountries().iterator().next();
             Set<String> tsNames = new HashSet<>();
-            Streams.stream(network.getGenerators())
+            network.getGeneratorStream()
                    .map(Generator::getEnergySource)
                    .distinct()
                    .forEach(eSource -> tsNames.add(eSource.toString() + "_" + country.toString()));
@@ -95,7 +94,7 @@ public final class Downscaling {
             final TimeSeriesMapperObserver equipmentWriter = new EquipmentTimeSeriesWriterObserver(network, mappingConfig, 10, pointRange, networkOutputDir);
             final DataSource dataSource = DataSourceUtil.createDataSource(networkOutputDir, "network", null);
             final TimeSeriesMapperObserver networkPointWriter = new NetworkPointWriter(network, dataSource);
-            final ArrayList<TimeSeriesMapperObserver> observers = Lists.newArrayList(equipmentWriter, networkPointWriter);
+            final List<TimeSeriesMapperObserver> observers = List.of(equipmentWriter, networkPointWriter);
             TimeSeriesMappingLogger logger = new TimeSeriesMappingLogger();
 
             // Perform mapping

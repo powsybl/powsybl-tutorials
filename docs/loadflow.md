@@ -234,7 +234,7 @@ network.getVariantManager().setWorkingVariant(variantId);
 Here we have saved the initial variant and set the new variant as the one to be used.
 
 In order to run the load flow calculation, we also need to define the set of parameters to be used.
-The default parameters are listed [here](inv:powsyblcore:*:*#simulation/loadflow/configuration). Here, angles are set to zero and voltages are set to one per unit. 
+The default parameters are listed [here](inv:powsyblcore:*:*#loadflow-generic-parameters). Here, angles are set to zero and voltages are set to one per unit. 
 
 ```java
 LoadFlowParameters loadflowParameters = new LoadFlowParameters()

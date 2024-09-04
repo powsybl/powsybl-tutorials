@@ -5,7 +5,7 @@ In this tutorial, we learn how to import IGM CGMES files, merge them, run a load
 Note that the boundary files in CGMES format are stored in each CGMES archive.
 
 # How to install the load flow simulator  
-In the tutorial, we use the OpenLoadFlow implementation. Please visit this [page](https://www.powsybl.org/pages/documentation/simulation/powerflow/openlf.html) for more information about it.
+In the tutorial, we use the OpenLoadFlow implementation. Please visit this [page](https://powsybl.readthedocs.io/projects/powsybl-open-loadflow/en/latest/) for more information about it.
 
 # How to configure this tutorial
 The configuration file is:

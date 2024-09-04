@@ -3,7 +3,7 @@ This tutorial aims to compute loadflows on a small fictive network. We first loa
 
 
 # How to install the loadflow simulator  
-In the tutorial, we use the OpenLoadFlow implementation. Please visit this page to learn more about [OpenLoadFlow](https://www.powsybl.org/pages/documentation/simulation/powerflow/openlf.html).
+In the tutorial, we use the OpenLoadFlow implementation. Please visit this page to learn more about [OpenLoadFlow](https://powsybl.readthedocs.io/projects/powsybl-open-loadflow/en/latest/).
 
 # How to configure this tutorial
 The configuration file is:

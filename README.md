@@ -14,7 +14,7 @@ PowSyBl is part of the LF Energy Foundation, a project of The Linux Foundation t
 <img src="https://raw.githubusercontent.com/powsybl/powsybl-gse/main/gse-spi/src/main/resources/images/logo_lfe_powsybl.svg?sanitize=true" alt="PowSyBl Logo" width="50%"/>
 </p>
 
-Read more at https://www.powsybl.org !
+Read more at https://www.powsybl.org!
 
 This project and everyone participates in it is governed by the [PowSyBl Code of Conduct](https://www.lfenergy.org/community/code-of-conduct/). By participating, you are expected to uphold this code. Please report unacceptable behavior to [powsybl.ddl@rte-france.com](mailto:powsybl.ddl@rte-france.com).
 

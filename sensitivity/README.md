@@ -22,7 +22,7 @@ In the tutorial, we use [powsybl-open-loadflow](https://github.com/powsybl/powsy
 
 # How to configure this tutorial
 To configure the loadflow, simply change the LoadFlowParameters passed on when launching the simulator with `LoadFlow.run`.
-If you want to use another loadflow implementation, you can use a configuration file to select which implementation you want, as specified in the [loadflow documentation](https://www.powsybl.org/pages/documentation/simulation/powerflow/#configuration).
+If you want to use another loadflow implementation, you can use a configuration file to select which implementation you want, as specified in the [loadflow documentation](https://powsybl.readthedocs.io/projects/powsybl-core/en/stable/simulation/loadflow/configuration.html).
 Or simply ensure that there is only one LoadFlowProvider in the classpath (remove the powsybl-open-loadflow artifact from the pom.xml).
 
 # Running the tutorial

@@ -25,5 +25,5 @@ load-flow-default-parameters:
 To run this tutorial, you just need to execute the following command lines:
 ```
 cd <path_to_powsybl_tutorials>/merging/
-mvn clean package exec:exec
+mvn clean package exec:java
 ```

@@ -20,7 +20,7 @@ This project and everyone participates in it is governed by the [PowSyBl Code of
 
 ## Tutorials
 
-This document describes how to build and run small tutorial projects. For more in depth explanations on each tutorial, please visit the [documentation](TODO).
+This document describes how to build and run small tutorial projects. For more in depth explanations on each tutorial, please visit the [documentation](https://powsybl.readthedocs.io/projects/powsybl-tutorials/en/latest/).
 
 ## Environment requirements
 

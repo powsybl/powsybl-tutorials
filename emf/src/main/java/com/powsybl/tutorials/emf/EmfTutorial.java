@@ -183,7 +183,7 @@ public final class EmfTutorial {
                                               List<BalanceComputationArea> balanceComputationAreas) {
         // Create dangling line scalables.
         List<Area> cgmesControlAreas = validNetworks.values().stream()
-                .map(n -> n.getAreas())
+                .map(Network::getAreas)
                 .filter(Objects::nonNull)
                 .map(cgmesControlAreaList -> cgmesControlAreaList.iterator().next())
                 .toList();

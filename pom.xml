@@ -29,7 +29,7 @@
         <javacsv.version>2.0</javacsv.version>
         <java.version>17</java.version>
 
-        <powsybl-dependencies.version>2025.0.0</powsybl-dependencies.version>
+        <powsybl-dependencies.version>2025.0.2</powsybl-dependencies.version>
     </properties>
 
     <modules>

@@ -14,8 +14,6 @@
     <name>Downscaling</name>
 
     <properties>
-        <powsybl.metrix.version>2.3.0</powsybl.metrix.version>
-
         <!-- These properties are only needed to run the tutorial from the command line with mvn exec:java -->
         <exec.cleanupDaemonThreads>false</exec.cleanupDaemonThreads>
         <exec.mainClass>com.powsybl.tutorials.downscaling.Downscaling</exec.mainClass>
@@ -86,7 +84,6 @@
         <dependency>
             <groupId>com.powsybl</groupId>
             <artifactId>powsybl-metrix-mapping</artifactId>
-            <version>${powsybl.metrix.version}</version>
             <scope>compile</scope>
         </dependency>
 

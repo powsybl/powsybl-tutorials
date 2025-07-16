@@ -23,6 +23,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 import java.util.TreeSet;
 import java.util.stream.Stream;
@@ -42,7 +43,7 @@ public final class Downscaling {
 
         // Load mapping groovy script. Build a DSL loader with it
         // This DSL loader will be later used when performing mapping
-        final Path mappingFilePath = Paths.get(Downscaling.class.getClassLoader().getResource("mapping.groovy").toURI());
+        final Path mappingFilePath = Paths.get(Objects.requireNonNull(Downscaling.class.getClassLoader().getResource("mapping.groovy")).toURI());
         TimeSeriesDslLoader dslLoader;
         try (Reader reader = Files.newBufferedReader(mappingFilePath)) {
             dslLoader = new TimeSeriesDslLoader(reader, mappingFilePath.getFileName().toString());
@@ -51,7 +52,7 @@ public final class Downscaling {
         // Iterate over each network to perform mapping
         for (final Network network : networks) {
             // Register the time series to use for this network mapping
-            // For each country, we need :
+            // For each country, we need:
             //    - A LOAD_<country name> TS (for loads mapping)
             //    - An <energy type>_<country_name> TS for each of the networks energy type (for generators mapping)
             // Iterate over all generators in the network to know which energy types will be required
@@ -92,7 +93,7 @@ public final class Downscaling {
             final Path networkOutputDir = outputPath.resolve(country.getName());
             Files.createDirectories(networkOutputDir);
             final TimeSeriesMapperObserver equipmentWriter = new EquipmentTimeSeriesWriterObserver(network, mappingConfig, 10, pointRange, networkOutputDir);
-            final DataSource dataSource = DataSourceUtil.createDataSource(networkOutputDir, "network", null);
+            final DataSource dataSource = DataSourceUtil.createDataSource(networkOutputDir, "network", null, null);
             final TimeSeriesMapperObserver networkPointWriter = new NetworkPointWriter(network, dataSource);
             final List<TimeSeriesMapperObserver> observers = List.of(equipmentWriter, networkPointWriter);
             TimeSeriesMappingLogger logger = new TimeSeriesMappingLogger();
@@ -111,7 +112,7 @@ public final class Downscaling {
      */
     private static ReadOnlyTimeSeriesStore initTSStore() {
         final InMemoryTimeSeriesStore store = new InMemoryTimeSeriesStore();
-        InputStreamReader isr = new InputStreamReader(Downscaling.class.getClassLoader().getResourceAsStream("ts-test.csv"));
+        InputStreamReader isr = new InputStreamReader(Objects.requireNonNull(Downscaling.class.getClassLoader().getResourceAsStream("ts-test.csv")));
         final BufferedReader reader = new BufferedReader(isr);
         store.importTimeSeries(reader);
         return store;
@@ -119,7 +120,7 @@ public final class Downscaling {
 
     /**
      * Load all networks in CGMES format. Ignore invalid import files.
-     * Iterate over each file in "networks" directory
+     * Iterate over each file in the "networks" directory
      * If the file is a zip file, try to load it as a CGMES network input
      *
      * @return produce a set containing al loaded networks
@@ -127,7 +128,8 @@ public final class Downscaling {
     private static Set<Network> loadNetworks() throws IOException, URISyntaxException {
         Set<Network> networks = new HashSet<>();
         final URL networksDir = Downscaling.class.getClassLoader().getResource("networks");
-        try (Stream<Path> walk = Files.walk(Paths.get(networksDir.toURI()))) {
+        final Path networksDirPath = Paths.get(Objects.requireNonNull(networksDir).toURI());
+        try (Stream<Path> walk = Files.walk(networksDirPath)) {
             walk.filter(Files::isRegularFile)
                 .filter(f -> f.toString().endsWith(".zip"))
                 .forEach(zipFile -> {
@@ -135,7 +137,8 @@ public final class Downscaling {
                         final Network network = Network.read(zipFile.toFile().toString());
                         networks.add(network);
                     } catch (Exception e) {
-                        LOGGER.error("Could not load network from file [" + zipFile.getFileName().toString() + "]", e);
+                        String msg = "Could not load network from file [" + zipFile.getFileName().toString() + "]";
+                        LOGGER.error(msg, e);
                     }
                 });
         }

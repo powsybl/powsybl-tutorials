@@ -5,13 +5,18 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <artifactId>powsybl-tutorials</artifactId>
         <groupId>com.powsybl.tutorials</groupId>
+        <artifactId>powsybl-tutorials</artifactId>
         <version>1.3.0-SNAPSHOT</version>
     </parent>
 
     <artifactId>powsybl-csv-importer</artifactId>
     <name>Import CSV to Network</name>
+
+    <!-- This property is only needed to run the tutorial easily -->
+    <properties>
+        <exec.mainClass>com.powsybl.tutorials.csv.import_.Main</exec.mainClass>
+    </properties>
 
     <dependencies>
         <!-- Compilation dependencies -->
@@ -22,7 +27,6 @@
         <dependency>
             <groupId>net.sourceforge.javacsv</groupId>
             <artifactId>javacsv</artifactId>
-            <version>${javacsv.version}</version>
         </dependency>
         <dependency>
             <groupId>com.powsybl</groupId>
@@ -41,10 +45,4 @@
             <scope>runtime</scope>
         </dependency>
     </dependencies>
-
-    <!-- This property is only needed to run the tutorial easily -->
-    <properties>
-      <exec.mainClass>com.powsybl.tutorials.csv.import_.Main</exec.mainClass>
-    </properties>
-
 </project>

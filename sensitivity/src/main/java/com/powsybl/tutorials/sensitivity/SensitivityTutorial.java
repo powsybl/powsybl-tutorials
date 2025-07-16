@@ -60,7 +60,7 @@ public final class SensitivityTutorial {
         }
 
         // Then build the factors themselves.
-        List<SensitivityFactor> factors =  monitoredLines.stream()
+        List<SensitivityFactor> factors = monitoredLines.stream()
                 .map(l -> new SensitivityFactor(SensitivityFunctionType.BRANCH_ACTIVE_POWER_1, l.getId(),
                                                 SensitivityVariableType.TRANSFORMER_PHASE, "BBE2AA1  BBE3AA1  1",
                                                 false, ContingencyContext.all())).collect(Collectors.toList());

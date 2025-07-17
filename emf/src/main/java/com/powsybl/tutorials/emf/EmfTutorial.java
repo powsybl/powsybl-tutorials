@@ -11,9 +11,8 @@ import com.powsybl.balances_adjustment.util.NetworkArea;
 import com.powsybl.balances_adjustment.util.NetworkAreaFactory;
 import com.powsybl.balances_adjustment.util.NetworkAreaUtil;
 import com.powsybl.cgmes.conversion.CgmesExport;
-import com.powsybl.cgmes.extensions.CgmesControlArea;
-import com.powsybl.cgmes.extensions.CgmesControlAreas;
 import com.powsybl.cgmes.extensions.CgmesDanglingLineBoundaryNode;
+import com.powsybl.cgmes.model.CgmesNames;
 import com.powsybl.commons.PowsyblException;
 import com.powsybl.computation.local.LocalComputationManager;
 import com.powsybl.entsoe.cgmes.balances_adjustment.data_exchange.DataExchanges;
@@ -21,10 +20,7 @@ import com.powsybl.entsoe.cgmes.balances_adjustment.data_exchange.DataExchangesX
 import com.powsybl.entsoe.cgmes.balances_adjustment.util.CgmesBoundariesAreaFactory;
 import com.powsybl.entsoe.cgmes.balances_adjustment.util.CgmesVoltageLevelsAreaFactory;
 import com.powsybl.iidm.modification.scalable.Scalable;
-import com.powsybl.iidm.network.DanglingLine;
-import com.powsybl.iidm.network.Generator;
-import com.powsybl.iidm.network.Identifiable;
-import com.powsybl.iidm.network.Network;
+import com.powsybl.iidm.network.*;
 import com.powsybl.loadflow.LoadFlow;
 import com.powsybl.loadflow.LoadFlowParameters;
 import com.powsybl.loadflow.LoadFlowResult;
@@ -157,10 +153,10 @@ public final class EmfTutorial {
         mergedNetwork.getSubnetworks().forEach(network -> {
 
             // Retrieve CGMES control area.
-            CgmesControlArea controlArea = network.getExtension(CgmesControlAreas.class).getCgmesControlAreas().iterator().next();
+            Area controlArea = network.getAreas().iterator().next();
 
             // Retrieve target AC net position.
-            double target = dataExchanges.getNetPosition(SYNCHRONOUS_AREA_ID, controlArea.getEnergyIdentificationCodeEIC(), Instant.parse(network.getCaseDate().toString()));
+            double target = dataExchanges.getNetPosition(SYNCHRONOUS_AREA_ID, controlArea.getAliasFromType(CgmesNames.ENERGY_IDENT_CODE_EIC).orElse(null), Instant.parse(network.getCaseDate().toString()));
 
             NetworkAreaFactory factory = createFactory(controlArea, mergedNetwork);
             NetworkArea area = factory.create(mergedNetwork);
@@ -186,10 +182,10 @@ public final class EmfTutorial {
     private static void prepareFictitiousArea(Network mergedNetwork, Map<String, Network> validNetworks, DataExchanges dataExchanges,
                                               List<BalanceComputationArea> balanceComputationAreas) {
         // Create dangling line scalables.
-        List<CgmesControlArea> cgmesControlAreas = validNetworks.values().stream()
-                .map(n -> n.getExtension(CgmesControlAreas.class))
+        List<Area> cgmesControlAreas = validNetworks.values().stream()
+                .map(Network::getAreas)
                 .filter(Objects::nonNull)
-                .map(cgmesControlAreaList -> ((CgmesControlAreas) cgmesControlAreaList).getCgmesControlAreas().iterator().next())
+                .map(cgmesControlAreaList -> cgmesControlAreaList.iterator().next())
                 .toList();
         Scalable scalable = createACDanglingLineScalable(mergedNetwork, cgmesControlAreas);
 
@@ -205,7 +201,8 @@ public final class EmfTutorial {
         Map<String, Double> fictitiousTargets = dataExchanges.getNetPositionsWithInDomainId(SYNCHRONOUS_AREA_ID,
                 Instant.parse(validNetworks.values().iterator().next().getCaseDate().toString()));
         double definedTargets = fictitiousTargets.entrySet().stream()
-                .filter(entry -> cgmesControlAreas.stream().anyMatch(area -> area.getEnergyIdentificationCodeEIC().equals(entry.getKey())))
+                .filter(entry -> cgmesControlAreas.stream().anyMatch(area -> area.getAliasFromType(CgmesNames.ENERGY_IDENT_CODE_EIC)
+                        .orElse(null).equals(entry.getKey())))
                 .mapToDouble(Map.Entry::getValue)
                 .sum();
         double target = 0.0 - definedTargets;
@@ -219,7 +216,7 @@ public final class EmfTutorial {
         }
     }
 
-    private static NetworkAreaFactory createFactory(CgmesControlArea area, Network network) {
+    private static NetworkAreaFactory createFactory(Area area, Network network) {
         return new CgmesVoltageLevelsAreaFactory(area, null, network.getVoltageLevelStream().map(Identifiable::getId).toList());
     }
 
@@ -234,12 +231,18 @@ public final class EmfTutorial {
         });
     }
 
-    private static Scalable createACDanglingLineScalable(Network mergedNetwork, List<CgmesControlArea> areas) {
+    private static Scalable createACDanglingLineScalable(Network mergedNetwork, List<Area> areas) {
         List<DanglingLine> danglingLines = mergedNetwork.getDanglingLineStream()
                 .filter(dl -> dl.getExtension(CgmesDanglingLineBoundaryNode.class) == null || !dl.getExtension(CgmesDanglingLineBoundaryNode.class).isHvdc())
                 .filter(dl -> dl.getTerminal().getBusView().getBus() != null && dl.getTerminal().getBusView().getBus().isInMainSynchronousComponent())
-                .filter(dl -> areas.stream().anyMatch(area -> area.getTerminals().stream().anyMatch(t -> t.getConnectable().getId().equals(dl.getId()))
-                        || area.getBoundaries().stream().anyMatch(b -> b.getDanglingLine().getId().equals(dl.getId()))))
+                .filter(dl -> areas.stream().anyMatch(area -> area.getAreaBoundaryStream()
+                        .map(AreaBoundary::getTerminal)
+                        .filter(Optional::isPresent)
+                        .map(Optional::get).anyMatch(t -> t.getConnectable().getId().equals(dl.getId()))
+                        || area.getAreaBoundaryStream()
+                        .map(AreaBoundary::getBoundary)
+                        .filter(Optional::isPresent)
+                        .map(Optional::get).anyMatch(b -> b.getDanglingLine().getId().equals(dl.getId()))))
                 .toList();
         if (danglingLines.isEmpty()) {
             return null; // there is no dangling line in the CGM.

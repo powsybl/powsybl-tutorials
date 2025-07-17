@@ -14,7 +14,6 @@ Sensitivity analysis<sensitivity-analysis.md>
 Topology<topology.md>
 Diagrams<diagram/index.md>
 Downscaling<downscaling.md>
-European merging function<emf.md>
 Network modifications in Groovy<network_modifications_groovy.md>
 ```
 
@@ -41,9 +40,6 @@ Network modifications in Groovy<network_modifications_groovy.md>
 
 ## Downscaling
 - [Create the Java code to map hypothesis on a network](downscaling.md): Learn how to create the Java code to map study state hypothesis on a network
-
-## Merging
-- [Create the Java code to perform merging and balances adjustment](emf.md): Learn how to create the Java code to merge multiple CIM-CGMES based IGMs and adjust the AC net positions of each control area to met the targets. This tutorial follows the European Merging Function requirements.
 
 ## Network modifications scripts in groovy
 - [Modify a network through groovy scripts](network_modifications_groovy.md): Learn how to use Powsybl network modification functions in Groovy.

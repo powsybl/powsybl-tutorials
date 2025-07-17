@@ -26,7 +26,6 @@
             <plugin>
                 <groupId>com.powsybl</groupId>
                 <artifactId>powsybl-itools-packager-maven-plugin</artifactId>
-                <version>6.0.1</version> <!-- to fix by adding this artifact to core dependency management -->
                 <executions>
                     <execution>
                         <phase>package</phase>
@@ -49,7 +48,6 @@
             <artifactId>logback-classic</artifactId>
             <scope>runtime</scope>
         </dependency>
-
         <dependency>
             <groupId>com.powsybl</groupId>
             <artifactId>powsybl-computation-local</artifactId>

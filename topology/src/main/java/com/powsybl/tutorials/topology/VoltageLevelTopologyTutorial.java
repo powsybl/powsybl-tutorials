@@ -115,7 +115,7 @@ public final class VoltageLevelTopologyTutorial {
         Network network = Network.create("bus/breaker network", "test");
 
         // The following code shows how to create the substation with a bus/breaker topology model.
-        Substation  substation = network.newSubstation()
+        Substation substation = network.newSubstation()
                 .setId("susbtation")
                 .add();
 

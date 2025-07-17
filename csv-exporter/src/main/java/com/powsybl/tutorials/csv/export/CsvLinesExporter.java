@@ -52,19 +52,19 @@ public class CsvLinesExporter implements Exporter {
 
             try (Writer writer = new OutputStreamWriter(dataSource.newOutputStream(null, EXTENSION, false));
                  TableFormatter formatter = factory.create(writer, "", tfc,
-                    new Column("LineId"),
-                    new Column("SubstationId1"),
-                    new Column("SubstationId2"),
-                    new Column("VoltageLevelId1"),
-                    new Column("VoltageLevelId2"),
-                    new Column("BusId1"),
-                    new Column("BusId2"),
-                    new Column("R"),
-                    new Column("X"),
-                    new Column("G1"),
-                    new Column("B1"),
-                    new Column("G2"),
-                    new Column("B2"))) {
+                     new Column("LineId"),
+                     new Column("SubstationId1"),
+                     new Column("SubstationId2"),
+                     new Column("VoltageLevelId1"),
+                     new Column("VoltageLevelId2"),
+                     new Column("BusId1"),
+                     new Column("BusId2"),
+                     new Column("R"),
+                     new Column("X"),
+                     new Column("G1"),
+                     new Column("B1"),
+                     new Column("G2"),
+                     new Column("B2"))) {
 
                 for (Line line : network.getLines()) {
                     VoltageLevel vl1 = line.getTerminal1().getVoltageLevel();
@@ -78,18 +78,18 @@ public class CsvLinesExporter implements Exporter {
 
                     LOGGER.debug("export lineID {} ", line.getId());
                     formatter.writeCell(line.getId())
-                            .writeCell(vl1.getSubstation().map(Substation::getId).orElse("null"))
-                            .writeCell(vl2.getSubstation().map(Substation::getId).orElse("null"))
-                            .writeCell(vl1.getId())
-                            .writeCell(vl2.getId())
-                            .writeCell(bus1Id)
-                            .writeCell(bus2Id)
-                            .writeCell(line.getR())
-                            .writeCell(line.getX())
-                            .writeCell(line.getG1())
-                            .writeCell(line.getB1())
-                            .writeCell(line.getG2())
-                            .writeCell(line.getB2());
+                        .writeCell(vl1.getSubstation().map(Substation::getId).orElse("null"))
+                        .writeCell(vl2.getSubstation().map(Substation::getId).orElse("null"))
+                        .writeCell(vl1.getId())
+                        .writeCell(vl2.getId())
+                        .writeCell(bus1Id)
+                        .writeCell(bus2Id)
+                        .writeCell(line.getR())
+                        .writeCell(line.getX())
+                        .writeCell(line.getG1())
+                        .writeCell(line.getB1())
+                        .writeCell(line.getG2())
+                        .writeCell(line.getB2());
                 }
                 LOGGER.info("CSV export done in {} ms", System.currentTimeMillis() - startTime);
             }

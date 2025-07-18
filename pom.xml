@@ -30,6 +30,7 @@
         <java.version>17</java.version>
 
         <powsybl-dependencies.version>2025.0.2</powsybl-dependencies.version>
+        <powsybl.metrix.version>2.3.0</powsybl.metrix.version>
     </properties>
 
     <modules>
@@ -66,6 +67,12 @@
                 <version>${powsybl-dependencies.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>com.powsybl</groupId>
+                <artifactId>powsybl-metrix-mapping</artifactId>
+                <version>${powsybl.metrix.version}</version>
+                <scope>compile</scope>
             </dependency>
         </dependencies>
     </dependencyManagement>

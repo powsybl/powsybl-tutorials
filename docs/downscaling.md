@@ -41,7 +41,7 @@ Create a new Maven `pom.xml` file in a directory called `downscaling` with the f
     <parent>
         <groupId>com.powsybl</groupId>
         <artifactId>powsybl-parent</artifactId>
-        <version>3</version>
+        <version>8</version>
         <relativePath/>
     </parent>
 
@@ -105,6 +105,18 @@ Note: PowSyBl uses [slf4j](http://www.slf4j.org/) as a facade for various loggin
 
 Add the following dependencies to the `pom.xml` file:
 ```xml
+<dependencyManagement>
+  <dependencies>
+    <dependency>
+      <groupId>com.powsybl</groupId>
+      <artifactId>powsybl-dependencies</artifactId>
+      <version>${powsybl-dependencies.version}</version>
+      <type>pom</type>
+      <scope>import</scope>
+    </dependency>
+  </dependencies>
+</dependencyManagement>
+
 <dependencies>
     <dependency>
         <groupId>com.powsybl</groupId>
@@ -148,6 +160,7 @@ Add the following dependencies to the `pom.xml` file:
     <dependency>
         <groupId>com.powsybl</groupId>
         <artifactId>powsybl-metrix-mapping</artifactId>
+        <version>${metrix.version}</version>
         <scope>compile</scope>
     </dependency>
 </dependencies>
@@ -170,7 +183,11 @@ In this tutorial, the provided networks are in CIM-CGMES format. Each one is loa
 - `CGMES_smaller.zip` is based on the Small Grid Base Case Test Configuration from CGMES Conformity Assessment, where we imagine that it represents Great Britain's network. The geographical information is just needed for the mapping.
 - `CGMES_bigger.zip` is based on the Real Grid Test Configuration from CGMES Conformity Assessment, where we imagine that it represents France's network. Here too, the geographical information is just needed for the mapping.
 
-First, create `Downscaling` class, with a main method and a logger.
+First, create `Downscaling.java` class in `downscaling/src/main/java/com/powsybl/tutorials/downscaling/`, with a main method and a logger.
+Remember to specify the package: 
+```java
+package com.powsybl.tutorials.downscaling;
+```
 
 ```java
 import org.slf4j.Logger;
@@ -196,7 +213,7 @@ public class Downscaling {
 Create the `downscaling/src/main/resources/networks` directory. You must put all the CIM-CGMES archives you want to manipulate inside.
 
 ### Write network import code
-Create a `Set<Network>` loaded from each zip file of the `networks` directory :
+Create a `Set<Network>` loaded from each zip file of the `networks` directory in the main method:
 
 ```java
 Set<Network> networks = new HashSet<>();
@@ -211,11 +228,13 @@ try (Stream<Path> walk = Files.walk(networksDirPath)) {
             networks.add(network);
         } catch (Exception e) {
             String msg = "Could not load network from file [" + zipFile.getFileName().toString() + "]";
-            LOGGER.error(msg, e);
+            LOG.error(msg, e);
         }
     });
 }
 ```
+
+Remember to add `IOException` (for the use of the `Files.walk()` method) and `URISyntaxException` (for the use of the `URL.toURI()` method) in the exception management of the main method declaration.
 
 Since we have logged any error occurring during network import, you should be able to understand problems more easily.
 
@@ -235,10 +254,9 @@ If a mapping process cannot find a time series for given equipment, the code thr
 In Powsybl, time series are grouped and accessed in data-structures called `TimeSeriesStore`. Create an `InMemoryTimeSeriesStore` (time series data are actually present directly in JVM memory) and populate it with the `ts-test.csv` file.
 
 ```java
-final InMemoryTimeSeriesStore store = new InMemoryTimeSeriesStore();
+InMemoryTimeSeriesStore store = new InMemoryTimeSeriesStore();
 InputStreamReader isr = new InputStreamReader(Objects.requireNonNull(Downscaling.class.getClassLoader().getResourceAsStream("ts-test.csv")));
-final BufferedReader reader = new BufferedReader(isr);
-store.importTimeSeries(reader);
+store.importTimeSeries(new BufferedReader(isr));
 ```
 
 ## Load mapping DSL script
@@ -318,15 +336,15 @@ Metrix integration mapping is highly parameterizable. Prepare inputs for the map
 
 ```java
 final MappingParameters mappingParameters = MappingParameters.load();
-final ComputationRange computationRange = new ComputationRange(tsStore.getTimeSeriesDataVersions(), 1, 1);
-final TimeSeriesMappingConfig mappingConfig = dslLoader.load(network, mappingParameters, tsStore, new DataTableStore(), computationRange);
+final ComputationRange computationRange = new ComputationRange(store.getTimeSeriesDataVersions(), 1, 1);
+final TimeSeriesMappingConfig mappingConfig = dslLoader.load(network, mappingParameters, store, new DataTableStore(), computationRange);
 mappingConfig.setMappedTimeSeriesNames(tsNames);
 
 // Initialize mapping parameters
-final TimeSeriesMappingConfigTableLoader loader = new TimeSeriesMappingConfigTableLoader(mappingConfig, tsStore);
+final TimeSeriesMappingConfigTableLoader loader = new TimeSeriesMappingConfigTableLoader(mappingConfig, store);
 final Range<Integer> pointRange = Range.closed(0, loader.checkIndexUnicity().getPointCount() - 1);
 final TimeSeriesMapperParameters tsMappingParams = new TimeSeriesMapperParameters(
-        new TreeSet<>(tsStore.getTimeSeriesDataVersions()),
+        new TreeSet<>(store.getTimeSeriesDataVersions()),
         pointRange,
         true,
         true,
@@ -377,7 +395,7 @@ Prepare mapping logs and perform actual mapping with a simple call:
 
 ```java
 TimeSeriesMapper mapper = new TimeSeriesMapper(mappingConfig, tsMappingParams, network, logger);
-mapper.mapToNetwork(tsStore, observers);
+mapper.mapToNetwork(store, observers);
 logger.writeCsv(networkOutputDir.resolve("mapping.log"));
 ```
 

@@ -1,2 +1,19 @@
-# Write the Java code to map steady state hypothesis on a network
-This tutorial shows how to write Java code to perform downscaling of global study state hypothesis and map the local hypothesis to an existing network. Follow the tutorial step by step in our [website](TODO).
+# Map steady state hypothesis on a network
+This tutorial shows how to write Java code to perform downscaling of global steady state hypothesis and map the local
+hypothesis to an existing network.
+
+# How to configure this tutorial
+The configuration file is:
+```
+<path_to_powsybl_tutorials>/downscaling/src/main/resources/config.yml
+```
+
+# Running the tutorial
+You need to execute the following command lines:
+```
+cd <path_to_powsybl_tutorials>/downscaling/
+mvn clean package exec:java
+```
+
+# Outputs
+The outputs are stored in the `target/tutorial/` folder.

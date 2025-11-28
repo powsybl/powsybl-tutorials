@@ -30,7 +30,7 @@
         <java.version>17</java.version>
 
         <powsybl-dependencies.version>2025.0.2</powsybl-dependencies.version>
-        <powsybl.metrix.version>2.3.0</powsybl.metrix.version>
+        <powsybl.metrix.version>2.7.0</powsybl.metrix.version>
     </properties>
 
     <modules>

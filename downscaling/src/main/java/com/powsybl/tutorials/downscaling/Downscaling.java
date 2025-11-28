@@ -1,6 +1,7 @@
 package com.powsybl.tutorials.downscaling;
 
 import com.google.common.collect.Range;
+import com.powsybl.commons.PowsyblException;
 import com.powsybl.commons.datasource.DataSource;
 import com.powsybl.commons.datasource.DataSourceUtil;
 import com.powsybl.iidm.network.Country;
@@ -112,9 +113,12 @@ public final class Downscaling {
      */
     private static ReadOnlyTimeSeriesStore initTSStore() {
         final InMemoryTimeSeriesStore store = new InMemoryTimeSeriesStore();
-        InputStreamReader isr = new InputStreamReader(Objects.requireNonNull(Downscaling.class.getClassLoader().getResourceAsStream("ts-test.csv")));
-        final BufferedReader reader = new BufferedReader(isr);
-        store.importTimeSeries(reader);
+        try (InputStreamReader isr = new InputStreamReader(Objects.requireNonNull(Downscaling.class.getClassLoader().getResourceAsStream("ts-test.csv")));
+            BufferedReader reader = new BufferedReader(isr)) {
+            store.importTimeSeries(reader);
+        } catch (IOException e) {
+            throw new PowsyblException("Failed to load time series", e);
+        }
         return store;
     }
 

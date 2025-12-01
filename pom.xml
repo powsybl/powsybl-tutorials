@@ -25,13 +25,13 @@
     <name>Powsybl tutorials</name>
 
     <properties>
-        <!-- TODO: find a way to configure this plugin with versions >3.0.0 -->
-        <maven.exec.version>3.0.0</maven.exec.version>
+        <maven.exec.version>3.6.2</maven.exec.version>
         <java.version>21</java.version>
 
         <powsybl-dependencies.version>2025.2.0</powsybl-dependencies.version>
         <powsybl-core.version>7.0.1</powsybl-core.version>
         <javacsv.version>2.0</javacsv.version>
+        <exec.mainClass/> <!-- To be defined in sub-modules -->
     </properties>
 
     <modules>
@@ -54,6 +54,23 @@
                     <groupId>org.codehaus.mojo</groupId>
                     <artifactId>exec-maven-plugin</artifactId>
                     <version>${maven.exec.version}</version>
+                    <executions>
+                        <execution>
+                            <id>run</id>
+                            <goals>
+                                <goal>exec</goal>
+                            </goals>
+                            <configuration>
+                                <executable>java</executable>
+                                <arguments>
+                                    <argument>-cp</argument>
+                                    <!-- computed project classpath -->
+                                    <classpath/>
+                                    <argument>${exec.mainClass}</argument>
+                                </arguments>
+                            </configuration>
+                        </execution>
+                    </executions>
                 </plugin>
                 <plugin>
                     <groupId>com.powsybl</groupId>

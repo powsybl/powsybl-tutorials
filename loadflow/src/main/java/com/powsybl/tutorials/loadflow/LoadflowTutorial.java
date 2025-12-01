@@ -6,12 +6,14 @@
  */
 package com.powsybl.tutorials.loadflow;
 
+import com.powsybl.commons.PowsyblException;
 import com.powsybl.iidm.network.*;
 import com.powsybl.loadflow.LoadFlow;
 import com.powsybl.loadflow.LoadFlowParameters;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.IOException;
 import java.io.InputStream;
 
 /**
@@ -26,8 +28,12 @@ public final class LoadflowTutorial {
         // We first import the network from a XML file. The network is described in the
         // iTesla Internal Data Model format.
         final String networkFileName = "eurostag-tutorial1-lf.xml";
-        final InputStream is = LoadflowTutorial.class.getClassLoader().getResourceAsStream(networkFileName);
-        Network network = Network.read(networkFileName, is);
+        Network network;
+        try (InputStream is = LoadflowTutorial.class.getClassLoader().getResourceAsStream(networkFileName)) {
+            network = Network.read(networkFileName, is);
+        } catch (IOException e) {
+            throw new PowsyblException("Could not load network from file [" + networkFileName + "]", e);
+        }
 
         // Let's scan the network.
         // In this tutorial it is composed of two substations. Each substation has two voltage

@@ -15,7 +15,7 @@
 
     <!-- This property is only needed to run the tutorial easily -->
     <properties>
-        <exec.mainClass>com.powsybl.tutorials.csv.import_.Main</exec.mainClass>
+        <exec.mainClass>com.powsybl.tutorials.csv.importer.Main</exec.mainClass>
     </properties>
 
     <dependencies>

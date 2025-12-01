@@ -21,6 +21,10 @@
     <artifactId>sld-custom-node</artifactId>
     <name>SLD custom node tutorial</name>
 
+    <properties>
+        <exec.mainClass>com.powsybl.tutorials.sld.customnode.SldCustomNodeTutorial</exec.mainClass>
+    </properties>
+
     <dependencies>
         <!-- Compile dependencies -->
         <dependency>

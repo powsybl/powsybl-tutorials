@@ -15,7 +15,7 @@
     <parent>
         <groupId>com.powsybl</groupId>
         <artifactId>powsybl-parent</artifactId>
-        <version>20.2</version>
+        <version>24</version>
         <relativePath/>
     </parent>
     <groupId>com.powsybl.tutorials</groupId>
@@ -25,12 +25,12 @@
     <name>Powsybl tutorials</name>
 
     <properties>
-        <maven.exec.version>3.5.1</maven.exec.version>
-        <javacsv.version>2.0</javacsv.version>
-        <java.version>17</java.version>
+        <maven.exec.version>3.6.2</maven.exec.version>
+        <java.version>21</java.version>
 
-        <powsybl-dependencies.version>2025.0.2</powsybl-dependencies.version>
-        <powsybl-core.version>6.7.2</powsybl-core.version>
+        <powsybl-dependencies.version>2025.2.0</powsybl-dependencies.version>
+        <powsybl-core.version>7.0.1</powsybl-core.version>
+        <javacsv.version>2.0</javacsv.version>
     </properties>
 
     <modules>

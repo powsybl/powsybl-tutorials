@@ -20,9 +20,8 @@
             <artifactId>auto-service</artifactId>
         </dependency>
         <dependency>
-            <groupId>net.sourceforge.javacsv</groupId>
-            <artifactId>javacsv</artifactId>
-            <version>${javacsv.version}</version>
+            <groupId>de.siegmar</groupId>
+            <artifactId>fastcsv</artifactId>
         </dependency>
         <dependency>
             <groupId>com.powsybl</groupId>

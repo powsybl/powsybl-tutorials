@@ -30,6 +30,7 @@
         <java.version>17</java.version>
 
         <powsybl-dependencies.version>2025.0.2</powsybl-dependencies.version>
+        <fastcsv.version>4.0.0</fastcsv.version> <!-- This dependency will be removed once FastCSV is used in powsybl-core -->
     </properties>
 
     <modules>
@@ -66,6 +67,11 @@
                 <version>${powsybl-dependencies.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>de.siegmar</groupId>
+                <artifactId>fastcsv</artifactId>
+                <version>${fastcsv.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

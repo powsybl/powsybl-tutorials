@@ -7,5 +7,5 @@ of this tutorial aims at computing a security analysis on this network.
 To run this tutorial, you need to execute the following command lines:
 ```
 cd <path_to_powsybl_tutorials>/cgmes/
-mvn compile exec:java
+mvn compile exec:exec@run
 ```

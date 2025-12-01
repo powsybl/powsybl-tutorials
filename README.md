@@ -30,13 +30,13 @@ Most tutorials show simple code and can be run directly from maven using the `ex
 
 ```
 $ cd <TUTORIAL-FOLDER>
-$ mvn compile exec:java
+$ mvn compile exec:exec@run
 ```
 
 Example:
 ```
 $ cd csv-exporter
-$ mvn compile exec:java
+$ mvn compile exec:exec@run
 [INFO] Scanning for projects...
 [INFO] 
 [INFO] ------------------------------------------------------------------------
@@ -57,4 +57,4 @@ NHV1_NHV2_1,P1,P2,VLHV1,VLHV2,NHV1,NHV2,3.00000,33.0000,0.00000,0.000193000,0.00
 NHV1_NHV2_2,P1,P2,VLHV1,VLHV2,NHV1,NHV2,3.00000,33.0000,0.00000,0.000193000,0.00000,0.000193000
 ```
 
-Alternatively, you can easily launch a tutorial from the root by using `mvn compile exec:java -pl <TUTORIAL-FOLDER>` or import the projects in your favorite IDE and use its facilities to run code and start experimenting!
+Alternatively, you can easily launch a tutorial from the root by using `mvn compile exec:exec@run -pl <TUTORIAL-FOLDER>` or import the projects in your favorite IDE and use its facilities to run code and start experimenting!

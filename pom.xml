@@ -25,7 +25,8 @@
     <name>Powsybl tutorials</name>
 
     <properties>
-        <maven.exec.version>3.6.2</maven.exec.version>
+        <!-- TODO: find a way to configure this plugin with versions >3.0.0 -->
+        <maven.exec.version>3.0.0</maven.exec.version>
         <java.version>21</java.version>
 
         <powsybl-dependencies.version>2025.2.0</powsybl-dependencies.version>

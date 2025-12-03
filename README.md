@@ -23,8 +23,8 @@ This document describes how to build and run small tutorial projects. For more i
 
 ## Environment requirements
 
-  * JDK *(17 or greater)*
-  * Maven *(3.8.0 or greater)*
+  * JDK *(21 or greater)*
+  * Maven *(3.9.0 or greater)*
 
 Most tutorials show simple code and can be run directly from maven using the `exec:java` goal on them:
 

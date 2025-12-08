@@ -1,5 +1,4 @@
-{
-  "components" : [ {
+[ {
     "type" : "WIND_TURBINE",
     "anchorPoints" : [ {
       "x" : 0.0,
@@ -28,5 +27,5 @@
       "fileName" : "wind-turbine.svg"
     } ],
     "styleClass" : "sld-wind-turbine"
-  } ]
-}
+  }
+]

@@ -20,7 +20,6 @@ import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -60,7 +59,7 @@ public final class SensitivityTutorial {
         }
 
         // Then build the factors themselves.
-        List<SensitivityFactor> factors =  monitoredLines.stream()
+        List<SensitivityFactor> factors = monitoredLines.stream()
                 .map(l -> new SensitivityFactor(SensitivityFunctionType.BRANCH_ACTIVE_POWER_1, l.getId(),
                                                 SensitivityVariableType.TRANSFORMER_PHASE, "BBE2AA1  BBE3AA1  1",
                                                 false, ContingencyContext.all())).collect(Collectors.toList());
@@ -68,7 +67,7 @@ public final class SensitivityTutorial {
         // 3. Run the sensitivity analysis
         // Run the analysis that will be performed on network working variant with default sensitivity analysis parameters
         // Default implementation defined in the platform configuration will be used.
-        SensitivityAnalysisResult results = SensitivityAnalysis.run(network, factors, Collections.emptyList());
+        SensitivityAnalysisResult results = SensitivityAnalysis.run(network, factors);
 
         // 4. Output the results
         // Print the sensitivity values in the terminal.
@@ -101,7 +100,9 @@ public final class SensitivityTutorial {
         LOGGER.info("Number of contingencies: {}", contingencies.size());
 
         // Run the sensitivity computation with respect to the PST tap position on that network.
-        SensitivityAnalysisResult results2 = SensitivityAnalysis.run(network, factors, contingencies);
+        SensitivityAnalysisRunParameters runParameters = SensitivityAnalysisRunParameters.getDefault()
+            .setContingencies(contingencies);
+        SensitivityAnalysisResult results2 = SensitivityAnalysis.run(network, factors, runParameters);
 
         // Write the sensitivity results in a JSON temporary file. You can check the results in that file or specify your own file.
         File jsonResultsFile = File.createTempFile("sensitivity_results_", ".json");

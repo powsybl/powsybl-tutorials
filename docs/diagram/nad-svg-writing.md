@@ -19,7 +19,7 @@ First of all, we need some Maven dependencies.
 <dependency>
     <groupId>com.powsybl</groupId>
     <artifactId>powsybl-starter</artifactId>
-    <version>2023.3.0</version>
+    <version>2025.2.0</version>
 </dependency>
 ```
 

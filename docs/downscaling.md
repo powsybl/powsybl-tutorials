@@ -21,7 +21,7 @@ These files are imported to load a set of networks, a time series store, and a D
 ## What will you need?
 - About 1 hour
 - A favorite text editor or IDE
-- JDK 1.17 or later
+- JDK 21 or later
 - You can also import the code straight into your IDE:
     - [IntelliJ IDEA](intellij.md)
 

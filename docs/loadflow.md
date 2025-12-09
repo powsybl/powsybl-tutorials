@@ -49,7 +49,7 @@ Create a new Maven `pom.xml` file in a directory called `loadflow` with the foll
 
     <properties>
         <maven.exec.version>1.6.0</maven.exec.version>
-        <powsybl-dependencies.version>2024.2.0</powsybl-dependencies.version>
+        <powsybl-dependencies.version>2025.2.0</powsybl-dependencies.version>
     </properties>
 </project>
 ```

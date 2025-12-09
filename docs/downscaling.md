@@ -54,6 +54,7 @@ Create a new Maven `pom.xml` file in a directory called `downscaling` with the f
 
       <powsybl-dependencies.version>2025.2.0</powsybl-dependencies.version>
       <powsybl-core.version>7.0.1</powsybl-core.version>
+      <slf4j.version>2.0.17</slf4j.version>
       <powsybl.metrix.version>2.8.1</powsybl.metrix.version>
       <javacsv.version>2.0</javacsv.version>
     </properties>

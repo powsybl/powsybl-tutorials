@@ -66,7 +66,7 @@ In the `pom.xml`, add first the following lines in the `<properties>` section to
 When you'll have created the `Downscaling` class and its main function, you'll then be able to execute your code through:
 
 ```
-$> mvn clean install exec:java -Dexec.args="/tmp/"
+$> mvn clean install exec:exec@run -Dexec.args="/tmp/"
 ```
 
 Also, configure the `pom.xml` file to use a configuration file taken in the classpath, instead of the one

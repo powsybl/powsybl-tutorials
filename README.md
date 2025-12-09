@@ -26,7 +26,7 @@ This document describes how to build and run small tutorial projects. For more i
   * JDK *(21 or greater)*
   * Maven *(3.9.0 or greater)*
 
-Most tutorials show simple code and can be run directly from maven using the `exec:java` goal on them:
+Most tutorials show simple code and can be run directly from maven using the `exec:exec@run` goal on them:
 
 ```
 $ cd <TUTORIAL-FOLDER>
@@ -44,7 +44,7 @@ $ mvn compile exec:exec@run
 [INFO] ------------------------------------------------------------------------
 [INFO] 
 [...snip...]
-[INFO] --- exec:3.5.1:java (default-cli) @ powsybl-csv-exporter ---
+[INFO] --- exec:3.5.1:java (default-cli) @ csv-exporter ---
 [com.powsybl.tutorials.csv.export.Main.main()] INFO com.powsybl.commons.config.PlatformConfig - Using platform configuration provider classic
 [com.powsybl.tutorials.csv.export.Main.main()] INFO com.powsybl.commons.config.PlatformConfig - Platform configuration defined by YAML file /home/rolnic/.itools/config.yml
 [com.powsybl.tutorials.csv.export.Main.main()] INFO com.powsybl.tutorials.csv.export.CsvLinesExporter - CSV export done in 4 ms

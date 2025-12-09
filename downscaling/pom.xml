@@ -10,13 +10,14 @@
         <version>2.0.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>powsybl-downscaling</artifactId>
-    <name>Downscaling</name>
+    <artifactId>downscaling</artifactId>
+    <name>Downscaling tutorial</name>
 
     <properties>
-        <!-- These properties are only needed to run the tutorial from the command line with mvn exec:java -->
+        <!-- These properties are only needed to run the tutorial from the command line with mvn exec:exec@run -->
         <exec.cleanupDaemonThreads>false</exec.cleanupDaemonThreads>
         <exec.mainClass>com.powsybl.tutorials.downscaling.Downscaling</exec.mainClass>
+        <exec.optionalArgument>${project.build.directory}/tutorial/output/dir</exec.optionalArgument>
     </properties>
 
     <build>
@@ -25,9 +26,6 @@
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>exec-maven-plugin</artifactId>
                 <configuration>
-                    <arguments>
-                        <argument>${project.build.directory}/tutorial/output/dir</argument>
-                    </arguments>
                     <systemProperties>
                         <systemProperty>
                             <key>powsybl.config.dirs</key>

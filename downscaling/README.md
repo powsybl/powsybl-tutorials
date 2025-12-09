@@ -12,7 +12,7 @@ The configuration file is:
 You need to execute the following command lines:
 ```
 cd <path_to_powsybl_tutorials>/downscaling/
-mvn clean package exec:java
+mvn clean package exec:exec@run
 ```
 
 # Outputs

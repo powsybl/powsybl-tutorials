@@ -13,7 +13,7 @@
     <artifactId>topology</artifactId>
     <name>Voltage Level Topology tutorial</name>
 
-    <!-- These properties are only needed to run the tutorial from the command line with mvn exec:java -->
+    <!-- These properties are only needed to run the tutorial from the command line with mvn exec:exec@run -->
     <properties>
         <exec.cleanupDaemonThreads>false</exec.cleanupDaemonThreads>
         <exec.mainClass>com.powsybl.tutorials.topology.VoltageLevelTopologyTutorial</exec.mainClass>

@@ -10,7 +10,7 @@
         <version>2.0.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>powsybl-csv-importer</artifactId>
+    <artifactId>csv-importer</artifactId>
     <name>Import CSV to Network</name>
 
     <!-- This property is only needed to run the tutorial easily -->

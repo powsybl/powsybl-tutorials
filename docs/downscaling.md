@@ -41,7 +41,7 @@ Create a new Maven `pom.xml` file in a directory called `downscaling` with the f
     <parent>
         <groupId>com.powsybl</groupId>
         <artifactId>powsybl-parent</artifactId>
-        <version>8</version>
+        <version>24</version>
         <relativePath/>
     </parent>
 
@@ -49,10 +49,13 @@ Create a new Maven `pom.xml` file in a directory called `downscaling` with the f
     <name>Downscaling</name>
 
     <properties>
-        <maven.exec.version>1.6.0</maven.exec.version>
-        <slf4j.version>1.7.22</slf4j.version>
-        <powsybl-dependencies.version>2025.0.2</powsybl-dependencies.version>
-        <metrix.version>2.3.0</metrix.version>
+      <maven.exec.version>3.6.2</maven.exec.version>
+      <java.version>21</java.version>
+
+      <powsybl-dependencies.version>2025.2.0</powsybl-dependencies.version>
+      <powsybl-core.version>7.0.1</powsybl-core.version>
+      <powsybl.metrix.version>2.8.1</powsybl.metrix.version>
+      <javacsv.version>2.0</javacsv.version>
     </properties>
 </project>
 ```
@@ -61,12 +64,13 @@ Create a new Maven `pom.xml` file in a directory called `downscaling` with the f
 In the `pom.xml`, add first the following lines in the `<properties>` section to make it possible to run the future main class through Maven:
 ```xml
 <exec.cleanupDaemonThreads>false</exec.cleanupDaemonThreads>
-<exec.mainClass>powsybl.tutorials.downscaling.Downscaling</exec.mainClass>
+<exec.mainClass>com.powsybl.tutorials.downscaling.Downscaling</exec.mainClass>
+<exec.optionalArgument>${project.build.directory}/tutorial/output/dir</exec.optionalArgument>
 ```
 When you'll have created the `Downscaling` class and its main function, you'll then be able to execute your code through:
 
 ```
-$> mvn clean install exec:exec@run -Dexec.args="/tmp/"
+$> mvn clean install exec:exec@run"
 ```
 
 Also, configure the `pom.xml` file to use a configuration file taken in the classpath, instead of the one
@@ -94,14 +98,14 @@ that is global to your system:
 
 Now, we'll add a few required maven dependencies:
 
-- `com.powsybl:powsybl-config-classic`: to provide a way to read the configuration
-- `org.slf4j:slf4j-simple`: to provide an implementation of `slf4j`.
-- `com.powsybl:powsybl-iidm-api` to work with networks.
+- `powsybl-config-classic`: to provide a way to read the configuration
+- `powsybl-iidm-api` to work with networks.
 - `powsybl-iidm-api`, `powsybl-cgmes-conversion` and `powsybl-triple-store-impl-rdf4j` to load CIM-CGMES networks.
 - `powsybl-time-series-api` to work with time series.
 - `powsybl-metrix-mapping` to perform downscaling.
+- `org.slf4j:slf4j-simple`: to provide an implementation of `slf4j`.
 
-Note: PowSyBl uses [slf4j](http://www.slf4j.org/) as a facade for various logging framework, but some APIs we use in PowSyBl use [log4j](https://logging.apache.org/log4j), which is not compatible with slf4j, making it necessary to create a bridge between the two logging system.
+Note: PowSyBl uses [slf4j](http://www.slf4j.org/) as a facade for various logging frameworks, but some APIs we use in PowSyBl use [log4j](https://logging.apache.org/log4j), which is not compatible with slf4j, making it necessary to create a bridge between the two logging system.
 
 Add the following dependencies to the `pom.xml` file:
 ```xml
@@ -126,6 +130,7 @@ Add the following dependencies to the `pom.xml` file:
         <groupId>org.slf4j</groupId>
         <artifactId>slf4j-simple</artifactId>
         <version>${slf4j.version}</version>
+        <scope>compile</scope>
     </dependency>
 
     <!-- Network + CGMES -->
@@ -136,6 +141,10 @@ Add the following dependencies to the `pom.xml` file:
     <dependency>
         <groupId>com.powsybl</groupId>
         <artifactId>powsybl-iidm-impl</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.powsybl</groupId>
+      <artifactId>powsybl-iidm-serde</artifactId>
     </dependency>
     <dependency>
         <groupId>com.powsybl</groupId>

@@ -2,17 +2,18 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <parent>
-        <artifactId>powsybl-tutorials</artifactId>
-        <groupId>com.powsybl.tutorials</groupId>
-        <version>1.3.0-SNAPSHOT</version>
-    </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>merging</artifactId>
-    <version>1.3.0-SNAPSHOT</version>
+    <parent>
+        <groupId>com.powsybl.tutorials</groupId>
+        <artifactId>powsybl-tutorials</artifactId>
+        <version>2.0.0-SNAPSHOT</version>
+    </parent>
 
-    <!-- These properties are only needed to run the tutorial from the command line with mvn exec:java -->
+    <artifactId>merging</artifactId>
+    <version>2.0.0-SNAPSHOT</version>
+
+    <!-- These properties are only needed to run the tutorial from the command line with mvn exec:exec@run -->
     <properties>
         <exec.cleanupDaemonThreads>false</exec.cleanupDaemonThreads>
         <exec.mainClass>com.powsybl.tutorials.merging.MergingTutorial</exec.mainClass>
@@ -53,6 +54,7 @@
             <artifactId>powsybl-loadflow-api</artifactId>
         </dependency>
 
+        <!-- Run-time dependencies -->
         <dependency>
             <groupId>com.powsybl</groupId>
             <artifactId>powsybl-iidm-impl</artifactId>
@@ -60,12 +62,12 @@
         </dependency>
         <dependency>
             <groupId>com.powsybl</groupId>
-            <artifactId>powsybl-triple-store-impl-rdf4j</artifactId>
+            <artifactId>powsybl-open-loadflow</artifactId>
             <scope>runtime</scope>
         </dependency>
         <dependency>
             <groupId>com.powsybl</groupId>
-            <artifactId>powsybl-open-loadflow</artifactId>
+            <artifactId>powsybl-triple-store-impl-rdf4j</artifactId>
             <scope>runtime</scope>
         </dependency>
         <dependency>

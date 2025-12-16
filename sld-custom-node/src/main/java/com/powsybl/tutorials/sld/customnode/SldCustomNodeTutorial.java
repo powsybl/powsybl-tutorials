@@ -9,13 +9,11 @@ package com.powsybl.tutorials.sld.customnode;
 import com.powsybl.iidm.network.EnergySource;
 import com.powsybl.iidm.network.Generator;
 import com.powsybl.iidm.network.Network;
-
 import com.powsybl.iidm.network.TopologyKind;
-
 import com.powsybl.sld.builders.NetworkGraphBuilder;
 import com.powsybl.sld.layout.LayoutParameters;
 import com.powsybl.sld.layout.SmartVoltageLevelLayoutFactory;
-import com.powsybl.sld.library.ResourcesComponentLibrary;
+import com.powsybl.sld.library.SldResourcesComponentLibrary;
 import com.powsybl.sld.model.graphs.NodeFactory;
 import com.powsybl.sld.model.graphs.VoltageLevelGraph;
 import com.powsybl.sld.model.nodes.Node;
@@ -116,7 +114,7 @@ public final class SldCustomNodeTutorial {
     /**
      * Custom SVG component library that extends ConvergenceLibrary by adding a wind turbine symbol.
      */
-    private static class CustomLibrary extends ResourcesComponentLibrary {
+    private static class CustomLibrary extends SldResourcesComponentLibrary {
 
         public CustomLibrary() {
             super("Custom", "/CustomLibrary", "/ConvergenceLibrary");

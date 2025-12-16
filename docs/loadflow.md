@@ -18,7 +18,7 @@ A contingency is created, and finally, the flows are recalculated to get the fin
 ## What will you need?
 - About 1/2 hour
 - A favorite text editor or IDE
-- JDK 1.17 or later
+- JDK 21 or later
 - You can also import the code straight into your IDE:
     - [IntelliJ IDEA](intellij.md)
 - A network to work with, it can either be your own network (see supported formats [here](inv:powsyblcore:*:*#grid_exchange_formats/index)) or the example network from
@@ -49,7 +49,7 @@ Create a new Maven `pom.xml` file in a directory called `loadflow` with the foll
 
     <properties>
         <maven.exec.version>1.6.0</maven.exec.version>
-        <powsybl-dependencies.version>2024.2.0</powsybl-dependencies.version>
+        <powsybl-dependencies.version>2025.2.0</powsybl-dependencies.version>
     </properties>
 </project>
 ```

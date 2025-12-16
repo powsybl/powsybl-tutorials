@@ -35,7 +35,7 @@ Start by adding the powsybl-dependencies module that ensures compatibility betwe
     <dependency>
         <groupId>com.powsybl</groupId>
         <artifactId>powsybl-dependencies</artifactId>
-        <version>2023.0.1</version>
+        <version>2025.2.0</version>
         <type>pom</type>
         <scope>import</scope>
     </dependency>
@@ -51,7 +51,7 @@ The required dependencies to implement a new `iTools` command are the following:
 <dependency>
     <groupId>com.google.auto.service</groupId>
     <artifactId>auto-service</artifactId>
-    <version>1.0-rc2</version>
+    <version>1.1.1</version>
 </dependency>
 <dependency>
     <groupId>com.powsybl</groupId>

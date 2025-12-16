@@ -30,8 +30,11 @@
 
         <powsybl-dependencies.version>2025.2.0</powsybl-dependencies.version>
         <powsybl-core.version>7.0.1</powsybl-core.version>
+        <powsybl.metrix.version>2.8.1</powsybl.metrix.version>
         <javacsv.version>2.0</javacsv.version>
+
         <exec.mainClass/> <!-- To be defined in sub-modules -->
+        <exec.optionalArgument/> <!-- To be defined in sub-modules -->
     </properties>
 
     <modules>
@@ -39,6 +42,7 @@
         <module>count-network-lines</module>
         <module>csv-exporter</module>
         <module>csv-importer</module>
+        <module>downscaling</module>
         <module>itools-packager</module>
         <module>loadflow</module>
         <module>merging</module>
@@ -67,6 +71,7 @@
                                     <!-- computed project classpath -->
                                     <classpath/>
                                     <argument>${exec.mainClass}</argument>
+                                    <argument>${exec.optionalArgument}</argument>
                                 </arguments>
                             </configuration>
                         </execution>
@@ -89,6 +94,12 @@
                 <version>${powsybl-dependencies.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>com.powsybl</groupId>
+                <artifactId>powsybl-metrix-mapping</artifactId>
+                <version>${powsybl.metrix.version}</version>
+                <scope>compile</scope>
             </dependency>
             <dependency>
                 <groupId>net.sourceforge.javacsv</groupId>

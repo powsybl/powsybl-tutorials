@@ -13,7 +13,7 @@
     <artifactId>merging</artifactId>
     <version>2.0.0-SNAPSHOT</version>
 
-    <!-- These properties are only needed to run the tutorial from the command line with mvn exec:java -->
+    <!-- These properties are only needed to run the tutorial from the command line with mvn exec:exec@run -->
     <properties>
         <exec.cleanupDaemonThreads>false</exec.cleanupDaemonThreads>
         <exec.mainClass>com.powsybl.tutorials.merging.MergingTutorial</exec.mainClass>

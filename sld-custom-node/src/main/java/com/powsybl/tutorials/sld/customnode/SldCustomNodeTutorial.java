@@ -18,7 +18,9 @@ import com.powsybl.sld.model.graphs.NodeFactory;
 import com.powsybl.sld.model.graphs.VoltageLevelGraph;
 import com.powsybl.sld.model.nodes.Node;
 import com.powsybl.sld.svg.DefaultLabelProvider;
+import com.powsybl.sld.svg.DefaultSVGLegendWriter;
 import com.powsybl.sld.svg.DefaultSVGWriter;
+import com.powsybl.sld.svg.SVGLegendWriter;
 import com.powsybl.sld.svg.SvgParameters;
 import com.powsybl.sld.svg.styles.iidm.TopologicalStyleProvider;
 import org.slf4j.Logger;
@@ -141,11 +143,12 @@ public final class SldCustomNodeTutorial {
         var svgWriter = new DefaultSVGWriter(componentLibrary, layoutParameters, svgParameters);
         var labelProvider = new DefaultLabelProvider(network, componentLibrary, layoutParameters, svgParameters);
         var styleProvider = new TopologicalStyleProvider(network);
+        SVGLegendWriter legendWriter = new DefaultSVGLegendWriter(network, svgParameters);
 
         Path svgFile = Paths.get(System.getProperty("java.io.tmpdir"), "sld.svg");
         LOGGER.info("Writing {}", svgFile);
         try (Writer writer = Files.newBufferedWriter(svgFile, StandardCharsets.UTF_8)) {
-            svgWriter.write(graph, labelProvider, styleProvider, writer);
+            svgWriter.write(graph, labelProvider, styleProvider, legendWriter, writer);
         }
 
     }

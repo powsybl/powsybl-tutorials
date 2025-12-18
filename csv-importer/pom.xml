@@ -36,10 +36,6 @@
             <groupId>de.siegmar</groupId>
             <artifactId>fastcsv</artifactId>
         </dependency>
-        <dependency>
-            <groupId>net.sourceforge.javacsv</groupId>
-            <artifactId>javacsv</artifactId>
-        </dependency>
 
         <!-- Runtime dependencies -->
         <dependency>

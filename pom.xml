@@ -106,11 +106,6 @@
                 <artifactId>fastcsv</artifactId>
                 <version>${fastcsv.version}</version>
             </dependency>
-            <dependency>
-                <groupId>net.sourceforge.javacsv</groupId>
-                <artifactId>javacsv</artifactId>
-                <version>${javacsv.version}</version>
-            </dependency>
         </dependencies>
     </dependencyManagement>
 </project>

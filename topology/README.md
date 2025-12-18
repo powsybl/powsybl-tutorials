@@ -11,5 +11,5 @@ The configuration file is :
 To run this tutorial, you just need to execute the following command lines:
 ```
 cd <path_to_powsybl_tutorials>/topology/
-mvn compile exec:java
+mvn compile exec:exec@run
 ```

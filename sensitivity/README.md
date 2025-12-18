@@ -29,5 +29,5 @@ Or simply ensure that there is only one LoadFlowProvider in the classpath (remov
 You just need to launch the `SensitivityTutorial::main` with your IDE or execute the following command lines:
 ```
 cd <path_to_powsybl_tutorials>/sensitivity
-mvn package exec:java
+mvn package exec:exec@run
 ```

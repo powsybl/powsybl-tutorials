@@ -15,22 +15,26 @@
     <parent>
         <groupId>com.powsybl</groupId>
         <artifactId>powsybl-parent</artifactId>
-        <version>8</version>
+        <version>24</version>
         <relativePath/>
     </parent>
     <groupId>com.powsybl.tutorials</groupId>
     <artifactId>powsybl-tutorials</artifactId>
-    <version>1.3.0-SNAPSHOT</version>
+    <version>2.0.0-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>Powsybl tutorials</name>
 
     <properties>
-        <maven.exec.version>1.6.0</maven.exec.version>
-        <javacsv.version>2.0</javacsv.version>
-        <java.version>17</java.version>
+        <maven.exec.version>3.6.2</maven.exec.version>
+        <java.version>21</java.version>
 
-        <powsybl-dependencies.version>2025.0.2</powsybl-dependencies.version>
+        <powsybl-dependencies.version>2025.3.0</powsybl-dependencies.version>
+        <powsybl-core.version>7.1.0</powsybl-core.version>
+        <powsybl.metrix.version>3.0.0</powsybl.metrix.version>
         <fastcsv.version>4.0.0</fastcsv.version> <!-- This dependency will be removed once FastCSV is used in powsybl-core -->
+
+        <exec.mainClass/> <!-- To be defined in sub-modules -->
+        <exec.optionalArgument/> <!-- To be defined in sub-modules -->
     </properties>
 
     <modules>
@@ -38,6 +42,7 @@
         <module>count-network-lines</module>
         <module>csv-exporter</module>
         <module>csv-importer</module>
+        <module>downscaling</module>
         <module>itools-packager</module>
         <module>loadflow</module>
         <module>merging</module>
@@ -53,11 +58,33 @@
                     <groupId>org.codehaus.mojo</groupId>
                     <artifactId>exec-maven-plugin</artifactId>
                     <version>${maven.exec.version}</version>
+                    <executions>
+                        <execution>
+                            <id>run</id>
+                            <goals>
+                                <goal>exec</goal>
+                            </goals>
+                            <configuration>
+                                <executable>java</executable>
+                                <arguments>
+                                    <argument>-cp</argument>
+                                    <!-- computed project classpath -->
+                                    <classpath/>
+                                    <argument>${exec.mainClass}</argument>
+                                    <argument>${exec.optionalArgument}</argument>
+                                </arguments>
+                            </configuration>
+                        </execution>
+                    </executions>
+                </plugin>
+                <plugin>
+                    <groupId>com.powsybl</groupId>
+                    <artifactId>powsybl-itools-packager-maven-plugin</artifactId>
+                    <version>${powsybl-core.version}</version>
                 </plugin>
             </plugins>
         </pluginManagement>
     </build>
-
 
     <dependencyManagement>
         <dependencies>
@@ -69,9 +96,20 @@
                 <scope>import</scope>
             </dependency>
             <dependency>
+                <groupId>com.powsybl</groupId>
+                <artifactId>powsybl-metrix-mapping</artifactId>
+                <version>${powsybl.metrix.version}</version>
+                <scope>compile</scope>
+            </dependency>
+            <dependency>
                 <groupId>de.siegmar</groupId>
                 <artifactId>fastcsv</artifactId>
                 <version>${fastcsv.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>net.sourceforge.javacsv</groupId>
+                <artifactId>javacsv</artifactId>
+                <version>${javacsv.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

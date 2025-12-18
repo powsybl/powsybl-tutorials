@@ -28,9 +28,9 @@
         <maven.exec.version>3.6.2</maven.exec.version>
         <java.version>21</java.version>
 
-        <powsybl-dependencies.version>2025.2.0</powsybl-dependencies.version>
-        <powsybl-core.version>7.0.1</powsybl-core.version>
-        <powsybl.metrix.version>2.8.1</powsybl.metrix.version>
+        <powsybl-dependencies.version>2025.3.0</powsybl-dependencies.version>
+        <powsybl-core.version>7.1.0</powsybl-core.version>
+        <powsybl.metrix.version>3.0.0</powsybl.metrix.version>
         <javacsv.version>2.0</javacsv.version>
 
         <exec.mainClass/> <!-- To be defined in sub-modules -->

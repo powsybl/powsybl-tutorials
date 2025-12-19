@@ -40,7 +40,7 @@ $ mvn compile exec:exec@run
 [INFO] Scanning for projects...
 [INFO] 
 [INFO] ------------------------------------------------------------------------
-[INFO] Building Export Network to CSV 1.3.0
+[INFO] Building Export Network to CSV 2.0.0
 [INFO] ------------------------------------------------------------------------
 [INFO] 
 [...snip...]

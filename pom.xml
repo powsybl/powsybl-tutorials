@@ -31,7 +31,7 @@
         <powsybl-dependencies.version>2025.3.0</powsybl-dependencies.version>
         <powsybl-core.version>7.1.0</powsybl-core.version>
         <powsybl.metrix.version>3.0.0</powsybl.metrix.version>
-        <javacsv.version>2.0</javacsv.version>
+        <fastcsv.version>4.0.0</fastcsv.version> <!-- This dependency will be removed once FastCSV is used in powsybl-core -->
 
         <exec.mainClass/> <!-- To be defined in sub-modules -->
         <exec.optionalArgument/> <!-- To be defined in sub-modules -->
@@ -102,9 +102,9 @@
                 <scope>compile</scope>
             </dependency>
             <dependency>
-                <groupId>net.sourceforge.javacsv</groupId>
-                <artifactId>javacsv</artifactId>
-                <version>${javacsv.version}</version>
+                <groupId>de.siegmar</groupId>
+                <artifactId>fastcsv</artifactId>
+                <version>${fastcsv.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

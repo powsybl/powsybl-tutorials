@@ -33,8 +33,8 @@
             <artifactId>powsybl-iidm-api</artifactId>
         </dependency>
         <dependency>
-            <groupId>net.sourceforge.javacsv</groupId>
-            <artifactId>javacsv</artifactId>
+            <groupId>de.siegmar</groupId>
+            <artifactId>fastcsv</artifactId>
         </dependency>
 
         <!-- Runtime dependencies -->

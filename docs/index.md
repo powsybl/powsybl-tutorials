@@ -11,6 +11,7 @@ intellij.md
 iTools<itools/index.md>
 Load flow<loadflow.md>
 Sensitivity analysis<sensitivity-analysis.md>
+Security analysis<security-analysis.md>
 Topology<topology.md>
 Diagrams<diagram/index.md>
 Downscaling<downscaling.md>
@@ -29,6 +30,7 @@ Network modifications in Groovy<network_modifications_groovy.md>
 ## Simulation
 - [Create the Java code to run power flows](loadflow.md): Learn how to create the Java code to setup and run power flows
 - [Create the Java code to run sensitivity analyses](sensitivity-analysis.md): Learn how to create the Java code to setup and run sensitivity analyses
+- [Security analyses](security-analysis.md): Learn how to use security analyses
 
 ## Topology
 - [Manage bus/breaker and node/breaker topology](topology.md): Learn how to manipulate topological views of the network

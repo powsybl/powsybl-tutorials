@@ -16,12 +16,16 @@ import com.powsybl.security.SecurityAnalysisResult;
 import com.powsybl.security.SecurityAnalysisRunParameters;
 import com.powsybl.security.condition.TrueCondition;
 import com.powsybl.security.limitreduction.LimitReduction;
+import com.powsybl.security.monitor.StateMonitor;
 import com.powsybl.security.strategy.ConditionalActions;
 import com.powsybl.security.strategy.OperatorStrategy;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.List;
+import java.util.Set;
+
+import static com.powsybl.contingency.ContingencyContextType.SPECIFIC;
 
 /**
  * @author Samir Romdhani {@literal <samir.romdhani_externe at rte-france.com>}
@@ -39,6 +43,8 @@ public final class SecurityAnalysisTutorials {
         log(runSecurityAnalysisWithOperatorStrategyAndActions());
         // Network, Contingency, and Limit Reductions
         log(runSecurityAnalysisWithLimitReduction());
+        // Network, Contingency, and State Monitor
+        log(runSecurityAnalysisWithStateMonitor());
     }
 
     public static SecurityAnalysisResult runSecurityAnalysisWithContingency() {
@@ -109,13 +115,33 @@ public final class SecurityAnalysisTutorials {
         return SecurityAnalysis.run(network, List.of(contingency), parameters).getResult();
     }
 
+    public static SecurityAnalysisResult runSecurityAnalysisWithStateMonitor() {
+        Network network = Network.read("network.xml", SecurityAnalysisTutorials.class.getResourceAsStream("/network.xiidm"));
+        LOGGER.info(":: SecurityAnalysis :: network, contingency and state Monitor");
+        Contingency contingency = Contingency.line("NHV1_NHV2_2");
+        SecurityAnalysisRunParameters parameters = new SecurityAnalysisRunParameters();
+        StateMonitor stateMonitor = new StateMonitor(new ContingencyContext(contingency.getId(), SPECIFIC),
+                Set.of("NHV1_NHV2_1"), // <= branch id
+                Set.of("VLGEN", "VLHV1", "VLHV2", "VLLOAD"), // <= Voltage Levels id
+                Set.of());
+        parameters.addMonitor(stateMonitor);
+        return SecurityAnalysis.run(network, List.of(contingency), parameters).getResult();
+    }
+
     private static void log(SecurityAnalysisResult result) {
         LOGGER.info("\t Pre contingency results");
-        result.getPreContingencyLimitViolationsResult().getLimitViolations()
-                .forEach(value -> {
-                    LOGGER.info("\t\t Value: {} MW/°", value.getValue());
-                    LOGGER.info("\t\t Limit: {} MW/°", value.getLimit());
+        result.getPreContingencyResult().getLimitViolationsResult().getLimitViolations()
+                .forEach(limitViolation -> {
+                    LOGGER.info("\t\t Value: {} MW/°", limitViolation.getValue());
+                    LOGGER.info("\t\t Limit: {} MW/°", limitViolation.getLimit());
                 });
+        result.getPreContingencyResult().getNetworkResult().getBranchResults()
+                .forEach(branchResult -> LOGGER.info("\t\t branchResult: {}", branchResult.toString()));
+        result.getPreContingencyResult().getNetworkResult().getBusResults()
+                .forEach(busResult -> LOGGER.info("\t\t busResult: {}", busResult.toString()));
+        result.getPreContingencyResult().getNetworkResult().getThreeWindingsTransformerResults()
+                .forEach(transformerResult -> LOGGER.info("\t\t TWT Result: {}", transformerResult.toString()));
+
         LOGGER.info("\t Post contingency results");
         result.getPostContingencyResults().forEach(postContingencyResult -> {
             LOGGER.info("\t\t Contingency : {}", postContingencyResult.getContingency().getId());
@@ -124,7 +150,14 @@ public final class SecurityAnalysisTutorials {
                         LOGGER.info("\t\t\t Violation Value: {} MW/°", value.getValue());
                         LOGGER.info("\t\t\t Violation Limit: {} MW/°", value.getLimit());
                     });
+            postContingencyResult.getNetworkResult().getBranchResults()
+                    .forEach(branchResult -> LOGGER.info("\t\t branchResult: {}", branchResult.toString()));
+            postContingencyResult.getNetworkResult().getBusResults()
+                    .forEach(busResult -> LOGGER.info("\t\t busResult: {}", busResult.toString()));
+            postContingencyResult.getNetworkResult().getThreeWindingsTransformerResults()
+                    .forEach(transformerResult -> LOGGER.info("\t\t TWT Result: {}", transformerResult.toString()));
         });
+
         LOGGER.info("\t Operator strategy results");
         result.getOperatorStrategyResults().forEach(operatorStrategyResult -> {
             LOGGER.info("\t\t OperatorStrategy : {}", operatorStrategyResult.getOperatorStrategy().getId());
@@ -133,6 +166,12 @@ public final class SecurityAnalysisTutorials {
                         LOGGER.info("\t\t\t Violation Value: {} MW/°", value.getValue());
                         LOGGER.info("\t\t\t Violation Limit: {} MW/°", value.getLimit());
                     });
+            operatorStrategyResult.getNetworkResult().getBranchResults()
+                    .forEach(branchResult -> LOGGER.info("\t\t branchResult: {}", branchResult.toString()));
+            operatorStrategyResult.getNetworkResult().getBusResults()
+                    .forEach(busResult -> LOGGER.info("\t\t busResult: {}", busResult.toString()));
+            operatorStrategyResult.getNetworkResult().getThreeWindingsTransformerResults()
+                    .forEach(transformerResult -> LOGGER.info("\t\t TWT Result: {}", transformerResult.toString()));
         });
     }
 }

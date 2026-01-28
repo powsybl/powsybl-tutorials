@@ -4,6 +4,7 @@ This tutorial aims to compute security analysis on a network, loading a network 
 - [x] Make a contingency on a line and compute a security analysis.
 - [x] Add operator strategies which contains references for actions
 - [x] Add limit reduction parameters
+- [x] Add state monitor parameters
 
 The complete tutorial is described in the [security analysis](https://powsybl.readthedocs.io/projects/powsybl-tutorials/en/latest/security-analysis.html) powsybl-tutorials documentation.
 

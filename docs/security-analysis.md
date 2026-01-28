@@ -17,6 +17,7 @@ Each example follows a brief and straightforward workflow, using input data that
 Network + contingency                       --> Security Analysis 
 Network + contingency + operators strategy  --> Security Analysis 
 Network + contingency + limit reduction     --> Security Analysis 
+Network + contingency + state monitor       --> Security Analysis 
 ```
 
 
@@ -27,7 +28,7 @@ Loading the network is a common step for all workflows. Then:
 1. Define a contingency and run the security analysis. 
 2. Add operator strategies and reference the associated actions. 
 3. Configure limit reduction parameters.
-
+4. Add state monitor parameters.
 
 ### Import the network from an XML IIDM file
 
@@ -155,5 +156,40 @@ Post contingency results
     Contingency : NHV1_NHV2_2
         Violation Value: 1008.9287882269946 MW/°
         Violation Limit: 460.0 MW/°
+Operator strategy results
+````
+
+### Create a state Monitor
+
+A state Monitor provides information about the state of elements of the network such as branch, bus and three-winding transformers
+
+As an example, we are going to add state monitor parameter, we will add branch and voltage levels ids that we want information about.
+
+```java
+
+Contingency contingency = Contingency.line("NHV1_NHV2_2");
+SecurityAnalysisRunParameters parameters = new SecurityAnalysisRunParameters();
+// State Monitor
+StateMonitor stateMonitor = new StateMonitor(new ContingencyContext(contingency.getId(), SPECIFIC),
+        Set.of("NHV1_NHV2_1"), // <= branch id
+        Set.of("VLGEN", "VLHV1", "VLHV2", "VLLOAD"), // <= Voltage Levels id
+        Set.of());
+parameters.addMonitor(stateMonitor);
+
+// Run security analysis
+SecurityAnalysis.run(network, List.of(contingency), parameters);
+```
+
+Here are the corresponding prints in the tutorial:
+````
+:: SecurityAnalysis :: network, contingency and state Monitor
+Pre contingency results
+Post contingency results
+        Contingency : NHV1_NHV2_2
+        branchResult: BranchResult{branchId='NHV1_NHV2_1', p1=610.56215354332, q1=334.0562715296571, i1=1008.9287882269946, p2=-600.9961559564288, q2=-285.3791465506596, i2=1047.8257691455576, flowTransfer=NaN}
+        busResult: BusResults{voltageLevelId='VLGEN', busId='NGEN', v=24.5, angle=2.3579552596552684}
+        busResult: BusResults{voltageLevelId='VLHV1', busId='NHV1', v=398.26472467308224, angle=0.0}
+        busResult: BusResults{voltageLevelId='VLHV2', busId='NHV2', v=366.58481145130054, angle=-7.499211315976122}
+        busResult: BusResults{voltageLevelId='VLLOAD', busId='NLOAD', v=137.74213838955504, angle=-14.464666247602445}
 Operator strategy results
 ````

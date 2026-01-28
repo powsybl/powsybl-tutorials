@@ -21,7 +21,6 @@ import com.powsybl.security.strategy.OperatorStrategy;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.*;
 import java.util.List;
 
 /**
@@ -35,14 +34,14 @@ public final class SecurityAnalysisTutorials {
 
     public static void main(String[] args) {
         // Network and Contingency
-        log(runSecurityAnalysisUseCase1());
+        log(runSecurityAnalysisWithContingency());
         // Network, Contingency, Operator Strategies and Actions
-        log(runSecurityAnalysisUseCase2());
+        log(runSecurityAnalysisWithOperatorStrategyAndActions());
         // Network, Contingency, and Limit Reductions
-        log(runSecurityAnalysisUseCase3());
+        log(runSecurityAnalysisWithLimitReduction());
     }
 
-    public static SecurityAnalysisResult runSecurityAnalysisUseCase1() {
+    public static SecurityAnalysisResult runSecurityAnalysisWithContingency() {
         Network network = Network.read("network.xml", SecurityAnalysisTutorials.class.getResourceAsStream("/network.xiidm"));
         LOGGER.info(":: SecurityAnalysis :: network and contingency");
 
@@ -56,7 +55,7 @@ public final class SecurityAnalysisTutorials {
         return SecurityAnalysis.run(network, List.of(contingency)).getResult();
     }
 
-    public static SecurityAnalysisResult runSecurityAnalysisUseCase2() {
+    public static SecurityAnalysisResult runSecurityAnalysisWithOperatorStrategyAndActions() {
         Network network = Network.read("network.xml", SecurityAnalysisTutorials.class.getResourceAsStream("/network.xiidm"));
         LOGGER.info(":: SecurityAnalysis :: network, contingency, operator strategies and actions");
 
@@ -90,7 +89,7 @@ public final class SecurityAnalysisTutorials {
         return SecurityAnalysis.run(network, List.of(contingency), parameters).getResult();
     }
 
-    public static SecurityAnalysisResult runSecurityAnalysisUseCase3() {
+    public static SecurityAnalysisResult runSecurityAnalysisWithLimitReduction() {
         Network network = Network.read("network.xml", SecurityAnalysisTutorials.class.getResourceAsStream("/network.xiidm"));
         LOGGER.info(":: SecurityAnalysis :: network, contingency and limit reduction");
 

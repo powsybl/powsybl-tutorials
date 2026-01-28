@@ -8,8 +8,6 @@ This tutorial aims to compute security analysis on a network, loading a network 
 The complete tutorial is described in the [security analysis](https://powsybl.readthedocs.io/projects/powsybl-tutorials/en/latest/security-analysis.html) powsybl-tutorials documentation.
 
 # How to install the security analysis simulator
-The available security analysis implementations are described in the .
-
 In the tutorial, we use the OpenLoadFlow implementation. Please visit this page: [security analysis](https://powsybl.readthedocs.io/projects/powsybl-core/en/stable/simulation/security/implementations.html) in powsybl-core documentation for more information about it.
 
 # How to configure this tutorial

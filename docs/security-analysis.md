@@ -4,12 +4,13 @@ layout: default
 
 # Write the Java code to perform security analysis
 
-In order to perform a `security analysis`, you need a `network` and at least one `contingency` (i.e. one failure) on that network,
-and possibly `operator strategies` that can take `actions` to correct a default.
+A `security analysis` is a simulation run on a `network` to check for violations. 
+To have more information about the contingencies we want to simulate and the network elements we want to monitor 
+please refer to the [Powsybl security analysis](inv:powsyblcore:*:*#simulation/security/index) documentation page.
 
-### What will you build?
+## What will you build?
 
-This tutorial presents three use cases of security analysis simulation. 
+This tutorial presents 4 use cases of security analysis simulation. 
 Each example follows a brief and straightforward workflow, using input data that includes an XIIDM file and at least one contingency.
 
 > The three workflows can be summarized as follows:
@@ -20,8 +21,7 @@ Network + contingency + limit reduction     --> Security Analysis
 Network + contingency + state monitor       --> Security Analysis 
 ```
 
-
-#### Tutorial steps
+### Tutorial steps
 
 Loading the network is a common step for all workflows. Then:
 
@@ -30,7 +30,7 @@ Loading the network is a common step for all workflows. Then:
 3. Configure limit reduction parameters.
 4. Add state monitor parameters.
 
-### Import the network from an XML IIDM file
+## Import the network from an XML IIDM file
 
 The network we use here is available in the tutorial's resources and is described in the IIDM format. 
 Start by adding the following lines in the main function of the tutorial:
@@ -48,7 +48,7 @@ The following are shown in the (Network Area Diagram) below.
 
 ![Workflow](./img/sa/nad.png){width="75%" .center-image}
 
-### Create a contingency
+## Create a contingency
 
 Before creating a contingency, make sure that contingency can actually cause a network violation.
 As an example, we will add a limit to the line `NHV1_NHV2_1` to simulate a default violation.
@@ -85,7 +85,7 @@ Post contingency results
 Operator strategy results
 ````
 
-### Create an Operator Strategy with Actions
+## Create an operator strategy with actions
 
 ```java
 LoadAction loadAction = new LoadActionBuilder()
@@ -127,9 +127,9 @@ Operator strategy results
         Violation Limit: 460.0 MW/°
 ````
 
-### Create a Limit Reduction
+### create a limit reduction
 
-Note that the reduction affect results as pre-contingency violations.
+Note that the limit reductions also affect the pre-contingency violations results.
 
 As an example, we are going to reduce the current limit of `NHV1_NHV2_1` line by 10%.
 
@@ -159,11 +159,11 @@ Post contingency results
 Operator strategy results
 ````
 
-### Create a state Monitor
+## Use state monitor
 
-A state Monitor provides information about the state of elements of the network such as branch, bus and three-winding transformers
+A `StateMonitor` provides information about the state of network elements we want to monitor such as branch, bus and three-winding transformers...
 
-As an example, we are going to add state monitor parameter, we will add branch and voltage levels ids that we want information about.
+As an example, we are going to add state monitor parameter, we will add branch and voltage levels ids that we want to monitor.
 
 ```java
 

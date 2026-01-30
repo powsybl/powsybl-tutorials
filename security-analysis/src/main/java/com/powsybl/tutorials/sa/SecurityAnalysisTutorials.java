@@ -37,13 +37,13 @@ public final class SecurityAnalysisTutorials {
     }
 
     public static void main(String[] args) {
-        // Network and Contingency
+        // Network and contingency
         log(runSecurityAnalysisWithContingency());
-        // Network, Contingency, Operator Strategies and Actions
+        // Network, contingency, operator strategies and actions
         log(runSecurityAnalysisWithOperatorStrategyAndActions());
-        // Network, Contingency, and Limit Reductions
+        // Network, contingency and limit reduction
         log(runSecurityAnalysisWithLimitReduction());
-        // Network, Contingency, and State Monitor
+        // Network, contingency and state monitor
         log(runSecurityAnalysisWithStateMonitor());
     }
 
@@ -51,12 +51,7 @@ public final class SecurityAnalysisTutorials {
         Network network = Network.read("network.xml", SecurityAnalysisTutorials.class.getResourceAsStream("/network.xiidm"));
         LOGGER.info(":: SecurityAnalysis :: network and contingency");
 
-        network.getLine("NHV1_NHV2_1")
-                .getOrCreateSelectedOperationalLimitsGroup1("DEFAULT")
-                .newCurrentLimits()
-                .setPermanentLimit(460).add();
-        network.getLine("NHV1_NHV2_1").setSelectedOperationalLimitsGroup1("DEFAULT");
-
+        addLimitInLine1(network);
         Contingency contingency = Contingency.line("NHV1_NHV2_2");
         return SecurityAnalysis.run(network, List.of(contingency)).getResult();
     }
@@ -65,13 +60,9 @@ public final class SecurityAnalysisTutorials {
         Network network = Network.read("network.xml", SecurityAnalysisTutorials.class.getResourceAsStream("/network.xiidm"));
         LOGGER.info(":: SecurityAnalysis :: network, contingency, operator strategies and actions");
 
-        network.getLine("NHV1_NHV2_1")
-                .getOrCreateSelectedOperationalLimitsGroup1("DEFAULT")
-                .newCurrentLimits()
-                .setPermanentLimit(460).add();
-        network.getLine("NHV1_NHV2_1").setSelectedOperationalLimitsGroup1("DEFAULT");
-
+        addLimitInLine1(network);
         Contingency contingency = Contingency.line("NHV1_NHV2_2");
+
         LoadAction loadAction = new LoadActionBuilder()
                 .withId("loadActionId")
                 .withLoadId("LOAD")
@@ -99,13 +90,9 @@ public final class SecurityAnalysisTutorials {
         Network network = Network.read("network.xml", SecurityAnalysisTutorials.class.getResourceAsStream("/network.xiidm"));
         LOGGER.info(":: SecurityAnalysis :: network, contingency and limit reduction");
 
-        network.getLine("NHV1_NHV2_1")
-                .getOrCreateSelectedOperationalLimitsGroup1("DEFAULT")
-                .newCurrentLimits()
-                .setPermanentLimit(460).add();
-        network.getLine("NHV1_NHV2_1").setSelectedOperationalLimitsGroup1("DEFAULT");
-
+        addLimitInLine1(network);
         Contingency contingency = Contingency.line("NHV1_NHV2_2");
+
         SecurityAnalysisRunParameters parameters = new SecurityAnalysisRunParameters();
         LimitReduction limitReduction = LimitReduction.builder(LimitType.CURRENT, 0.9)
                 .withMonitoringOnly(false)
@@ -173,5 +160,13 @@ public final class SecurityAnalysisTutorials {
             operatorStrategyResult.getNetworkResult().getThreeWindingsTransformerResults()
                     .forEach(transformerResult -> LOGGER.info("\t\t TWT Result: {}", transformerResult.toString()));
         });
+    }
+
+    private static void addLimitInLine1(Network network) {
+        network.getLine("NHV1_NHV2_1")
+                .getOrCreateSelectedOperationalLimitsGroup1("DEFAULT")
+                .newCurrentLimits()
+                .setPermanentLimit(460).add();
+        network.getLine("NHV1_NHV2_1").setSelectedOperationalLimitsGroup1("DEFAULT");
     }
 }

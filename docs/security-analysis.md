@@ -21,7 +21,7 @@ Network + contingency + limit reduction     --> Security Analysis
 Network + contingency + state monitor       --> Security Analysis 
 ```
 
-### Tutorial steps
+## Tutorial steps
 
 Loading the network is a common step for all workflows. Then:
 
@@ -30,7 +30,7 @@ Loading the network is a common step for all workflows. Then:
 3. Configure limit reduction parameters.
 4. Add state monitor parameters.
 
-## Import the network from an XML IIDM file
+### Import the network from an XML IIDM file
 
 The network we use here is available in the tutorial's resources and is described in the IIDM format. 
 Start by adding the following lines in the main function of the tutorial:
@@ -48,7 +48,7 @@ The following are shown in the (Network Area Diagram) below.
 
 ![Workflow](./img/sa/nad.png){width="75%" .center-image}
 
-## Create a contingency
+### Create a contingency
 
 Before creating a contingency, make sure that contingency can actually cause a network violation.
 As an example, we will add a limit to the line `NHV1_NHV2_1` to simulate a default violation.
@@ -85,7 +85,7 @@ Post contingency results
 Operator strategy results
 ````
 
-## Create an operator strategy with actions
+### Create an operator strategy with actions
 
 ```java
 LoadAction loadAction = new LoadActionBuilder()
@@ -127,7 +127,7 @@ Operator strategy results
         Violation Limit: 460.0 MW/°
 ````
 
-### create a limit reduction
+### Create a limit reduction
 
 Note that the limit reductions also affect the pre-contingency violations results.
 
@@ -159,7 +159,7 @@ Post contingency results
 Operator strategy results
 ````
 
-## Use state monitor
+### Use state monitor
 
 A `StateMonitor` provides information about the state of network elements we want to monitor such as branch, bus and three-winding transformers...
 

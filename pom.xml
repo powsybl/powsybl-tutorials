@@ -49,6 +49,7 @@
         <module>sensitivity</module>
         <module>sld-custom-node</module>
         <module>topology</module>
+        <module>security-analysis</module>
     </modules>
 
     <build>

@@ -5,7 +5,7 @@ layout: default
 # How to manage topological views?
 This example aims first to create a substation with a node/breaker topology model and to visit it through the bus/breaker and the bus views.
 Then, we create the same substation with a bus/breaker topology model and we visit it through the bus/breaker and the bus views.
-The corresponding code is fully available in the [topology](https://github.com/powsybl/powsybl-tutorials) tutorial.
+The corresponding code is fully available in the [topology](https://github.com/powsybl/powsybl-tutorials/topology) tutorial.
 
 
 ## Building a network in node/breaker topology model

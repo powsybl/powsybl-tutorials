@@ -18,6 +18,7 @@
         <exec.cleanupDaemonThreads>false</exec.cleanupDaemonThreads>
         <exec.mainClass>com.powsybl.tutorials.downscaling.Downscaling</exec.mainClass>
         <exec.optionalArgument>${project.build.directory}/tutorial/output/dir</exec.optionalArgument>
+        <exec.optionalSystemArgs>-Dpowsybl.config.dirs=${project.basedir}/src/main/resources</exec.optionalSystemArgs>
     </properties>
 
     <build>
@@ -25,15 +26,6 @@
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>exec-maven-plugin</artifactId>
-                <configuration>
-                    <systemProperties>
-                        <systemProperty>
-                            <key>powsybl.config.dirs</key>
-                            <value>${project.build.directory}/classes</value>
-                        </systemProperty>
-                    </systemProperties>
-                    <classpathScope>compile</classpathScope>
-                </configuration>
             </plugin>
         </plugins>
     </build>

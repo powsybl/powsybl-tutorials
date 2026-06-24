@@ -38,8 +38,9 @@ As said above, you will need to write your own implementation of the `Exporter` 
 implementation. Here is an empty class template of an `Exporter` implementation:
 
 ```java
+import com.google.auto.service.AutoService;
 import com.powsybl.commons.datasource.DataSource;
-import com.powsybl.iidm.export.Exporter;
+import com.powsybl.iidm.network.Exporter;
 import com.powsybl.iidm.network.Network;
 
 import java.util.Properties;

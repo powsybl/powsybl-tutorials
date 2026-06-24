@@ -38,12 +38,15 @@ As said above, you will need to write your own implementation of the `Importer` 
 implementation. Here is an empty class template of an `Importer` implementation:
 
 ```java
+import com.google.auto.service.AutoService;
 import com.powsybl.commons.datasource.DataSource;
 import com.powsybl.commons.datasource.ReadOnlyDataSource;
-import com.powsybl.iidm.import_.Importer;
+import com.powsybl.commons.parameters.Parameter;
+import com.powsybl.iidm.network.Importer;
 import com.powsybl.iidm.network.Network;
-import com.powsybl.iidm.parameters.Parameter;
+import com.powsybl.iidm.network.NetworkFactory;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Properties;
 
@@ -99,7 +102,7 @@ public class MyImporter implements Importer {
      * @return the model
      */
     @Override
-    public Network importData(ReadOnlyDataSource dataSource, Properties parameters) {
+    public Network importData(ReadOnlyDataSource dataSource, NetworkFactory networkFactory, Properties parameters) {
         // business logic to import a network from a data source in a given format
         return null;
     }

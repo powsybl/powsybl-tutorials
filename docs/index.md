@@ -9,6 +9,7 @@ hidden: true
 ---
 intellij.md
 iTools<itools/index.md>
+IIDM import/export<iidm/index.md>
 Load flow<loadflow.md>
 Sensitivity analysis<sensitivity-analysis.md>
 Security analysis<security-analysis.md>

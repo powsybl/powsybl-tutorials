@@ -28,9 +28,9 @@
         <maven.exec.version>3.6.2</maven.exec.version>
         <java.version>21</java.version>
 
-        <powsybl-dependencies.version>2025.3.0</powsybl-dependencies.version>
-        <powsybl-core.version>7.1.0</powsybl-core.version>
-        <powsybl.metrix.version>3.0.0</powsybl.metrix.version>
+        <powsybl-dependencies.version>2026.0.0</powsybl-dependencies.version>
+        <powsybl-core.version>7.2.2</powsybl-core.version>
+        <powsybl.metrix.version>3.1.1</powsybl.metrix.version>
         <fastcsv.version>4.0.0</fastcsv.version> <!-- This dependency will be removed once FastCSV is used in powsybl-core -->
 
         <exec.mainClass/> <!-- To be defined in sub-modules -->

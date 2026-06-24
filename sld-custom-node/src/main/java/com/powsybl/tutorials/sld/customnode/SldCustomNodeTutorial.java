@@ -84,8 +84,8 @@ public final class SldCustomNodeTutorial {
 
     private static class CustomNodeBreakerGraphBuilder extends NetworkGraphBuilder.NodeBreakerGraphBuilder {
 
-        CustomNodeBreakerGraphBuilder(VoltageLevelGraph graph, Map<Integer, Node> nodesByNumber) {
-            super(graph, nodesByNumber);
+        CustomNodeBreakerGraphBuilder(VoltageLevelGraph graph, Map<Integer, Node> nodesByNumber, LayoutParameters layoutParameters) {
+            super(graph, nodesByNumber, layoutParameters);
         }
 
         @Override
@@ -103,13 +103,16 @@ public final class SldCustomNodeTutorial {
 
     private static class CustomNetworkGraphBuilder extends NetworkGraphBuilder {
 
-        public CustomNetworkGraphBuilder(Network network) {
+        private final LayoutParameters layoutParameters;
+
+        public CustomNetworkGraphBuilder(Network network, LayoutParameters layoutParameters) {
             super(network);
+            this.layoutParameters = layoutParameters;
         }
 
         @Override
         protected NodeBreakerGraphBuilder createNodeBreakerGraphBuilder(VoltageLevelGraph graph, Map<Integer, Node> nodesByNumber) {
-            return new CustomNodeBreakerGraphBuilder(graph, nodesByNumber);
+            return new CustomNodeBreakerGraphBuilder(graph, nodesByNumber, layoutParameters);
         }
     }
 
@@ -127,12 +130,14 @@ public final class SldCustomNodeTutorial {
         // create network
         var network = createNetwork();
 
+        // layout parameters
+        var layoutParameters = new LayoutParameters();
+
         // build SLD graph
-        var graph = new CustomNetworkGraphBuilder(network)
+        var graph = new CustomNetworkGraphBuilder(network, layoutParameters)
                 .buildVoltageLevelGraph("VL");
 
         // run layout
-        var layoutParameters = new LayoutParameters();
         var layout = new SmartVoltageLevelLayoutFactory(network)
                 .create(graph);
         layout.run(layoutParameters);

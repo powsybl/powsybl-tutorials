@@ -33,8 +33,9 @@
         <powsybl.metrix.version>3.0.0</powsybl.metrix.version>
         <fastcsv.version>4.0.0</fastcsv.version> <!-- This dependency will be removed once FastCSV is used in powsybl-core -->
 
-        <exec.mainClass/> <!-- To be defined in sub-modules -->
-        <exec.optionalArgument/> <!-- To be defined in sub-modules -->
+        <exec.optionalSystemArgs/> <!-- To be defined or not in submodules -->
+        <exec.mainClass/> <!-- To be defined in submodules -->
+        <exec.optionalArgument/> <!-- To be defined in submodules -->
     </properties>
 
     <modules>
@@ -67,13 +68,9 @@
                             </goals>
                             <configuration>
                                 <executable>java</executable>
-                                <arguments>
-                                    <argument>-cp</argument>
-                                    <!-- computed project classpath -->
-                                    <classpath/>
-                                    <argument>${exec.mainClass}</argument>
-                                    <argument>${exec.optionalArgument}</argument>
-                                </arguments>
+                                <commandlineArgs>
+                                    ${exec.optionalSystemArgs} -cp %classpath ${exec.mainClass} ${exec.optionalArgument}
+                                </commandlineArgs>
                             </configuration>
                         </execution>
                     </executions>

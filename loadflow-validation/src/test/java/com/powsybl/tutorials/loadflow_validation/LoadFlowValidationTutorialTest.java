@@ -60,8 +60,8 @@ class LoadFlowValidationTutorialTest {
     static Stream<Arguments> provideValidationElement() {
         // loadflow validation element | validation status before loadflow run |  validation status after loadflow run
         return Stream.of(
-                Arguments.of(ValidationType.BUSES, false, false), // TODO
-                Arguments.of(ValidationType.FLOWS, false, false), // TODO
+                Arguments.of(ValidationType.BUSES, false, true),
+                Arguments.of(ValidationType.FLOWS, false, true),
                 Arguments.of(ValidationType.GENERATORS, false, true),
                 Arguments.of(ValidationType.SVCS, true, true),
                 Arguments.of(ValidationType.TWTS, false, true),
@@ -111,7 +111,7 @@ class LoadFlowValidationTutorialTest {
                     System.out.println("    <<<< P :: " + loadP);
                     System.out.println("    <<<< Q :: " + loadQ);
                 });
-        assertThat(ValidationType.BUSES.check(network, ValidationConfig.load(), tmpDir)).isEqualTo(false);
+        assertThat(ValidationType.BUSES.check(network, ValidationConfig.load(), tmpDir)).isEqualTo(true);
         //[main] INFO com.powsybl.loadflow.validation.BusesValidation - Checking buses of network sim1
         //[main] WARN com.powsybl.loadflow.validation.BusesValidation - BUSES validation error: VLGEN_0 P -1.0630223528096394E-5 0.0
         //[main] WARN com.powsybl.loadflow.validation.BusesValidation - BUSES validation error: VLHV1_0 P -0.0040426552814096794 0.0
@@ -129,7 +129,7 @@ class LoadFlowValidationTutorialTest {
         // loadflow validation
         LoadFlow.run(network, new LoadFlowParameters());
         // check loadflow validation after loadflow run
-        assertThat(ValidationType.FLOWS.check(network, ValidationConfig.load(), tmpDir)).isEqualTo(false); // TODO
+        assertThat(ValidationType.FLOWS.check(network, ValidationConfig.load(), tmpDir)).isEqualTo(true);
     }
 
     @Test

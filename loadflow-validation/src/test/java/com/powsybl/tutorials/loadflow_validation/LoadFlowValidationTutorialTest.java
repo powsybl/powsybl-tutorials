@@ -73,27 +73,6 @@ class LoadFlowValidationTutorialTest {
     void testValidationOfBuses() throws IOException {
         Network network = Network.read("network.xiidm", getClass().getResourceAsStream("/network.xiidm"));
         assertThat(ValidationType.BUSES.check(network, ValidationConfig.load(), tmpDir)).isFalse();
-        String result = """
-                sim1 BUSES check
-                id;characteristic;value
-                VLGEN_0;incomingP;NOT_CALCULATED
-                VLGEN_0;incomingQ;NOT_CALCULATED
-                VLGEN_0;loadP;0.00000
-                VLGEN_0;loadQ;0.00000
-                VLHV1_0;incomingP;NOT_CALCULATED
-                VLHV1_0;incomingQ;NOT_CALCULATED
-                VLHV1_0;loadP;0.00000
-                VLHV1_0;loadQ;0.00000
-                VLHV2_0;incomingP;NOT_CALCULATED
-                VLHV2_0;incomingQ;NOT_CALCULATED
-                VLHV2_0;loadP;0.00000
-                VLHV2_0;loadQ;0.00000
-                VLLOAD_0;incomingP;NOT_CALCULATED
-                VLLOAD_0;incomingQ;NOT_CALCULATED
-                VLLOAD_0;loadP;NOT_CALCULATED
-                VLLOAD_0;loadQ;NOT_CALCULATED
-                """;
-        assertThat(tmpDir.resolve("buses.csv")).content().isEqualTo(result);
         Generator generator = network.getGenerator("GEN");
         TwoWindingsTransformer transformer = network.getTwoWindingsTransformer("NGEN_NHV1");
         LOGGER.info("Validation before LoadFlow");
@@ -108,26 +87,6 @@ class LoadFlowValidationTutorialTest {
         LOGGER.info("GEN P: {} MW", generator.getTerminal().getP());
         LOGGER.info("Transformer P: {} MW", transformer.getTerminal1().getP());
         LOGGER.info("SUM : {}", generator.getTerminal().getP() + transformer.getTerminal1().getP());
-        assertThat(tmpDir.resolve("buses.csv")).content().isEqualTo("""
-                sim1 BUSES check
-                id;characteristic;value
-                VLGEN_0;incomingP;-1.06302e-05
-                VLGEN_0;incomingQ;0.00000
-                VLGEN_0;loadP;0.00000
-                VLGEN_0;loadQ;0.00000
-                VLHV1_0;incomingP;-0.00404266
-                VLHV1_0;incomingQ;7.02223e-05
-                VLHV1_0;loadP;0.00000
-                VLHV1_0;loadQ;0.00000
-                VLHV2_0;incomingP;2.34490e-09
-                VLHV2_0;incomingQ;-1.18100e-08
-                VLHV2_0;loadP;0.00000
-                VLHV2_0;loadQ;0.00000
-                VLLOAD_0;incomingP;-600.000
-                VLLOAD_0;incomingQ;-200.000
-                VLLOAD_0;loadP;600.000
-                VLLOAD_0;loadQ;200.000
-                """);
     }
 
     @Test

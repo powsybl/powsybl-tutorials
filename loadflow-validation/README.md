@@ -14,7 +14,7 @@ PowSyBl provides the following load flow validation types:
 ### Example 
 Network overview
 
-![NAD](src/test/resources/network_nad.svg)
+![NAD](../docs/img/loadflow-validation/network_nad.svg)
 
 #### Bus validation
 Bus validation checks Kirchhoff's power balance equations
@@ -25,7 +25,7 @@ Bus validation checks Kirchhoff's power balance equations
 ```
 If we consider the bus connecting generator `GEN` to the two-winding transformer `NGEN_NHV1`, its calculated bus identifier is `VLGEN_0`
 
-![bus validation example](src/test/resources/bus_validation_example.jpeg)
+![bus validation example](../docs/img/loadflow-validation/bus_validation_example.jpeg)
 
 Before running the load flow, the CSV formatter displays terminal powers missing values as `NOT_CALCULATED`:
 ```text

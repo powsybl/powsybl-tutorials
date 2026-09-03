@@ -16,6 +16,7 @@ Topology<topology.md>
 Diagrams<diagram/index.md>
 Downscaling<downscaling.md>
 Network modifications in Groovy<network_modifications_groovy.md>
+Loadflow validation<loadflow-validation.md>
 ```
 
 # Tutorials
@@ -45,3 +46,6 @@ Network modifications in Groovy<network_modifications_groovy.md>
 
 ## Network modifications scripts in groovy
 - [Modify a network through groovy scripts](network_modifications_groovy.md): Learn how to use Powsybl network modification functions in Groovy.
+
+## Loadflow validation
+- [Loadflow validation](loadflow-validation.md): Learn how to validate a load flow

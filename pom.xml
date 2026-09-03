@@ -50,6 +50,7 @@
         <module>sld-custom-node</module>
         <module>topology</module>
         <module>security-analysis</module>
+        <module>loadflow-validation</module>
     </modules>
 
     <build>

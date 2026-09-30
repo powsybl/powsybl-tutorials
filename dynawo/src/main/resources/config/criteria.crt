@@ -1,0 +1,48 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!--
+    Copyright (c) 2015-2021, RTE (http://www.rte-france.com)
+    See AUTHORS.txt
+    All rights reserved.
+    This Source Code Form is subject to the terms of the Mozilla Public
+    License, v. 2.0. If a copy of the MPL was not distributed with this
+    file, you can obtain one at http://mozilla.org/MPL/2.0/.
+    SPDX-License-Identifier: MPL-2.0
+
+    This file is part of Dynawo, an hybrid C++/Modelica open source suite
+    of simulation tools for power systems.
+-->
+<criteria xmlns="http://www.rte-france.com/dynawo">
+  <busCriteria>
+    <parameters id ="Risque modele" scope="DYNAMIC" type="LOCAL_VALUE" uMinPu="0.8" uNomMin="225"/>
+    <country id="AF"/>
+    <country id="AFGHANISTAN"/>
+  </busCriteria>
+  <loadCriteria>
+    <parameters id ="Risque protection" scope="DYNAMIC" type="SUM" pMax="100">
+      <voltageLevel uMaxPu="0.85"/>
+    </parameters>
+    <country id="AF"/>
+    <country id="AFGHANISTAN"/>
+  </loadCriteria>
+  <loadCriteria>
+    <parameters id ="Risque QdE" scope="FINAL" type="SUM" pMax="200">
+      <voltageLevel uMaxPu="0.92"/>
+    </parameters>
+    <country id="AF"/>
+    <country id="AFGHANISTAN"/>
+  </loadCriteria>
+  <loadCriteria>
+    <parameters id ="Risque Surete" scope="FINAL" type="SUM" pMax="1500">
+      <voltageLevel uMaxPu="0.92"/>
+    </parameters>
+    <country id="AF"/>
+    <country id="AFGHANISTAN"/>
+  </loadCriteria>
+  <loadCriteria>
+    <parameters id ="Risque IGA" scope="FINAL" type="SUM" pMax="3000">
+      <voltageLevel uMaxPu="0.92"/>
+    </parameters>
+    <country id="AF"/>
+    <country id="AFGHANISTAN"/>
+  </loadCriteria>
+</criteria>

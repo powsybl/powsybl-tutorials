@@ -14,6 +14,7 @@ Load flow<loadflow.md>
 Sensitivity analysis<sensitivity-analysis.md>
 Security analysis<security-analysis.md>
 Topology<topology.md>
+Dynawo dynamic simulation<dynawo.md>
 Diagrams<diagram/index.md>
 Downscaling<downscaling.md>
 Network modifications in Groovy<network_modifications_groovy.md>
@@ -31,6 +32,7 @@ Network modifications in Groovy<network_modifications_groovy.md>
 ## Simulation
 - [Create the Java code to run power flows](loadflow.md): Learn how to create the Java code to setup and run power flows
 - [Create the Java code to run sensitivity analyses](sensitivity-analysis.md): Learn how to create the Java code to setup and run sensitivity analyses
+- [Create the Java code to run dynamic simulations](dynawo.md): Learn how to setup and run time-domain dynamic simulations with Dynawo
 - [Security analyses](security-analysis.md): Learn how to use security analyses
 
 ## Topology

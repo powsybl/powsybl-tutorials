@@ -14,11 +14,11 @@ import com.powsybl.iidm.network.*;
 import com.powsybl.security.SecurityAnalysis;
 import com.powsybl.security.SecurityAnalysisResult;
 import com.powsybl.security.SecurityAnalysisRunParameters;
-import com.powsybl.security.condition.TrueCondition;
+import com.powsybl.contingency.strategy.condition.TrueCondition;
 import com.powsybl.security.limitreduction.LimitReduction;
 import com.powsybl.security.monitor.StateMonitor;
-import com.powsybl.security.strategy.ConditionalActions;
-import com.powsybl.security.strategy.OperatorStrategy;
+import com.powsybl.contingency.strategy.ConditionalActions;
+import com.powsybl.contingency.strategy.OperatorStrategy;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

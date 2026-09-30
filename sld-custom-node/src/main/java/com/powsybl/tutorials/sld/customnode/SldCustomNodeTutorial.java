@@ -85,7 +85,7 @@ public final class SldCustomNodeTutorial {
     private static class CustomNodeBreakerGraphBuilder extends NetworkGraphBuilder.NodeBreakerGraphBuilder {
 
         CustomNodeBreakerGraphBuilder(VoltageLevelGraph graph, Map<Integer, Node> nodesByNumber) {
-            super(graph, nodesByNumber);
+            super(graph, nodesByNumber, new LayoutParameters());
         }
 
         @Override

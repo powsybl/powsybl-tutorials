@@ -172,8 +172,8 @@ public final class VoltageLevelTopologyTutorial {
                 .setId("B3")
                 .add();
 
-        // We create a dangling line connected through B3.
-        vl2.newDanglingLine()
+        // We create a boundary line connected through B3.
+        vl2.newBoundaryLine()
                 .setId("LN")
                 .setBus("B3")
                 .setR(0)
@@ -327,8 +327,8 @@ public final class VoltageLevelTopologyTutorial {
                 .setNode(2)
                 .add();
 
-        // We create a dangling line LN.
-        vl2.newDanglingLine()
+        // We create a boundary line LN.
+        vl2.newBoundaryLine()
                 .setId("LN")
                 .setNode(1)
                 .setP0(40)

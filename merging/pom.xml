@@ -16,6 +16,7 @@
     <properties>
         <exec.cleanupDaemonThreads>false</exec.cleanupDaemonThreads>
         <exec.mainClass>com.powsybl.tutorials.merging.MergingTutorial</exec.mainClass>
+        <exec.optionalSystemArgs>-Dpowsybl.config.dirs=${project.basedir}/src/main/resources</exec.optionalSystemArgs>
     </properties>
 
     <build>
@@ -23,14 +24,6 @@
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>exec-maven-plugin</artifactId>
-                <configuration>
-                    <systemProperties>
-                        <systemProperty>
-                            <key>powsybl.config.dirs</key>
-                            <value>${project.basedir}/src/main/resources</value>
-                        </systemProperty>
-                    </systemProperties>
-                </configuration>
             </plugin>
         </plugins>
     </build>

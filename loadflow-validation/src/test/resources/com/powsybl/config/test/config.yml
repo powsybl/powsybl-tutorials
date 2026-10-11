@@ -1,0 +1,6 @@
+load-flow:
+  default-impl-name: "OpenLoadFlow"
+loadflow-validation:
+  threshold: 0.01
+table-formatter:
+  invalid-string: NOT_CALCULATED

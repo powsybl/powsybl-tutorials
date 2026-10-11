@@ -3,3 +3,5 @@ target/
 # IntelliJ
 .idea
 *.iml
+validation-results
+validation-results/

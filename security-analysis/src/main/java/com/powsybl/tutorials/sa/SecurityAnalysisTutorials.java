@@ -15,7 +15,7 @@ import com.powsybl.security.SecurityAnalysis;
 import com.powsybl.security.SecurityAnalysisResult;
 import com.powsybl.security.SecurityAnalysisRunParameters;
 import com.powsybl.contingency.strategy.condition.TrueCondition;
-import com.powsybl.security.limitreduction.LimitReduction;
+import com.powsybl.security.limitscaling.LimitScaling;
 import com.powsybl.security.monitor.StateMonitor;
 import com.powsybl.contingency.strategy.ConditionalActions;
 import com.powsybl.contingency.strategy.OperatorStrategy;
@@ -94,11 +94,11 @@ public final class SecurityAnalysisTutorials {
         Contingency contingency = Contingency.line("NHV1_NHV2_2");
 
         SecurityAnalysisRunParameters parameters = new SecurityAnalysisRunParameters();
-        LimitReduction limitReduction = LimitReduction.builder(LimitType.CURRENT, 0.9)
+        LimitScaling limitReduction = LimitScaling.builder(LimitType.CURRENT, 0.9)
                 .withMonitoringOnly(false)
                 .withContingencyContext(ContingencyContext.all())
                 .build();
-        parameters.addLimitReduction(limitReduction);
+        parameters.addLimitScaling(limitReduction);
         return SecurityAnalysis.run(network, List.of(contingency), parameters).getResult();
     }
 

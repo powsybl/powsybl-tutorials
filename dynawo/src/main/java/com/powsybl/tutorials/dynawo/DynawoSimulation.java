@@ -1,7 +1,6 @@
 package com.powsybl.tutorials.dynawo;
 
 import com.powsybl.commons.report.ReportNode;
-import com.powsybl.computation.local.LocalComputationManager;
 import com.powsybl.dynamicsimulation.*;
 import com.powsybl.dynamicsimulation.groovy.*;
 import com.powsybl.dynawo.DynawoSimulationConfig;
@@ -66,28 +65,18 @@ public final class DynawoSimulation {
 //                .setSolverType(DynawoSimulationParameters.SolverType.IDA)
                 .setTimelineExportMode(ExportMode.XML);
 
-//        DynamicSimulationRunParameters runParameters = new DynamicSimulationRunParameters()
-//                .setParameters(parameters)
-//                .setEventModelsSupplier(eventModelsSupplier)
-//                .setOutputVariablesSupplier(outputVariablesSupplier);
+        DynamicSimulationRunParameters runParameters = new DynamicSimulationRunParameters()
+                .setParameters(parameters)
+                .setEventModelsSupplier(eventModelsSupplier)
+                .setOutputVariablesSupplier(outputVariablesSupplier);
 
         ReportNode reportNode = ReportNode.newRootReportNode()
                 .withAllResourceBundlesFromClasspath()
                 .withMessageTemplate("tutorial.dynawo.root")
                 .build();
-        //runParameters.setReportNode(reportNode);
+        runParameters.setReportNode(reportNode);
 
-        DynamicSimulationResult report = provider.run(
-                        network,
-                        dynamicModelsSupplier,
-                        eventModelsSupplier,
-                        outputVariablesSupplier,
-                        VariantManagerConstants.INITIAL_VARIANT_ID,
-                        LocalComputationManager.getDefault(),
-                        parameters,
-                        reportNode)
-                .join();
-        //        DynamicSimulationResult report = provider.run(network, VariantManagerConstants.INITIAL_VARIANT_ID, dynamicModelsSupplier, runParameters).join();
+        provider.run(network, VariantManagerConstants.INITIAL_VARIANT_ID, dynamicModelsSupplier, runParameters).join();
 
         StringWriter sw = new StringWriter();
         reportNode.print(sw);

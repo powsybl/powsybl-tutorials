@@ -131,7 +131,8 @@ intersphinx_mapping = {
     "powsyblcore": ("https://powsybl.readthedocs.io/projects/powsybl-core/en/latest/", None),
     "powsybldiagram": ("https://powsybl.readthedocs.io/projects/powsybl-diagram/latest/", None),
     "powsyblmetrix": ("https://powsybl.readthedocs.io/projects/powsybl-metrix/en/latest/", None),
-    "powsyblopenloadflow": ("https://powsybl.readthedocs.io/projects/powsybl-open-loadflow/en/latest/", None)
+    "powsyblopenloadflow": ("https://powsybl.readthedocs.io/projects/powsybl-open-loadflow/en/latest/", None),
+    "powsybldynawo": ("https://powsybl.readthedocs.io/projects/powsybl-dynawo/en/latest/", None)
 }
 intersphinx_disabled_reftypes = ["*"]
 

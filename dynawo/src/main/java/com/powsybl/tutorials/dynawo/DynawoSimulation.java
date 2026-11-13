@@ -65,16 +65,16 @@ public final class DynawoSimulation {
 //                .setSolverType(DynawoSimulationParameters.SolverType.IDA)
                 .setTimelineExportMode(ExportMode.XML);
 
-        DynamicSimulationRunParameters runParameters = new DynamicSimulationRunParameters()
-                .setParameters(parameters)
-                .setEventModelsSupplier(eventModelsSupplier)
-                .setOutputVariablesSupplier(outputVariablesSupplier);
-
         ReportNode reportNode = ReportNode.newRootReportNode()
-                .withAllResourceBundlesFromClasspath()
-                .withMessageTemplate("tutorial.dynawo.root")
-                .build();
-        runParameters.setReportNode(reportNode);
+            .withAllResourceBundlesFromClasspath()
+            .withMessageTemplate("tutorial.dynawo.root")
+            .build();
+
+        DynamicSimulationRunParameters runParameters = new DynamicSimulationRunParameters()
+            .setParameters(parameters)
+            .setEventModelsSupplier(eventModelsSupplier)
+            .setOutputVariablesSupplier(outputVariablesSupplier)
+            .setReportNode(reportNode);
 
         provider.run(network, VariantManagerConstants.INITIAL_VARIANT_ID, dynamicModelsSupplier, runParameters).join();
 

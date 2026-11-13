@@ -315,16 +315,18 @@ ReportNode reportNode = ReportNode.newRootReportNode()
         .withMessageTemplate("tutorial.dynawo.root")
         .build();
 
+DynamicSimulationRunParameters runParameters = new DynamicSimulationRunParameters()
+        .setParameters(parameters)
+        .setEventModelsSupplier(eventModelsSupplier)
+        .setOutputVariablesSupplier(outputVariablesSupplier)
+        .setReportNode(reportNode);
+
 DynamicSimulationResult report = provider.run(
-                network,
-                dynamicModelsSupplier,
-                eventModelsSupplier,
-                outputVariablesSupplier,
-                VariantManagerConstants.INITIAL_VARIANT_ID,
-                LocalComputationManager.getDefault(),
-                parameters,
-                reportNode)
-        .join();
+    network,
+    VariantManagerConstants.INITIAL_VARIANT_ID,
+    dynamicModelsSupplier,
+    runParameters
+    ).join();
 
 StringWriter sw = new StringWriter();
 reportNode.print(sw);

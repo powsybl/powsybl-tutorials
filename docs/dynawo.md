@@ -136,7 +136,7 @@ $> mvn clean install exec:exec@run"
 
 The `DynawoSimulationProvider` acts as the bridge between PowSyBl's high-level dynamic simulation interfaces and the underlying Dynawo executable.
 
-In the `main` method, we read the path to the Dynawo executable from the first program argument (`args[0]`), configure the provider, and set general simulation parameters such as the start and stop times:
+In the `main` method, we read the path to the Dynawo executable from the first program argument (`args[0]`), configure the provider, and set general simulation parameters such as the start and stop times (or configure the main [config.yml](../dynawo/src/main/resources/config.yml) file):
 
 ```java
 // Path to the Dynawo executable binary

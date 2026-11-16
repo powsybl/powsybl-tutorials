@@ -18,6 +18,23 @@
         <exec.optionalArgument>${env.HOME}/dynawo/dynawo</exec.optionalArgument>
     </properties>
 
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <configuration>
+                    <systemProperties>
+                        <systemProperty>
+                            <key>powsybl.config.dirs</key>
+                            <value>${project.basedir}/src/main/resources</value>
+                        </systemProperty>
+                    </systemProperties>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
     <dependencies>
         <!-- Tutorials report bundles -->
         <dependency>

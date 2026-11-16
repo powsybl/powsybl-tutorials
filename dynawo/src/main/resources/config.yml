@@ -1,0 +1,30 @@
+# This file is loaded when `powsybl.config.dirs` points to this resources directory.
+dynawo:
+  homeDir: /path_to_folder/dynawo/dynawo
+  debug: true
+
+dynamic-simulation-default-parameters:
+  startTime: 0
+  stopTime: 100
+  debugDir: /tmp/dynawo_debugDir
+
+dynamic-simulation:
+  default-impl-name: Dynawo
+
+dynawo-simulation-default-parameters:
+  parametersFile: /path_to_folder/powsybl-tutorials/dynawo/src/main/resources/config/models.par
+  network.parametersFile: /path_to_folder/powsybl-tutorials/dynawo/src/main/resources/config/network.par
+  solver.parametersFile: /path_to_folder/powsybl-tutorials/dynawo/src/main/resources/config/solvers.par
+  network.parametersId: "8"
+  solver.type: SIM
+  solver.parametersId: "3"
+  dump.exportFolder: /home/caronali/dynawo/dumps
+  dump.fileName: dump.dmp
+  mergeLoads: false
+  timeline.exportMode: XML
+  precision: 10e-6
+  log.levelFilter: INFO
+  log.specificLogs:
+    - NETWORK
+    - PARAMETERS
+  criteria.file: /path_to_folder/powsybl-tutorials/dynawo/src/main/resources/config/criteria.crt

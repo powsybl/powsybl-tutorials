@@ -22,8 +22,6 @@ public final class DynawoSimulation {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(DynawoSimulation.class);
 
-    private static final String TMP_DIR = System.getProperty("java.io.tmpdir"); // put your own directory output path
-
     private DynawoSimulation() {
 
     }
@@ -35,10 +33,7 @@ public final class DynawoSimulation {
         DynawoSimulationProvider provider = new DynawoSimulationProvider(new DynawoSimulationConfig(
                 Path.of(args[0]), true)
         );
-        DynamicSimulationParameters parameters = new DynamicSimulationParameters()
-                .setDebugDir(TMP_DIR + "/tutorials_dynamic_simulation/")
-                .setStartTime(0)
-                .setStopTime(100);
+        DynamicSimulationParameters parameters = DynamicSimulationParameters.load();
         DynawoSimulationParameters dynawoSimulationParameters = DynawoSimulationParameters.load();
         parameters.addExtension(DynawoSimulationParameters.class, dynawoSimulationParameters);
 

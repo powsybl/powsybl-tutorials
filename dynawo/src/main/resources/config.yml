@@ -18,13 +18,3 @@ dynawo-simulation-default-parameters:
   network.parametersId: "8"
   solver.type: SIM
   solver.parametersId: "3"
-  dump.exportFolder: /home/caronali/dynawo/dumps
-  dump.fileName: dump.dmp
-  mergeLoads: false
-  timeline.exportMode: XML
-  precision: 10e-6
-  log.levelFilter: INFO
-  log.specificLogs:
-    - NETWORK
-    - PARAMETERS
-  criteria.file: /path_to_folder/powsybl-tutorials/dynawo/src/main/resources/config/criteria.crt

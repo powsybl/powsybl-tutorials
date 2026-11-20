@@ -36,11 +36,17 @@
     </build>
 
     <dependencies>
+        <!-- Platform configuration: to load config from ~/.itools/config.yml or from other path if provided -->
+        <dependency>
+            <groupId>com.powsybl</groupId>
+            <artifactId>powsybl-config-classic</artifactId>
+        </dependency>
         <!-- Tutorials report bundles -->
         <dependency>
             <groupId>com.powsybl.tutorials</groupId>
             <artifactId>commons</artifactId>
         </dependency>
+
         <!-- Dynawo dynamic provider-->
         <dependency>
             <groupId>com.powsybl</groupId>
@@ -51,30 +57,13 @@
             <groupId>com.powsybl</groupId>
             <artifactId>powsybl-dynawo-dsl</artifactId>
         </dependency>
-        <!-- CORE dynamic API -->
-        <dependency>
-            <groupId>com.powsybl</groupId>
-            <artifactId>powsybl-dynamic-security-analysis</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.powsybl</groupId>
-            <artifactId>powsybl-dynamic-simulation-dsl</artifactId>
-        </dependency>
-        <!-- Dynawo dynamic SA provider -->
-        <dependency>
-            <groupId>com.powsybl</groupId>
-            <artifactId>powsybl-dynawo-security-analysis</artifactId>
-        </dependency>
+
 
         <!-- IIDM Network implementation -->
         <dependency>
             <groupId>com.powsybl</groupId>
             <artifactId>powsybl-iidm-impl</artifactId>
             <scope>runtime</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.powsybl</groupId>
-            <artifactId>powsybl-dynamic-simulation-api</artifactId>
         </dependency>
     </dependencies>
 

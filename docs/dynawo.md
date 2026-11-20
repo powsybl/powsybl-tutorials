@@ -36,51 +36,6 @@ Monitored Variables (Groovy DSL)
 - **Dynawo executable**: Dynawo is an open-source hybrid C++/Modelica power system simulation engine. Download the latest release from the [Dynawo GitHub repository](https://github.com/dynawo/dynawo/releases/) and install/extract it on your machine.
 - An IDE such as [IntelliJ IDEA](intellij.md).
 
-## Maven Configuration
-
-To run dynamic simulations with Dynawo in your Maven project, include the following dependencies in your `pom.xml`:
-
-```xml
-<dependencies>
-    <!-- PowSyBl Dynamic Simulation API & DSL -->
-    <dependency>
-        <groupId>com.powsybl</groupId>
-        <artifactId>powsybl-dynamic-simulation-api</artifactId>
-    </dependency>
-    <dependency>
-        <groupId>com.powsybl</groupId>
-        <artifactId>powsybl-dynamic-simulation-dsl</artifactId>
-    </dependency>
-
-    <!-- Dynawo Provider & Dynawo DSL -->
-    <dependency>
-        <groupId>com.powsybl</groupId>
-        <artifactId>powsybl-dynawo-simulation</artifactId>
-    </dependency>
-    <dependency>
-        <groupId>com.powsybl</groupId>
-        <artifactId>powsybl-dynawo-dsl</artifactId>
-    </dependency>
-
-    <!-- IIDM Network Implementation -->
-    <dependency>
-        <groupId>com.powsybl</groupId>
-        <artifactId>powsybl-iidm-impl</artifactId>
-        <scope>runtime</scope>
-    </dependency>
-
-    <!-- Logging & Reporting -->
-    <dependency>
-        <groupId>org.slf4j</groupId>
-        <artifactId>slf4j-simple</artifactId>
-    </dependency>
-    <dependency>
-        <groupId>com.powsybl.tutorials</groupId>
-        <artifactId>commons</artifactId>
-    </dependency>
-</dependencies>
-```
-
 ## How to complete this tutorial?
 To complete this tutorial, you can either start from scratch and write the code or you can download the sources from the
 [tutorial repository](https://github.com/powsybl/powsybl-tutorials) on GitHub.
@@ -128,6 +83,73 @@ When you'll have created the `DynawoSimulation` class and its main function, you
 
 ```
 $> mvn clean install exec:exec@run"
+```
+
+Also, configure the pom file to use a configuration file taken in the classpath, instead of the one
+that is global to your system:
+```xml
+<build>
+    <plugins>
+        <plugin>
+            <groupId>org.codehaus.mojo</groupId>
+            <artifactId>exec-maven-plugin</artifactId>
+            <version>1.6.0</version>
+            <configuration>
+                <systemProperties>
+                    <systemProperty>
+                        <key>powsybl.config.dirs</key>
+                        <value>${project.build.directory}/classes</value>
+                    </systemProperty>
+                </systemProperties>
+            </configuration>
+        </plugin>
+    </plugins>
+</build>
+```
+Some **required** maven dependencies:
+- `com.powsybl:powsybl-config-classic`: to provide a way to read the configuration for dynamic simulation
+- `org.slf4j:slf4j-simple`: to provide an implementation of `slf4j`.
+- `com.powsybl:powsybl-dynawo-simulation` to provide the Dynawo provider for dynamic simulation.
+- `com.powsybl:powsybl-dynawo-dsl` to read groovy files for dynawo simulations.
+- `com.powsybl:powsybl-iidm-impl` to load and work with networks.
+
+To run dynamic simulations with Dynawo in your Maven project, include the following dependencies in your `pom.xml`:
+
+```xml
+<dependencies>
+    <!-- Platform configuration: to load config from ~/.itools/config.yml or from other path if provided -->
+    <dependency>
+       <groupId>com.powsybl</groupId>
+       <artifactId>powsybl-config-classic</artifactId>
+    </dependency>
+    
+    <!-- Dynawo Provider & Dynawo DSL -->
+    <dependency>
+        <groupId>com.powsybl</groupId>
+        <artifactId>powsybl-dynawo-simulation</artifactId>
+    </dependency>
+    <dependency>
+        <groupId>com.powsybl</groupId>
+        <artifactId>powsybl-dynawo-dsl</artifactId>
+    </dependency>
+
+    <!-- IIDM Network Implementation -->
+    <dependency>
+        <groupId>com.powsybl</groupId>
+        <artifactId>powsybl-iidm-impl</artifactId>
+        <scope>runtime</scope>
+    </dependency>
+
+    <!-- Logging & Reporting -->
+    <dependency>
+        <groupId>org.slf4j</groupId>
+        <artifactId>slf4j-simple</artifactId>
+    </dependency>
+    <dependency>
+        <groupId>com.powsybl.tutorials</groupId>
+        <artifactId>commons</artifactId>
+    </dependency>
+</dependencies>
 ```
 
 ## Tutorial Steps
@@ -342,10 +364,29 @@ To run the `DynawoSimulation` class, supply the path to your Dynawo installation
 Using Maven:
 
 ```bash
-mvn clean compile exec:java -Dexec.mainClass="com.powsybl.tutorials.dynawo.DynawoSimulation" -Dexec.args="/path/to/dynawo/bin/dynawo"
+mvn clean compile exec:java -Dexec.mainClass="com.powsybl.tutorials.dynawo.DynawoSimulation" -Dexec.args="/path/to/dynawo/dynawo"
 ```
 
 Or run directly from your IDE by creating an Application Run Configuration with `com.powsybl.tutorials.dynawo.DynawoSimulation` as the main class and `/path/to/dynawo/bin/dynawo` in Program arguments.
+
+By default, PowSyBl reads `config.yml` from `~/.itools`. To use another configuration, for instance the `src/main/resources/config.yml` of the `dynawo` module (after replacing the `/path_to_folder/...` placeholders), set the `powsybl.config.dirs` system property.
+
+From the command line, `exec:java` runs in the Maven JVM, so the property is passed as a regular Maven `-D` option, separately from `-Dexec.args` (which only contains the program arguments). Run it from the `dynawo` directory:
+
+```bash
+mvn clean compile exec:java \
+  -Dexec.mainClass="com.powsybl.tutorials.dynawo.DynawoSimulation" \
+  -Dexec.args="/path/to/dynawo/dynawo" \
+  -Dpowsybl.config.dirs="$(pwd)/src/main/resources"
+```
+
+From the IDE, add the same property to the VM options of the Run Configuration:
+
+```
+-Dpowsybl.config.dirs=/path/to/powsybl-tutorials/dynawo/src/main/resources
+```
+
+Note that the `powsybl-config-classic` dependency must be on the classpath (it is declared in the `pom.xml` of the module); without it, `PlatformConfig.defaultConfig()` is empty and the default values of the code are used (for instance `debugDir` is `null`).
 
 ### Outputs
 

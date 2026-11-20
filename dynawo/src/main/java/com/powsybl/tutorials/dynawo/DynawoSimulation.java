@@ -56,8 +56,6 @@ public final class DynawoSimulation {
                 .setNetworkParameters(getResourceAsStream("/config/network.par"), "8")
                 .setSolverParameters(getResourceAsStream("/config/solvers.par"), "3")
                 .setSolverType(DynawoSimulationParameters.SolverType.SIM)
-//                .setSolverParameters(getResourceAsStream("/ieee14/solvers.par"), "2")
-//                .setSolverType(DynawoSimulationParameters.SolverType.IDA)
                 .setTimelineExportMode(ExportMode.XML);
 
         ReportNode reportNode = ReportNode.newRootReportNode()
@@ -78,7 +76,7 @@ public final class DynawoSimulation {
         System.out.println(sw);
     }
 
-    protected static InputStream getResourceAsStream(String name) {
+    private static InputStream getResourceAsStream(String name) {
         return Objects.requireNonNull(DynawoSimulation.class.getResourceAsStream(name));
     }
 }

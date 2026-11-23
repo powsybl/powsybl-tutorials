@@ -6,16 +6,16 @@ layout: default
 
 This tutorial shows how to write Java code using the PowSyBl Dynamic Simulation API and the Dynawo simulation engine to perform time-domain dynamic simulations on a power system network.
 
-Dynamic simulation allows to analyze the transient and long-term dynamic behavior of a power grid following events such as line trips, generator outages, or short circuits. In this tutorial, you will learn how to configure and run a dynamic simulation on an IEEE 14-bus test network using the `DynawoSimulation` class from the `dynawo` tutorial module.
+Dynamic simulation allows to analyze the transient and long-term dynamic behavior of a power grid following events such as line trips, generator outages, or short circuits. In this tutorial, you will learn how to configure and run a dynamic simulation on an IEEE 14-bus test network using the `DynamicSimulation` class from the `dynawo` tutorial module.
 
 ## What will you build?
 
 You will write a Java application that:
 1. Configures a `DynawoSimulationProvider` pointing to the local Dynawo installation.
 2. Loads a power grid model (`IEEE14.iidm`).
-3. Maps dynamic models onto static network components (such as exponential loads and synchronous generators with automatic voltage regulation) using a Groovy DSL script ([dynamicModels.groovy](../dynawo/src/main/resources/ieee14/dynamicModels.groovy)).
-4. Defines dynamic events (a transmission line disconnection at $t = 1\text{ s}$) using a Groovy DSL script ([eventModels.groovy](../dynawo/src/main/resources/ieee14/eventModels.groovy)).
-5. Specifies output variables to monitor (bus voltages, generator rotational speeds, active/reactive powers, field voltage) using a Groovy DSL script ([outputVariables.groovy](../dynawo/src/main/resources/ieee14/outputVariables.groovy)).
+3. Maps dynamic models onto static network components (such as exponential loads and synchronous generators with automatic voltage regulation) using a Groovy DSL script ([dynamicModels.groovy](../../dynawo/src/main/resources/ieee14/dynamicModels.groovy)).
+4. Defines dynamic events (a transmission line disconnection at $t = 1\text{ s}$) using a Groovy DSL script ([eventModels.groovy](../../dynawo/src/main/resources/ieee14/eventModels.groovy)).
+5. Specifies output variables to monitor (bus voltages, generator rotational speeds, active/reactive powers, field voltage) using a Groovy DSL script ([outputVariables.groovy](../../dynawo/src/main/resources/ieee14/outputVariables.groovy)).
 6. Sets solver options and model parameters through Dynawo parameter files (`.par` files in the `config` folder).
 7. Executes the simulation asynchronously through PowSyBl computation manager and logs the simulation report.
 
@@ -34,14 +34,14 @@ Monitored Variables (Groovy DSL)
 - **Java Development Kit (JDK)**: Version 21 or later.
 - **Maven**: Version 3.6 or later.
 - **Dynawo executable**: Dynawo is an open-source hybrid C++/Modelica power system simulation engine. Download the latest release from the [Dynawo GitHub repository](https://github.com/dynawo/dynawo/releases/) and install/extract it on your machine.
-- An IDE such as [IntelliJ IDEA](intellij.md).
+- An IDE such as [IntelliJ IDEA](../intellij.md).
 
 ## How to complete this tutorial?
 To complete this tutorial, you can either start from scratch and write the code or you can download the sources from the
 [tutorial repository](https://github.com/powsybl/powsybl-tutorials) on GitHub.
 
 ## Create a new project from scratch
-Create a new Maven `pom.xml` file in a directory called `dynawo-simulation` with the following content:
+Create a new Maven `../../pom.xml` file in a directory called `dynawo-simulation` with the following content:
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
@@ -71,15 +71,15 @@ Create a new Maven `pom.xml` file in a directory called `dynawo-simulation` with
 ```
 
 ## Configure the maven pom file
-In the `pom.xml`, add first the following lines in the `<properties>` section to make it possible to run the future main class through Maven:
+In the `../../pom.xml`, add first the following lines in the `<properties>` section to make it possible to run the future main class through Maven:
 
 ```xml
 <exec.cleanupDaemonThreads>false</exec.cleanupDaemonThreads>
-<exec.mainClass>com.powsybl.tutorials.dynawo.DynawoSimulation</exec.mainClass>
+<exec.mainClass>com.powsybl.tutorials.dynawo.DynamicSimulationcom.powsybl.tutorials.dynawo.DynamicSimulation</exec.mainClass>
 <exec.optionalArgument>${env.HOME}/dynawo/dynawo</exec.optionalArgument>
 ```
 The optional argument should point to the installed dynawo on your computer. 
-When you'll have created the `DynawoSimulation` class and its main function, you'll then be able to execute your code through:
+When you'll have created the `DynamicSimulation` class and its main function, you'll then be able to execute your code through:
 
 ```
 $> mvn clean install exec:exec@run"
@@ -113,7 +113,7 @@ Some **required** maven dependencies:
 - `com.powsybl:powsybl-dynawo-dsl` to read groovy files for dynawo simulations.
 - `com.powsybl:powsybl-iidm-impl` to load and work with networks.
 
-To run dynamic simulations with Dynawo in your Maven project, include the following dependencies in your `pom.xml`:
+To run dynamic simulations with Dynawo in your Maven project, include the following dependencies in your `../../pom.xml`:
 
 ```xml
 <dependencies>
@@ -158,7 +158,7 @@ To run dynamic simulations with Dynawo in your Maven project, include the follow
 
 The `DynawoSimulationProvider` acts as the bridge between PowSyBl's high-level dynamic simulation interfaces and the underlying Dynawo executable.
 
-In the `main` method, we read the path to the Dynawo executable from the first program argument (`args[0]`), configure the provider, and set general simulation parameters such as the start and stop times (or configure the main [config.yml](../dynawo/src/main/resources/config.yml) file):
+In the `main` method, we read the path to the Dynawo executable from the first program argument (`args[0]`), configure the provider, and set general simulation parameters such as the start and stop times (or configure the main [config.yml](../../dynawo/src/main/resources/config.yml) file):
 
 ```java
 // Path to the Dynawo executable binary
@@ -359,15 +359,15 @@ The method `.join()` blocks until the simulation computation finishes. The `repo
 
 ## Running the tutorial
 
-To run the `DynawoSimulation` class, supply the path to your Dynawo installation as the first argument.
+To run the `DynamicSimulation` class, supply the path to your Dynawo installation as the first argument.
 
 Using Maven:
 
 ```bash
-mvn clean compile exec:java -Dexec.mainClass="com.powsybl.tutorials.dynawo.DynawoSimulation" -Dexec.args="/path/to/dynawo/dynawo"
+mvn clean compile exec:java -Dexec.mainClass="com.powsybl.tutorials.dynawo.DynamicSimulation" -Dexec.args="/path/to/dynawo/dynawo"
 ```
 
-Or run directly from your IDE by creating an Application Run Configuration with `com.powsybl.tutorials.dynawo.DynawoSimulation` as the main class and `/path/to/dynawo/bin/dynawo` in Program arguments.
+Or run directly from your IDE by creating an Application Run Configuration with `com.powsybl.tutorials.dynawo.DynamicSimulation` as the main class and `/path/to/dynawo/bin/dynawo` in Program arguments.
 
 By default, PowSyBl reads `config.yml` from `~/.itools`. To use another configuration, for instance the `src/main/resources/config.yml` of the `dynawo` module (after replacing the `/path_to_folder/...` placeholders), set the `powsybl.config.dirs` system property.
 
@@ -375,7 +375,7 @@ From the command line, `exec:java` runs in the Maven JVM, so the property is pas
 
 ```bash
 mvn clean compile exec:java \
-  -Dexec.mainClass="com.powsybl.tutorials.dynawo.DynawoSimulation" \
+  -Dexec.mainClass="com.powsybl.tutorials.dynawo.DynamicSimulation" \
   -Dexec.args="/path/to/dynawo/dynawo" \
   -Dpowsybl.config.dirs="$(pwd)/src/main/resources"
 ```
@@ -386,7 +386,7 @@ From the IDE, add the same property to the VM options of the Run Configuration:
 -Dpowsybl.config.dirs=/path/to/powsybl-tutorials/dynawo/src/main/resources
 ```
 
-Note that the `powsybl-config-classic` dependency must be on the classpath (it is declared in the `pom.xml` of the module); without it, `PlatformConfig.defaultConfig()` is empty and the default values of the code are used (for instance `debugDir` is `null`).
+Note that the `powsybl-config-classic` dependency must be on the classpath (it is declared in the `../../pom.xml` of the module); without it, `PlatformConfig.defaultConfig()` is empty and the default values of the code are used (for instance `debugDir` is `null`).
 
 ### Outputs
 

@@ -18,11 +18,11 @@ import java.io.StringWriter;
 import java.nio.file.Path;
 import java.util.Objects;
 
-public final class DynawoSimulation {
+public final class DynamicSimulation {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(DynawoSimulation.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(DynamicSimulation.class);
 
-    private DynawoSimulation() {
+    private DynamicSimulation() {
 
     }
 
@@ -37,7 +37,7 @@ public final class DynawoSimulation {
         DynawoSimulationParameters dynawoSimulationParameters = DynawoSimulationParameters.load();
         parameters.addExtension(DynawoSimulationParameters.class, dynawoSimulationParameters);
 
-        String path = DynawoSimulation.class.getClassLoader().getResource("IEEE14.iidm").getPath();
+        String path = DynamicSimulation.class.getClassLoader().getResource("IEEE14.iidm").getPath();
         Network network = Network.newReader(path).read();
 
         GroovyDynamicModelsSupplier dynamicModelsSupplier = new GroovyDynamicModelsSupplier(
@@ -77,6 +77,6 @@ public final class DynawoSimulation {
     }
 
     private static InputStream getResourceAsStream(String name) {
-        return Objects.requireNonNull(DynawoSimulation.class.getResourceAsStream(name));
+        return Objects.requireNonNull(DynamicSimulation.class.getResourceAsStream(name));
     }
 }

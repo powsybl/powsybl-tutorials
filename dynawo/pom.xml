@@ -14,7 +14,7 @@
     <!-- These properties are only needed to run the tutorial from the command line with mvn exec:exec@run -->
     <properties>
         <exec.cleanupDaemonThreads>false</exec.cleanupDaemonThreads>
-        <exec.mainClass>com.powsybl.tutorials.dynawo.DynawoSimulation</exec.mainClass>
+        <exec.mainClass>com.powsybl.tutorials.dynawo.DynamicSimulation</exec.mainClass>
         <exec.optionalArgument>${env.HOME}/dynawo/dynawo</exec.optionalArgument>
     </properties>
 

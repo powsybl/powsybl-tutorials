@@ -1,4 +1,6 @@
 # This file is loaded when `powsybl.config.dirs` points to this resources directory.
+
+# For dynamic simulation the provider should be configured with:
 dynawo:
   homeDir: /path_to_folder/dynawo/dynawo
   debug: true
@@ -11,6 +13,7 @@ dynamic-simulation-default-parameters:
 dynamic-simulation:
   default-impl-name: Dynawo
 
+# Useful for dynamic simulation, dynamic security analysis
 dynawo-simulation-default-parameters:
   parametersFile: /path_to_folder/powsybl-tutorials/dynawo/src/main/resources/config/models.par
   network.parametersFile: /path_to_folder/powsybl-tutorials/dynawo/src/main/resources/config/network.par
@@ -18,3 +21,8 @@ dynawo-simulation-default-parameters:
   network.parametersId: "8"
   solver.type: SIM
   solver.parametersId: "3"
+
+# For dynamic security analysis the provider should be configured with:
+dynawo-algorithms:
+  homeDir: /path_to_folder/dynawo/dynawo-algorithms
+  debug: true

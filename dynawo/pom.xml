@@ -65,6 +65,25 @@
             <artifactId>powsybl-iidm-impl</artifactId>
             <scope>runtime</scope>
         </dependency>
+
+        <!-- For SA -->
+        <dependency>
+            <groupId>com.powsybl</groupId>
+            <artifactId>powsybl-contingency-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.powsybl</groupId>
+            <artifactId>powsybl-security-analysis-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.powsybl</groupId>
+            <artifactId>powsybl-dynamic-security-analysis</artifactId>
+        </dependency>
+        <!-- Dynawo security analysis provider-->
+        <dependency>
+            <groupId>com.powsybl</groupId>
+            <artifactId>powsybl-dynawo-security-analysis</artifactId>
+        </dependency>
     </dependencies>
 
 </project>

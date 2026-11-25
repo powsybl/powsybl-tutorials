@@ -43,7 +43,7 @@ public final class DynamicSimulation {
     }
 
     public static void main(String[] args) throws IOException {
-        // Need to set as first argument the parg to the user dynawo executable
+        // Need to set as first argument the arg to the user dynawo executable
         LOGGER.info("args[0]: {} (path to Dynawo executable)", args[0]);
 
         DynawoSimulationProvider provider = new DynawoSimulationProvider(new DynawoSimulationConfig(

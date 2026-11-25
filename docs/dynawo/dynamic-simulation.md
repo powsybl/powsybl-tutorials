@@ -164,14 +164,10 @@ In the `main` method, we read the path to the Dynawo executable from the first p
 // Path to the Dynawo executable binary
 LOGGER.info("args[0]: {} (path to Dynawo executable)", args[0]);
 
-DynawoSimulationProvider provider = new DynawoSimulationProvider(
-        new DynawoSimulationConfig(Path.of(args[0]), true)
+DynawoSimulationProvider provider = new DynawoSimulationProvider(new DynawoSimulationConfig(
+        Path.of(args[0]), true)
 );
-
-DynamicSimulationParameters parameters = new DynamicSimulationParameters()
-        .setDebugDir(TMP_DIR + "/tutorials_dynamic_simulation/")
-        .setStartTime(0)
-        .setStopTime(100);
+DynamicSimulationParameters parameters = DynamicSimulationParameters.load();
 ```
 
 - `setDebugDir(...)`: Specifies the directory where input files, logs, and simulation output curves are generated.
@@ -182,8 +178,8 @@ DynamicSimulationParameters parameters = new DynamicSimulationParameters()
 Load the static network model from an IIDM file (here the IEEE 14-bus network located in resources):
 
 ```java
-String path = DynawoSimulation.class.getClassLoader().getResource("IEEE14.iidm").getPath();
-Network network = Network.newReader(path).read();
+final Path CASE_FOLDER = Path.of(DynamicSimulation.class.getClassLoader().getResource("ieee14").getPath());
+Network network = Network.read(CASE_FOLDER.resolve("IEEE14.iidm"));
 ```
 
 ### Assign dynamic models via Groovy
@@ -228,8 +224,8 @@ In Java, instantiate the `GroovyDynamicModelsSupplier`:
 
 ```java
 GroovyDynamicModelsSupplier dynamicModelsSupplier = new GroovyDynamicModelsSupplier(
-        getResourceAsStream("/ieee14/dynamicModels.groovy"),
-        GroovyExtension.find(DynamicModelGroovyExtension.class, DynawoSimulationProvider.NAME));
+    CASE_FOLDER.resolve("dynamicModels.groovy"),
+    GroovyExtension.find(DynamicModelGroovyExtension.class, DynawoSimulationProvider.NAME));
 ```
 
 ### Define dynamic events via Groovy
@@ -254,7 +250,7 @@ In Java, instantiate the `GroovyEventModelsSupplier`:
 
 ```java
 GroovyEventModelsSupplier eventModelsSupplier = new GroovyEventModelsSupplier(
-        getResourceAsStream("/ieee14/eventModels.groovy"),
+        CASE_FOLDER.resolve("eventModels.groovy"),
         GroovyExtension.find(EventModelGroovyExtension.class, DynawoSimulationProvider.NAME));
 ```
 
@@ -302,7 +298,7 @@ In Java, instantiate the `GroovyOutputVariablesSupplier`:
 
 ```java
 GroovyOutputVariablesSupplier outputVariablesSupplier = new GroovyOutputVariablesSupplier(
-        getResourceAsStream("/ieee14/outputVariables.groovy"),
+        CASE_FOLDER.resolve("outputVariables.groovy"),
         GroovyExtension.find(OutputVariableGroovyExtension.class, DynawoSimulationProvider.NAME));
 ```
 
@@ -311,14 +307,21 @@ GroovyOutputVariablesSupplier outputVariablesSupplier = new GroovyOutputVariable
 Dynawo model parameters (time constants, gains, limits), network settings, and numerical solver configurations are loaded via `DynawoSimulationParameters`:
 
 ```java
+final Path CONFIG_FOLDER = Path.of(DynamicSimulation.class.getClassLoader().getResource("config").getPath());
+
 DynawoSimulationParameters dynawoSimulationParameters = DynawoSimulationParameters.load();
 parameters.addExtension(DynawoSimulationParameters.class, dynawoSimulationParameters);
 
-dynawoSimulationParameters.setModelsParameters(getResourceAsStream("/config/models.par"))
-        .setNetworkParameters(getResourceAsStream("/config/network.par"), "8")
-        .setSolverParameters(getResourceAsStream("/config/solvers.par"), "3")
-        .setSolverType(DynawoSimulationParameters.SolverType.SIM)
-        .setTimelineExportMode(ExportMode.XML);
+try (InputStream models = Files.newInputStream(CONFIG_FOLDER.resolve("models.par"));
+    InputStream networkPar = Files.newInputStream(CONFIG_FOLDER.resolve("network.par"));
+    InputStream solvers = Files.newInputStream(CONFIG_FOLDER.resolve("solvers.par"))
+) {
+    dynawoSimulationParameters.setModelsParameters(models)
+            .setNetworkParameters(networkPar, "8")
+            .setSolverParameters(solvers, "3")
+            .setSolverType(DynawoSimulationParameters.SolverType.SIM)
+            .setTimelineExportMode(ExportMode.XML);
+}
 ```
 
 - `models.par`: Contains parameters referenced by `parameterSetId` (e.g. `LAB` for loads, `GSFWPR...` for generators).

@@ -50,6 +50,8 @@
         <module>sld-custom-node</module>
         <module>topology</module>
         <module>security-analysis</module>
+        <module>dynawo</module>
+        <module>commons</module>
     </modules>
     <build>
         <pluginManagement>
@@ -88,6 +90,11 @@
 
     <dependencyManagement>
         <dependencies>
+            <dependency>
+                <groupId>com.powsybl.tutorials</groupId>
+                <artifactId>commons</artifactId>
+                <version>${project.version}</version>
+            </dependency>
             <dependency>
                 <groupId>com.powsybl</groupId>
                 <artifactId>powsybl-dependencies</artifactId>
